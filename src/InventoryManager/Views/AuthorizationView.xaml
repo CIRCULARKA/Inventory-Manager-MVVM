@@ -1,0 +1,24 @@
+﻿<Window x:Class="InventoryManager.AuthorizationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:InventoryManager"
+        Title="Авторизация"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        Width="350">
+    <Window.Resources>
+        <Style x:Key="controlsStyle">
+            <Setter Property="Control.Margin" Value="5 0 5 5" />
+            <Setter Property="Control.Height" Value="19" />
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock Text="Авторизация" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
+        <Separator Margin="0 5 0 10" />
+        <TextBlock Text="Логин" Style="{StaticResource controlsStyle}" />
+        <TextBox Style="{StaticResource controlsStyle}" Margin="0 0 0 10" />
+        <TextBlock Text="Пароль" Style="{StaticResource controlsStyle}" />
+        <TextBox Style="{StaticResource controlsStyle}" Margin="0 0 0 10" />
+        <Button Content="Войти" Style="{StaticResource controlsStyle}" Height="28" />
+    </StackPanel>
+</Window>
