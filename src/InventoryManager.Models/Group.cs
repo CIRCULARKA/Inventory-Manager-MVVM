@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace InventoryManager.Models
 {
 	public class Group : NotifyingModel
@@ -25,5 +27,7 @@ namespace InventoryManager.Models
 				base.OnPropertyChanged("Name");
 			}
 		}
+
+		public List<User> Users;
 	}
 }
