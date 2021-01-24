@@ -7,15 +7,27 @@ namespace InventoryManager.Models.ModelsConfiguration
 	{
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
-			builder.HasKey(p => p.ID);
-
 			builder.Property(p => p.LastName).IsRequired();
 			builder.Property(p => p.FirstName).IsRequired();
 			builder.Property(p => p.MiddleName).IsRequired();
 			builder.Property(p => p.Login).IsRequired();
-			builder.HasIndex(p => p.Login).IsUnique();
+			builder.HasKey(p => p.Login);
 			builder.Property(p => p.Password).IsRequired();
 			builder.Property(p => p.UserGroupID).IsRequired();
+			builder.HasOne(p => p.UserGroup).WithMany(p => p.Users);
+
+			builder.HasData(
+				new
+				{
+					ID = -1,
+					LastName = "Иванов",
+					FirstName = "Иван",
+					MiddleName = "Иванович",
+					Login = "root",
+					Password = "root",
+					UserGroupID = 3
+				}
+			);
 		}
 	}
 }
