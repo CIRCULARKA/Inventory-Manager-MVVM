@@ -6,7 +6,7 @@
             "command": "dotnet",
             "type": "process",
             "args": [
-                "build",
+                "build"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -31,6 +31,61 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Migrate & Update Database",
+            "dependsOn": [
+                "Drop Database",
+                "Remove Migration",
+                "Add Migration",
+                "Update Database"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Remove Migration",
+            "command": "dotnet",
+            "args": [
+                "ef",
+                "migrations",
+                "remove"
+            ]
+        },
+        {
+            "label": "Add Migration",
+            "command": "dotnet",
+            "args": [
+                "ef",
+                "migrations",
+                "add",
+                "Init",
+                "-o",
+                "src/InventoryManager.Migrations/"
+            ]
+        },
+        {
+            "label": "Drop Database",
+            "command": "dotnet",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "0"
+            ]
+        },
+        {
+            "label": "Update Database",
+            "command": "dotnet",
+            "args": [
+                "ef",
+                "database",
+                "update"
+            ]
         }
     ]
 }
