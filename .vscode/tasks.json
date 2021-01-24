@@ -37,8 +37,8 @@
         {
             "label": "Migrate & Update Database",
             "dependsOn": [
-                "Remove Migration",
                 "Drop Database",
+                "Remove Migration",
                 "Add Migration",
                 "Update Database"
             ],
@@ -55,9 +55,7 @@
             "args": [
                 "ef",
                 "migrations",
-                "remove",
-                "--no-build",
-                "-f"
+                "remove"
             ]
         },
         {
@@ -88,8 +86,7 @@
             "args": [
                 "ef",
                 "database",
-                "update",
-                "--no-build"
+                "update"
             ]
         },
         {
