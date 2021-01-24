@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using InventoryManager.Data;
 using InventoryManager.ViewModels;
 
 namespace InventoryManager
@@ -9,13 +10,32 @@ namespace InventoryManager
 		{
 			InitializeComponent();
 
-			DataContext = new AuthorizationViewModel();
+			ViewModel = new AuthorizationViewModel(new InventoryManagerDbContext());
+			DataContext = ViewModel;
 		}
+
+		private AuthorizationViewModel ViewModel { get; }
 
 		public void AttemptToLogin(object sender, RoutedEventArgs info)
 		{
 			// There is must be a call of a ViewModel method that confirms that user exists
 			// If so, method must open user's window and close this view
+			if (ViewModel.DoesUserExist())
+			{
+				// Message boxes as a temporary solution
+				MessageBox.Show(
+					"Вы успешно авторизированы",
+					"Добро пожаловать!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Information
+				);
+			}
+			else MessageBox.Show(
+				"Логин или пароль введены неверно",
+				"Ошибка",
+				MessageBoxButton.OK,
+				MessageBoxImage.Error
+			);
 		}
 	}
 }
