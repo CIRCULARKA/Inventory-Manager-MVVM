@@ -2,8 +2,6 @@ namespace InventoryManager.Models
 {
 	public class User : NotifyingModel
 	{
-		private int _id;
-
 		private string _lastName;
 
 		private string _firstName;
@@ -15,19 +13,6 @@ namespace InventoryManager.Models
 		private string _password;
 
 		private Group _userGroup;
-
-		public int ID
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged("ID");
-			}
-		}
 
 		public string LastName
 		{
