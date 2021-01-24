@@ -88,6 +88,19 @@
                 "database",
                 "update"
             ]
+        },
+        {
+            "label": "Git: Stage Opened File",
+            "command": "git",
+            "args": [
+                "add",
+                "${relativeFile}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }
