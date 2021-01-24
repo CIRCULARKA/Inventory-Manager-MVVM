@@ -8,9 +8,10 @@ namespace InventoryManager.Data
 	{
 		public DbSet<Group> Group { get; set; }
 
+		public DbSet<User> User { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			// Define connection string
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
 		}
 
