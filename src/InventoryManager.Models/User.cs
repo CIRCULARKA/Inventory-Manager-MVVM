@@ -94,6 +94,8 @@ namespace InventoryManager.Models
 			}
 		}
 
+		public int UserGroupID { get; set; }
+
 		public Group UserGroup
 		{
 			get

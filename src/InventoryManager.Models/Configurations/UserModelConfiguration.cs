@@ -15,7 +15,7 @@ namespace InventoryManager.Models.ModelsConfiguration
 			builder.Property(p => p.Login).IsRequired();
 			builder.HasIndex(p => p.Login).IsUnique();
 			builder.Property(p => p.Password).IsRequired();
-			builder.Property(p => p.UserGroup).IsRequired();
+			builder.Property(p => p.UserGroupID).IsRequired();
 		}
 	}
 }
