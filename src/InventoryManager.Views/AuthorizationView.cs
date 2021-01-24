@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using InventoryManager.ViewModels;
 
 namespace InventoryManager
 {
@@ -7,6 +8,8 @@ namespace InventoryManager
 		public AuthorizationView()
 		{
 			InitializeComponent();
+
+			DataContext = new AuthorizationViewModel();
 		}
 	}
 }
