@@ -21,6 +21,7 @@
         },
         {
             "label": "Build & Run",
+            "command": "",
             "dependsOn": [
                 "Build",
                 "Run"
@@ -30,7 +31,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Migrate & Update Database",
