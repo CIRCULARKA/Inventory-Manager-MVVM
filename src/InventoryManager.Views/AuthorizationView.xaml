@@ -23,7 +23,7 @@
         <TextBox Text="{Binding InputtedLogin, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Text="Пароль" />
         <TextBox Text="{Binding InputtedPassword, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Content="Войти" Height="28" />
+        <Button Content="Войти" Click="AttemptToLogin" Height="28" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" />
     </StackPanel>
 </Window>
