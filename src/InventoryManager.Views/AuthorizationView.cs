@@ -2,7 +2,7 @@
 using InventoryManager.Data;
 using InventoryManager.ViewModels;
 
-namespace InventoryManager
+namespace InventoryManager.Views
 {
 	public partial class AuthorizationView : Window
 	{
@@ -18,17 +18,11 @@ namespace InventoryManager
 
 		public void AttemptToLogin(object sender, RoutedEventArgs info)
 		{
-			// There is must be a call of a ViewModel method that confirms that user exists
-			// If so, method must open user's window and close this view
 			if (ViewModel.DoesUserExist())
 			{
-				// Message boxes as a temporary solution
-				MessageBox.Show(
-					"Вы успешно авторизированы",
-					"Добро пожаловать!",
-					MessageBoxButton.OK,
-					MessageBoxImage.Information
-				);
+				var userView = new UserView();
+				userView.Show();
+				this.Close();
 			}
 			else
 			{
