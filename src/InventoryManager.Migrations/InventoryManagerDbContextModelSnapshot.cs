@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace InventoryManager.Migrations
+namespace InventoryManager.src.InventoryManager.Migrations
 {
     [DbContext(typeof(InventoryManagerDbContext))]
     partial class InventoryManagerDbContextModelSnapshot : ModelSnapshot
@@ -35,14 +35,29 @@ namespace InventoryManager.Migrations
                         .IsUnique();
 
                     b.ToTable("Group");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Техник"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Администратор"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Суперпользователь"
+                        });
                 });
 
             modelBuilder.Entity("InventoryManager.Models.User", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                    b.Property<string>("Login")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -51,10 +66,6 @@ namespace InventoryManager.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
@@ -67,25 +78,38 @@ namespace InventoryManager.Migrations
                     b.Property<int>("UserGroupID")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("Login")
-                        .IsUnique();
+                    b.HasKey("Login");
 
                     b.HasIndex("UserGroupID");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Login = "root",
+                            FirstName = "Иван",
+                            LastName = "Иванов",
+                            MiddleName = "Иванович",
+                            Password = "root",
+                            UserGroupID = 3
+                        });
                 });
 
             modelBuilder.Entity("InventoryManager.Models.User", b =>
                 {
                     b.HasOne("InventoryManager.Models.Group", "UserGroup")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("UserGroupID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("UserGroup");
+                });
+
+            modelBuilder.Entity("InventoryManager.Models.Group", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
