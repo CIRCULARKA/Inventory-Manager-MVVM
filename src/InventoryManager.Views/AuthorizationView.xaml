@@ -1,4 +1,4 @@
-﻿<Window x:Class="InventoryManager.AuthorizationView"
+﻿<Window x:Class="InventoryManager.Views.AuthorizationView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:InventoryManager"
@@ -22,8 +22,9 @@
         <TextBlock Text="Логин" />
         <TextBox Text="{Binding InputtedLogin, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Text="Пароль" />
+        <!-- Change to PasswordBox and make DepProp for it -->
         <TextBox Text="{Binding InputtedPassword, UpdateSourceTrigger=PropertyChanged}" />
         <Button Content="Войти" Click="AttemptToLogin" Height="28" />
-        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" />
+        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
 </Window>
