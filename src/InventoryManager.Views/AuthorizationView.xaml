@@ -7,18 +7,22 @@
         SizeToContent="Height"
         Width="350">
     <Window.Resources>
-        <Style x:Key="controlsStyle">
-            <Setter Property="Control.Margin" Value="5 0 5 5" />
-            <Setter Property="Control.Height" Value="19" />
+        <Style TargetType="Controls.TextBlock">
+            <Setter Property="Margin" Value="5 0 3 5" />
+        </Style>
+        <Style TargetType="Controls.TextBox">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+        <Style TargetType="Controls.Button">
+            <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
     </Window.Resources>
     <StackPanel>
         <TextBlock Text="Авторизация" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
-        <Separator Margin="0 5 0 10" />
-        <TextBlock Text="Логин" Style="{StaticResource controlsStyle}" />
-        <TextBox Style="{StaticResource controlsStyle}" Margin="0 0 0 10" />
-        <TextBlock Text="Пароль" Style="{StaticResource controlsStyle}" />
-        <TextBox Style="{StaticResource controlsStyle}" Margin="0 0 0 10" />
-        <Button Content="Войти" Style="{StaticResource controlsStyle}" Height="28" />
+        <TextBlock Text="Логин" />
+        <TextBox />
+        <TextBlock Text="Пароль" />
+        <TextBox />
+        <Button Content="Войти" Height="28" />
     </StackPanel>
 </Window>
