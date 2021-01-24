@@ -20,9 +20,10 @@
     <StackPanel>
         <TextBlock Text="Авторизация" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
         <TextBlock Text="Логин" />
-        <TextBox />
+        <TextBox Text="{Binding InputtedLogin, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Text="Пароль" />
-        <TextBox />
+        <TextBox Text="{Binding InputtedPassword, UpdateSourceTrigger=PropertyChanged}" />
         <Button Content="Войти" Height="28" />
+        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" />
     </StackPanel>
 </Window>
