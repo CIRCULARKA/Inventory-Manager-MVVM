@@ -18,6 +18,7 @@ namespace InventoryManager.Data
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.ApplyConfiguration<Group>(new GroupModelConfiguration());
+			builder.ApplyConfiguration<User>(new UserModelConfiguration());
 		}
 	}
 }
