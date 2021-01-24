@@ -30,12 +30,10 @@ namespace InventoryManager
 					MessageBoxImage.Information
 				);
 			}
-			else MessageBox.Show(
-				"Логин или пароль введены неверно",
-				"Ошибка",
-				MessageBoxButton.OK,
-				MessageBoxImage.Error
-			);
+			else
+			{
+				ViewModel.MessageToUser = "Логин или пароль введён неверно";
+			}
 		}
 	}
 }
