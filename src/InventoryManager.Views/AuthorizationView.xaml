@@ -25,7 +25,7 @@
         <TextBlock Text="Пароль" />
         <!-- Change to PasswordBox and make DepProp for it -->
         <TextBox Text="{Binding InputtedPassword, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Content="Войти" Click="AttemptToLogin" Height="28" />
+        <Button Content="Войти" Height="28" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
 </src:ViewBase>
