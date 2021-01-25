@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using InventoryManager.Models;
-using InventoryManager.Models.ModelsConfiguration;
+using InventoryManager.Models.Configuration;
 
 namespace InventoryManager.Data
 {
@@ -19,6 +19,7 @@ namespace InventoryManager.Data
 		{
 			builder.ApplyConfiguration<Group>(new GroupModelConfiguration());
 			builder.ApplyConfiguration<User>(new UserModelConfiguration());
+			builder.ApplyConfiguration<DeviceType>(new DeviceTypeModelConfiguration());
 		}
 	}
 }
