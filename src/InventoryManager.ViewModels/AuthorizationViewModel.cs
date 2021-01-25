@@ -7,10 +7,6 @@ namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : NotifyingModel
 	{
-		private string _inputtedLogin;
-
-		private string _inputtedPassword;
-
 		private string _messageToUser;
 
 		public AuthorizationViewModel(InventoryManagerDbContext data)
@@ -20,25 +16,10 @@ namespace InventoryManager.ViewModels
 
 		private InventoryManagerDbContext Data { get; }
 
-		public string InputtedLogin
-		{
-			get => _inputtedLogin;
-			set
-			{
-				_inputtedLogin = value;
-				OnPropertyChanged("InputtedLogin");
-			}
-		}
+		public string InputtedLogin { get; set; }
 
-		public string InputtedPassword
-		{
-			get => _inputtedPassword;
-			set
-			{
-				_inputtedPassword = value;
-				OnPropertyChanged("InputtedPassword");
-			}
-		}
+
+		public string InputtedPassword { get; set; }
 
 		public string MessageToUser
 		{
@@ -52,7 +33,10 @@ namespace InventoryManager.ViewModels
 
 		public bool DoesUserExist()
 		{
-			return Data.User.Find(InputtedLogin) == null ? false : true;
+			var foundedUser = Data.User.Find(InputtedLogin);
+			if (foundedUser != null & foundedUser.Password == InputtedPassword)
+				return true;
+			return false;
 		}
 	}
 }
