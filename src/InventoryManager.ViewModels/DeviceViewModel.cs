@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using InventoryManager.Models;
 using InventoryManager.Data;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace InventoryManager.ViewModels
 
 		public InventoryManagerDbContext Data { get; }
 
-		public IQueryable<Device> Devices => Data.Devices;
+		public IQueryable<Device> Devices =>
+			Data.Devices.Include(d => d.DeviceType).ToList().AsQueryable();
 
 		public Device SelectedDevice { get; set; }
 
