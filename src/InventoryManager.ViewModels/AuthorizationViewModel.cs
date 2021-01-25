@@ -56,13 +56,5 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("MessageToUser");
 			}
 		}
-
-		public bool DoesUserExist()
-		{
-			var foundedUser = Data.Users.Find(InputtedLogin);
-			if (foundedUser != null & foundedUser.Password == InputtedPassword)
-				return true;
-			return false;
-		}
 	}
 }
