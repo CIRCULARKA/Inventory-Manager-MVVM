@@ -100,6 +100,13 @@
                 "kind": "build",
                 "isDefault": true
             },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+            },
             "problemMatcher": []
         }
     ]
