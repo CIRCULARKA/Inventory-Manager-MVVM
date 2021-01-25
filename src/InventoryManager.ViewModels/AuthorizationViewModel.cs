@@ -1,5 +1,5 @@
-using System.Windows;
-using Microsoft.EntityFrameworkCore;
+using InventoryManager.Commands;
+using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Data;
 
@@ -9,12 +9,38 @@ namespace InventoryManager.ViewModels
 	{
 		private string _messageToUser;
 
-		public AuthorizationViewModel(InventoryManagerDbContext data)
+		private ButtonCommand _loginCommand;
+
+		public AuthorizationViewModel(InventoryManagerDbContext data, ViewBase view)
 		{
 			Data = data;
+			AuthorizationView = view;
 		}
 
 		private InventoryManagerDbContext Data { get; }
+
+		private ViewBase AuthorizationView { get; }
+
+		private ButtonCommand LoginCommand
+		{
+			get
+			{
+				return _loginCommand ??
+					new ButtonCommand(
+						(user) =>
+						{
+							var findedUser = Data.Users.Find(InputtedLogin, InputtedPassword);
+							if (findedUser != null && findedUser.Password == InputtedPassword)
+							{
+								var userView = new UserView();
+								userView.Show();
+								AuthorizationView.Close();
+							}
+							else MessageToUser = "Логин или пароль введён неверно";
+						}
+					);
+			}
+		}
 
 		public string InputtedLogin { get; set; }
 
