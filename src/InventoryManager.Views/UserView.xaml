@@ -12,8 +12,16 @@
             HorizontalAlignment="Center"
             Margin="0 5 0 10" />
 
-        <ListBox>
-
+        <ListBox ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock FontSize="18" Text="{Binding Path=NetworkName}" />
+                        <TextBlock Text="{Binding Path=DeviceType.Name}" />
+                        <TextBlock Text="{Binding Path=InventoryNumber}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </StackPanel>
 </src:ViewBase>
