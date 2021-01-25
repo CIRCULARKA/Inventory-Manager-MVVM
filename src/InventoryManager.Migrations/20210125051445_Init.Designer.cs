@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManager.src.InventoryManager.Migrations
 {
     [DbContext(typeof(InventoryManagerDbContext))]
-    [Migration("20210124135514_Init")]
+    [Migration("20210125051445_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,39 @@ namespace InventoryManager.src.InventoryManager.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
+
+            modelBuilder.Entity("InventoryManager.Models.DeviceType", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DeviceType");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Персональный компьютер"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Сервер"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Коммутатор"
+                        });
+                });
 
             modelBuilder.Entity("InventoryManager.Models.Group", b =>
                 {

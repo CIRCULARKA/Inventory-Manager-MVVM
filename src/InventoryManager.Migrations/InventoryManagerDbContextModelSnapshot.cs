@@ -18,6 +18,39 @@ namespace InventoryManager.src.InventoryManager.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
+            modelBuilder.Entity("InventoryManager.Models.DeviceType", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DeviceType");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Персональный компьютер"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Сервер"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Коммутатор"
+                        });
+                });
+
             modelBuilder.Entity("InventoryManager.Models.Group", b =>
                 {
                     b.Property<int>("ID")

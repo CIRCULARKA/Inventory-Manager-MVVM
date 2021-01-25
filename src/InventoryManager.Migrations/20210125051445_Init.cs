@@ -7,6 +7,19 @@ namespace InventoryManager.src.InventoryManager.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "DeviceType",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeviceType", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Group",
                 columns: table => new
                 {
@@ -42,19 +55,24 @@ namespace InventoryManager.src.InventoryManager.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Group",
+                table: "DeviceType",
                 columns: new[] { "ID", "Name" },
-                values: new object[] { 1, "Техник" });
+                values: new object[,]
+                {
+                    { 1, "Персональный компьютер" },
+                    { 2, "Сервер" },
+                    { 3, "Коммутатор" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Group",
                 columns: new[] { "ID", "Name" },
-                values: new object[] { 2, "Администратор" });
-
-            migrationBuilder.InsertData(
-                table: "Group",
-                columns: new[] { "ID", "Name" },
-                values: new object[] { 3, "Суперпользователь" });
+                values: new object[,]
+                {
+                    { 1, "Техник" },
+                    { 2, "Администратор" },
+                    { 3, "Суперпользователь" }
+                });
 
             migrationBuilder.InsertData(
                 table: "User",
@@ -75,6 +93,9 @@ namespace InventoryManager.src.InventoryManager.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DeviceType");
+
             migrationBuilder.DropTable(
                 name: "User");
 
