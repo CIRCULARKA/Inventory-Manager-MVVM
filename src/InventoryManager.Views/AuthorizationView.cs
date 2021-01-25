@@ -4,7 +4,7 @@ using InventoryManager.ViewModels;
 
 namespace InventoryManager.Views
 {
-	public partial class AuthorizationView : Window
+	public partial class AuthorizationView : ViewBase
 	{
 		public AuthorizationView()
 		{
