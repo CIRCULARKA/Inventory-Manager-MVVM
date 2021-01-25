@@ -21,7 +21,7 @@ namespace InventoryManager.ViewModels
 
 		private ViewBase AuthorizationView { get; }
 
-		private ButtonCommand LoginCommand
+		public ButtonCommand LoginCommand
 		{
 			get
 			{
@@ -29,7 +29,7 @@ namespace InventoryManager.ViewModels
 					new ButtonCommand(
 						(user) =>
 						{
-							var findedUser = Data.Users.Find(InputtedLogin, InputtedPassword);
+							var findedUser = Data.Users.Find(InputtedLogin);
 							if (findedUser != null && findedUser.Password == InputtedPassword)
 							{
 								var userView = new UserView();
@@ -43,7 +43,6 @@ namespace InventoryManager.ViewModels
 		}
 
 		public string InputtedLogin { get; set; }
-
 
 		public string InputtedPassword { get; set; }
 
