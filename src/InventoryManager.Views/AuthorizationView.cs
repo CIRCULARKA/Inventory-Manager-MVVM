@@ -10,7 +10,7 @@ namespace InventoryManager.Views
 		{
 			InitializeComponent();
 
-			ViewModel = new AuthorizationViewModel(new InventoryManagerDbContext());
+			ViewModel = new AuthorizationViewModel(Data);
 			DataContext = ViewModel;
 		}
 
