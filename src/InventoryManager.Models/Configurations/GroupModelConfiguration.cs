@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace InventoryManager.Models.ModelsConfiguration
+namespace InventoryManager.Models.Configuration
 {
 	public class GroupModelConfiguration : IEntityTypeConfiguration<Group>
 	{
