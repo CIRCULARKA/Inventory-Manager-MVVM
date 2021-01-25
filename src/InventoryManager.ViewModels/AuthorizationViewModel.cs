@@ -9,38 +9,30 @@ namespace InventoryManager.ViewModels
 	{
 		private string _messageToUser;
 
-		private ButtonCommand _loginCommand;
-
 		public AuthorizationViewModel(InventoryManagerDbContext data, ViewBase view)
 		{
 			Data = data;
 			AuthorizationView = view;
+			LoginCommand = new ButtonCommand(
+				(user) =>
+				{
+					var findedUser = Data.Users.Find(InputtedLogin);
+					if (findedUser != null && findedUser.Password == InputtedPassword)
+					{
+						var userView = new UserView();
+						userView.Show();
+						AuthorizationView.Close();
+					}
+					else MessageToUser = "Логин или пароль введён неверно";
+				}
+			);
 		}
 
 		private InventoryManagerDbContext Data { get; }
 
 		private ViewBase AuthorizationView { get; }
 
-		public ButtonCommand LoginCommand
-		{
-			get
-			{
-				return _loginCommand ??
-					new ButtonCommand(
-						(user) =>
-						{
-							var findedUser = Data.Users.Find(InputtedLogin);
-							if (findedUser != null && findedUser.Password == InputtedPassword)
-							{
-								var userView = new UserView();
-								userView.Show();
-								AuthorizationView.Close();
-							}
-							else MessageToUser = "Логин или пароль введён неверно";
-						}
-					);
-			}
-		}
+		public ButtonCommand LoginCommand { get; }
 
 		public string InputtedLogin { get; set; }
 
