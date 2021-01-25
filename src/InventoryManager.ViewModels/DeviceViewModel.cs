@@ -14,7 +14,7 @@ namespace InventoryManager.ViewModels
 
 		public InventoryManagerDbContext Data { get; }
 
-		public IQueryable<Device> Devices => Data.Device;
+		public IQueryable<Device> Devices => Data.Devices;
 
 		public Device SelectedDevice { get; set; }
 

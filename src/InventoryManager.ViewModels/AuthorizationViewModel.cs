@@ -33,7 +33,7 @@ namespace InventoryManager.ViewModels
 
 		public bool DoesUserExist()
 		{
-			var foundedUser = Data.User.Find(InputtedLogin);
+			var foundedUser = Data.Users.Find(InputtedLogin);
 			if (foundedUser != null & foundedUser.Password == InputtedPassword)
 				return true;
 			return false;
