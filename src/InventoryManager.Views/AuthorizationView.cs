@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using InventoryManager.Data;
 using InventoryManager.ViewModels;
 
 namespace InventoryManager.Views
@@ -10,24 +9,10 @@ namespace InventoryManager.Views
 		{
 			InitializeComponent();
 
-			ViewModel = new AuthorizationViewModel(Data);
+			ViewModel = new AuthorizationViewModel(Data, this);
 			DataContext = ViewModel;
 		}
 
 		private AuthorizationViewModel ViewModel { get; }
-
-		public void AttemptToLogin(object sender, RoutedEventArgs info)
-		{
-			if (ViewModel.DoesUserExist())
-			{
-				var userView = new UserView();
-				userView.Show();
-				this.Close();
-			}
-			else
-			{
-				ViewModel.MessageToUser = "Логин или пароль введён неверно";
-			}
-		}
 	}
 }
