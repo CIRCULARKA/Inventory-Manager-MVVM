@@ -8,6 +8,14 @@
             "args": [
                 "build"
             ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
             "problemMatcher": "$msCompile"
         },
         {
@@ -17,11 +25,18 @@
             "args": [
                 "run"
             ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
             "problemMatcher": "$msCompile"
         },
         {
             "label": "Build & Run",
-            "command": "",
             "dependsOn": [
                 "Build",
                 "Run"
