@@ -14,7 +14,6 @@ namespace InventoryManager.Models.Configuration
 			builder.HasKey(p => p.Login);
 			builder.Property(p => p.Password).IsRequired();
 			builder.Property(p => p.UserGroupID).IsRequired();
-			builder.HasOne(p => p.UserGroup).WithMany(p => p.Users);
 
 			builder.HasData(
 				new
