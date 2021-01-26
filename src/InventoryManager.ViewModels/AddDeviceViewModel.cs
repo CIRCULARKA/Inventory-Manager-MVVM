@@ -8,6 +8,8 @@ namespace InventoryManager.ViewModels
 {
 	public class AddDeviceViewModel : ViewModelBase
 	{
+		private string _messageToUser;
+
 		public AddDeviceViewModel()
 		{
 			AddDeviceCommand = new ButtonCommand(
@@ -21,6 +23,17 @@ namespace InventoryManager.ViewModels
 							NetworkName = InputtedNetworkName
 						}
 					);
+
+					DataContext.SaveChanges();
+
+					InputtedInventoryNumber = "";
+					InputtedNetworkName = "";
+					MessageToUser = "Устройство добавлено";
+				},
+				(obj) =>
+				{
+					return string.IsNullOrEmpty(InputtedInventoryNumber) &&
+						string.IsNullOrEmpty(InputtedNetworkName);
 				}
 			);
 		}
@@ -31,6 +44,16 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand AddDeviceCommand { get; }
 
 		public string InputtedInventoryNumber { get; set; }
+
+		public string MessageToUser
+		{
+			get => _messageToUser;
+			set
+			{
+				_messageToUser = value;
+				OnPropertyChanged("MessageToUser");
+			}
+		}
 
 		public DeviceType SelectedDeviceType { get; set; }
 
