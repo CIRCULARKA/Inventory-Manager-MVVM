@@ -1,7 +1,8 @@
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using InventoryManager.Commands;
 using InventoryManager.Models;
 using InventoryManager.Data;
+using InventoryManager.Views;
 using System.Linq;
 
 namespace InventoryManager.ViewModels
@@ -11,7 +12,16 @@ namespace InventoryManager.ViewModels
 		public DeviceViewModel(InventoryManagerDbContext context)
 		{
 			Data = context;
+			OpenAddDeviceViewCommand = new ButtonCommand(
+				(obj) =>
+				{
+					var addDeviceWindow = new AddDeviceView();
+					addDeviceWindow.Show();
+				}
+			);
 		}
+
+		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
 		public InventoryManagerDbContext Data { get; }
 
