@@ -9,9 +9,8 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceViewModel : ViewModelBase
 	{
-		public DeviceViewModel(InventoryManagerDbContext context)
+		public DeviceViewModel()
 		{
-			Data = context;
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -23,10 +22,8 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
-		public InventoryManagerDbContext Data { get; }
-
 		public IQueryable<Device> Devices =>
-			Data.Devices.Include(d => d.DeviceType).ToList().AsQueryable();
+			DataContext.Devices.Include(d => d.DeviceType).ToList().AsQueryable();
 
 		public Device SelectedDevice { get; set; }
 
