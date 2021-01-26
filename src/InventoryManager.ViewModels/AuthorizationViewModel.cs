@@ -5,18 +5,17 @@ using InventoryManager.Data;
 
 namespace InventoryManager.ViewModels
 {
-	public class AuthorizationViewModel : NotifyingModel
+	public class AuthorizationViewModel : ViewModelBase
 	{
 		private string _messageToUser;
 
-		public AuthorizationViewModel(InventoryManagerDbContext data, ViewBase view)
+		public AuthorizationViewModel(ViewBase view)
 		{
-			Data = data;
 			AuthorizationView = view;
 			LoginCommand = new ButtonCommand(
 				(user) =>
 				{
-					var findedUser = Data.Users.Find(InputtedLogin);
+					var findedUser = DataContext.Find<User>(InputtedLogin);
 					if (findedUser != null && findedUser.Password == InputtedPassword)
 					{
 						var userView = new UserView();
@@ -27,8 +26,6 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
-
-		private InventoryManagerDbContext Data { get; }
 
 		private ViewBase AuthorizationView { get; }
 
