@@ -9,7 +9,7 @@ namespace InventoryManager.Views
 		{
 			InitializeComponent();
 
-			ViewModel = new AuthorizationViewModel(Data, this);
+			ViewModel = new AuthorizationViewModel(this);
 			DataContext = ViewModel;
 		}
 
