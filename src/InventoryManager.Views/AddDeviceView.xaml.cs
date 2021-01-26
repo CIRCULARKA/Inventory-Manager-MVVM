@@ -1,4 +1,5 @@
 using System.Windows;
+using InventoryManager.ViewModels;
 
 namespace InventoryManager.Views
 {
@@ -7,6 +8,7 @@ namespace InventoryManager.Views
 		public AddDeviceView()
 		{
 			InitializeComponent();
+			DataContext = new AddDeviceViewModel();
 		}
 	}
 }

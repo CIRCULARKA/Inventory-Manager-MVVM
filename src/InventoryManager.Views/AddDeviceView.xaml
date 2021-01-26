@@ -17,14 +17,17 @@
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
     </Window.Resources>
     <StackPanel>
 		<TextBlock Text="Инвентарный номер" />
-		<TextBox />
+		<TextBox Text="{Binding InputtedInventoryNumber}" />
 		<TextBlock Text="Тип" />
-		<ComboBox ItemsSource="{Binding UserGroups}" />
+		<ComboBox ItemsSource="{Binding DeviceTypes}" SelectedIndex="0" />
 		<TextBlock Text="Сетевое имя" />
-		<TextBox />
-		<Button Content="Добавить" />
+		<TextBox Text="{Binding InputtedNetworkName}" />
+		<Button Content="Добавить" Height="30" />
     </StackPanel>
 </src:ViewBase>
