@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceViewModel
+	public class DeviceViewModel : ViewModelBase
 	{
 		public DeviceViewModel(InventoryManagerDbContext context)
 		{
