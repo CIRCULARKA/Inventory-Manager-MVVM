@@ -4,30 +4,9 @@ namespace InventoryManager.Models
 {
 	public class Group : NotifyingModel
 	{
-		private int _id;
+		public int ID { get; set; }
 
-		private string _name;
+		public string Name { get; set; }
 
-		public int ID
-		{
-			get => _id;
-			set
-			{
-				_id = value;
-				base.OnPropertyChanged("ID");
-			}
-		}
-
-		public string Name
-		{
-			get => _name;
-			set
-			{
-				_name = value;
-				base.OnPropertyChanged("Name");
-			}
-		}
-
-		public List<User> Users;
 	}
 }
