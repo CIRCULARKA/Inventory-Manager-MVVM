@@ -5,11 +5,11 @@ namespace InventoryManager.ViewModels
 {
 	public class ViewModelBase : NotifyingModel
 	{
-		public ViewModelBase()
+		protected ViewModelBase()
 		{
 			DataContext = new InventoryManagerDbContext();
 		}
 
-		InventoryManagerDbContext DataContext { get; }
+		public InventoryManagerDbContext DataContext { get; }
 	}
 }
