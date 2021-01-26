@@ -8,7 +8,7 @@ namespace InventoryManager.ViewModels
 {
 	public class AddDeviceViewModel : ViewModelBase
 	{
-		public AddDeviceViewModel(InventoryManagerDbContext context)
+		public AddDeviceViewModel()
 		{
 			AddDeviceCommand = new ButtonCommand(
 				(obj) =>
@@ -25,7 +25,8 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
-		public IEnumerable<Group> UserGroups => DataContext.Groups.ToList();
+		public IEnumerable<DeviceType> DeviceTypes =>
+			DataContext.DeviceTypes.ToList();
 
 		public ButtonCommand AddDeviceCommand { get; }
 
