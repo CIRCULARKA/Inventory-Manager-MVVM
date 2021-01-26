@@ -32,8 +32,8 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) =>
 				{
-					return string.IsNullOrEmpty(InputtedInventoryNumber) &&
-						string.IsNullOrEmpty(InputtedNetworkName);
+					return !string.IsNullOrEmpty(InputtedInventoryNumber) &&
+						!string.IsNullOrEmpty(InputtedNetworkName);
 				}
 			);
 		}
