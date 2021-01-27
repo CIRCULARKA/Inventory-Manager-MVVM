@@ -13,7 +13,8 @@
             Margin="0 5 0 10" />
         <Button Width="70" Height="25" Content="Добавить" HorizontalAlignment="Left" Margin="5 0 0 5"
             Command="{Binding OpenAddDeviceViewCommand}" />
-        <ListBox ItemsSource="{Binding Devices, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}">
+        <ListBox ItemsSource="{Binding Devices, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}"
+            Height="450">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
