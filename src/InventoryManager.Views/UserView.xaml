@@ -11,8 +11,12 @@
             FontSize="16" FontWeight="Bold"
             HorizontalAlignment="Center"
             Margin="0 5 0 10" />
-        <Button Width="70" Height="25" Content="Добавить" HorizontalAlignment="Left" Margin="5 0 0 5"
-            Command="{Binding OpenAddDeviceViewCommand}" />
+        <StackPanel Orientation="Horizontal">
+            <Button Width="70" Height="30" Content="Добавить" Margin="5 0 0 5"
+                Command="{Binding OpenAddDeviceViewCommand}"  />
+            <Button Width = "70" Height="30" Content="Удалить" Margin="0 0 5 0"
+                Command="{Binding RemoveDeviceCommand}" />
+        </StackPanel>
         <ListBox ItemsSource="{Binding Devices, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}"
             Height="450">
             <ListBox.ItemTemplate>
