@@ -35,7 +35,7 @@ namespace InventoryManager.ViewModels
 			AddDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					this.Devices.Add(
+					Devices.Add(
 						new Device
 						{
 							InventoryNumber = InputtedInventoryNumber,
@@ -43,7 +43,6 @@ namespace InventoryManager.ViewModels
 							NetworkName = InputtedNetworkName
 						}
 					);
-
 					DataContext.SaveChanges();
 
 					InputtedInventoryNumber = "";
@@ -56,12 +55,23 @@ namespace InventoryManager.ViewModels
 						!string.IsNullOrEmpty(InputtedNetworkName);
 				}
 			);
+
+			RemoveDeviceCommand = new ButtonCommand(
+				(obj) =>
+				{
+					Devices.Remove(SelectedDevice);
+					DataContext.SaveChanges();
+				},
+				(obj) => Devices.Count > 0
+			);
 		}
 
 		public IEnumerable<DeviceType> DeviceTypes =>
 			DataContext.DeviceTypes.ToList();
 
 		public ButtonCommand AddDeviceCommand { get; }
+
+		public ButtonCommand RemoveDeviceCommand { get; }
 
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
