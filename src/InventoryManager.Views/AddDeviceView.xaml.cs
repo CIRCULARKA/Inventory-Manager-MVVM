@@ -8,7 +8,6 @@ namespace InventoryManager.Views
 		public AddDeviceView()
 		{
 			InitializeComponent();
-			DataContext = new AddDeviceViewModel();
 		}
 	}
 }
