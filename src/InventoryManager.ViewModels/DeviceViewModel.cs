@@ -28,7 +28,7 @@ namespace InventoryManager.ViewModels
 				{
 					var addDeviceWindow = new AddDeviceView();
 					addDeviceWindow.DataContext = this;
-					addDeviceWindow.Show();
+					addDeviceWindow.ShowDialog();
 				}
 			);
 
