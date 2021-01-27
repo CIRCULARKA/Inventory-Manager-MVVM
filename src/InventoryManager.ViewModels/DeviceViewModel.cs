@@ -17,8 +17,12 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkName;
 
+		private ObservableCollection<Device> _devices;
+
 		public DeviceViewModel()
 		{
+			_devices = DataContext.Devices.Include(d => d.DeviceType).ToList().ToObservableCollection();
+
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -31,7 +35,7 @@ namespace InventoryManager.ViewModels
 			AddDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					DataContext.Devices.Add(
+					this.Devices.Add(
 						new Device
 						{
 							InventoryNumber = InputtedInventoryNumber,
@@ -62,7 +66,7 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
 		public ObservableCollection<Device> Devices =>
-			DataContext.Devices.Include(d => d.DeviceType).ToList().ToObservableCollection();
+			_devices;
 
 		public Device SelectedDevice { get; set; }
 
