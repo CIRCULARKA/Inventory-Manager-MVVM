@@ -14,6 +14,10 @@ namespace InventoryManager.Data
 
 		public DbSet<Device> Devices { get; set; }
 
+		public DbSet<IPAddress> IPAddresses { get; set; }
+
+		public DbSet<DeviceConfiguration> DeviceConfigurations { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
@@ -25,6 +29,8 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<User>(new UserModelConfiguration());
 			builder.ApplyConfiguration<DeviceType>(new DeviceTypeModelConfiguration());
 			builder.ApplyConfiguration<Device>(new DeviceModelConfiguration());
+			builder.ApplyConfiguration<IPAddress>(new IPAddressModelConfiguration());
+			builder.ApplyConfiguration<DeviceConfiguration>(new DeviceConfigurationModelConfiguration());
 		}
 	}
 }
