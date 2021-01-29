@@ -69,7 +69,7 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					DataContext.Devices.Remove(SelectedDevice);
+					DataContext.Devices.Remove(DataContext.Devices.Find(SelectedDevice.InventoryNumber));
 					Devices.Remove(SelectedDevice);
 					DataContext.SaveChanges();
 				},
