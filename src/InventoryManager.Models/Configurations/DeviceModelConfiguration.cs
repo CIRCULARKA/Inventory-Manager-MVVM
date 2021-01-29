@@ -18,7 +18,8 @@ namespace InventoryManager.Models.Configuration
 					{
 						InventoryNumber = "NSGK530923",
 						DeviceTypeID = 1,
-						NetworkName = "IVAN-PC"
+						NetworkName = "IVAN-PC",
+						DeviceConfigurationID = -1
 					}
 				}
 			);
