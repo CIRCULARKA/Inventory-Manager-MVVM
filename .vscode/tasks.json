@@ -89,8 +89,8 @@
             "args": [
                 "ef",
                 "database",
-                "update",
-                "0"
+                "drop",
+                "-f"
             ]
         },
         {
