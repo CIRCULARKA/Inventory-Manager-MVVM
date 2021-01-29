@@ -80,9 +80,7 @@
                 "ef",
                 "migrations",
                 "add",
-                "Init",
-                "-o",
-                "src/InventoryManager.Migrations/"
+                "Init"
             ]
         },
         {
