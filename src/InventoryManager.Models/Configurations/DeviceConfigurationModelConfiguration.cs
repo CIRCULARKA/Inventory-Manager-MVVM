@@ -7,7 +7,16 @@ namespace InventoryManager.Models.Configuration
 	{
 		public void Configure(EntityTypeBuilder<DeviceConfiguration> builder)
 		{
-			builder.HasKey(dc => dc.DeviceInventoryNumber);
+			builder.HasKey(dc => dc.ID);
+			builder.Property(dc => dc.ID).UseIdentityColumn();
+			builder.HasData(
+				new DeviceConfiguration
+				{
+					AccountName = "admin",
+					AccountPassword = "root",
+					ID = -1
+				}
+			);
 		}
 	}
 }
