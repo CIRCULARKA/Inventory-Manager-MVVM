@@ -7,7 +7,7 @@ namespace InventoryManager.Models.Configuration
 	{
 		public void Configure(EntityTypeBuilder<DeviceConfiguration> builder)
 		{
-			builder.HasKey(dc => dc.DeviceSerialNumber);
+			builder.HasKey(dc => dc.DeviceInventoryNumber);
 		}
 	}
 }
