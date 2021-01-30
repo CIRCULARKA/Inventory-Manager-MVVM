@@ -17,6 +17,10 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkName;
 
+		private string _inputtedDeviceAccountName;
+
+		private string _inputtedDevicePassword;
+
 		private ObservableCollection<Device> _devices;
 
 		public DeviceViewModel()
@@ -39,8 +43,8 @@ namespace InventoryManager.ViewModels
 					// in order to avoid FK constraint failure
 					var newDeviceConfiguration = new DeviceConfiguration
 					{
-						AccountName = "",
-						AccountPassword = ""
+						AccountName = InputtedDeviceAccountName,
+						AccountPassword = InputtedDevicePassword
 					};
 					DataContext.DeviceConfigurations.Add(newDeviceConfiguration);
 
@@ -59,6 +63,8 @@ namespace InventoryManager.ViewModels
 
 					InputtedInventoryNumber = "";
 					InputtedNetworkName = "";
+					InputtedDeviceAccountName = "";
+					InputtedDevicePassword = "";
 					MessageToUser = "Устройство добавлено";
 				},
 				(obj) =>
@@ -123,6 +129,26 @@ namespace InventoryManager.ViewModels
 			{
 				_inputtedNetworkName = value;
 				OnPropertyChanged("InputtedNetworkName");
+			}
+		}
+
+		public string InputtedDeviceAccountName
+		{
+			get => _inputtedDeviceAccountName;
+			set
+			{
+				_inputtedDeviceAccountName = value;
+				OnPropertyChanged("InputtedDeviceAccountName");
+			}
+		}
+
+		public string InputtedDevicePassword
+		{
+			get => _inputtedDevicePassword;
+			set
+			{
+				_inputtedDevicePassword = value;
+				OnPropertyChanged("InputtedDevicePassword");
 			}
 		}
 	}
