@@ -35,23 +35,26 @@ namespace InventoryManager.ViewModels
 			AddDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					Devices.Add(
-						new Device
-						{
-							InventoryNumber = InputtedInventoryNumber,
-							DeviceType = SelectedDeviceType,
-							NetworkName = InputtedNetworkName
-						}
-					);
+					// Firstly - create new row in DeviceConfiguration for the device
+					// in order to avoid FK constraint failure
+					var newDeviceConfiguration = new DeviceConfiguration
+					{
+						AccountName = "",
+						AccountPassword = ""
+					};
+					DataContext.DeviceConfigurations.Add(newDeviceConfiguration);
 
-					DataContext.Devices.Add(
-						new Device
-						{
-							InventoryNumber = InputtedInventoryNumber,
-							DeviceType = SelectedDeviceType,
-							NetworkName = InputtedNetworkName
-						}
-					);
+					var newDevice = new Device
+					{
+						InventoryNumber = InputtedInventoryNumber,
+						DeviceType = SelectedDeviceType,
+						NetworkName = InputtedNetworkName,
+						DeviceConfiguration = newDeviceConfiguration
+					};
+
+					Devices.Add(newDevice);
+
+					DataContext.Devices.Add(newDevice);
 					DataContext.SaveChanges();
 
 					InputtedInventoryNumber = "";
