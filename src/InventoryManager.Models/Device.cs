@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class Device : NotifyingModel
+	public class Device
 	{
 		public string InventoryNumber { get; set; }
 

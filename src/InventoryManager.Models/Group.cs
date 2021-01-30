@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace InventoryManager.Models
 {
-	public class Group : NotifyingModel
+	public class Group
 	{
 		public int ID { get; set; }
 

@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class User : NotifyingModel
+	public class User
 	{
 		private string _lastName;
 
@@ -14,84 +14,21 @@ namespace InventoryManager.Models
 
 		private Group _userGroup;
 
-		public string LastName
-		{
-			get
-			{
-				return _lastName;
-			}
-			set
-			{
-				_lastName = value;
-				OnPropertyChanged("LastName");
-			}
-		}
+		public string LastName { get; set; }
 
-		public string FirstName
-		{
-			get
-			{
-				return _firstName;
-			}
-			set
-			{
-				_firstName = value;
-				OnPropertyChanged("FirstName");
-			}
-		}
 
-		public string MiddleName
-		{
-			get
-			{
-				return _middleName;
-			}
-			set
-			{
-				_middleName = value;
-				OnPropertyChanged("MiddleName");
-			}
-		}
+		public string FirstName { get; set; }
 
-		public string Login
-		{
-			get
-			{
-				return _login;
-			}
-			set
-			{
-				_login = value;
-				OnPropertyChanged("Login");
-			}
-		}
 
-		public string Password
-		{
-			get
-			{
-				return _password;
-			}
-			set
-			{
-				_password = value;
-				OnPropertyChanged("Password");
-			}
-		}
+		public string MiddleName { get; set; }
+
+		public string Login { get; set; }
+
+		public string Password { get; set; }
 
 		public int UserGroupID { get; set; }
 
-		public Group UserGroup
-		{
-			get
-			{
-				return _userGroup;
-			}
-			set
-			{
-				_userGroup = value;
-				OnPropertyChanged("UserGroup");
-			}
-		}
+		public Group UserGroup { get; set; }
+
 	}
 }
