@@ -63,6 +63,8 @@ namespace InventoryManager.ViewModels
 
 					InputtedInventoryNumber = "";
 					InputtedNetworkName = "";
+					InputtedDeviceAccountName = "";
+					InputtedDevicePassword = "";
 					MessageToUser = "Устройство добавлено";
 				},
 				(obj) =>
