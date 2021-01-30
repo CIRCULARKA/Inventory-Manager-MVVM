@@ -6,7 +6,7 @@ namespace InventoryManager.Models
 
 		public int DeviceConfigurationID { get; set; }
 
-		public DeviceConfiguration Configuration { get; set; }
+		public DeviceConfiguration DeviceConfiguration { get; set; }
 
 		public int DeviceTypeID { get; set; }
 
