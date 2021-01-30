@@ -34,6 +34,12 @@
         </ComboBox>
 		<TextBlock Text="Сетевое имя" />
 		<TextBox Text="{Binding InputtedNetworkName, UpdateSourceTrigger=PropertyChanged}" />
+        <Separator />
+        <TextBlock Text="Дополнительные настройки (опционально)" FontWeight="Bold" />
+        <TextBlock Text="Имя аккаунта" />
+        <TextBox />
+        <TextBlock Text="Пароль к аккаунту" />
+        <TextBox />
 		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
