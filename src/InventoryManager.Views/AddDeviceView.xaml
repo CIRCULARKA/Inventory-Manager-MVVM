@@ -37,9 +37,9 @@
         <Separator />
         <TextBlock Text="Дополнительные настройки (опционально)" FontWeight="Bold" />
         <TextBlock Text="Имя аккаунта" />
-        <TextBox />
+        <TextBox Text="{Binding InputtedDeviceAccountName}" />
         <TextBlock Text="Пароль к аккаунту" />
-        <TextBox />
+        <TextBox Text="{Binding InputtedDevicePassword}" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
