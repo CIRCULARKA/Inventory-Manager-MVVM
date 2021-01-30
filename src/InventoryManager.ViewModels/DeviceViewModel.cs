@@ -125,5 +125,9 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("InputtedNetworkName");
 			}
 		}
+
+		public string InputtedDeviceAccount { get; set; }
+
+		public string InputtedDevicePassword { get; set; }
 	}
 }
