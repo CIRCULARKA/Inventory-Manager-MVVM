@@ -43,8 +43,8 @@ namespace InventoryManager.ViewModels
 					// in order to avoid FK constraint failure
 					var newDeviceConfiguration = new DeviceConfiguration
 					{
-						AccountName = "",
-						AccountPassword = ""
+						AccountName = InputtedDeviceAccountName,
+						AccountPassword = InputtedDevicePassword
 					};
 					DataContext.DeviceConfigurations.Add(newDeviceConfiguration);
 
