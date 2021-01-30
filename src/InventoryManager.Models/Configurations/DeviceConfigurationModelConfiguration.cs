@@ -12,9 +12,9 @@ namespace InventoryManager.Models.Configuration
 			builder.HasData(
 				new DeviceConfiguration
 				{
-					AccountName = "admin",
-					AccountPassword = "root",
-					ID = -1
+					AccountName = "",
+					AccountPassword = "",
+					ID = 1
 				}
 			);
 		}
