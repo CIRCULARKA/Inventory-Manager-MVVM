@@ -126,7 +126,7 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDeviceAccount { get; set; }
+		public string InputtedDeviceAccountName { get; set; }
 
 		public string InputtedDevicePassword { get; set; }
 	}
