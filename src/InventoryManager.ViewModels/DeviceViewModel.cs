@@ -17,6 +17,10 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkName;
 
+		private string _inputtedDeviceAccountName;
+
+		private string _inputtedDevicePassword;
+
 		private ObservableCollection<Device> _devices;
 
 		public DeviceViewModel()
@@ -126,8 +130,24 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDeviceAccountName { get; set; }
+		public string InputtedDeviceAccountName
+		{
+			get => _inputtedDeviceAccountName;
+			set
+			{
+				_inputtedDeviceAccountName = value;
+				OnPropertyChanged("InputtedDeviceAccountName");
+			}
+		}
 
-		public string InputtedDevicePassword { get; set; }
+		public string InputtedDevicePassword
+		{
+			get => _inputtedDevicePassword;
+			set
+			{
+				_inputtedDevicePassword = value;
+				OnPropertyChanged("InputtedDevicePassword");
+			}
+		}
 	}
 }
