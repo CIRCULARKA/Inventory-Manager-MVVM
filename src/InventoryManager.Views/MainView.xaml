@@ -6,28 +6,4 @@
         ResizeMode="NoResize"
         SizeToContent="Height"
         Width="500">
-    <StackPanel>
-        <TextBlock Text="Управление устройствами"
-            FontSize="16" FontWeight="Bold"
-            HorizontalAlignment="Center"
-            Margin="0 5 0 10" />
-        <StackPanel Orientation="Horizontal">
-            <Button Width="70" Height="30" Content="Добавить" Margin="5 0 5 5"
-                Command="{Binding OpenAddDeviceViewCommand}" />
-            <Button Width="70" Height="30" Content="Удалить" Margin="0 0 5 5"
-                Command="{Binding RemoveDeviceCommand}" />
-        </StackPanel>
-        <ListBox ItemsSource="{Binding Devices, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}"
-            Height="450">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock FontSize="18" Text="{Binding Path=NetworkName}" />
-                        <TextBlock Text="{Binding Path=DeviceType.Name}" />
-                        <TextBlock Text="{Binding Path=InventoryNumber}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </StackPanel>
 </src:ViewBase>
