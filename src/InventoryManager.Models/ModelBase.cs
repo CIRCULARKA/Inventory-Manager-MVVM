@@ -16,6 +16,9 @@ namespace InventoryManager.Models
 
 		public void Update(T entity) => DataContext.Update<T>(entity);
 
+		/// <summary>
+		/// This method saves all changes with all models whatever model it called from
+		/// </summary>
 		public void SaveChanges() => DataContext.SaveChanges();
 
 		public abstract List<T> All();
