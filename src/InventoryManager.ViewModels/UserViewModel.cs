@@ -1,8 +1,6 @@
 using InventoryManager.Commands;
 using InventoryManager.Models;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
@@ -10,20 +8,37 @@ namespace InventoryManager.ViewModels
 	{
 		private readonly User _userModel;
 
+		private ObservableCollection<User> _users;
+
 		public UserViewModel()
 		{
 			_userModel = new User();
 
-			// AddUserCommand = new ButtonCommand(
-			// 	(obj) =>
-			// 	{
+			// Need to make something like All() method for models
+			// _users =
 
-			// 	}
-			// );
+			AddUserCommand = new ButtonCommand(
+				(obj) =>
+				{
+				}
+			);
+
+			RemoveUserCommand = new ButtonCommand(
+				(obj) =>
+				{
+					_userModel.Remove(SelectedUser);
+					_userModel.SaveChanges();
+				},
+				(obj) => SelectedUser != null
+			);
 		}
+
+		public User SelectedUser { get; set; }
 
 		public ButtonCommand AddUserCommand { get; }
 
 		public ButtonCommand RemoveUserCommand { get; }
+
+		public ObservableCollection<>
 	}
 }
