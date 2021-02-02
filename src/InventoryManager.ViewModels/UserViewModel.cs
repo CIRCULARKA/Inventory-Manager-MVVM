@@ -1,5 +1,6 @@
 using InventoryManager.Commands;
 using InventoryManager.Models;
+using InventoryManager.Extensions;
 using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
@@ -13,9 +14,7 @@ namespace InventoryManager.ViewModels
 		public UserViewModel()
 		{
 			_userModel = new User();
-
-			// Need to make something like All() method for models
-			// _users =
+			_users = _userModel.All().ToObservableCollection();
 
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
@@ -34,6 +33,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		public User SelectedUser { get; set; }
+
+		public ObservableCollection<User> Users => _users;
 
 		public ButtonCommand AddUserCommand { get; }
 
