@@ -1,4 +1,5 @@
 using System;
+using System.Windows;
 
 namespace InventoryManager
 {
@@ -7,8 +8,20 @@ namespace InventoryManager
 		[STAThread]
 		public static void Main()
 		{
-			var app = new App();
-			app.Run();
+			try
+			{
+				var app = new App();
+				app.Run();
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(
+					e.Message,
+					"Необработанная ошибка",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+			}
 		}
 	}
 }
