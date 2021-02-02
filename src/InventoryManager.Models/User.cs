@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 namespace InventoryManager.Models
 {
 	public class User : ModelBase<User>
@@ -15,5 +19,8 @@ namespace InventoryManager.Models
 		public int UserGroupID { get; set; }
 
 		public Group UserGroup { get; set; }
+
+		public override List<User> All() =>
+			DataContext.Users.Include(u => u.UserGroup).ToList();
 	}
 }

@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using InventoryManager.Extensions;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 namespace InventoryManager.Models
 {
 	public class Device : ModelBase<Device>
@@ -13,5 +18,9 @@ namespace InventoryManager.Models
 		public DeviceType DeviceType { get; set; }
 
 		public string NetworkName { get; set; }
+
+		public override List<Device> All() => DataContext.Devices.
+			Include(d => d.DeviceConfiguration).
+			Include(d => d.DeviceType).ToList();
 	}
 }
