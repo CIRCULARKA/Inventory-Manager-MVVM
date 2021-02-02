@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class Device
+	public class Device : ModelBase<Device>
 	{
 		public string InventoryNumber { get; set; }
 
