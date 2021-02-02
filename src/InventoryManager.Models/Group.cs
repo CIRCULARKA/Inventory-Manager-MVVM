@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace InventoryManager.Models
 {
-	public class Group
+	public class Group : ModelBase<Group>
 	{
 		public int ID { get; set; }
 

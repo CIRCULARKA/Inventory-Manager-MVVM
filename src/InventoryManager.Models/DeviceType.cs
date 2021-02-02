@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class DeviceType : NotifyingModel
+	public class DeviceType : ModelBase<DeviceType>
 	{
 		public int ID { get; set; }
 

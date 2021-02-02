@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class User
+	public class User : ModelBase<User>
 	{
 		public string LastName { get; set; }
 
