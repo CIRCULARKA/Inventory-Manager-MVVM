@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class DeviceConfiguration
+	public class DeviceConfiguration : ModelBase<DeviceConfiguration>
 	{
 		public int ID { get; set; }
 

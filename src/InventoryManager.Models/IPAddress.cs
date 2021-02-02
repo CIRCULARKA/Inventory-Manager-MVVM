@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class IPAddress
+	public class IPAddress : ModelBase<IPAddress>
 	{
 		public int ID { get; set; }
 
