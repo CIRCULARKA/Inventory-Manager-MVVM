@@ -17,8 +17,6 @@ namespace InventoryManager.ViewModels
 
 		private readonly DeviceType _deviceTypeModel;
 
-		private string _messageToUser;
-
 		private string _inputtedInventoryNumber;
 
 		private string _inputtedNetworkName;
