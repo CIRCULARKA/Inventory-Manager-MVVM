@@ -7,6 +7,20 @@
 	SizeToContent="Height"
 	Width="500">
 	<StackPanel>
-		<src:DevicesManagementView />
+		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
+		<TabControl>
+			<TabItem>
+				<TabItem.Header>Пользователи</TabItem.Header>
+				<TabItem.Content>
+					<src:UsersManagementView />
+				</TabItem.Content>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>Устройства</TabItem.Header>
+				<TabItem.Content>
+					<src:DevicesManagementView />
+				</TabItem.Content>
+			</TabItem>
+		</TabControl>
 	</StackPanel>
 </src:ViewBase>
