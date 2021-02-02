@@ -7,13 +7,6 @@ namespace InventoryManager.ViewModels
 	{
 		private string _messageToUser;
 
-		protected ViewModelBase()
-		{
-			DataContext = new InventoryManagerDbContext();
-		}
-
-		public InventoryManagerDbContext DataContext { get; }
-
 		public string MessageToUser
 		{
 			get => _messageToUser;
