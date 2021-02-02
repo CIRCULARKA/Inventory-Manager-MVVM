@@ -7,22 +7,28 @@ namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : ViewModelBase
 	{
-		private string _messageToUser;
+		private readonly User _userModel;
 
 		public AuthorizationViewModel(ViewBase view)
 		{
+			_userModel = new User();
+
 			AuthorizationView = view;
 			LoginCommand = new ButtonCommand(
 				(user) =>
 				{
-					var findedUser = DataContext.Find<User>(InputtedLogin);
-					if (findedUser != null && findedUser.Password == InputtedPassword)
+					try
 					{
+						var findedUser = _userModel.Find(InputtedLogin);
+
 						var mainView = new MainView();
 						mainView.Show();
 						AuthorizationView.Close();
 					}
-					else MessageToUser = "Логин или пароль введён неверно";
+					catch (System.Exception)
+					{
+						MessageToUser = "Логин или пароль введён неверно";
+					}
 				}
 			);
 		}
@@ -34,15 +40,5 @@ namespace InventoryManager.ViewModels
 		public string InputtedLogin { get; set; }
 
 		public string InputtedPassword { get; set; }
-
-		public string MessageToUser
-		{
-			get => _messageToUser;
-			set
-			{
-				_messageToUser = value;
-				OnPropertyChanged("MessageToUser");
-			}
-		}
 	}
 }

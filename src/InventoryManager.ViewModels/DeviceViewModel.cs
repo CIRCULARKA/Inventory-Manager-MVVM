@@ -11,6 +11,12 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceViewModel : ViewModelBase
 	{
+		private readonly Device _deviceModel;
+
+		private readonly DeviceConfiguration _deviceConfigurationModel;
+
+		private readonly DeviceType _deviceTypeModel;
+
 		private string _messageToUser;
 
 		private string _inputtedInventoryNumber;
@@ -25,7 +31,11 @@ namespace InventoryManager.ViewModels
 
 		public DeviceViewModel()
 		{
-			_devices = DataContext.Devices.Include(d => d.DeviceType).ToList().ToObservableCollection();
+			_deviceModel = new Device();
+			_deviceConfigurationModel = new DeviceConfiguration();
+			_deviceTypeModel = new DeviceType();
+
+			_devices = _deviceModel.All().ToObservableCollection();
 
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
@@ -46,7 +56,7 @@ namespace InventoryManager.ViewModels
 						AccountName = InputtedDeviceAccountName,
 						AccountPassword = InputtedDevicePassword
 					};
-					DataContext.DeviceConfigurations.Add(newDeviceConfiguration);
+					_deviceConfigurationModel.Add(newDeviceConfiguration);
 
 					var newDevice = new Device
 					{
@@ -58,8 +68,8 @@ namespace InventoryManager.ViewModels
 
 					Devices.Add(newDevice);
 
-					DataContext.Devices.Add(newDevice);
-					DataContext.SaveChanges();
+					_deviceModel.Add(newDevice);
+					_deviceModel.SaveChanges();
 
 					InputtedInventoryNumber = "";
 					InputtedNetworkName = "";
@@ -78,16 +88,16 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					DataContext.Devices.Remove(DataContext.Devices.Find(SelectedDevice.InventoryNumber));
+					_deviceModel.Remove(_deviceModel.Find(SelectedDevice.InventoryNumber));
 					Devices.Remove(SelectedDevice);
-					DataContext.SaveChanges();
+					_deviceModel.SaveChanges();
 				},
 				(obj) => Devices.Count > 0 && SelectedDevice != null
 			);
 		}
 
 		public IEnumerable<DeviceType> DeviceTypes =>
-			DataContext.DeviceTypes.ToList();
+			_deviceTypeModel.All();
 
 		public ButtonCommand AddDeviceCommand { get; }
 
@@ -107,16 +117,6 @@ namespace InventoryManager.ViewModels
 			{
 				_inputtedInventoryNumber = value;
 				OnPropertyChanged("InputtedInventoryNumber");
-			}
-		}
-
-		public string MessageToUser
-		{
-			get => _messageToUser;
-			set
-			{
-				_messageToUser = value;
-				OnPropertyChanged("MessageToUser");
 			}
 		}
 
