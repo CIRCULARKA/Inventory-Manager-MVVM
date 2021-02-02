@@ -1,6 +1,7 @@
 using InventoryManager.Commands;
 using InventoryManager.Models;
 using InventoryManager.Extensions;
+using InventoryManager.Views;
 using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
@@ -30,6 +31,15 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedUser != null
 			);
+
+			OpenAddUserViewCommand = new ButtonCommand(
+				(o) =>
+				{
+					var addUserDialog = new AddUserView();
+					addUserDialog.DataContext = this;
+					addUserDialog.ShowDialog();
+				}
+			);
 		}
 
 		public User SelectedUser { get; set; }
@@ -39,5 +49,7 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand AddUserCommand { get; }
 
 		public ButtonCommand RemoveUserCommand { get; }
+
+		public ButtonCommand OpenAddUserViewCommand { get; }
 	}
 }
