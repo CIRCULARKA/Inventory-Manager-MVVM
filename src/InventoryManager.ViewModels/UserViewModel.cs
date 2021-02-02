@@ -38,7 +38,5 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand AddUserCommand { get; }
 
 		public ButtonCommand RemoveUserCommand { get; }
-
-		public ObservableCollection<>
 	}
 }
