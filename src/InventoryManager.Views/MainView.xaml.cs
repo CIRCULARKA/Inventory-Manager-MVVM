@@ -3,9 +3,9 @@ using InventoryManager.ViewModels;
 
 namespace InventoryManager.Views
 {
-	public partial class UserView : ViewBase
+	public partial class MainView : ViewBase
 	{
-		public UserView()
+		public MainView()
 		{
 			InitializeComponent();
 

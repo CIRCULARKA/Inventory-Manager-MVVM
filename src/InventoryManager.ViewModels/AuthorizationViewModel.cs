@@ -18,8 +18,8 @@ namespace InventoryManager.ViewModels
 					var findedUser = DataContext.Find<User>(InputtedLogin);
 					if (findedUser != null && findedUser.Password == InputtedPassword)
 					{
-						var userView = new UserView();
-						userView.Show();
+						var mainView = new MainView();
+						mainView.Show();
 						AuthorizationView.Close();
 					}
 					else MessageToUser = "Логин или пароль введён неверно";
