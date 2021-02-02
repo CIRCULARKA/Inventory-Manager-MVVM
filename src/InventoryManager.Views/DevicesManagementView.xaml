@@ -1,6 +1,10 @@
 <UserControl x:Class="InventoryManager.Views.DevicesManagementView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:InventoryManager.ViewModels">
+    <UserControl.DataContext>
+        <vms:DeviceViewModel />
+    </UserControl.DataContext>
     <StackPanel>
         <TextBlock Text="Управление устройствами"
             FontSize="16" FontWeight="Bold"
