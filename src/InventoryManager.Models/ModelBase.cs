@@ -1,4 +1,5 @@
 using InventoryManager.Data;
+using System.Collections.Generic;
 
 namespace InventoryManager.Models
 {
@@ -16,6 +17,8 @@ namespace InventoryManager.Models
 		public void Update(T entity) => DataContext.Update<T>(entity);
 
 		public void SaveChanges() => DataContext.SaveChanges();
+
+		public abstract List<T> All();
 
 		public InventoryManagerDbContext DataContext { get; }
 	}
