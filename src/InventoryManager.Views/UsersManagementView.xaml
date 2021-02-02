@@ -23,7 +23,7 @@
                     <StackPanel>
                         <TextBlock FontSize="18" Text="{Binding Path=Login}" />
                         <TextBlock Text="{Binding Path=FullName}" />
-                        <TextBlock Text="{Binding Path=Group.Name}" />
+                        <TextBlock Text="{Binding Path=UserGroup.Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
