@@ -16,7 +16,7 @@
             <Button Width="70" Height="30" Content="Удалить" Margin="0 0 5 5"
                 Command="{Binding RemoveDeviceCommand}" />
         </StackPanel>
-        <ListBox ItemsSource="{Binding Devices, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}"
+        <ListBox ItemsSource="{Binding DevicesToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}"
             Height="450">
             <ListBox.ItemTemplate>
                 <DataTemplate>
