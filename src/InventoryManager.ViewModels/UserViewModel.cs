@@ -16,7 +16,11 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedPassword;
 
-		private string _inputtedFullName;
+		private string _inputtedFirstName;
+
+		private string _inputtedLastName;
+
+		private string _inputtedMiddleName;
 
 		public UserViewModel()
 		{
@@ -26,7 +30,25 @@ namespace InventoryManager.ViewModels
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-				}
+					var newUser = new User
+					{
+						LastName = InputtedLastName,
+						FirstName = InputtedFirstName,
+						MiddleName = InputtedMiddleName,
+						Login = InputtedLogin,
+						Password = InputtedPassword,
+						UserGroup = SelectedUserGroup
+					};
+					_userModel.Add(newUser);
+					Users.Add(newUser);
+					_userModel.SaveChanges();
+				},
+				(obj) => !(string.IsNullOrWhiteSpace(InputtedLogin) &&
+					string.IsNullOrWhiteSpace(InputtedPassword) &&
+					string.IsNullOrWhiteSpace(InputtedFirstName) &&
+					string.IsNullOrWhiteSpace(InputtedLastName) &&
+					string.IsNullOrWhiteSpace(InputtedMiddleName) &&
+					string.IsNullOrWhiteSpace(InputtedPassword))
 			);
 
 			RemoveUserCommand = new ButtonCommand(
@@ -34,12 +56,13 @@ namespace InventoryManager.ViewModels
 				{
 					_userModel.Remove(SelectedUser);
 					_userModel.SaveChanges();
+					Users.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
 			);
 
 			ShowAddUserViewCommand = new ButtonCommand(
-				(o) =>
+				(obj) =>
 				{
 					var addUserDialog = new AddUserView();
 					addUserDialog.ShowDialog();
@@ -74,6 +97,36 @@ namespace InventoryManager.ViewModels
 			{
 				_inputtedPassword = value;
 				OnPropertyChanged("InputtedPassword");
+			}
+		}
+
+		public string InputtedFirstName
+		{
+			get => _inputtedFirstName;
+			set
+			{
+				_inputtedFirstName = value;
+				OnPropertyChanged("InputtedFirstName");
+			}
+		}
+
+		public string InputtedLastName
+		{
+			get => _inputtedLastName;
+			set
+			{
+				_inputtedLastName = value;
+				OnPropertyChanged("InputtedLastName");
+			}
+		}
+
+		public string InputtedMiddleName
+		{
+			get => _inputtedMiddleName;
+			set
+			{
+				_inputtedMiddleName = value;
+				OnPropertyChanged("InputtedMiddleName");
 			}
 		}
 
