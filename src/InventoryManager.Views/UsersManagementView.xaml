@@ -1,4 +1,4 @@
-<UserControl x:Class="InventoryManager.Views.UsersManagementView"
+<UserControl x:Class="InventoryManager.Views.UsersToShowManagementView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
@@ -16,7 +16,7 @@
             <Button Width="70" Height="30" Content="Удалить" Margin="0 0 5 5"
                 Command="{Binding RemoveUserCommand}" />
         </StackPanel>
-        <ListBox ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser}"
+        <ListBox ItemsSource="{Binding UsersToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser}"
             Height="450">
             <ListBox.ItemTemplate>
                 <DataTemplate>
