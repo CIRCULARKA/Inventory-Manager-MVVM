@@ -69,7 +69,10 @@ namespace InventoryManager.ViewModels
 						_deviceConfigurationModel.Add(newDeviceConfiguration);
 						_deviceModel.SaveChanges();
 
-						Devices.Add(newDevice);
+						// Load DeviceType object after adding to db in order to avoid exception
+						// and display name of device type in observable collection
+						newDevice.DeviceType = SelectedDeviceType;
+						DevicesToShow.Add(newDevice);
 
 						InputtedInventoryNumber = "";
 						InputtedNetworkName = "";
@@ -94,10 +97,10 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					_deviceModel.Remove(_deviceModel.Find(SelectedDevice.InventoryNumber));
-					Devices.Remove(SelectedDevice);
 					_deviceModel.SaveChanges();
+					DevicesToShow.Remove(SelectedDevice);
 				},
-				(obj) => Devices.Count > 0 && SelectedDevice != null
+				(obj) => SelectedDevice != null
 			);
 		}
 
@@ -110,7 +113,7 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
-		public ObservableCollection<Device> Devices =>
+		public ObservableCollection<Device> DevicesToShow =>
 			_devices;
 
 		public Device SelectedDevice { get; set; }
