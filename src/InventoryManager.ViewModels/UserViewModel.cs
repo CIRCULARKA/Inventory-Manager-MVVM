@@ -47,8 +47,8 @@ namespace InventoryManager.ViewModels
 						UserGroup = SelectedUserGroup
 					};
 					_userModel.Add(newUser);
-					Users.Add(newUser);
 					_userModel.SaveChanges();
+					UsersToShow.Add(newUser);
 				},
 				(obj) => !(string.IsNullOrWhiteSpace(InputtedLogin) &&
 					string.IsNullOrWhiteSpace(InputtedPassword) &&
@@ -63,7 +63,7 @@ namespace InventoryManager.ViewModels
 				{
 					_userModel.Remove(SelectedUser);
 					_userModel.SaveChanges();
-					Users.Remove(SelectedUser);
+					UsersToShow.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
 			);
@@ -79,7 +79,7 @@ namespace InventoryManager.ViewModels
 
 		public User SelectedUser { get; set; }
 
-		public ObservableCollection<User> Users => _users;
+		public ObservableCollection<User> UsersToShow => _users;
 
 		public ObservableCollection<Group> UserGroups => _groups;
 
