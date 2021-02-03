@@ -17,18 +17,15 @@ namespace InventoryManager.ViewModels
 			LoginCommand = new ButtonCommand(
 				(user) =>
 				{
-					try
-					{
-						var findedUser = _userModel.Find(InputtedLogin);
+					var findedUser = _userModel.Find(InputtedLogin);
 
+					if (findedUser != null && findedUser.Password == InputtedPassword)
+					{
 						var mainView = new MainView();
 						mainView.Show();
 						AuthorizationView.Close();
 					}
-					catch (System.Exception)
-					{
-						MessageToUser = "Логин или пароль введён неверно";
-					}
+					else MessageToUser = "Логин или пароль введён неверно";
 				}
 			);
 		}

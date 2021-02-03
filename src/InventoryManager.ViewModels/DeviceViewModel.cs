@@ -17,8 +17,6 @@ namespace InventoryManager.ViewModels
 
 		private readonly DeviceType _deviceTypeModel;
 
-		private string _messageToUser;
-
 		private string _inputtedInventoryNumber;
 
 		private string _inputtedNetworkName;
@@ -56,26 +54,36 @@ namespace InventoryManager.ViewModels
 						AccountName = InputtedDeviceAccountName,
 						AccountPassword = InputtedDevicePassword
 					};
-					_deviceConfigurationModel.Add(newDeviceConfiguration);
 
 					var newDevice = new Device
 					{
 						InventoryNumber = InputtedInventoryNumber,
-						DeviceType = SelectedDeviceType,
+						DeviceTypeID = SelectedDeviceType.ID,
 						NetworkName = InputtedNetworkName,
 						DeviceConfiguration = newDeviceConfiguration
 					};
 
-					Devices.Add(newDevice);
+					try
+					{
+						_deviceModel.Add(newDevice);
+						_deviceConfigurationModel.Add(newDeviceConfiguration);
+						_deviceModel.SaveChanges();
 
-					_deviceModel.Add(newDevice);
-					_deviceModel.SaveChanges();
+						// Load DeviceType object after adding to db in order to avoid exception
+						// and display name of device type in observable collection
+						newDevice.DeviceType = SelectedDeviceType;
+						DevicesToShow.Add(newDevice);
 
-					InputtedInventoryNumber = "";
-					InputtedNetworkName = "";
-					InputtedDeviceAccountName = "";
-					InputtedDevicePassword = "";
-					MessageToUser = "Устройство добавлено";
+						InputtedInventoryNumber = "";
+						InputtedNetworkName = "";
+						InputtedDeviceAccountName = "";
+						InputtedDevicePassword = "";
+						MessageToUser = "Устройство добавлено";
+					}
+					catch (System.Exception)
+					{
+						MessageToUser = "Устройство с таким инвентарным номер уже существует";
+					}
 				},
 				(obj) =>
 				{
@@ -89,10 +97,10 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					_deviceModel.Remove(_deviceModel.Find(SelectedDevice.InventoryNumber));
-					Devices.Remove(SelectedDevice);
 					_deviceModel.SaveChanges();
+					DevicesToShow.Remove(SelectedDevice);
 				},
-				(obj) => Devices.Count > 0 && SelectedDevice != null
+				(obj) => SelectedDevice != null
 			);
 		}
 
@@ -105,7 +113,7 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
-		public ObservableCollection<Device> Devices =>
+		public ObservableCollection<Device> DevicesToShow =>
 			_devices;
 
 		public Device SelectedDevice { get; set; }
