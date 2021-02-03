@@ -78,8 +78,8 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					_userModel.Remove(_userModel.Find(SelectedUser.Login));
-					UsersToShow.Remove(SelectedUser);
 					_userModel.SaveChanges();
+					UsersToShow.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
 			);
