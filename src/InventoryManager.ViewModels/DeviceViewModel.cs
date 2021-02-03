@@ -54,26 +54,33 @@ namespace InventoryManager.ViewModels
 						AccountName = InputtedDeviceAccountName,
 						AccountPassword = InputtedDevicePassword
 					};
-					_deviceConfigurationModel.Add(newDeviceConfiguration);
 
 					var newDevice = new Device
 					{
 						InventoryNumber = InputtedInventoryNumber,
-						DeviceType = SelectedDeviceType,
+						DeviceTypeID = SelectedDeviceType.ID,
 						NetworkName = InputtedNetworkName,
 						DeviceConfiguration = newDeviceConfiguration
 					};
 
-					Devices.Add(newDevice);
+					try
+					{
+						_deviceModel.Add(newDevice);
+						_deviceConfigurationModel.Add(newDeviceConfiguration);
+						_deviceModel.SaveChanges();
 
-					_deviceModel.Add(newDevice);
-					_deviceModel.SaveChanges();
+						Devices.Add(newDevice);
 
-					InputtedInventoryNumber = "";
-					InputtedNetworkName = "";
-					InputtedDeviceAccountName = "";
-					InputtedDevicePassword = "";
-					MessageToUser = "Устройство добавлено";
+						InputtedInventoryNumber = "";
+						InputtedNetworkName = "";
+						InputtedDeviceAccountName = "";
+						InputtedDevicePassword = "";
+						MessageToUser = "Устройство добавлено";
+					}
+					catch (System.Exception)
+					{
+						MessageToUser = "Устройство с таким инвентарным номер уже существует";
+					}
 				},
 				(obj) =>
 				{
