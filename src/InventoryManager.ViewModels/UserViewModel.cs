@@ -81,7 +81,7 @@ namespace InventoryManager.ViewModels
 
 		public ObservableCollection<User> Users => _users;
 
-		public ObservableCollection<Group> Groups => _groups;
+		public ObservableCollection<Group> UserGroups => _groups;
 
 		public ButtonCommand AddUserCommand { get; }
 
