@@ -40,7 +40,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-		<Button Content="Добавить" Height="30" Command="{Binding ShowAddUserViewCommand}" />
+		<Button Content="Добавить" Height="30" Command="{Binding AddUserCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
 </src:ViewBase>
