@@ -44,7 +44,7 @@ namespace InventoryManager.ViewModels
 						MiddleName = InputtedMiddleName,
 						Login = InputtedLogin,
 						Password = InputtedPassword,
-						UserGroup = SelectedUserGroup
+						UserGroupID = SelectedUserGroup.ID
 					};
 					_userModel.Add(newUser);
 					_userModel.SaveChanges();
