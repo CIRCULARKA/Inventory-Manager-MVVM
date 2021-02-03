@@ -26,8 +26,12 @@
         <vms:UserViewModel />
     </Window.DataContext>
     <StackPanel>
-		<TextBlock Text="Полное имя" />
-		<TextBox Text="{Binding InputtedInventoryNumber, UpdateSourceTrigger=PropertyChanged}" />
+		<TextBlock Text="Фамилия" />
+		<TextBox Text="{Binding InputtedLastName, UpdateSourceTrigger=PropertyChanged}" />
+		<TextBlock Text="Имя" />
+		<TextBox Text="{Binding InputtedFirstName, UpdateSourceTrigger=PropertyChanged}" />
+		<TextBlock Text="Отчество" />
+		<TextBox Text="{Binding InputtedMiddleName, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Логин" />
 		<TextBox Text="{Binding InputtedLogin, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Пароль" />
