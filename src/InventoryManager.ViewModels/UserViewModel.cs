@@ -67,11 +67,11 @@ namespace InventoryManager.ViewModels
 					}
 
 				},
-				(obj) => !(string.IsNullOrWhiteSpace(InputtedLogin) &&
-					string.IsNullOrWhiteSpace(InputtedPassword) &&
-					string.IsNullOrWhiteSpace(InputtedFirstName) &&
-					string.IsNullOrWhiteSpace(InputtedLastName) &&
-					string.IsNullOrWhiteSpace(InputtedMiddleName) &&
+				(obj) => !(string.IsNullOrWhiteSpace(InputtedLogin) ||
+					string.IsNullOrWhiteSpace(InputtedPassword) ||
+					string.IsNullOrWhiteSpace(InputtedFirstName) ||
+					string.IsNullOrWhiteSpace(InputtedLastName) ||
+					string.IsNullOrWhiteSpace(InputtedMiddleName) ||
 					string.IsNullOrWhiteSpace(InputtedPassword))
 			);
 
