@@ -20,7 +20,7 @@ namespace InventoryManager.Models
 
 		public Group UserGroup { get; set; }
 
-		public string FullName => LastName + FirstName + MiddleName;
+		public string FullName => $"{LastName} {FirstName} {MiddleName}";
 
 		public override List<User> All() =>
 			DataContext.Users.Include(u => u.UserGroup).ToList();
