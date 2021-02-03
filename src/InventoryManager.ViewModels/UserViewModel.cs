@@ -46,9 +46,26 @@ namespace InventoryManager.ViewModels
 						Password = InputtedPassword,
 						UserGroupID = SelectedUserGroup.ID
 					};
+
 					_userModel.Add(newUser);
-					_userModel.SaveChanges();
-					UsersToShow.Add(newUser);
+					try
+					{
+						_userModel.SaveChanges();
+						UsersToShow.Add(newUser);
+
+						MessageToUser = "Пользователь добавлен";
+
+						InputtedFirstName = "";
+						InputtedLastName = "";
+						InputtedMiddleName = "";
+						InputtedLogin = "";
+						InputtedPassword = "";
+					}
+					catch (System.Exception)
+					{
+						MessageToUser = "Вы не ввели все данные, либо пользователь уже существует";
+					}
+
 				},
 				(obj) => !(string.IsNullOrWhiteSpace(InputtedLogin) &&
 					string.IsNullOrWhiteSpace(InputtedPassword) &&
@@ -61,9 +78,9 @@ namespace InventoryManager.ViewModels
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					_userModel.Remove(SelectedUser);
-					_userModel.SaveChanges();
+					_userModel.Remove(_userModel.Find(SelectedUser.Login));
 					UsersToShow.Remove(SelectedUser);
+					_userModel.SaveChanges();
 				},
 				(obj) => SelectedUser != null
 			);
