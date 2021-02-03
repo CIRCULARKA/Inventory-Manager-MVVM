@@ -26,8 +26,6 @@ namespace InventoryManager.ViewModels
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var addUserView = new AddUserView();
-					addUserView.ShowDialog();
 				}
 			);
 
@@ -44,7 +42,6 @@ namespace InventoryManager.ViewModels
 				(o) =>
 				{
 					var addUserDialog = new AddUserView();
-					addUserDialog.DataContext = this;
 					addUserDialog.ShowDialog();
 				}
 			);
