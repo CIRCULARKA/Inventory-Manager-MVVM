@@ -1,4 +1,4 @@
-<UserControl x:Class="InventoryManager.Views.UsersToShowManagementView"
+<UserControl x:Class="InventoryManager.Views.UsersManagementView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
