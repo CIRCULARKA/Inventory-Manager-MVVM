@@ -12,6 +12,12 @@ namespace InventoryManager.ViewModels
 
 		private ObservableCollection<User> _users;
 
+		private string _inputtedLogin;
+
+		private string _inputtedPassword;
+
+		private string _inputtedFullName;
+
 		public UserViewModel()
 		{
 			_userModel = new User();
@@ -51,5 +57,27 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand RemoveUserCommand { get; }
 
 		public ButtonCommand OpenAddUserViewCommand { get; }
+
+		public string InputtedLogin
+		{
+			get => _inputtedLogin;
+			set
+			{
+				_inputtedLogin = value;
+				OnPropertyChanged("InputtedLogin");
+			}
+		}
+
+		public string InputtedPassword
+		{
+			get => _inputtedPassword;
+			set
+			{
+				_inputtedPassword = value;
+				OnPropertyChanged("InputtedPassword");
+			}
+		}
+
+		public Group SelectedUserGroup { get; set; }
 	}
 }
