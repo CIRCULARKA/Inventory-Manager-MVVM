@@ -10,7 +10,11 @@ namespace InventoryManager.ViewModels
 	{
 		private readonly User _userModel;
 
+		private readonly Group _groupModel;
+
 		private ObservableCollection<User> _users;
+
+		private ObservableCollection<Group> _groups;
 
 		private string _inputtedLogin;
 
@@ -26,6 +30,9 @@ namespace InventoryManager.ViewModels
 		{
 			_userModel = new User();
 			_users = _userModel.All().ToObservableCollection();
+
+			_groupModel = new Group();
+			_groups = _groupModel.All().ToObservableCollection();
 
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
@@ -73,6 +80,8 @@ namespace InventoryManager.ViewModels
 		public User SelectedUser { get; set; }
 
 		public ObservableCollection<User> Users => _users;
+
+		public ObservableCollection<Group> Groups => _groups;
 
 		public ButtonCommand AddUserCommand { get; }
 
