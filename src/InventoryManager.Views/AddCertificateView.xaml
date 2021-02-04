@@ -2,7 +2,6 @@
         xmlns:src="clr-namespace:InventoryManager.Views"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:InventoryManager"
         Title="Заполните данные для нового сертификата"
         ResizeMode="NoResize"
         SizeToContent="Height"
@@ -24,7 +23,9 @@
     <StackPanel>
 		<TextBlock Text="Субъект, выдавший сертификат" />
 		<TextBox Text="{Binding InputtedSubject, UpdateSourceTrigger=PropertyChanged}" />
-		<TextBlock Text="Границы, в которых находится срок действия сертификата" />
+		<TextBlock Text="Границы, в которых находится срок действия сертификата. Выберите дату начала, зажмите Shift и выберите дату конца"
+            TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" />
+        <Calendar SelectionMode="SingleRange" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
