@@ -14,7 +14,7 @@ namespace InventoryManager.Models
 
 		public T Find(params object[] keys) => DataContext.Find<T>(keys);
 
-		public void Remove(T entity) => DataContext.Remove<T>(entity);
+		public virtual void Remove(T entity) => DataContext.Remove<T>(entity);
 
 		public void Update(T entity) => DataContext.Update<T>(entity);
 
