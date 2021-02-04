@@ -19,6 +19,12 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
+		public override void Remove(Device entity)
+		{
+			DataContext.DeviceConfigurations.Remove(entity.DeviceConfiguration);
+			DataContext.Devices.Remove(entity);
+		}
+
 		public override List<Device> All() => DataContext.Devices.
 			Include(d => d.DeviceConfiguration).
 			Include(d => d.DeviceType).ToList();
