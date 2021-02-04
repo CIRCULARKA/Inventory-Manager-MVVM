@@ -14,7 +14,7 @@ namespace InventoryManager.Models.Configuration
 				{
 					AccountName = "",
 					AccountPassword = "",
-					ID = 1
+					ID = -1
 				}
 			);
 		}
