@@ -51,6 +51,9 @@ namespace InventoryManager.ViewModels
 					{
 						_userModel.Add(newUser);
 						_userModel.SaveChanges();
+
+						// Load user group explicitly to display user group in users list
+						newUser.UserGroup = SelectedUserGroup;
 						UsersToShow.Add(newUser);
 
 						MessageToUser = "Пользователь добавлен";
