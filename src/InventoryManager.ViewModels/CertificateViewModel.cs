@@ -25,8 +25,9 @@ namespace InventoryManager.ViewModels
 			AddCertificateCommand = new ButtonCommand(
 				(o) =>
 				{
+					// Just for debugging
 					MessageBox.Show(
-						SelectedDates[0] + " " + SelectedDates[SelectedDates.Count - 1]
+						SelectedDates.ToString()
 					);
 				}
 			);
@@ -46,6 +47,6 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand AddCertificateCommand { get; }
 
-		public List<DateTime> SelectedDates { get; set; }
+		public SelectedDatesCollection SelectedDates { get; set; }
 	}
 }
