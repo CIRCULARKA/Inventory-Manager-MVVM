@@ -22,9 +22,6 @@
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
     </Window.Resources>
-    <Window.DataContext>
-        <vms:UserViewModel />
-    </Window.DataContext>
     <StackPanel>
 		<TextBlock Text="Фамилия" />
 		<TextBox Text="{Binding InputtedLastName, UpdateSourceTrigger=PropertyChanged}" />
