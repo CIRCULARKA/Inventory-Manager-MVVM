@@ -80,7 +80,8 @@ namespace InventoryManager.ViewModels
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					_userModel.Remove(_userModel.Find(SelectedUser.Login));
+					var userToRemove = _userModel.Find(SelectedUser.Login);
+					_userModel.Remove(userToRemove);
 					_userModel.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
