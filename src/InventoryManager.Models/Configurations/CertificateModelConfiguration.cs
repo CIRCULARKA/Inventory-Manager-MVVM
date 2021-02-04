@@ -7,6 +7,8 @@ namespace InventoryManager.Models.Configuration
 	{
 		public void Configure(EntityTypeBuilder<Certificate> builder)
 		{
+			builder.HasKey(c => c.ID);
+			builder.Property(c => c.ID).UseIdentityColumn();
 		}
 	}
 }
