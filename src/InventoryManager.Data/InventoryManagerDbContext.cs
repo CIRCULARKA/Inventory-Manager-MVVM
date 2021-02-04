@@ -33,6 +33,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Device>(new DeviceModelConfiguration());
 			builder.ApplyConfiguration<IPAddress>(new IPAddressModelConfiguration());
 			builder.ApplyConfiguration<DeviceConfiguration>(new DeviceConfigurationModelConfiguration());
+			builder.ApplyConfiguration<Certificate>(new CertificateModelConfiguration());
 		}
 	}
 }
