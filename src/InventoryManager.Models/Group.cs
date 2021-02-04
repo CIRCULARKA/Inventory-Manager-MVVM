@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManager.Models
 {
@@ -10,6 +11,6 @@ namespace InventoryManager.Models
 		public string Name { get; set; }
 
 		public override List<Group> All() =>
-			DataContext.Groups.ToList();
+			DataContext.Groups.AsNoTracking().ToList();
 	}
 }
