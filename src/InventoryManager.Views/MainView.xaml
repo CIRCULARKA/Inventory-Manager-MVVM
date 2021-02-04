@@ -21,6 +21,12 @@
 					<src:DevicesManagementView />
 				</TabItem.Content>
 			</TabItem>
+			<TabItem>
+				<TabItem.Header>Сертификаты</TabItem.Header>
+				<TabItem.Content>
+					<src:CertificatesManagementView />
+				</TabItem.Content>
+			</TabItem>
 		</TabControl>
 	</StackPanel>
 </src:ViewBase>
