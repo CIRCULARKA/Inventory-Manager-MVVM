@@ -25,8 +25,8 @@
 		<TextBox Text="{Binding InputtedSubject, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Границы, в которых находится срок действия сертификата. Выберите дату начала, зажмите Shift и выберите дату конца"
             TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" />
-        <Calendar SelectionMode="SingleRange" />
-		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceCommand}" />
+        <Calendar SelectionMode="SingleRange" SelectedDates="{Binding SelectedDates, UpdateSourceTrigger=PropertyChanged}" />
+		<Button Content="Добавить" Height="30" Command="{Binding AddCertificateCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
 </src:ViewBase>
