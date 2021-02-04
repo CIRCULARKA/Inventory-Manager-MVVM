@@ -91,6 +91,7 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					var addUserDialog = new AddUserView();
+					addUserDialog.DataContext = this;
 					addUserDialog.ShowDialog();
 				}
 			);
