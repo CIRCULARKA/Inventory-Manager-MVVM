@@ -10,6 +10,12 @@
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
 		<TabControl>
 			<TabItem>
+				<TabItem.Header>Сертификаты</TabItem.Header>
+				<TabItem.Content>
+					<src:CertificatesManagementView />
+				</TabItem.Content>
+			</TabItem>
+			<TabItem>
 				<TabItem.Header>Пользователи</TabItem.Header>
 				<TabItem.Content>
 					<src:UsersManagementView />

@@ -18,6 +18,8 @@ namespace InventoryManager.Data
 
 		public DbSet<DeviceConfiguration> DeviceConfigurations { get; set; }
 
+		public DbSet<Certificate> Certificates { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
@@ -31,6 +33,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Device>(new DeviceModelConfiguration());
 			builder.ApplyConfiguration<IPAddress>(new IPAddressModelConfiguration());
 			builder.ApplyConfiguration<DeviceConfiguration>(new DeviceConfigurationModelConfiguration());
+			builder.ApplyConfiguration<Certificate>(new CertificateModelConfiguration());
 		}
 	}
 }
