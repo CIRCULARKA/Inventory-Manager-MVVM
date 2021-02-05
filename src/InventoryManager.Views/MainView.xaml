@@ -10,9 +10,9 @@
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
 		<TabControl>
 			<TabItem>
-				<TabItem.Header>Сертификаты</TabItem.Header>
+				<TabItem.Header>Устройства</TabItem.Header>
 				<TabItem.Content>
-					<src:CertificatesManagementView />
+					<src:DevicesManagementView />
 				</TabItem.Content>
 			</TabItem>
 			<TabItem>
@@ -22,9 +22,9 @@
 				</TabItem.Content>
 			</TabItem>
 			<TabItem>
-				<TabItem.Header>Устройства</TabItem.Header>
+				<TabItem.Header>Сертификаты</TabItem.Header>
 				<TabItem.Content>
-					<src:DevicesManagementView />
+					<src:CertificatesManagementView />
 				</TabItem.Content>
 			</TabItem>
 		</TabControl>
