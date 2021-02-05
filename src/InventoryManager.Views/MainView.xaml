@@ -5,7 +5,7 @@
 	Title="Окно пользователя"
 	ResizeMode="NoResize"
 	SizeToContent="Height"
-	Width="500">
+	Width="450">
 	<StackPanel>
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
 		<TabControl>
