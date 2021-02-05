@@ -1,11 +1,9 @@
-using Microsoft.EntityFrameworkCore;
 using InventoryManager.Commands;
 using InventoryManager.Models;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using InventoryManager.Views;
 using InventoryManager.Extensions;
-using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
