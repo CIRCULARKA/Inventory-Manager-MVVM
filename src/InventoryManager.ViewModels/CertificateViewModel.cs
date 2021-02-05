@@ -47,7 +47,8 @@ namespace InventoryManager.ViewModels
 					InputtedSubject = "";
 
 					MessageToUser = "Сертификат добавлен";
-				}
+				},
+				(o) => !string.IsNullOrWhiteSpace(InputtedSubject)
 			);
 
 			RemoveCertificateCommand = new ButtonCommand(
