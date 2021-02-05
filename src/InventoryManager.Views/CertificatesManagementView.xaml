@@ -21,9 +21,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="18" Text="{Binding Path=ID}" />
-                        <TextBlock Text="{Binding Path=Subject}" />
+                        <TextBlock FontSize="18" Text="{Binding Path=Subject}" />
                         <TextBlock Text="{Binding Path=State}" />
+                        <TextBlock Text="{Binding Path=ID}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

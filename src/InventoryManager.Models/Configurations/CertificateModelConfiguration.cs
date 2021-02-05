@@ -9,6 +9,7 @@ namespace InventoryManager.Models.Configuration
 		{
 			builder.HasKey(c => c.ID);
 			builder.Property(c => c.ID).UseIdentityColumn();
+			builder.Ignore(c => c.State);
 		}
 	}
 }

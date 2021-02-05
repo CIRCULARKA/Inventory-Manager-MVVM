@@ -23,9 +23,11 @@
     <StackPanel>
 		<TextBlock Text="Субъект, выдавший сертификат" />
 		<TextBox Text="{Binding InputtedSubject, UpdateSourceTrigger=PropertyChanged}" />
-		<TextBlock Text="Границы, в которых находится срок действия сертификата. Выберите дату начала, зажмите Shift и выберите дату конца"
-            TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" />
-        <Calendar SelectionMode="SingleRange" SelectedDates="{Binding SelectedDates, UpdateSourceTrigger=PropertyChanged}" />
+        <!-- Need to merge two calendars into one with SingleRange selection and bind to VM -->
+		<TextBlock Text="Начало действия сертификата" />
+        <Calendar  SelectedDate="{Binding SelectedValidUntilDate, UpdateSourceTrigger=PropertyChanged}" />
+		<TextBlock Text="Конец действия сертификата" />
+        <Calendar SelectedDate="{Binding SelectedValidUntilDate, UpdateSourceTrigger=PropertyChanged}" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddCertificateCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
