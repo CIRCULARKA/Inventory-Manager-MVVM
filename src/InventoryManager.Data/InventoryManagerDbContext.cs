@@ -38,6 +38,8 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<IPAddress>(new IPAddressModelConfiguration());
 			builder.ApplyConfiguration<DeviceConfiguration>(new DeviceConfigurationModelConfiguration());
 			builder.ApplyConfiguration<Certificate>(new CertificateModelConfiguration());
+			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
+			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
 		}
 	}
 }
