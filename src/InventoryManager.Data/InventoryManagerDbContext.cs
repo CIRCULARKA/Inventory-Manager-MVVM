@@ -20,6 +20,10 @@ namespace InventoryManager.Data
 
 		public DbSet<Certificate> Certificates { get; set; }
 
+		public DbSet<Housing> Housings { get; set; }
+
+		public DbSet<Cabinet> Cabinets { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
