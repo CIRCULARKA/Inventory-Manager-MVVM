@@ -12,10 +12,9 @@ namespace InventoryManager.Models.Configuration
 			builder.HasData(
 				new DeviceConfiguration
 				{
-					AccountName = "",
-					AccountPassword = "",
 					IPAddressID = -1,
-					ID = -1
+					ID = -1,
+					AccountID = -1
 				}
 			);
 		}
