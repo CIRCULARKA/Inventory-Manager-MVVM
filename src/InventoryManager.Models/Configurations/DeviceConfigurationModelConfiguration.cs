@@ -14,6 +14,7 @@ namespace InventoryManager.Models.Configuration
 				{
 					AccountName = "",
 					AccountPassword = "",
+					IPAddressID = -1,
 					ID = -1
 				}
 			);
