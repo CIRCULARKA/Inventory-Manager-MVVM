@@ -34,5 +34,7 @@
         </ComboBox>
 		<TextBlock Text="Сетевое имя" />
 		<TextBox Text="{Binding InputtedNetworkName, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Content="Добавить" Command="{Binding AddDeviceCommand}" Height="35" />
+        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
 </src:ViewBase>
