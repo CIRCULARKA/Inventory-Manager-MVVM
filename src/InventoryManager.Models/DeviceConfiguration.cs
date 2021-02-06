@@ -8,13 +8,9 @@ namespace InventoryManager.Models
 	{
 		public int ID { get; set; }
 
-		public string AccountName { get; set; }
-
 		public int AccountID { get; set; }
 
 		public Account Account { get; set; }
-
-		public string AccountPassword { get; set; }
 
 		public int IPAddressID { get; set; }
 
