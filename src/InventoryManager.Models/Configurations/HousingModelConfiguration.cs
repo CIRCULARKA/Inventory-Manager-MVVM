@@ -10,6 +10,10 @@ namespace InventoryManager.Models.Configuration
 			builder.HasKey(h => h.ID);
 			builder.Property(h => h.ID).UseIdentityColumn();
 			builder.Property(h => h.Name).IsRequired();
+			builder.HasData(
+					new Housing { ID = 1, Name = "Главный корпус" },
+					new Housing { ID = 2, Name = "Второй корпус" }
+			);
 		}
 	}
 }
