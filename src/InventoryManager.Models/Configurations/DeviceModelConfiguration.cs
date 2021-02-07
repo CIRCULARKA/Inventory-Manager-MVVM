@@ -12,15 +12,12 @@ namespace InventoryManager.Models.Configuration
 			builder.Property(d => d.NetworkName).IsRequired();
 
 			builder.HasData(
-				new Device[]
+				new Device
 				{
-					new Device
-					{
-						InventoryNumber = "NSGK530923",
-						DeviceTypeID = 1,
-						NetworkName = "IVAN-PC",
-						DeviceConfigurationID = -1
-					}
+					ID = -1,
+					InventoryNumber = "NSGK530923",
+					DeviceTypeID = 1,
+					NetworkName = "IVAN-PC",
 				}
 			);
 		}
