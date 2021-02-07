@@ -6,6 +6,11 @@ namespace InventoryManager.Models
 {
 	public class User : ModelBase<User>
 	{
+		private List<User> _allUsers;
+
+		public User() =>
+			_allUsers = DataContext.Users.Include(u => u.UserGroup).ToList();
+
 		public string LastName { get; set; }
 
 		public string FirstName { get; set; }
@@ -22,7 +27,6 @@ namespace InventoryManager.Models
 
 		public string FullName => $"{LastName} {FirstName} {MiddleName}";
 
-		public override List<User> All() =>
-			DataContext.Users.Include(u => u.UserGroup).ToList();
+		public override List<User> All() => _allUsers;
 	}
 }

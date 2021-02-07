@@ -5,6 +5,11 @@ namespace InventoryManager.Models
 {
 	public class Account : ModelBase<Account>
 	{
+		private List<Account> _allAccounts;
+
+		public Account() =>
+			_allAccounts = DataContext.Accounts.ToList();
+
 		public int ID { get; set; }
 
 		public string Login { get; set; }
@@ -15,7 +20,6 @@ namespace InventoryManager.Models
 
 		public Device Device { get; set; }
 
-		public override List<Account> All() =>
-			DataContext.Accounts.ToList();
+		public override List<Account> All() => _allAccounts;
 	}
 }
