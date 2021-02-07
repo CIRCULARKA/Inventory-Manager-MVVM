@@ -11,8 +11,6 @@ namespace InventoryManager.ViewModels
 	{
 		private readonly Device _deviceModel;
 
-		private readonly DeviceConfiguration _deviceConfigurationModel;
-
 		private readonly DeviceType _deviceTypeModel;
 
 		private string _inputtedInventoryNumber;
@@ -28,7 +26,6 @@ namespace InventoryManager.ViewModels
 		public DeviceViewModel()
 		{
 			_deviceModel = new Device();
-			_deviceConfigurationModel = new DeviceConfiguration();
 			_deviceTypeModel = new DeviceType();
 
 			_devices = _deviceModel.All().ToObservableCollection();
