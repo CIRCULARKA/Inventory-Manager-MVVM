@@ -10,7 +10,7 @@ namespace InventoryManager.Models
 			DataContext = new InventoryManagerDbContext();
 		}
 
-		public void Add(T entity) => DataContext.Add<T>(entity);
+		public virtual void Add(T entity) => DataContext.Add<T>(entity);
 
 		public T Find(params object[] keys) => DataContext.Find<T>(keys);
 
