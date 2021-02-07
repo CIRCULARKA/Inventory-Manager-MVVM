@@ -14,9 +14,16 @@ namespace InventoryManager.Models.Configuration
 				new Account
 				{
 					ID = -1,
-					Login = "AdminIvan",
-					Password = "root",
+					Login = "Student1",
+					Password = "jlsdft324",
 					DeviceID = -1
+				},
+				new Account
+				{
+					ID = -2,
+					Login = "Root",
+					Password = "lk54Sf",
+					DeviceID = -2
 				}
 			);
 		}
