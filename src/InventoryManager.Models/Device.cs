@@ -7,11 +7,6 @@ namespace InventoryManager.Models
 {
 	public class Device : ModelBase<Device>
 	{
-		private List<Device> _allDevices;
-
-		public Device() =>
-			_allDevices = DataContext.Devices.Include(d => d.DeviceType).ToList();
-
 		public int ID { get; set; }
 
 		public string InventoryNumber { get; set; }
@@ -38,6 +33,7 @@ namespace InventoryManager.Models
 			DataContext.Devices.Remove(device);
 		}
 
-		public override List<Device> All() => _allDevices;
+		public override List<Device> All() =>
+			DataContext.Devices.Include(c => c.DeviceType).ToList();
 	}
 }

@@ -5,11 +5,6 @@ namespace InventoryManager.Models
 {
 	public abstract class ModelBase<T> where T: class
 	{
-		protected ModelBase()
-		{
-			DataContext = new InventoryManagerDbContext();
-		}
-
 		public virtual void Add(T entity) => DataContext.Add<T>(entity);
 
 		public T Find(params object[] keys) => DataContext.Find<T>(keys);
@@ -25,6 +20,6 @@ namespace InventoryManager.Models
 
 		public abstract List<T> All();
 
-		public InventoryManagerDbContext DataContext { get; }
+		public static InventoryManagerDbContext DataContext { get; } = new InventoryManagerDbContext();
 	}
 }

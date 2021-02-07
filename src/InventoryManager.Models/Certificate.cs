@@ -6,11 +6,6 @@ namespace InventoryManager.Models
 {
 	public class Certificate : ModelBase<Certificate>
 	{
-		private List<Certificate> _allCertificates;
-
-		public Certificate() =>
-			_allCertificates = DataContext.Certificates.ToList();
-
 		public int ID { get; set; }
 
 		public string Subject { get; set; }
@@ -23,6 +18,8 @@ namespace InventoryManager.Models
 			ValidTo < DateTime.Now ? "Сертификат недействителен!" :
 				$"Осталось дней: {(ValidTo - DateTime.Now).Days}";
 
-		public override List<Certificate> All() => _allCertificates;
+		public override List<Certificate> All() =>
+			DataContext.Certificates.ToList();
+
 	}
 }
