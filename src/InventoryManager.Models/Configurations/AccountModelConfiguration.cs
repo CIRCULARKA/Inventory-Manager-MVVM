@@ -15,7 +15,8 @@ namespace InventoryManager.Models.Configuration
 				{
 					ID = -1,
 					Login = "AdminIvan",
-					Password = "root"
+					Password = "root",
+					DeviceID = -1
 				}
 			);
 		}
