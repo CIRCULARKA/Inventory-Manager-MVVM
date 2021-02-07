@@ -47,8 +47,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						Model.Device.Add(newDevice);
-						Model.Device.SaveChanges();
+						DeviceModel.Add(newDevice);
+						DeviceModel.SaveChanges();
 
 						// Add DeviceType explicitly in order to avoid db exception
 						newDevice.DeviceType = SelectedDeviceType;
@@ -60,7 +60,7 @@ namespace InventoryManager.ViewModels
 						InputtedDevicePassword = "";
 						MessageToUser = "Устройство добавлено";
 					}
-					catch (System.Exception e)
+					catch (System.Exception)
 					{
 						MessageToUser = "Устройство с таким инвентарным номер уже существует";
 					}
@@ -76,8 +76,8 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					Model.Device.Remove(Model.Device.Find(SelectedDevice.InventoryNumber));
-					Model.Device.SaveChanges();
+					DeviceModel.Remove(DeviceModel.Find(SelectedDevice.InventoryNumber));
+					DeviceModel.SaveChanges();
 					DevicesToShow.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
@@ -86,8 +86,8 @@ namespace InventoryManager.ViewModels
 			RemoveAccountFromDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					Model.Account.Remove(SelectedAccount);
-					Model.Account.SaveChanges();
+					AccountModel.Remove(SelectedAccount);
+					AccountModel.SaveChanges();
 
 					SelectedDeviceAccounts.Remove(SelectedAccount);
 				},
@@ -97,8 +97,8 @@ namespace InventoryManager.ViewModels
 			RemoveIPFromDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					Model.IPAddress.Remove(SelectedIP);
-					Model.IPAddress.SaveChanges();
+					IPAddressModel.Remove(SelectedIP);
+					IPAddressModel.SaveChanges();
 
 					SelectedDeviceIPAddresses.Remove(SelectedIP);
 				},
@@ -107,7 +107,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		public IEnumerable<DeviceType> DeviceTypes =>
-			Model.DeviceType.All();
+			DeviceTypeModel.All();
 
 		public ButtonCommand AddDeviceCommand { get; }
 
@@ -124,7 +124,7 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
 
 		public ObservableCollection<Device> DevicesToShow =>
-			Model.Device.All().ToObservableCollection();
+			DeviceModel.All().ToObservableCollection();
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -148,7 +148,7 @@ namespace InventoryManager.ViewModels
 
 		public Housing SelectedDeviceHousing { get; set; }
 
-		public List<Housing> HousingsToShow => Model.Housing.All();
+		public List<Housing> HousingsToShow => HousingModel.All();
 
 		// public List<Cabinet> CabinetsToShow =>
 
@@ -160,12 +160,12 @@ namespace InventoryManager.ViewModels
 				_selectedDevice = value;
 
 				// Getting all device's accounts
-				SelectedDeviceAccounts = Model.Account.All().
+				SelectedDeviceAccounts = AccountModel.All().
 					Where(a => a.DeviceID == SelectedDevice.ID).
 					ToObservableCollection();
 
 				// Getting all device's IP's
-				SelectedDeviceIPAddresses = Model.IPAddress.All().
+				SelectedDeviceIPAddresses = IPAddressModel.All().
 					Where(ip => ip.DeviceID == SelectedDevice.ID).
 					ToObservableCollection();
 
