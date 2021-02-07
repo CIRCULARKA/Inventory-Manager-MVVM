@@ -129,11 +129,13 @@
                     <TextBlock Text="Корпус"
                         FontSize="13"
                         Margin="0 0 0 3" />
-                    <ComboBox ItemsSource="{Binding Housings}" />
+                    <ComboBox ItemsSource="{Binding Housings}"
+                        SelectedItem="{Binding DeviceHousing}" />
                     <TextBlock Text="Кабинет"
                         FontSize="13"
                         Margin="0 10 0 3" />
-                    <ComboBox ItemsSource="{Binding Cabinets}" />
+                    <ComboBox ItemsSource="{Binding Cabinets}"
+                        SelectedItem="{Binding DeviceCabinet}" />
                     <Button Content="Применить"
                         Command="{Binding ApplyLocationChangesCommand}"
                         Height="25"
