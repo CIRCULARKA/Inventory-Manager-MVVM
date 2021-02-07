@@ -2,6 +2,7 @@ using InventoryManager.Commands;
 using InventoryManager.Models;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Linq;
 using InventoryManager.Views;
 using InventoryManager.Extensions;
 
@@ -11,7 +12,13 @@ namespace InventoryManager.ViewModels
 	{
 		private readonly Device _deviceModel;
 
+		private Device _selectedDevice;
+
 		private readonly DeviceType _deviceTypeModel;
+
+		private readonly IPAddress _ipAddressModel;
+
+		private readonly Account _accountModel;
 
 		private string _inputtedInventoryNumber;
 
@@ -23,12 +30,24 @@ namespace InventoryManager.ViewModels
 
 		private ObservableCollection<Device> _devices;
 
+		private ObservableCollection<IPAddress> _allIPAddresses;
+
+		private ObservableCollection<Account> _allAccounts;
+
+		private ObservableCollection<Account> _selectedDeviceAccounts;
+
+		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
+
 		public DeviceViewModel()
 		{
 			_deviceModel = new Device();
 			_deviceTypeModel = new DeviceType();
+			_ipAddressModel = new IPAddress();
+			_accountModel = new Account();
 
 			_devices = _deviceModel.All().ToObservableCollection();
+			_allIPAddresses = _ipAddressModel.All().ToObservableCollection();
+			_allAccounts = _accountModel.All().ToObservableCollection();
 
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
@@ -100,7 +119,53 @@ namespace InventoryManager.ViewModels
 		public ObservableCollection<Device> DevicesToShow =>
 			_devices;
 
-		public Device SelectedDevice { get; set; }
+		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
+		{
+			get => _selectedDeviceIPAddresses;
+			set
+			{
+				_selectedDeviceIPAddresses = value;
+				OnPropertyChanged("SelectedDeviceIPAddresses");
+			}
+		}
+
+		public ObservableCollection<Account> SelectedDeviceAccounts
+		{
+			get => _selectedDeviceAccounts;
+			set
+			{
+				_selectedDeviceAccounts = value;
+				OnPropertyChanged("SelectedDeviceAccounts");
+			}
+		}
+
+
+		public Device SelectedDevice
+		{
+			get => _selectedDevice;
+			set
+			{
+				_selectedDevice = value;
+
+				// Getting all device's accounts
+				SelectedDeviceAccounts = _allAccounts.
+					Where(a => a.DeviceID == SelectedDevice.ID).
+					ToObservableCollection();
+
+				// Getting all device's IP's
+				SelectedDeviceIPAddresses = _allIPAddresses.
+					Where(ip => ip.DeviceID == SelectedDevice.ID).
+					ToObservableCollection();
+
+				OnPropertyChanged("SelectedDevice");
+			}
+		}
+
+		public Account SelectedAccount { get; set; }
+
+		public IPAddress SelectedIP { get; set; }
+
+		public DeviceType SelectedDeviceType { get; set; }
 
 		public string InputtedInventoryNumber
 		{
@@ -111,8 +176,6 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("InputtedInventoryNumber");
 			}
 		}
-
-		public DeviceType SelectedDeviceType { get; set; }
 
 		public string InputtedNetworkName
 		{
