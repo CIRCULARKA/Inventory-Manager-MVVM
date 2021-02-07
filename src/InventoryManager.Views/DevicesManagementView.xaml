@@ -81,7 +81,8 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <ListBox
-                ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAccount}"
+                ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedAccount}"
                 Height="100"
                 Margin="0 0 0 3"
                 Grid.Row="0">
@@ -96,14 +97,17 @@
             </ListBox>
             <StackPanel Orientation="Horizontal"
                 Grid.Row="1">
-                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding AddAccountToDeviceCommand}" />
-                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding RemoveAccountFromDeviceCommand}" />
+                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+                    Command="{Binding AddAccountToDeviceCommand}" />
+                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+                    Command="{Binding RemoveAccountFromDeviceCommand}" />
             </StackPanel>
             <TextBlock Text="IP-адреса"
                 FontSize="14" FontWeight="Bold"
                 Margin="0 10 0 3"
                 Grid.Row="2" />
-            <ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedIP}"
+            <ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedIP}"
                 Height="100"
                 Margin="0 0 0 3"
                 Grid.Row="3">
@@ -117,8 +121,10 @@
             </ListBox>
             <StackPanel Orientation="Horizontal"
                 Grid.Row="4">
-                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding AddIPToDeviceCommand}" />
-                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding RemoveIPFromDeviceCommand}" />
+                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+                    Command="{Binding AddIPToDeviceCommand}" />
+                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+                    Command="{Binding RemoveIPFromDeviceCommand}" />
             </StackPanel>
             <TextBlock Text="Корпус"
                 FontSize="14" FontWeight="Bold"
