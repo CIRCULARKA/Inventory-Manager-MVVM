@@ -11,6 +11,10 @@ namespace InventoryManager.Models
 
 		public string Password { get; set; }
 
+		public int DeviceID { get; set; }
+
+		public Device Device { get; set; }
+
 		public override List<Account> All() =>
 			DataContext.Accounts.ToList();
 	}
