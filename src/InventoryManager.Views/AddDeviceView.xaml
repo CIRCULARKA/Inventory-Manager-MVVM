@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:InventoryManager"
         Title="Заполните данные для устройства"
+        WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Width="350">
