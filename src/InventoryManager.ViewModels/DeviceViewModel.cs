@@ -45,30 +45,19 @@ namespace InventoryManager.ViewModels
 			AddDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					// Firstly - create new row in DeviceConfiguration for the device
-					// in order to avoid FK constraint failure
-					var newDeviceConfiguration = new DeviceConfiguration
-					{
-						AccountName = InputtedDeviceAccountName,
-						AccountPassword = InputtedDevicePassword
-					};
-
 					var newDevice = new Device
 					{
 						InventoryNumber = InputtedInventoryNumber,
 						DeviceTypeID = SelectedDeviceType.ID,
 						NetworkName = InputtedNetworkName,
-						DeviceConfiguration = newDeviceConfiguration
 					};
 
 					try
 					{
 						_deviceModel.Add(newDevice);
-						_deviceConfigurationModel.Add(newDeviceConfiguration);
 						_deviceModel.SaveChanges();
 
-						// Load DeviceType object after adding to db in order to avoid exception
-						// and display name of device type in observable collection
+						// Add DeviceType explicitly in order to avoid db exception
 						newDevice.DeviceType = SelectedDeviceType;
 						DevicesToShow.Add(newDevice);
 
@@ -78,7 +67,7 @@ namespace InventoryManager.ViewModels
 						InputtedDevicePassword = "";
 						MessageToUser = "Устройство добавлено";
 					}
-					catch (System.Exception)
+					catch (System.Exception e)
 					{
 						MessageToUser = "Устройство с таким инвентарным номер уже существует";
 					}
