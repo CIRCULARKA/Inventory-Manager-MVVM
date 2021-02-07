@@ -10,6 +10,14 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceViewModel : ViewModelBase
 	{
+		private string _inputtedInventoryNumber;
+
+		private string _inputtedNetworkName;
+
+		private string _inputtedDeviceAccountName;
+
+		private string _inputtedDevicePassword;
+
 		private readonly Device _deviceModel;
 
 		private Device _selectedDevice;
@@ -20,21 +28,13 @@ namespace InventoryManager.ViewModels
 
 		private readonly Account _accountModel;
 
-		private string _inputtedInventoryNumber;
-
-		private string _inputtedNetworkName;
-
-		private string _inputtedDeviceAccountName;
-
-		private string _inputtedDevicePassword;
-
 		private ObservableCollection<Device> _devices;
-
-		private ObservableCollection<IPAddress> _allIPAddresses;
 
 		private ObservableCollection<Account> _allAccounts;
 
 		private ObservableCollection<Account> _selectedDeviceAccounts;
+
+		private ObservableCollection<IPAddress> _allIPAddresses;
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 
