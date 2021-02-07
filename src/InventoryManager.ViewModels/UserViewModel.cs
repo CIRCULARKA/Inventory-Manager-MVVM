@@ -8,10 +8,6 @@ namespace InventoryManager.ViewModels
 {
 	public class UserViewModel : ViewModelBase
 	{
-		private readonly User _userModel;
-
-		private readonly Group _groupModel;
-
 		private ObservableCollection<User> _users;
 
 		private ObservableCollection<Group> _groups;
@@ -28,11 +24,9 @@ namespace InventoryManager.ViewModels
 
 		public UserViewModel()
 		{
-			_userModel = new User();
-			_users = _userModel.All().ToObservableCollection();
+			_users = Model.User.All().ToObservableCollection();
 
-			_groupModel = new Group();
-			_groups = _groupModel.All().ToObservableCollection();
+			_groups = Model.Group.All().ToObservableCollection();
 
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
@@ -49,8 +43,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						_userModel.Add(newUser);
-						_userModel.SaveChanges();
+						Model.User.Add(newUser);
+						Model.User.SaveChanges();
 
 						// Load user group explicitly to display user group in users list
 						newUser.UserGroup = SelectedUserGroup;
@@ -80,9 +74,9 @@ namespace InventoryManager.ViewModels
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var userToRemove = _userModel.Find(SelectedUser.Login);
-					_userModel.Remove(userToRemove);
-					_userModel.SaveChanges();
+					var userToRemove = Model.User.Find(SelectedUser.Login);
+					Model.User.Remove(userToRemove);
+					Model.User.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
