@@ -82,7 +82,7 @@
             </Grid.RowDefinitions>
             <ListBox
                 ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAccount}"
-                Height="150"
+                Height="100"
                 Margin="0 0 0 3"
                 Grid.Row="0">
                 <ListBox.ItemTemplate>
@@ -104,7 +104,7 @@
                 Margin="0 10 0 3"
                 Grid.Row="2" />
             <ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedIP}"
-                Height="150"
+                Height="100"
                 Margin="0 0 0 3"
                 Grid.Row="3">
                 <ListBox.ItemTemplate>
