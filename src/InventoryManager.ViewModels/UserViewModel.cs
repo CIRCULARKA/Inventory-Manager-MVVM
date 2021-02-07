@@ -8,10 +8,6 @@ namespace InventoryManager.ViewModels
 {
 	public class UserViewModel : ViewModelBase
 	{
-		private ObservableCollection<User> _users;
-
-		private ObservableCollection<Group> _groups;
-
 		private string _inputtedLogin;
 
 		private string _inputtedPassword;
@@ -24,10 +20,6 @@ namespace InventoryManager.ViewModels
 
 		public UserViewModel()
 		{
-			_users = Model.User.All().ToObservableCollection();
-
-			_groups = Model.Group.All().ToObservableCollection();
-
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -94,9 +86,11 @@ namespace InventoryManager.ViewModels
 
 		public User SelectedUser { get; set; }
 
-		public ObservableCollection<User> UsersToShow => _users;
+		public Group SelectedUserGroup { get; set; }
 
-		public ObservableCollection<Group> UserGroups => _groups;
+		public ObservableCollection<User> UsersToShow => Model.User.All().ToObservableCollection();
+
+		public ObservableCollection<Group> UserGroups => Model.Group.All().ToObservableCollection();
 
 		public ButtonCommand AddUserCommand { get; }
 
@@ -154,6 +148,5 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public Group SelectedUserGroup { get; set; }
 	}
 }
