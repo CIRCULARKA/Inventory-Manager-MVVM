@@ -20,28 +20,12 @@ namespace InventoryManager.ViewModels
 
 		private Device _selectedDevice;
 
-		private ObservableCollection<Device> _devices;
-
-		private ObservableCollection<Account> _allAccounts;
-
 		private ObservableCollection<Account> _selectedDeviceAccounts;
-
-		private ObservableCollection<IPAddress> _allIPAddresses;
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 
-		private List<Housing> _allHousings;
-
-		private List<Cabinet> _allCabinets;
-
 		public DeviceViewModel()
 		{
-			_devices = Model.Device.All().ToObservableCollection();
-			_allIPAddresses = Model.IPAddress.All().ToObservableCollection();
-			_allAccounts = Model.Account.All().ToObservableCollection();
-			_allHousings = Model.Housing.All();
-			_allCabinets = Model.Cabinet.All();
-
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -140,7 +124,7 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
 
 		public ObservableCollection<Device> DevicesToShow =>
-			_devices;
+			Model.Device.All().ToObservableCollection();
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -164,7 +148,7 @@ namespace InventoryManager.ViewModels
 
 		public Housing SelectedDeviceHousing { get; set; }
 
-		public List<Housing> HousingsToShow => _allHousings;
+		public List<Housing> HousingsToShow => Model.Housing.All();
 
 		// public List<Cabinet> CabinetsToShow =>
 
@@ -176,18 +160,17 @@ namespace InventoryManager.ViewModels
 				_selectedDevice = value;
 
 				// Getting all device's accounts
-				SelectedDeviceAccounts = _allAccounts.
+				SelectedDeviceAccounts = Model.Account.All().
 					Where(a => a.DeviceID == SelectedDevice.ID).
 					ToObservableCollection();
 
 				// Getting all device's IP's
-				SelectedDeviceIPAddresses = _allIPAddresses.
+				SelectedDeviceIPAddresses = Model.IPAddress.All().
 					Where(ip => ip.DeviceID == SelectedDevice.ID).
 					ToObservableCollection();
 
 				// Getting device's housing
 				// SelectedDeviceHousing = _allHousings.Wh
-
 
 				OnPropertyChanged("SelectedDevice");
 			}
