@@ -9,6 +9,10 @@ namespace InventoryManager.Models
 
 		public string Address { get; set; }
 
+		public int DeviceID { get; set; }
+
+		public Device Device { get; set; }
+
 		public override List<IPAddress> All() =>
 			DataContext.IPAddresses.ToList();
 	}
