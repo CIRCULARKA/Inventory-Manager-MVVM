@@ -7,7 +7,9 @@ namespace InventoryManager.Models.Configuration
 	{
 		public void Configure(EntityTypeBuilder<Device> builder)
 		{
-			builder.HasKey(d => d.InventoryNumber);
+			builder.HasKey(d => d.ID);
+			builder.Property(d => d.ID).UseIdentityColumn();
+			builder.HasIndex(d => d.InventoryNumber).IsUnique();
 			builder.Property(d => d.DeviceTypeID).IsRequired();
 			builder.Property(d => d.NetworkName).IsRequired();
 
