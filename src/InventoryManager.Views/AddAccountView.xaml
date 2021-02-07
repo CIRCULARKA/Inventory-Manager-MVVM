@@ -1,0 +1,32 @@
+<src:ViewBase x:Class="InventoryManager.Views.AddAccountView"
+        xmlns:src="clr-namespace:InventoryManager.Views"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Заполните данные для учётной записи"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        Width="250">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5 0 5 10" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+		<TextBlock Text="Логин" />
+		<TextBox Text="{Binding InputtedAccountLogin, UpdateSourceTrigger=PropertyChanged}" />
+		<TextBlock Text="Пароль" />
+		<TextBox Text="{Binding InputtedAccountPassword}" />
+		<Button Content="Добавить" Height="30" Command="{Binding AddAccountCommand}" />
+        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
+    </StackPanel>
+</src:ViewBase>
