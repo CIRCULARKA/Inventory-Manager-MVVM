@@ -80,10 +80,19 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <ListBox ItemsSource="{Binding AccountsToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAccount}"
+            <ListBox
+                ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAccount}"
                 Height="150"
                 Margin="0 0 0 3"
                 Grid.Row="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Path=Password}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Orientation="Horizontal"
                 Grid.Row="1">
@@ -94,10 +103,17 @@
                 FontSize="14" FontWeight="Bold"
                 Margin="0 10 0 3"
                 Grid.Row="2" />
-            <ListBox ItemsSource="{Binding IPsToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedIP}"
+            <ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedIP}"
                 Height="150"
                 Margin="0 0 0 3"
                 Grid.Row="3">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Address}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Orientation="Horizontal"
                 Grid.Row="4">
