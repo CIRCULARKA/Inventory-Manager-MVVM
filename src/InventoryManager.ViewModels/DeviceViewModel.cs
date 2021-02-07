@@ -105,6 +105,28 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedDevice != null
 			);
+
+			RemoveAccountFromDeviceCommand = new ButtonCommand(
+				(obj) =>
+				{
+					_accountModel.Remove(SelectedAccount);
+					_accountModel.SaveChanges();
+
+					SelectedDeviceAccounts.Remove(SelectedAccount);
+				},
+				(obj) => SelectedAccount != null
+			);
+
+			RemoveIPFromDeviceCommand = new ButtonCommand(
+				(obj) =>
+				{
+					_ipAddressModel.Remove(SelectedIP);
+					_ipAddressModel.SaveChanges();
+
+					SelectedDeviceIPAddresses.Remove(SelectedIP);
+				},
+				(obj) => SelectedIP != null
+			);
 		}
 
 		public IEnumerable<DeviceType> DeviceTypes =>
@@ -115,6 +137,14 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand RemoveDeviceCommand { get; }
 
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
+
+		public ButtonCommand AddIPToDeviceCommand { get; }
+
+		public ButtonCommand RemoveIPFromDeviceCommand { get; }
+
+		public ButtonCommand AddAccountToDeviceCommand { get; }
+
+		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
 
 		public ObservableCollection<Device> DevicesToShow =>
 			_devices;
