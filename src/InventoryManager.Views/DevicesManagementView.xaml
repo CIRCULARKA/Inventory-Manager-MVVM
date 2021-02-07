@@ -96,8 +96,8 @@
             </ListBox>
             <StackPanel Orientation="Horizontal"
                 Grid.Row="1">
-                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}" />
-                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}" />
+                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding AddAccountToDeviceCommand}" />
+                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding RemoveAccountFromDeviceCommand}" />
             </StackPanel>
             <TextBlock Text="IP-адреса"
                 FontSize="14" FontWeight="Bold"
@@ -117,8 +117,8 @@
             </ListBox>
             <StackPanel Orientation="Horizontal"
                 Grid.Row="4">
-                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}" />
-                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}" />
+                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding AddIPToDeviceCommand}" />
+                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}" Command="{Binding RemoveIPFromDeviceCommand}" />
             </StackPanel>
             <TextBlock Text="Корпус"
                 FontSize="14" FontWeight="Bold"
