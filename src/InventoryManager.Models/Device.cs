@@ -7,11 +7,9 @@ namespace InventoryManager.Models
 {
 	public class Device : ModelBase<Device>
 	{
+		public int ID { get; set; }
+
 		public string InventoryNumber { get; set; }
-
-		public int DeviceConfigurationID { get; set; }
-
-		public DeviceConfiguration DeviceConfiguration { get; set; }
 
 		public int DeviceTypeID { get; set; }
 
@@ -19,14 +17,23 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
-		public override void Remove(Device entity)
+		public void AddAccount(Device device, Account acc)
 		{
-			DataContext.DeviceConfigurations.Remove(entity.DeviceConfiguration);
-			DataContext.Devices.Remove(entity);
+			DataContext.Accounts.Add(acc);
+			DataContext.Devices.Update(device);
 		}
 
-		public override List<Device> All() => DataContext.Devices.
-			Include(d => d.DeviceConfiguration).
-			Include(d => d.DeviceType).ToList();
+		public override void Remove(Device device)
+		{
+			DataContext.Accounts.RemoveRange(
+				DataContext.
+				Accounts.
+				Where(a => a.DeviceID == device.ID)
+			);
+			DataContext.Devices.Remove(device);
+		}
+
+		public override List<Device> All() =>
+			DataContext.Devices.Include(d => d.DeviceType).ToList();
 	}
 }
