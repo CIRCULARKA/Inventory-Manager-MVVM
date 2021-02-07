@@ -18,15 +18,7 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedDevicePassword;
 
-		private readonly Device _deviceModel;
-
 		private Device _selectedDevice;
-
-		private readonly DeviceType _deviceTypeModel;
-
-		private readonly IPAddress _ipAddressModel;
-
-		private readonly Account _accountModel;
 
 		private ObservableCollection<Device> _devices;
 
@@ -38,16 +30,17 @@ namespace InventoryManager.ViewModels
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 
+		private List<Housing> _allHousings;
+
+		private List<Cabinet> _allCabinets;
+
 		public DeviceViewModel()
 		{
-			_deviceModel = new Device();
-			_deviceTypeModel = new DeviceType();
-			_ipAddressModel = new IPAddress();
-			_accountModel = new Account();
-
-			_devices = _deviceModel.All().ToObservableCollection();
-			_allIPAddresses = _ipAddressModel.All().ToObservableCollection();
-			_allAccounts = _accountModel.All().ToObservableCollection();
+			_devices = Model.Device.All().ToObservableCollection();
+			_allIPAddresses = Model.IPAddress.All().ToObservableCollection();
+			_allAccounts = Model.Account.All().ToObservableCollection();
+			_allHousings = Model.Housing.All();
+			_allCabinets = Model.Cabinet.All();
 
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
@@ -70,8 +63,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						_deviceModel.Add(newDevice);
-						_deviceModel.SaveChanges();
+						Model.Device.Add(newDevice);
+						Model.Device.SaveChanges();
 
 						// Add DeviceType explicitly in order to avoid db exception
 						newDevice.DeviceType = SelectedDeviceType;
@@ -99,8 +92,8 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					_deviceModel.Remove(_deviceModel.Find(SelectedDevice.InventoryNumber));
-					_deviceModel.SaveChanges();
+					Model.Device.Remove(Model.Device.Find(SelectedDevice.InventoryNumber));
+					Model.Device.SaveChanges();
 					DevicesToShow.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
@@ -109,8 +102,8 @@ namespace InventoryManager.ViewModels
 			RemoveAccountFromDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					_accountModel.Remove(SelectedAccount);
-					_accountModel.SaveChanges();
+					Model.Account.Remove(SelectedAccount);
+					Model.Account.SaveChanges();
 
 					SelectedDeviceAccounts.Remove(SelectedAccount);
 				},
@@ -120,8 +113,8 @@ namespace InventoryManager.ViewModels
 			RemoveIPFromDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					_ipAddressModel.Remove(SelectedIP);
-					_ipAddressModel.SaveChanges();
+					Model.IPAddress.Remove(SelectedIP);
+					Model.IPAddress.SaveChanges();
 
 					SelectedDeviceIPAddresses.Remove(SelectedIP);
 				},
@@ -130,7 +123,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		public IEnumerable<DeviceType> DeviceTypes =>
-			_deviceTypeModel.All();
+			Model.DeviceType.All();
 
 		public ButtonCommand AddDeviceCommand { get; }
 
@@ -169,6 +162,11 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		public Housing SelectedDeviceHousing { get; set; }
+
+		public List<Housing> HousingsToShow => _allHousings;
+
+		// public List<Cabinet> CabinetsToShow =>
 
 		public Device SelectedDevice
 		{
@@ -186,6 +184,10 @@ namespace InventoryManager.ViewModels
 				SelectedDeviceIPAddresses = _allIPAddresses.
 					Where(ip => ip.DeviceID == SelectedDevice.ID).
 					ToObservableCollection();
+
+				// Getting device's housing
+				// SelectedDeviceHousing = _allHousings.Wh
+
 
 				OnPropertyChanged("SelectedDevice");
 			}
