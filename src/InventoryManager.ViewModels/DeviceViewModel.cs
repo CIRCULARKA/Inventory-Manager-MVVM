@@ -106,7 +106,7 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
-		public IEnumerable<DeviceType> DeviceTypes =>
+		public IEnumerable<DeviceType> AllDeviceTypes =>
 			DeviceTypeModel.All();
 
 		public ButtonCommand AddDeviceCommand { get; }
