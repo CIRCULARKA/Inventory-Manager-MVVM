@@ -20,6 +20,8 @@ namespace InventoryManager.ViewModels
 
 		private Device _selectedDevice;
 
+		private Housing _selectedHousing;
+
 		private ObservableCollection<Account> _selectedDeviceAccounts;
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
@@ -109,6 +111,24 @@ namespace InventoryManager.ViewModels
 		public IEnumerable<DeviceType> AllDeviceTypes =>
 			DeviceTypeModel.All();
 
+		public List<Housing> AllHousings =>
+			HousingModel.All();
+
+		public List<Cabinet> SelectedHousingCabinets { get; set; }
+
+		public Cabinet SelectedCabinet { get; set; }
+
+		public Housing SelectedHousing
+		{
+			get => _selectedHousing;
+			set
+			{
+				_selectedHousing = value;
+				SelectedHousingCabinets = CabinetModel.All(_selectedHousing);
+				OnPropertyChanged("SelectedHousing");
+			}
+		}
+
 		public ButtonCommand AddDeviceCommand { get; }
 
 		public ButtonCommand RemoveDeviceCommand { get; }
@@ -150,7 +170,7 @@ namespace InventoryManager.ViewModels
 
 		public List<Housing> HousingsToShow => HousingModel.All();
 
-		// public List<Cabinet> CabinetsToShow =>
+		public List<Cabinet> CabinetsToShow { get; set; }
 
 		public Device SelectedDevice
 		{
@@ -170,7 +190,13 @@ namespace InventoryManager.ViewModels
 					ToObservableCollection();
 
 				// Getting device's housing
-				// SelectedDeviceHousing = _allHousings.Wh
+				SelectedHousing = SelectedDevice.Cabinet.Housing;
+
+				// Getting housing's cabinets
+				CabinetsToShow = CabinetModel.All(SelectedHousing);
+
+				// Select device's cabinet
+				SelectedCabinet = SelectedDevice.Cabinet;
 
 				OnPropertyChanged("SelectedDevice");
 			}
