@@ -22,9 +22,13 @@ namespace InventoryManager.ViewModels
 
 		private Housing _selectedHousing;
 
+		private Cabinet _selectedCabinet;
+
 		private ObservableCollection<Account> _selectedDeviceAccounts;
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
+
+		private ObservableCollection<Cabinet> _selectedHousingCabinets;
 
 		public DeviceViewModel()
 		{
@@ -111,12 +115,51 @@ namespace InventoryManager.ViewModels
 		public IEnumerable<DeviceType> AllDeviceTypes =>
 			DeviceTypeModel.All();
 
-		public List<Housing> AllHousings =>
-			HousingModel.All();
+		public ObservableCollection<Housing> AllHousings =>
+			HousingModel.All().ToObservableCollection();
 
-		public List<Cabinet> SelectedHousingCabinets { get; set; }
+		public Device SelectedDevice
+		{
+			get => _selectedDevice;
+			set
+			{
+				_selectedDevice = value;
 
-		public Cabinet SelectedCabinet { get; set; }
+				// Getting all device's accounts
+				SelectedDeviceAccounts = AccountModel.All().
+					Where(a => a.DeviceID == SelectedDevice.ID).
+					ToObservableCollection();
+
+				// Getting all device's IP's
+				SelectedDeviceIPAddresses = IPAddressModel.All().
+					Where(ip => ip.DeviceID == SelectedDevice.ID).
+					ToObservableCollection();
+
+				// Getting device's housing
+				SelectedHousing = SelectedDevice.Cabinet.Housing;
+
+				// Select device's cabinet
+				SelectedCabinet = SelectedDevice.Cabinet;
+
+				OnPropertyChanged("SelectedDevice");
+			}
+		}
+
+		public Account SelectedAccount { get; set; }
+
+		public IPAddress SelectedIP { get; set; }
+
+		public DeviceType SelectedDeviceType { get; set; }
+
+		public Cabinet SelectedCabinet
+		{
+			get => _selectedCabinet;
+			set
+			{
+				_selectedCabinet = value;
+				OnPropertyChanged("SelectedCabinet");
+			}
+		}
 
 		public Housing SelectedHousing
 		{
@@ -124,27 +167,10 @@ namespace InventoryManager.ViewModels
 			set
 			{
 				_selectedHousing = value;
-				SelectedHousingCabinets = CabinetModel.All(_selectedHousing);
+				CabinetsToShow = CabinetModel.All(_selectedHousing).ToObservableCollection();
 				OnPropertyChanged("SelectedHousing");
 			}
 		}
-
-		public ButtonCommand AddDeviceCommand { get; }
-
-		public ButtonCommand RemoveDeviceCommand { get; }
-
-		public ButtonCommand OpenAddDeviceViewCommand { get; }
-
-		public ButtonCommand AddIPToDeviceCommand { get; }
-
-		public ButtonCommand RemoveIPFromDeviceCommand { get; }
-
-		public ButtonCommand AddAccountToDeviceCommand { get; }
-
-		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
-
-		public ObservableCollection<Device> DevicesToShow =>
-			DeviceModel.All().ToObservableCollection();
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -168,45 +194,36 @@ namespace InventoryManager.ViewModels
 
 		public Housing SelectedDeviceHousing { get; set; }
 
+		public ButtonCommand AddDeviceCommand { get; }
+
+		public ButtonCommand RemoveDeviceCommand { get; }
+
+		public ButtonCommand OpenAddDeviceViewCommand { get; }
+
+		public ButtonCommand AddIPToDeviceCommand { get; }
+
+		public ButtonCommand RemoveIPFromDeviceCommand { get; }
+
+		public ButtonCommand AddAccountToDeviceCommand { get; }
+
+		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
+
+		public ObservableCollection<Device> DevicesToShow =>
+			DeviceModel.All().ToObservableCollection();
+
+
 		public List<Housing> HousingsToShow => HousingModel.All();
 
-		public List<Cabinet> CabinetsToShow { get; set; }
-
-		public Device SelectedDevice
+		public ObservableCollection<Cabinet> CabinetsToShow
 		{
-			get => _selectedDevice;
+			get => _selectedHousingCabinets;
 			set
 			{
-				_selectedDevice = value;
-
-				// Getting all device's accounts
-				SelectedDeviceAccounts = AccountModel.All().
-					Where(a => a.DeviceID == SelectedDevice.ID).
-					ToObservableCollection();
-
-				// Getting all device's IP's
-				SelectedDeviceIPAddresses = IPAddressModel.All().
-					Where(ip => ip.DeviceID == SelectedDevice.ID).
-					ToObservableCollection();
-
-				// Getting device's housing
-				SelectedHousing = SelectedDevice.Cabinet.Housing;
-
-				// Getting housing's cabinets
-				CabinetsToShow = CabinetModel.All(SelectedHousing);
-
-				// Select device's cabinet
-				SelectedCabinet = SelectedDevice.Cabinet;
-
-				OnPropertyChanged("SelectedDevice");
+				_selectedHousingCabinets = value;
+				OnPropertyChanged("CabinetsToShow");
 			}
 		}
 
-		public Account SelectedAccount { get; set; }
-
-		public IPAddress SelectedIP { get; set; }
-
-		public DeviceType SelectedDeviceType { get; set; }
 
 		public string InputtedInventoryNumber
 		{
