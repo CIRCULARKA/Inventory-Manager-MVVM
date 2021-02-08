@@ -38,6 +38,9 @@ namespace InventoryManager.Models
 		}
 
 		public override List<Device> All() =>
-			DataContext.Devices.Include(c => c.DeviceType).ToList();
+			DataContext.
+			Devices.
+			Include(c => c.DeviceType).
+			Include(d => d.Cabinet).ToList();
 	}
 }
