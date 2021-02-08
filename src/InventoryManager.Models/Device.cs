@@ -17,6 +17,10 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
+		public int CabinetID { get; set; }
+
+		public Cabinet Cabinet { get; set; }
+
 		public void AddAccount(Device device, Account acc)
 		{
 			DataContext.Accounts.Add(acc);
