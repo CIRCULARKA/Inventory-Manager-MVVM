@@ -13,6 +13,7 @@ namespace InventoryManager.Models.Configuration
 			builder.Property(c => c.Name).IsRequired();
 			builder.HasIndex(c => new { c.HousingID, c.Name }).IsUnique();
 			builder.HasData(
+				new Cabinet { ID = -4, Name = "N/A ", HousingID = -1 },
 				new Cabinet { ID = -1, Name = "1", HousingID = 1 },
 				new Cabinet { ID = -2, Name = "201", HousingID = 2 },
 				new Cabinet { ID = -3, Name = "101", HousingID = 1 }
