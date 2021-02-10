@@ -19,5 +19,11 @@ namespace InventoryManager.Models
 			Include(dc => dc.Device).
 			Include(dc => dc.Cabinet).
 			ToList();
+
+		public Cabinet FindDeviceCabinet(Device device) =>
+			DataContext.
+			DeviceCabinets.
+			Include(dc => dc.Cabinet).
+			First(dc => device.ID == dc.DeviceID).Cabinet;
 	}
 }
