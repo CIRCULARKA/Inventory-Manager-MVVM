@@ -41,7 +41,6 @@ namespace InventoryManager.Models
 			DataContext.
 			Devices.
 			Include(c => c.DeviceType).
-			Include(d => d.Cabinet).
 			Include(d => d.Cabinet.Housing).ToList();
 	}
 }
