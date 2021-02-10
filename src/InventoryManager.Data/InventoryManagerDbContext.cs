@@ -42,6 +42,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
 			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
 			builder.ApplyConfiguration<Account>(new AccountModelConfiguration());
+			builder.ApplyConfiguration<DeviceCabinet>(new DeviceCabinetModelConfiguration());
 		}
 	}
 }
