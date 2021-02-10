@@ -6,7 +6,7 @@ namespace InventoryManager.Models
 {
 	public class DeviceCabinet : ModelBase<DeviceCabinet>
 	{
-		public string DeviceInventoryNumber { get; set; }
+		public int DeviceID { get; set; }
 
 		public Device Device { get; set; }
 
