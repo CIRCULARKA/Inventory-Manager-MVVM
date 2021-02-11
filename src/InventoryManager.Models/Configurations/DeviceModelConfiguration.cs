@@ -12,8 +12,6 @@ namespace InventoryManager.Models.Configuration
 			builder.HasIndex(d => d.InventoryNumber).IsUnique();
 			builder.Property(d => d.DeviceTypeID).IsRequired();
 			builder.Property(d => d.NetworkName).IsRequired();
-			builder.Ignore(d => d.Cabinet);
-			builder.Ignore(d => d.Housing);
 
 			builder.HasData(
 				new Device
@@ -21,21 +19,24 @@ namespace InventoryManager.Models.Configuration
 					ID = -1,
 					InventoryNumber = "NSGK530923",
 					DeviceTypeID = 1,
-					NetworkName = "IVAN-PC"
+					NetworkName = "IVAN-PC",
+					LocationID = -1
 				},
 				new Device
 				{
 					ID = -2,
 					InventoryNumber = "NSGK052132",
 					DeviceTypeID = 2,
-					NetworkName = "MAIN-SERVER"
+					NetworkName = "MAIN-SERVER",
+					LocationID = -2
 				},
 				new Device
 				{
 					ID = -3,
 					InventoryNumber = "NSGK1235231",
 					DeviceTypeID = 3,
-					NetworkName = "COMMUTATOR-1"
+					NetworkName = "COMMUTATOR-1",
+					LocationID = -3
 				}
 			);
 		}

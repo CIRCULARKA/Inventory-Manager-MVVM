@@ -17,9 +17,9 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
-		public Cabinet Cabinet { get; set; }
+		public int LocationID { get; set; }
 
-		public Housing Housing { get; set; }
+		public Location Location { get; set; }
 
 		public void AddAccount(Device device, Account acc)
 		{
