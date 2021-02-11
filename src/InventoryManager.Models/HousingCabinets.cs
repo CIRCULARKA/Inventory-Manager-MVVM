@@ -7,7 +7,11 @@ namespace InventoryManager.Models
 	{
 		public int HousingID { get; set; }
 
+		public Housing Housing { get; set; }
+
 		public int CabinetID { get; set; }
+
+		public Cabinet Cabinet { get; set; }
 
 		public override List<HousingCabinet> All() =>
 			DataContext.HousingCabinets.ToList();
