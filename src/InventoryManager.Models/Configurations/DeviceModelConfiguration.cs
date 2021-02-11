@@ -12,6 +12,7 @@ namespace InventoryManager.Models.Configuration
 			builder.HasIndex(d => d.InventoryNumber).IsUnique();
 			builder.Property(d => d.DeviceTypeID).IsRequired();
 			builder.Property(d => d.NetworkName).IsRequired();
+			builder.Ignore(d => d.Cabinet);
 
 			builder.HasData(
 				new Device
