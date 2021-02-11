@@ -8,22 +8,19 @@ namespace InventoryManager.Models
 	{
 		public int ID { get; set; }
 
-		public int HousingID { get; set; }
-
-		public Housing Housing { get; set; }
-
 		public string Name { get; set; }
 
 		public override List<Cabinet> All() =>
-			DataContext.Cabinets.Include(c => c.Housing).ToList();
+			DataContext.Cabinets.ToList();
 
 		/// <summary>
 		/// All cabinets in specified housing
 		/// </summary>
-		public List<Cabinet> All(Housing housing) =>
-			DataContext.
-			Cabinets.
-			Include(c => c.Housing).
-			Where(c => c.HousingID == housing.ID).ToList();
+		// Temporary comment until I figure out how to implement this method with HousingCabinet
+		// public List<Cabinet> All(Housing housing) =>
+		// 	DataContext.
+		// 	Cabinets.
+		// 	Include(c => c.Housing).
+		// 	Where(c => c.HousingID == housing.ID).ToList();
 	}
 }
