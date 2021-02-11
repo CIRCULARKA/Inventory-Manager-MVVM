@@ -13,6 +13,7 @@ namespace InventoryManager.Models.Configuration
 			builder.Property(d => d.DeviceTypeID).IsRequired();
 			builder.Property(d => d.NetworkName).IsRequired();
 			builder.Ignore(d => d.Cabinet);
+			builder.Ignore(d => d.Housing);
 
 			builder.HasData(
 				new Device
