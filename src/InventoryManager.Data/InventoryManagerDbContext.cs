@@ -26,6 +26,8 @@ namespace InventoryManager.Data
 
 		public DbSet<DeviceCabinet> DeviceCabinets { get; set; }
 
+		public DbSet<HousingCabinet> HousingCabinets { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
