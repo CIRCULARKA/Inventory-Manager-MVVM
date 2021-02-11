@@ -17,6 +17,18 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
+		public Cabinet Cabinet
+		{
+			get => DataContext.DeviceCabinets.First(dc => this.ID == dc.DeviceID).Cabinet;
+			set
+			{
+				var location = DataContext.DeviceCabinets.First(dc => dc.DeviceID == this.ID);
+				location.CabinetID = value.ID;
+				location.Cabinet = value;
+				DataContext.DeviceCabinets.Update(location);
+			}
+		}
+
 		public void AddAccount(Device device, Account acc)
 		{
 			DataContext.Accounts.Add(acc);
