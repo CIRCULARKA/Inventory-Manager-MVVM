@@ -20,7 +20,7 @@ namespace InventoryManager.Models.Configuration
 					InventoryNumber = "NSGK530923",
 					DeviceTypeID = 1,
 					NetworkName = "IVAN-PC",
-					LocationID = -1
+					CabinetID = -3
 				},
 				new Device
 				{
@@ -28,7 +28,7 @@ namespace InventoryManager.Models.Configuration
 					InventoryNumber = "NSGK052132",
 					DeviceTypeID = 2,
 					NetworkName = "MAIN-SERVER",
-					LocationID = -2
+					CabinetID = -2
 				},
 				new Device
 				{
@@ -36,7 +36,7 @@ namespace InventoryManager.Models.Configuration
 					InventoryNumber = "NSGK1235231",
 					DeviceTypeID = 3,
 					NetworkName = "COMMUTATOR-1",
-					LocationID = -3
+					CabinetID = -1
 				}
 			);
 		}

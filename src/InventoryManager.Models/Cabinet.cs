@@ -10,23 +10,20 @@ namespace InventoryManager.Models
 
 		public string Name { get; set; }
 
+		public int HousingID { get; set; }
+
+		public Housing Housing { get; set; }
+
 		public override List<Cabinet> All() =>
 			DataContext.Cabinets.ToList();
 
 		/// <summary>
 		/// All cabinets in specified housing
 		/// </summary>
-		public List<Cabinet> All(Housing housing)
-		{
-			var housingCabinets = DataContext.
-				HousingCabinets.
-				Where(hc => hc.HousingID == housing.ID);
-
-			var result = new List<Cabinet>();
-			foreach (var item in housingCabinets)
-				result.Add(item.Cabinet);
-
-			return result;
-		}
+		public List<Cabinet> All(Housing housing) =>
+			DataContext.
+			Cabinets.
+			Where(c => c.HousingID == housing.ID).
+			ToList();
 	}
 }

@@ -17,10 +17,6 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
-		public int HousingID { get; set; }
-
-		public Housing Housing { get; set; }
-
 		public int CabinetID { get; set; }
 
 		public Cabinet Cabinet { get; set; }
@@ -45,7 +41,7 @@ namespace InventoryManager.Models
 			DataContext.
 			Devices.
 			Include(d => d.Cabinet).
-			Include(d => d.Housing).
+			// Include(d => d.Housing).
 			Include(c => c.DeviceType).ToList();
 	}
 }

@@ -24,12 +24,6 @@ namespace InventoryManager.Data
 
 		public DbSet<Account> Accounts { get; set; }
 
-		public DbSet<DeviceCabinet> DeviceCabinets { get; set; }
-
-		public DbSet<HousingCabinet> HousingCabinets { get; set; }
-
-		public DbSet<Location> Locations { get; set; }
-
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
@@ -46,9 +40,6 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
 			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
 			builder.ApplyConfiguration<Account>(new AccountModelConfiguration());
-			builder.ApplyConfiguration<DeviceCabinet>(new DeviceCabinetModelConfiguration());
-			builder.ApplyConfiguration<HousingCabinet>(new HousingCabinetModelConfiguration());
-			builder.ApplyConfiguration<Location>(new LocationModelConfiguration());
 		}
 	}
 }

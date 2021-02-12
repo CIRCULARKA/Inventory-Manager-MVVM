@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InventoryManager.Views;
 using InventoryManager.Extensions;
+using System.Windows.Controls;
 
 namespace InventoryManager.ViewModels
 {
@@ -18,9 +19,12 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedDevicePassword;
 
+
+		private int _selectedHousingIndex;
+
 		private Device _selectedDevice;
 
-		private Housing _selectedHousing;
+		private  Housing _selectedHousing;
 
 		private Cabinet _selectedCabinet;
 
@@ -28,10 +32,27 @@ namespace InventoryManager.ViewModels
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 
-		private ObservableCollection<Cabinet> _selectedHousingCabinets;
+		private List<Cabinet> _selectedHousingCabinets;
+
+		private List<Housing> _allHousings;
+
+		private List<Cabinet> _allCabinets;
+
+		private ObservableCollection<Device> _allDevices;
 
 		public DeviceViewModel()
 		{
+			// Load devices housings and cabinets explicitly because device must have them from
+			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
+			_allHousings = HousingModel.All();
+			_allCabinets = CabinetModel.All();
+			_allDevices = DeviceModel.All().ToObservableCollection();
+			foreach (var device in _allDevices)
+			{
+				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
+				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
+			}
+
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -58,7 +79,7 @@ namespace InventoryManager.ViewModels
 
 						// Add DeviceType explicitly in order to avoid db exception
 						newDevice.DeviceType = SelectedDeviceType;
-						DevicesToShow.Add(newDevice);
+						AllDevices.Add(newDevice);
 
 						InputtedInventoryNumber = "";
 						InputtedNetworkName = "";
@@ -84,7 +105,7 @@ namespace InventoryManager.ViewModels
 				{
 					DeviceModel.Remove(DeviceModel.Find(SelectedDevice.InventoryNumber));
 					DeviceModel.SaveChanges();
-					DevicesToShow.Remove(SelectedDevice);
+					AllDevices.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
 			);
@@ -112,11 +133,13 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
+		public ObservableCollection<Device> AllDevices =>
+			_allDevices;
+
 		public IEnumerable<DeviceType> AllDeviceTypes =>
 			DeviceTypeModel.All();
 
-		public ObservableCollection<Housing> AllHousings =>
-			HousingModel.All().ToObservableCollection();
+		public List<Housing> AllHousings => _allHousings;
 
 		public Device SelectedDevice
 		{
@@ -124,6 +147,7 @@ namespace InventoryManager.ViewModels
 			set
 			{
 				_selectedDevice = value;
+				OnPropertyChanged("SelectedDevice");
 
 				// Getting all device's accounts
 				SelectedDeviceAccounts = AccountModel.All().
@@ -141,23 +165,6 @@ namespace InventoryManager.ViewModels
 				// Select device's cabinet
 				SelectedCabinet = SelectedDevice.Cabinet;
 
-				OnPropertyChanged("SelectedDevice");
-			}
-		}
-
-		public Account SelectedAccount { get; set; }
-
-		public IPAddress SelectedIP { get; set; }
-
-		public DeviceType SelectedDeviceType { get; set; }
-
-		public Cabinet SelectedCabinet
-		{
-			get => _selectedCabinet;
-			set
-			{
-				_selectedCabinet = value;
-				OnPropertyChanged("SelectedCabinet");
 			}
 		}
 
@@ -167,8 +174,31 @@ namespace InventoryManager.ViewModels
 			set
 			{
 				_selectedHousing = value;
-				CabinetsToShow = CabinetModel.All(_selectedHousing).ToObservableCollection();
-				OnPropertyChanged("SelectedHousing");
+				SelectedHousingCabinets = _allCabinets.
+					Where(c => c.HousingID == _selectedHousing.ID).
+					ToList();
+				if (_selectedHousing != null)
+					OnPropertyChanged("SelectedHousing");
+			}
+		}
+
+		public int SelectedHousingIndex
+		{
+			get => _selectedHousingIndex;
+			set
+			{
+				_selectedHousingIndex = value;
+				OnPropertyChanged(nameof(SelectedHousingIndex));
+			}
+		}
+
+		public Cabinet SelectedCabinet
+		{
+			get => _selectedCabinet;
+			set
+			{
+				_selectedCabinet = value;
+				OnPropertyChanged("SelectedCabinet");
 			}
 		}
 
@@ -192,7 +222,12 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public Housing SelectedDeviceHousing { get; set; }
+		public Account SelectedAccount { get; set; }
+
+		public IPAddress SelectedIP { get; set; }
+
+		public DeviceType SelectedDeviceType { get; set; }
+
 
 		public ButtonCommand AddDeviceCommand { get; }
 
@@ -208,19 +243,13 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
 
-		public ObservableCollection<Device> DevicesToShow =>
-			DeviceModel.All().ToObservableCollection();
-
-
-		public List<Housing> HousingsToShow => HousingModel.All();
-
-		public ObservableCollection<Cabinet> CabinetsToShow
+		public List<Cabinet> SelectedHousingCabinets
 		{
 			get => _selectedHousingCabinets;
 			set
 			{
 				_selectedHousingCabinets = value;
-				OnPropertyChanged("CabinetsToShow");
+				OnPropertyChanged("SelectedHousingCabinets");
 			}
 		}
 
