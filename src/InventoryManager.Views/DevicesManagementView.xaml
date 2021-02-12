@@ -92,7 +92,7 @@
             <StackPanel Orientation="Horizontal"
                 Grid.Row="1">
                 <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding AddDeviceAccountToDeviceCommand}" />
+                    Command="{Binding ShowAddDeviceAccountViewCommand}" />
                 <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
                     Command="{Binding RemoveDeviceAccountFromDeviceCommand}" />
             </StackPanel>
@@ -116,7 +116,7 @@
             <StackPanel Orientation="Horizontal"
                 Grid.Row="4">
                 <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding AddIPToDeviceCommand}" />
+                    Command="{Binding ShowAddIPViewCommand}" />
                 <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
                     Command="{Binding RemoveIPFromDeviceCommand}" />
             </StackPanel>

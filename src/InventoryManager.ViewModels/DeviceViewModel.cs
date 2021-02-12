@@ -82,7 +82,6 @@ namespace InventoryManager.ViewModels
 
 						InputtedInventoryNumber = "";
 						InputtedNetworkName = "";
-						InputtedDeviceDeviceAccountName = "";
 						InputtedDevicePassword = "";
 						MessageToUser = "Устройство добавлено";
 					}
@@ -109,12 +108,14 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			AddDeviceAccountToDeviceCommand = new ButtonCommand(
+			ShowAddDeviceAccountViewCommand = new ButtonCommand(
 				(obj) =>
 				{
-
+					var addAccountView = new AddDeviceAccountView();
+					addAccountView.DataContext = this;
+					addAccountView.ShowDialog();
 				},
-				(obj) => SelectedDevice.DeviceType.Name != "Коммутатор"
+				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType.Name != "Коммутатор"
 			);
 
 			RemoveDeviceAccountFromDeviceCommand = new ButtonCommand(
@@ -128,11 +129,14 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDeviceAccount != null
 			);
 
-			AddIPToDeviceCommand = new ButtonCommand(
+			ShowAddIPViewCommand = new ButtonCommand(
 				(obj) =>
 				{
-
-				}
+					var addIpView = new AddIPAddressView();
+					addIpView.DataContext = this;
+					addIpView.ShowDialog();
+				},
+				(obj) => SelectedDevice != null
 			);
 
 			RemoveIPFromDeviceCommand = new ButtonCommand(
@@ -258,6 +262,10 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand OpenAddDeviceViewCommand { get; }
 
+		public ButtonCommand ShowAddDeviceAccountViewCommand { get; }
+
+		public ButtonCommand ShowAddIPViewCommand { get; set; }
+
 		public ButtonCommand AddIPToDeviceCommand { get; }
 
 		public ButtonCommand RemoveIPFromDeviceCommand { get; }
@@ -286,7 +294,7 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDeviceDeviceAccountName
+		public string InputtedDeviceAccountName
 		{
 			get => _inputtedDeviceDeviceAccountName;
 			set
