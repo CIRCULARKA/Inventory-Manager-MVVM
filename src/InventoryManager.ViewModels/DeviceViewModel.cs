@@ -109,6 +109,14 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
+			AddDeviceAccountToDeviceCommand = new ButtonCommand(
+				(obj) =>
+				{
+
+				},
+				(obj) => SelectedDevice.DeviceType.Name != "Коммутатор"
+			);
+
 			RemoveDeviceAccountFromDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -118,6 +126,13 @@ namespace InventoryManager.ViewModels
 					SelectedDeviceDeviceAccounts.Remove(SelectedDeviceAccount);
 				},
 				(obj) => SelectedDeviceAccount != null
+			);
+
+			AddIPToDeviceCommand = new ButtonCommand(
+				(obj) =>
+				{
+
+				}
 			);
 
 			RemoveIPFromDeviceCommand = new ButtonCommand(
