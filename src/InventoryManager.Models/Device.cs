@@ -21,17 +21,17 @@ namespace InventoryManager.Models
 
 		public Cabinet Cabinet { get; set; }
 
-		public void AddAccount(Device device, Account acc)
+		public void AddDeviceAccount(Device device, DeviceAccount acc)
 		{
-			DataContext.Accounts.Add(acc);
+			DataContext.DeviceAccounts.Add(acc);
 			DataContext.Devices.Update(device);
 		}
 
 		public override void Remove(Device device)
 		{
-			DataContext.Accounts.RemoveRange(
+			DataContext.DeviceAccounts.RemoveRange(
 				DataContext.
-				Accounts.
+				DeviceAccounts.
 				Where(a => a.DeviceID == device.ID)
 			);
 			DataContext.Devices.Remove(device);

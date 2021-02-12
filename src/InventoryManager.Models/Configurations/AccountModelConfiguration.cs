@@ -3,22 +3,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace InventoryManager.Models.Configuration
 {
-	public class AccountModelConfiguration : IEntityTypeConfiguration<Account>
+	public class DeviceAccountModelConfiguration : IEntityTypeConfiguration<DeviceAccount>
 	{
-		public void Configure(EntityTypeBuilder<Account> builder)
+		public void Configure(EntityTypeBuilder<DeviceAccount> builder)
 		{
 			builder.HasKey(a => a.ID);
 			builder.Property(a => a.ID).UseIdentityColumn();
 			builder.Property(a => a.Login).IsRequired();
 			builder.HasData(
-				new Account
+				new DeviceAccount
 				{
 					ID = -1,
 					Login = "Student1",
 					Password = "jlsdft324",
 					DeviceID = -1
 				},
-				new Account
+				new DeviceAccount
 				{
 					ID = -2,
 					Login = "Root",

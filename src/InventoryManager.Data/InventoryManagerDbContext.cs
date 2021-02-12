@@ -22,7 +22,7 @@ namespace InventoryManager.Data
 
 		public DbSet<Cabinet> Cabinets { get; set; }
 
-		public DbSet<Account> Accounts { get; set; }
+		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -39,7 +39,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Certificate>(new CertificateModelConfiguration());
 			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
 			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
-			builder.ApplyConfiguration<Account>(new AccountModelConfiguration());
+			builder.ApplyConfiguration<DeviceAccount>(new DeviceAccountModelConfiguration());
 		}
 	}
 }

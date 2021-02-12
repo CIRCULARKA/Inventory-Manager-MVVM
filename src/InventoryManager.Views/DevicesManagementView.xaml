@@ -75,8 +75,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ListBox
-                ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedAccount}"
+                ItemsSource="{Binding SelectedDeviceDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedDeviceAccount}"
                 Height="100"
                 Margin="0 0 0 3"
                 Grid.Row="0">
@@ -92,9 +92,9 @@
             <StackPanel Orientation="Horizontal"
                 Grid.Row="1">
                 <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding AddAccountToDeviceCommand}" />
+                    Command="{Binding AddDeviceAccountToDeviceCommand}" />
                 <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding RemoveAccountFromDeviceCommand}" />
+                    Command="{Binding RemoveDeviceAccountFromDeviceCommand}" />
             </StackPanel>
             <TextBlock Text="IP-адреса"
                 FontSize="14" FontWeight="Bold"

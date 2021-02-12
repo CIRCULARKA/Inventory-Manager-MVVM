@@ -7,17 +7,14 @@ namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : ViewModelBase
 	{
-		private readonly User _userModel;
-
 		public AuthorizationViewModel(ViewBase view)
 		{
-			_userModel = new User();
-
 			AuthorizationView = view;
+
 			LoginCommand = new ButtonCommand(
-				(user) =>
+				(obj) =>
 				{
-					var findedUser = _userModel.Find(InputtedLogin);
+					var findedUser = UserModel.Find(InputtedLogin);
 
 					if (findedUser != null && findedUser.Password == InputtedPassword)
 					{

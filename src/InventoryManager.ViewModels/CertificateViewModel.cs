@@ -11,14 +11,11 @@ namespace InventoryManager.ViewModels
 	{
 		private string _inputtedSubject;
 
-		private readonly Certificate _certificateModel;
-
 		private ObservableCollection<Certificate> _allCertificates;
 
 		public CertificateViewModel()
 		{
-			_certificateModel = new Certificate();
-			_allCertificates = _certificateModel.All().ToObservableCollection();
+			_allCertificates = CertificateModel.All().ToObservableCollection();
 
 			ShowAddCertificateViewCommand = new ButtonCommand(
 				(o) =>
@@ -39,8 +36,8 @@ namespace InventoryManager.ViewModels
 						ValidTo = SelectedValidUntilDate
 					};
 
-					_certificateModel.Add(newCertificate);
-					_certificateModel.SaveChanges();
+					CertificateModel.Add(newCertificate);
+					CertificateModel.SaveChanges();
 
 					CertificatesToShow.Add(newCertificate);
 
@@ -54,8 +51,8 @@ namespace InventoryManager.ViewModels
 			RemoveCertificateCommand = new ButtonCommand(
 				(o) =>
 				{
-					_certificateModel.Remove(SelectedCertificate);
-					_certificateModel.SaveChanges();
+					CertificateModel.Remove(SelectedCertificate);
+					CertificateModel.SaveChanges();
 					CertificatesToShow.Remove(SelectedCertificate);
 				},
 				(o) => SelectedCertificate != null

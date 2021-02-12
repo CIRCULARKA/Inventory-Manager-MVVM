@@ -6,36 +6,23 @@ namespace InventoryManager.ViewModels
 	{
 		private string _messageToUser;
 
-		private Device _deviceModel;
+		private Device _deviceModel = new Device();
 
-		private DeviceType _deviceTypeModel;
+		private DeviceType _deviceTypeModel = new DeviceType();
 
-		private User _userModel;
+		private User _userModel = new User();
 
-		private Group _groupModel;
+		private Group _groupModel = new Group();
 
-		private Housing _housingModel;
+		private Housing _housingModel = new Housing();
 
-		private Cabinet _cabinetModel;
+		private Cabinet _cabinetModel = new Cabinet();
 
-		private Certificate _certificateModel;
+		private Certificate _certificateModel = new Certificate();
 
-		private IPAddress _ipAddressModel;
+		private IPAddress _ipAddressModel = new IPAddress();
 
-		private Account _accountModel;
-
-		public ViewModelBase()
-		{
-			_deviceModel = new Device();
-			_deviceTypeModel = new DeviceType();
-			_userModel = new User();
-			_groupModel = new Group();
-			_housingModel = new Housing();
-			_cabinetModel = new Cabinet();
-			_certificateModel = new Certificate();
-			_ipAddressModel = new IPAddress();
-			_accountModel = new Account();
-		}
+		private DeviceAccount _accountModel = new DeviceAccount();
 
 		public string MessageToUser
 		{
@@ -49,7 +36,7 @@ namespace InventoryManager.ViewModels
 
 		public Device DeviceModel => _deviceModel;
 
-		public Account AccountModel => _accountModel;
+		public DeviceAccount DeviceAccountModel => _accountModel;
 
 		public Cabinet CabinetModel => _cabinetModel;
 

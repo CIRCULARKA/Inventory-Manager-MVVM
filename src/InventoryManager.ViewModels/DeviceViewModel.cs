@@ -15,30 +15,29 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkName;
 
-		private string _inputtedDeviceAccountName;
+		private string _inputtedDeviceDeviceAccountName;
 
 		private string _inputtedDevicePassword;
-
 
 		private int _selectedHousingIndex;
 
 		private Device _selectedDevice;
 
-		private  Housing _selectedHousing;
+		private Housing _selectedHousing;
 
 		private Cabinet _selectedCabinet;
 
-		private ObservableCollection<Account> _selectedDeviceAccounts;
+		private ObservableCollection<DeviceAccount> _selectedDeviceDeviceAccounts;
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
+
+		private ObservableCollection<Device> _allDevices;
 
 		private List<Cabinet> _selectedHousingCabinets;
 
 		private List<Housing> _allHousings;
 
 		private List<Cabinet> _allCabinets;
-
-		private ObservableCollection<Device> _allDevices;
 
 		public DeviceViewModel()
 		{
@@ -83,7 +82,7 @@ namespace InventoryManager.ViewModels
 
 						InputtedInventoryNumber = "";
 						InputtedNetworkName = "";
-						InputtedDeviceAccountName = "";
+						InputtedDeviceDeviceAccountName = "";
 						InputtedDevicePassword = "";
 						MessageToUser = "Устройство добавлено";
 					}
@@ -110,15 +109,15 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			RemoveAccountFromDeviceCommand = new ButtonCommand(
+			RemoveDeviceAccountFromDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					AccountModel.Remove(SelectedAccount);
-					AccountModel.SaveChanges();
+					DeviceAccountModel.Remove(SelectedDeviceAccount);
+					DeviceAccountModel.SaveChanges();
 
-					SelectedDeviceAccounts.Remove(SelectedAccount);
+					SelectedDeviceDeviceAccounts.Remove(SelectedDeviceAccount);
 				},
-				(obj) => SelectedAccount != null
+				(obj) => SelectedDeviceAccount != null
 			);
 
 			RemoveIPFromDeviceCommand = new ButtonCommand(
@@ -136,10 +135,40 @@ namespace InventoryManager.ViewModels
 		public ObservableCollection<Device> AllDevices =>
 			_allDevices;
 
-		public IEnumerable<DeviceType> AllDeviceTypes =>
+		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
+		{
+			get => _selectedDeviceIPAddresses;
+			set
+			{
+				_selectedDeviceIPAddresses = value;
+				OnPropertyChanged("SelectedDeviceIPAddresses");
+			}
+		}
+
+		public ObservableCollection<DeviceAccount> SelectedDeviceDeviceAccounts
+		{
+			get => _selectedDeviceDeviceAccounts;
+			set
+			{
+				_selectedDeviceDeviceAccounts = value;
+				OnPropertyChanged("SelectedDeviceDeviceAccounts");
+			}
+		}
+
+		public List<DeviceType> AllDeviceTypes =>
 			DeviceTypeModel.All();
 
 		public List<Housing> AllHousings => _allHousings;
+
+		public List<Cabinet> SelectedHousingCabinets
+		{
+			get => _selectedHousingCabinets;
+			set
+			{
+				_selectedHousingCabinets = value;
+				OnPropertyChanged("SelectedHousingCabinets");
+			}
+		}
 
 		public Device SelectedDevice
 		{
@@ -150,7 +179,7 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("SelectedDevice");
 
 				// Getting all device's accounts
-				SelectedDeviceAccounts = AccountModel.All().
+				SelectedDeviceDeviceAccounts = DeviceAccountModel.All().
 					Where(a => a.DeviceID == SelectedDevice.ID).
 					ToObservableCollection();
 
@@ -202,32 +231,11 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
-		{
-			get => _selectedDeviceIPAddresses;
-			set
-			{
-				_selectedDeviceIPAddresses = value;
-				OnPropertyChanged("SelectedDeviceIPAddresses");
-			}
-		}
-
-		public ObservableCollection<Account> SelectedDeviceAccounts
-		{
-			get => _selectedDeviceAccounts;
-			set
-			{
-				_selectedDeviceAccounts = value;
-				OnPropertyChanged("SelectedDeviceAccounts");
-			}
-		}
-
-		public Account SelectedAccount { get; set; }
+		public DeviceAccount SelectedDeviceAccount { get; set; }
 
 		public IPAddress SelectedIP { get; set; }
 
 		public DeviceType SelectedDeviceType { get; set; }
-
 
 		public ButtonCommand AddDeviceCommand { get; }
 
@@ -239,20 +247,9 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand RemoveIPFromDeviceCommand { get; }
 
-		public ButtonCommand AddAccountToDeviceCommand { get; }
+		public ButtonCommand AddDeviceAccountToDeviceCommand { get; }
 
-		public ButtonCommand RemoveAccountFromDeviceCommand { get; }
-
-		public List<Cabinet> SelectedHousingCabinets
-		{
-			get => _selectedHousingCabinets;
-			set
-			{
-				_selectedHousingCabinets = value;
-				OnPropertyChanged("SelectedHousingCabinets");
-			}
-		}
-
+		public ButtonCommand RemoveDeviceAccountFromDeviceCommand { get; }
 
 		public string InputtedInventoryNumber
 		{
@@ -274,13 +271,13 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDeviceAccountName
+		public string InputtedDeviceDeviceAccountName
 		{
-			get => _inputtedDeviceAccountName;
+			get => _inputtedDeviceDeviceAccountName;
 			set
 			{
-				_inputtedDeviceAccountName = value;
-				OnPropertyChanged("InputtedDeviceAccountName");
+				_inputtedDeviceDeviceAccountName = value;
+				OnPropertyChanged("InputtedDeviceDeviceAccountName");
 			}
 		}
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InventoryManager.Models
 {
-	public class Account : ModelBase<Account>
+	public class DeviceAccount : ModelBase<DeviceAccount>
 	{
 		public int ID { get; set; }
 
@@ -15,7 +15,7 @@ namespace InventoryManager.Models
 
 		public Device Device { get; set; }
 
-		public override List<Account> All() =>
-			DataContext.Accounts.ToList();
+		public override List<DeviceAccount> All() =>
+			DataContext.DeviceAccounts.ToList();
 	}
 }

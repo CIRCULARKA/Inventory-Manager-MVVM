@@ -1,7 +1,7 @@
 namespace InventoryManager.Views
 {
-	public partial class AddAccountView : ViewBase
+	public partial class AddDeviceAccountView : ViewBase
 	{
-		public AddAccountView() => InitializeComponent();
+		public AddDeviceAccountView() => InitializeComponent();
 	}
 }

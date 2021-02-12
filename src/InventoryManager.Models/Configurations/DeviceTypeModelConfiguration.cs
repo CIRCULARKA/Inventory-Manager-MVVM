@@ -8,9 +8,7 @@ namespace InventoryManager.Models.Configuration
 		public void Configure(EntityTypeBuilder<DeviceType> builder)
 		{
 			builder.HasKey(dt => dt.ID);
-
 			builder.Property(dt => dt.Name).IsRequired();
-
 			builder.HasData(
 				new DeviceType[]
 				{

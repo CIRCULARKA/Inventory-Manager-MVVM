@@ -84,13 +84,15 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
+		public ObservableCollection<User> UsersToShow =>
+			UserModel.All().ToObservableCollection();
+
+		public ObservableCollection<Group> UserGroups =>
+			GroupModel.All().ToObservableCollection();
+
 		public User SelectedUser { get; set; }
 
 		public Group SelectedUserGroup { get; set; }
-
-		public ObservableCollection<User> UsersToShow => UserModel.All().ToObservableCollection();
-
-		public ObservableCollection<Group> UserGroups => GroupModel.All().ToObservableCollection();
 
 		public ButtonCommand AddUserCommand { get; }
 
@@ -147,6 +149,5 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("InputtedMiddleName");
 			}
 		}
-
 	}
 }
