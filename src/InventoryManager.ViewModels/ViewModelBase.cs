@@ -24,8 +24,6 @@ namespace InventoryManager.ViewModels
 
 		private Account _accountModel;
 
-		private DeviceCabinet _deviceCabinet;
-
 		public ViewModelBase()
 		{
 			_deviceModel = new Device();
@@ -37,7 +35,6 @@ namespace InventoryManager.ViewModels
 			_certificateModel = new Certificate();
 			_ipAddressModel = new IPAddress();
 			_accountModel = new Account();
-			_deviceCabinet = new DeviceCabinet();
 		}
 
 		public string MessageToUser
@@ -67,7 +64,5 @@ namespace InventoryManager.ViewModels
 		public IPAddress IPAddressModel => _ipAddressModel;
 
 		public User UserModel => _userModel;
-
-		public DeviceCabinet DeviceCabinetModel => _deviceCabinet;
 	}
 }
