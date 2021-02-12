@@ -17,9 +17,13 @@ namespace InventoryManager.Models
 
 		public string NetworkName { get; set; }
 
-		public int LocationID { get; set; }
+		public int HousingID { get; set; }
 
-		public Location Location { get; set; }
+		public Housing Housing { get; set; }
+
+		public int CabinetID { get; set; }
+
+		public Cabinet Cabinet { get; set; }
 
 		public void AddAccount(Device device, Account acc)
 		{
@@ -40,6 +44,8 @@ namespace InventoryManager.Models
 		public override List<Device> All() =>
 			DataContext.
 			Devices.
+			Include(d => d.Cabinet).
+			Include(d => d.Housing).
 			Include(c => c.DeviceType).ToList();
 	}
 }
