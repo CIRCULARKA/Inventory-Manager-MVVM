@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:InventoryManager"
         Title="Заполните данные для устройства"
+        WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Width="350">
@@ -25,7 +26,7 @@
 		<TextBlock Text="Инвентарный номер" />
 		<TextBox Text="{Binding InputtedInventoryNumber, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Тип" />
-		<ComboBox ItemsSource="{Binding DeviceTypes}" SelectedItem="{Binding SelectedDeviceType}">
+		<ComboBox ItemsSource="{Binding AllDeviceTypes}" SelectedItem="{Binding SelectedDeviceType}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Name}" />
@@ -34,13 +35,7 @@
         </ComboBox>
 		<TextBlock Text="Сетевое имя" />
 		<TextBox Text="{Binding InputtedNetworkName, UpdateSourceTrigger=PropertyChanged}" />
-        <Separator />
-        <TextBlock Text="Дополнительные настройки (опционально)" FontWeight="Bold" />
-        <TextBlock Text="Имя аккаунта" />
-        <TextBox Text="{Binding InputtedDeviceAccountName}" />
-        <TextBlock Text="Пароль к аккаунту" />
-        <TextBox Text="{Binding InputtedDevicePassword}" />
-		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceCommand}" />
+        <Button Content="Добавить" Command="{Binding AddDeviceCommand}" Height="35" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
 </src:ViewBase>

@@ -8,14 +8,6 @@ namespace InventoryManager.ViewModels
 {
 	public class UserViewModel : ViewModelBase
 	{
-		private readonly User _userModel;
-
-		private readonly Group _groupModel;
-
-		private ObservableCollection<User> _users;
-
-		private ObservableCollection<Group> _groups;
-
 		private string _inputtedLogin;
 
 		private string _inputtedPassword;
@@ -28,12 +20,6 @@ namespace InventoryManager.ViewModels
 
 		public UserViewModel()
 		{
-			_userModel = new User();
-			_users = _userModel.All().ToObservableCollection();
-
-			_groupModel = new Group();
-			_groups = _groupModel.All().ToObservableCollection();
-
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -49,8 +35,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						_userModel.Add(newUser);
-						_userModel.SaveChanges();
+						UserModel.Add(newUser);
+						UserModel.SaveChanges();
 
 						// Load user group explicitly to display user group in users list
 						newUser.UserGroup = SelectedUserGroup;
@@ -80,9 +66,9 @@ namespace InventoryManager.ViewModels
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var userToRemove = _userModel.Find(SelectedUser.Login);
-					_userModel.Remove(userToRemove);
-					_userModel.SaveChanges();
+					var userToRemove = UserModel.Find(SelectedUser.Login);
+					UserModel.Remove(userToRemove);
+					UserModel.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
@@ -98,11 +84,15 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
+		public ObservableCollection<User> UsersToShow =>
+			UserModel.All().ToObservableCollection();
+
+		public ObservableCollection<Group> UserGroups =>
+			GroupModel.All().ToObservableCollection();
+
 		public User SelectedUser { get; set; }
 
-		public ObservableCollection<User> UsersToShow => _users;
-
-		public ObservableCollection<Group> UserGroups => _groups;
+		public Group SelectedUserGroup { get; set; }
 
 		public ButtonCommand AddUserCommand { get; }
 
@@ -159,7 +149,5 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("InputtedMiddleName");
 			}
 		}
-
-		public Group SelectedUserGroup { get; set; }
 	}
 }

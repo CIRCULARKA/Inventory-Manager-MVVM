@@ -5,7 +5,7 @@ namespace InventoryManager.Extensions
 {
 	public static class ListExtenstions
 	{
-		public static ObservableCollection<T> ToObservableCollection<T>(this List<T> list)
+		public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> list)
 		{
 			var result = new ObservableCollection<T>();
 			foreach(var item in list)

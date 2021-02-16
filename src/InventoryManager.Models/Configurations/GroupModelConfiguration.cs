@@ -9,10 +9,8 @@ namespace InventoryManager.Models.Configuration
 		{
 			builder.HasKey(p => p.ID);
 			builder.Property(p => p.ID).UseIdentityColumn();
-
 			builder.HasIndex(p => p.Name).IsUnique();
 			builder.Property(p => p.Name).IsRequired();
-
 			builder.HasData(
 				new Group { ID = 1, Name = "Техник" },
 				new Group { ID = 2, Name = "Администратор" },

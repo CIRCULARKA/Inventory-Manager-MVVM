@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManager.Models
 {
-	public class Group : ModelBase<Group>
+	public class Housing : ModelBase<Housing>
 	{
 		public int ID { get; set; }
 
 		public string Name { get; set; }
 
-		public override List<Group> All() =>
-			DataContext.Groups.AsNoTracking().ToList();
+		public override List<Housing> All() =>
+			DataContext.Housings.AsNoTracking().ToList();
 	}
 }

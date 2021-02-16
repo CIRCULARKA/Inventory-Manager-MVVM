@@ -71,7 +71,15 @@
                 "ef",
                 "migrations",
                 "remove"
-            ]
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
         },
         {
             "label": "Add Migration",
@@ -81,7 +89,15 @@
                 "migrations",
                 "add",
                 "Init"
-            ]
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
         },
         {
             "label": "Drop Database",
@@ -91,7 +107,15 @@
                 "database",
                 "drop",
                 "-f"
-            ]
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
         },
         {
             "label": "Update Database",
@@ -100,7 +124,15 @@
                 "ef",
                 "database",
                 "update"
-            ]
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
         },
         {
             "label": "Git: Stage Opened File",

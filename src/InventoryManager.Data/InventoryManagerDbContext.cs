@@ -16,9 +16,13 @@ namespace InventoryManager.Data
 
 		public DbSet<IPAddress> IPAddresses { get; set; }
 
-		public DbSet<DeviceConfiguration> DeviceConfigurations { get; set; }
-
 		public DbSet<Certificate> Certificates { get; set; }
+
+		public DbSet<Housing> Housings { get; set; }
+
+		public DbSet<Cabinet> Cabinets { get; set; }
+
+		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -32,8 +36,10 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<DeviceType>(new DeviceTypeModelConfiguration());
 			builder.ApplyConfiguration<Device>(new DeviceModelConfiguration());
 			builder.ApplyConfiguration<IPAddress>(new IPAddressModelConfiguration());
-			builder.ApplyConfiguration<DeviceConfiguration>(new DeviceConfigurationModelConfiguration());
 			builder.ApplyConfiguration<Certificate>(new CertificateModelConfiguration());
+			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
+			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
+			builder.ApplyConfiguration<DeviceAccount>(new DeviceAccountModelConfiguration());
 		}
 	}
 }

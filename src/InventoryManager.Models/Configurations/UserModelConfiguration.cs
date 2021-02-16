@@ -15,7 +15,6 @@ namespace InventoryManager.Models.Configuration
 			builder.Property(p => p.Password).IsRequired();
 			builder.Property(p => p.UserGroupID).IsRequired();
 			builder.Ignore(p => p.FullName);
-
 			builder.HasData(
 				new
 				{

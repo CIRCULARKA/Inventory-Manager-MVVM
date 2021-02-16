@@ -18,6 +18,8 @@ namespace InventoryManager.Models
 			ValidTo < DateTime.Now ? "Сертификат недействителен!" :
 				$"Осталось дней: {(ValidTo - DateTime.Now).Days}";
 
-		public override List<Certificate> All() => DataContext.Certificates.ToList();
+		public override List<Certificate> All() =>
+			DataContext.Certificates.ToList();
+
 	}
 }
