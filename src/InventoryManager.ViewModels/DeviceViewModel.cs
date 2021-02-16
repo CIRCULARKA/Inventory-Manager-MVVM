@@ -287,8 +287,7 @@ namespace InventoryManager.ViewModels
 					// Getting device's housing
 					SelectedHousing = SelectedDevice.Cabinet.Housing;
 
-					// Select device's cabinet
-					SelectedCabinet = SelectedDevice.Cabinet;
+					// Selecting device's cabinet
 				}
 				else
 				{
@@ -313,6 +312,11 @@ namespace InventoryManager.ViewModels
 					SelectedHousingCabinets = _allCabinets.
 						Where(c => c.HousingID == _selectedHousing.ID).
 						ToList();
+
+					if (SelectedDevice.Cabinet.HousingID == SelectedHousing.ID)
+						SelectedCabinet = SelectedDevice?.Cabinet;
+					else
+						SelectedCabinet = _allCabinets.First(c => c.HousingID == SelectedHousing.ID);
 				}
 				else SelectedHousingCabinets = null;
 				OnPropertyChanged("SelectedHousing");
