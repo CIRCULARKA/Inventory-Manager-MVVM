@@ -21,7 +21,7 @@
     <StackPanel>
 		<TextBlock Text="Адрес" />
 		<!-- Make it possible to pick IP from combo box with all available IP's -->
-		<TextBox Text="{Binding InputtedIPAddress}" />
+		<TextBox Text="{Binding InputtedIPAddress, UpdateSourceTrigger=PropertyChanged}" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceIPCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>

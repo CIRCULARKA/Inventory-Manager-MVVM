@@ -24,7 +24,7 @@
 		<TextBlock Text="Логин" />
 		<TextBox Text="{Binding InputtedDeviceAccountLogin, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Пароль" />
-		<TextBox Text="{Binding InputtedDeviceAccountPassword}" />
+		<TextBox Text="{Binding InputtedDeviceAccountPassword, UpdateSourceTrigger=PropertyChanged}" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddDeviceAccountCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>

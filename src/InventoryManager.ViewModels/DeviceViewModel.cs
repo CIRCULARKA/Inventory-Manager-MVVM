@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using InventoryManager.Views;
 using InventoryManager.Extensions;
-using System.Windows.Controls;
 
 namespace InventoryManager.ViewModels
 {
@@ -15,11 +14,11 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkName;
 
+		private string _inputtedIPAddress;
+
 		private string _inputtedDeviceDeviceAccountName;
 
 		private string _inputtedDevicePassword;
-
-		private int _selectedHousingIndex;
 
 		private Device _selectedDevice;
 
@@ -27,7 +26,7 @@ namespace InventoryManager.ViewModels
 
 		private Cabinet _selectedCabinet;
 
-		private ObservableCollection<DeviceAccount> _selectedDeviceDeviceAccounts;
+		private ObservableCollection<DeviceAccount> _selectedDeviceAccounts;
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 
@@ -76,18 +75,20 @@ namespace InventoryManager.ViewModels
 						DeviceModel.Add(newDevice);
 						DeviceModel.SaveChanges();
 
-						// Add DeviceType explicitly in order to avoid db exception
+						// Add DeviceType and Cabinet object explicitly in order to avoid db future exceptions
 						newDevice.DeviceType = SelectedDeviceType;
+						newDevice.Cabinet = CabinetModel.Find(newDevice.CabinetID);
+						newDevice.Cabinet.Housing = _allHousings.Find(h => h.ID == newDevice.Cabinet.HousingID);
 						AllDevices.Add(newDevice);
 
 						InputtedInventoryNumber = "";
 						InputtedNetworkName = "";
-						InputtedDevicePassword = "";
 						MessageToUser = "Устройство добавлено";
 					}
-					catch (System.Exception)
+					catch (System.Exception e)
 					{
-						MessageToUser = "Устройство с таким инвентарным номер уже существует";
+						MessageToUser = e.Message;
+						DeviceModel.Remove(newDevice);
 					}
 				},
 				(obj) =>
@@ -101,7 +102,7 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					DeviceModel.Remove(DeviceModel.Find(SelectedDevice.InventoryNumber));
+					DeviceModel.Remove(SelectedDevice);
 					DeviceModel.SaveChanges();
 					AllDevices.Remove(SelectedDevice);
 				},
@@ -118,13 +119,44 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType.Name != "Коммутатор"
 			);
 
-			RemoveDeviceAccountFromDeviceCommand = new ButtonCommand(
+			AddDeviceAccountCommand = new ButtonCommand(
+				(obj) =>
+				{
+					var newAcc = new DeviceAccount
+					{
+						DeviceID = SelectedDevice.ID,
+						Login = InputtedDeviceAccountLogin,
+						Password = InputtedDeviceAccountPassword
+					};
+
+					try
+					{
+						DeviceAccountModel.Add(newAcc);
+						DeviceAccountModel.SaveChanges();
+						SelectedDeviceAccounts.Add(newAcc);
+
+						InputtedDeviceAccountLogin = "";
+						InputtedDeviceAccountPassword = "";
+
+						MessageToUser = "Учётная запись успешно добавлена";
+					}
+					catch (System.Exception)
+					{
+						MessageToUser = "Учётная запись с таким логином уже существует";
+						DeviceAccountModel.Remove(newAcc);
+					}
+				},
+				(obj) => !(string.IsNullOrWhiteSpace(InputtedDeviceAccountLogin) ||
+					string.IsNullOrWhiteSpace(InputtedDeviceAccountPassword))
+			);
+
+			RemoveDeviceAccountCommand = new ButtonCommand(
 				(obj) =>
 				{
 					DeviceAccountModel.Remove(SelectedDeviceAccount);
 					DeviceAccountModel.SaveChanges();
 
-					SelectedDeviceDeviceAccounts.Remove(SelectedDeviceAccount);
+					SelectedDeviceAccounts.Remove(SelectedDeviceAccount);
 				},
 				(obj) => SelectedDeviceAccount != null
 			);
@@ -139,15 +171,41 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			RemoveIPFromDeviceCommand = new ButtonCommand(
+			AddDeviceIPCommand = new ButtonCommand(
 				(obj) =>
 				{
-					IPAddressModel.Remove(SelectedIP);
+					var newIP = new IPAddress
+					{
+						Address = InputtedIPAddress,
+						DeviceID = SelectedDevice.ID
+					};
+
+					try
+					{
+						IPAddressModel.Add(newIP);
+						IPAddressModel.SaveChanges();
+						SelectedDeviceIPAddresses.Add(newIP);
+
+						InputtedIPAddress = "";
+						MessageToUser = "Адрес успешно добавлен";
+					}
+					catch (System.Exception e)
+					{
+						MessageToUser = "Такой адрес уже используется";
+						IPAddressModel.Remove(newIP);
+					}
+				}
+			);
+
+			RemoveDeviceIPCommand = new ButtonCommand(
+				(obj) =>
+				{
+					IPAddressModel.Remove(SelectedDeviceIP);
 					IPAddressModel.SaveChanges();
 
-					SelectedDeviceIPAddresses.Remove(SelectedIP);
+					SelectedDeviceIPAddresses.Remove(SelectedDeviceIP);
 				},
-				(obj) => SelectedIP != null
+				(obj) => SelectedDeviceIP != null
 			);
 		}
 
@@ -164,13 +222,13 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public ObservableCollection<DeviceAccount> SelectedDeviceDeviceAccounts
+		public ObservableCollection<DeviceAccount> SelectedDeviceAccounts
 		{
-			get => _selectedDeviceDeviceAccounts;
+			get => _selectedDeviceAccounts;
 			set
 			{
-				_selectedDeviceDeviceAccounts = value;
-				OnPropertyChanged("SelectedDeviceDeviceAccounts");
+				_selectedDeviceAccounts = value;
+				OnPropertyChanged("SelectedDeviceAccounts");
 			}
 		}
 
@@ -195,24 +253,34 @@ namespace InventoryManager.ViewModels
 			set
 			{
 				_selectedDevice = value;
+
+				if (SelectedDevice != null)
+				{
+					// Getting all device's accounts
+					SelectedDeviceAccounts = DeviceAccountModel.All().
+						Where(a => a.DeviceID == SelectedDevice.ID).
+						ToObservableCollection();
+
+					// Getting all device's IP's
+					SelectedDeviceIPAddresses = IPAddressModel.All().
+						Where(ip => ip.DeviceID == SelectedDevice.ID).
+						ToObservableCollection();
+
+					// Getting device's housing
+					SelectedHousing = SelectedDevice.Cabinet.Housing;
+
+					// Select device's cabinet
+					SelectedCabinet = SelectedDevice.Cabinet;
+				}
+				else
+				{
+					SelectedDeviceAccounts = null;
+					SelectedDeviceIPAddresses = null;
+					SelectedHousing = null;
+					SelectedCabinet = null;
+				}
+
 				OnPropertyChanged("SelectedDevice");
-
-				// Getting all device's accounts
-				SelectedDeviceDeviceAccounts = DeviceAccountModel.All().
-					Where(a => a.DeviceID == SelectedDevice.ID).
-					ToObservableCollection();
-
-				// Getting all device's IP's
-				SelectedDeviceIPAddresses = IPAddressModel.All().
-					Where(ip => ip.DeviceID == SelectedDevice.ID).
-					ToObservableCollection();
-
-				// Getting device's housing
-				SelectedHousing = SelectedDevice.Cabinet.Housing;
-
-				// Select device's cabinet
-				SelectedCabinet = SelectedDevice.Cabinet;
-
 			}
 		}
 
@@ -222,21 +290,14 @@ namespace InventoryManager.ViewModels
 			set
 			{
 				_selectedHousing = value;
-				SelectedHousingCabinets = _allCabinets.
-					Where(c => c.HousingID == _selectedHousing.ID).
-					ToList();
 				if (_selectedHousing != null)
-					OnPropertyChanged("SelectedHousing");
-			}
-		}
-
-		public int SelectedHousingIndex
-		{
-			get => _selectedHousingIndex;
-			set
-			{
-				_selectedHousingIndex = value;
-				OnPropertyChanged(nameof(SelectedHousingIndex));
+				{
+					SelectedHousingCabinets = _allCabinets.
+						Where(c => c.HousingID == _selectedHousing.ID).
+						ToList();
+				}
+				else SelectedHousingCabinets = null;
+				OnPropertyChanged("SelectedHousing");
 			}
 		}
 
@@ -252,7 +313,7 @@ namespace InventoryManager.ViewModels
 
 		public DeviceAccount SelectedDeviceAccount { get; set; }
 
-		public IPAddress SelectedIP { get; set; }
+		public IPAddress SelectedDeviceIP { get; set; }
 
 		public DeviceType SelectedDeviceType { get; set; }
 
@@ -266,13 +327,13 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand ShowAddIPViewCommand { get; set; }
 
-		public ButtonCommand AddIPToDeviceCommand { get; }
+		public ButtonCommand AddDeviceIPCommand { get; }
 
-		public ButtonCommand RemoveIPFromDeviceCommand { get; }
+		public ButtonCommand RemoveDeviceIPCommand { get; }
 
-		public ButtonCommand AddDeviceAccountToDeviceCommand { get; }
+		public ButtonCommand AddDeviceAccountCommand { get; }
 
-		public ButtonCommand RemoveDeviceAccountFromDeviceCommand { get; }
+		public ButtonCommand RemoveDeviceAccountCommand { get; }
 
 		public string InputtedInventoryNumber
 		{
@@ -294,7 +355,7 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDeviceAccountName
+		public string InputtedDeviceAccountLogin
 		{
 			get => _inputtedDeviceDeviceAccountName;
 			set
@@ -304,13 +365,23 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDevicePassword
+		public string InputtedDeviceAccountPassword
 		{
 			get => _inputtedDevicePassword;
 			set
 			{
 				_inputtedDevicePassword = value;
 				OnPropertyChanged("InputtedDevicePassword");
+			}
+		}
+
+		public string InputtedIPAddress
+		{
+			get => _inputtedIPAddress;
+			set
+			{
+				_inputtedIPAddress = value;
+				OnPropertyChanged(nameof(InputtedIPAddress));
 			}
 		}
 	}

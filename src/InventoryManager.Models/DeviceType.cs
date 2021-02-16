@@ -11,6 +11,6 @@ namespace InventoryManager.Models
 		public string Name { get; set; }
 
 		public override List<DeviceType> All() =>
-			DataContext.DeviceTypes.ToList();
+			DataContext.DeviceTypes.AsNoTracking().ToList();
 	}
 }

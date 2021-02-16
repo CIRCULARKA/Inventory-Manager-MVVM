@@ -22,7 +22,8 @@ namespace InventoryManager.Models
 		/// </summary>
 		public List<Cabinet> All(Housing housing) =>
 			DataContext.
-			Cabinets.
+			Cabinets.AsNoTracking().
+			Include(c => c.Housing).AsNoTracking().
 			Where(c => c.HousingID == housing.ID).
 			ToList();
 	}

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using InventoryManager.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System;
 
 namespace InventoryManager.Models
 {
@@ -21,12 +22,6 @@ namespace InventoryManager.Models
 
 		public Cabinet Cabinet { get; set; }
 
-		public void AddDeviceAccount(Device device, DeviceAccount acc)
-		{
-			DataContext.DeviceAccounts.Add(acc);
-			DataContext.Devices.Update(device);
-		}
-
 		public override void Remove(Device device)
 		{
 			DataContext.DeviceAccounts.RemoveRange(
@@ -34,14 +29,14 @@ namespace InventoryManager.Models
 				DeviceAccounts.
 				Where(a => a.DeviceID == device.ID)
 			);
+			device.DeviceType = null;
 			DataContext.Devices.Remove(device);
 		}
 
 		public override List<Device> All() =>
 			DataContext.
 			Devices.
-			Include(d => d.Cabinet).
-			// Include(d => d.Housing).
-			Include(c => c.DeviceType).ToList();
+			Include(d => d.Cabinet).AsNoTracking().
+			Include(c => c.DeviceType).AsNoTracking().ToList();
 	}
 }

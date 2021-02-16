@@ -16,7 +16,7 @@ namespace InventoryManager.Models
 		/// <summary>
 		/// This method saves all changes with all models whatever model it called from
 		/// </summary>
-		public void SaveChanges() => DataContext.SaveChanges();
+		public void SaveChanges() => DataContext.SaveChanges(true);
 
 		public abstract List<T> All();
 
