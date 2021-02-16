@@ -141,7 +141,7 @@
                         ItemsSource="{Binding SelectedHousingCabinets}"
                         DisplayMemberPath="Name" />
                     <Button Content="Применить"
-                        Command="{Binding ApplyLocationChangesCommand}"
+                        Command="{Binding ApplyDeviceLocationChangesCommand}"
                         Height="25"
                         Margin="0 5 0 0" />
                 </StackPanel>

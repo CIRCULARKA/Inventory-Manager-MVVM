@@ -207,6 +207,24 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedDeviceIP != null
 			);
+
+			ApplyDeviceLocationChangesCommand = new ButtonCommand(
+				(obj) =>
+				{
+					SelectedDevice.Cabinet = SelectedCabinet;
+					SelectedDevice.Cabinet.Housing = SelectedHousing;
+
+					try
+					{
+						DeviceModel.Update(SelectedDevice);
+						DeviceModel.SaveChanges();
+					}
+					catch (System.Exception e)
+					{
+						MessageToUser = e.Message;
+					}
+				}
+			);
 		}
 
 		public ObservableCollection<Device> AllDevices =>
@@ -334,6 +352,8 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand AddDeviceAccountCommand { get; }
 
 		public ButtonCommand RemoveDeviceAccountCommand { get; }
+
+		public ButtonCommand ApplyDeviceLocationChangesCommand { get; }
 
 		public string InputtedInventoryNumber
 		{
