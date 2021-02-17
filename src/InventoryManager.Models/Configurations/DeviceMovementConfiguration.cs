@@ -7,7 +7,7 @@ namespace InventoryManager.Models.Configuration
 	{
 		public void Configure(EntityTypeBuilder<DeviceMovementHistory> builder)
 		{
-			builder.HasKey(dmh => new { dmh.ID, dmh.TargetCabinetID, dmh.TargetHousingID });
+			builder.HasKey(dmh => new { dmh.ID, dmh.TargetCabinetID });
 			builder.Property(dmh => dmh.ID).UseIdentityColumn();
 		}
 	}

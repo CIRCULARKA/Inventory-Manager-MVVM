@@ -10,10 +10,6 @@ namespace InventoryManager.Models
 
 		public int DeviceID { get; set; }
 
-		public int TargetHousingID { get; set; }
-
-		public Housing TargetHousing { get; set; }
-
 		public int TargetCabinetID { get; set; }
 
 		public Cabinet TargetCabinet { get; set; }
