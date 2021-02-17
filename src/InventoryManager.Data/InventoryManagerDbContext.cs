@@ -24,6 +24,8 @@ namespace InventoryManager.Data
 
 		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
+		public DbSet<DeviceMovementHistory> DeviceMovementHistory { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");
@@ -40,6 +42,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
 			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
 			builder.ApplyConfiguration<DeviceAccount>(new DeviceAccountModelConfiguration());
+			builder.ApplyConfiguration<DeviceMovementHistory>(new DeviceMovementHistoryConfiguration());
 		}
 	}
 }
