@@ -36,6 +36,8 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		public DeviceMovementHistory DeviceMovementHistoryModel => _deviceMovementHistory;
+
 		public Device DeviceModel => _deviceModel;
 
 		public DeviceAccount DeviceAccountModel => _accountModel;
