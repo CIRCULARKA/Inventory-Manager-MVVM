@@ -24,6 +24,8 @@ namespace InventoryManager.ViewModels
 
 		private DeviceAccount _accountModel = new DeviceAccount();
 
+		private DeviceMovementHistory _deviceMovementHistory = new DeviceMovementHistory();
+
 		public string MessageToUser
 		{
 			get => _messageToUser;
