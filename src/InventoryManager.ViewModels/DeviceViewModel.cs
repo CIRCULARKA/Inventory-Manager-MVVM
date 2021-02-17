@@ -3,6 +3,7 @@ using InventoryManager.Models;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using InventoryManager.Views;
 using InventoryManager.Extensions;
 
@@ -217,7 +218,19 @@ namespace InventoryManager.ViewModels
 					try
 					{
 						DeviceModel.Update(SelectedDevice);
+						var newRecord = new DeviceMovementHistory()
+						{
+							DeviceID = SelectedDevice.ID,
+							TargetCabinetID = SelectedDevice.Cabinet.ID,
+							Date = DateTime.Now,
+							// Reason field is temporary. Need to create entity with reasons
+							// and use it instead of this hard coding
+							Reason = "Перемещение"
+						};
+
+						try { DeviceMovementHistoryModel.Add(newRecord); } catch {}
 						DeviceModel.SaveChanges();
+						DeviceMovementHistoryModel.SaveChanges();
 					}
 					catch (System.Exception e)
 					{
