@@ -22,5 +22,8 @@ namespace InventoryManager.Models
 
 		public override List<DeviceMovementHistory> All() =>
 			DataContext.DeviceMovementHistory.ToList();
+
+		public List<DeviceMovementHistory> ALl(Device device) =>
+			DataContext.DeviceMovementHistory.Where(dh => dh.DeviceID == device.ID).ToList();
 	}
 }
