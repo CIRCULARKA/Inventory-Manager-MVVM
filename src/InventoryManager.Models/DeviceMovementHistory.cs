@@ -1,11 +1,8 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManager.Models
 {
-	public class DeviceMovementHistory : ModelBase<DeviceMovementHistory>
+	public class DeviceMovementHistory
 	{
 		public int ID { get; set; }
 
@@ -20,16 +17,5 @@ namespace InventoryManager.Models
 		public string Reason { get; set; }
 
 		public DateTime Date { get; set; }
-
-		public override List<DeviceMovementHistory> All() =>
-			DataContext.DeviceMovementHistory.ToList();
-
-		public List<DeviceMovementHistory> All(Device device) =>
-			DataContext.
-			DeviceMovementHistory.
-			Include(dmh => dmh.Device).
-			Include(dmh => dmh.TargetCabinet).
-			ThenInclude(cabinet => cabinet.Housing).
-			Where(dh => dh.DeviceID == device.ID).ToList();
 	}
 }

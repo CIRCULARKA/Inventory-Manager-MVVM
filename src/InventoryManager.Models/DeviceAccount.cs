@@ -1,9 +1,6 @@
-using System.Linq;
-using System.Collections.Generic;
-
 namespace InventoryManager.Models
 {
-	public class DeviceAccount : ModelBase<DeviceAccount>
+	public class DeviceAccount
 	{
 		public int ID { get; set; }
 
@@ -14,8 +11,5 @@ namespace InventoryManager.Models
 		public int DeviceID { get; set; }
 
 		public Device Device { get; set; }
-
-		public override List<DeviceAccount> All() =>
-			DataContext.DeviceAccounts.ToList();
 	}
 }

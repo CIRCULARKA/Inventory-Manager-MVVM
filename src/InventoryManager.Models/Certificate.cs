@@ -1,10 +1,8 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace InventoryManager.Models
 {
-	public class Certificate : ModelBase<Certificate>
+	public class Certificate
 	{
 		public int ID { get; set; }
 
@@ -17,9 +15,5 @@ namespace InventoryManager.Models
 		public string State =>
 			ValidTo < DateTime.Now ? "Сертификат недействителен!" :
 				$"Осталось дней: {(ValidTo - DateTime.Now).Days}";
-
-		public override List<Certificate> All() =>
-			DataContext.Certificates.ToList();
-
 	}
 }
