@@ -57,6 +57,7 @@ namespace InventoryManager.ViewModels
 				{
 					var deviceHistoryView = new DeviceMovementHistoryView();
 					deviceHistoryView.DataContext = this;
+					deviceHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
 					deviceHistoryView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
