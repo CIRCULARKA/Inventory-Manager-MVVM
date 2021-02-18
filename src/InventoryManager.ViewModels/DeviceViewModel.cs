@@ -52,6 +52,16 @@ namespace InventoryManager.ViewModels
 				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 			}
 
+			ShowDeviceMovementHistoryCommand = new ButtonCommand(
+				(obj) =>
+				{
+					var deviceHistoryView = new DeviceMovementHistoryView();
+					deviceHistoryView.DataContext = this;
+					deviceHistoryView.ShowDialog();
+				},
+				(obj) => SelectedDevice != null
+			);
+
 			OpenAddDeviceViewCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -272,6 +282,9 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		public List<DeviceMovementHistory> SelectedDeviceMovementHistory =>
+			DeviceMovementHistoryModel.All(SelectedDevice);
+
 		public List<DeviceType> AllDeviceTypes =>
 			DeviceTypeModel.All();
 
@@ -360,6 +373,8 @@ namespace InventoryManager.ViewModels
 		public IPAddress SelectedDeviceIP { get; set; }
 
 		public DeviceType SelectedDeviceType { get; set; }
+
+		public ButtonCommand ShowDeviceMovementHistoryCommand { get; set; }
 
 		public ButtonCommand AddDeviceCommand { get; }
 
