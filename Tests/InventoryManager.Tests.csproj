@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InventoryManager\InventoryManager.csproj" />
+    <ProjectReference Include="..\src\InventoryManager.csproj" />
   </ItemGroup>
 
 </Project>
