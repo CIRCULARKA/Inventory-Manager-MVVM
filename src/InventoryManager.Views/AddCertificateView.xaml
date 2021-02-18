@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Заполните данные для нового сертификата"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Width="350">

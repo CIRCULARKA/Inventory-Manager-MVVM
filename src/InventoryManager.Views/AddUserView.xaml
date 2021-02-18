@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:InventoryManager"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels"
         Title="Заполните данные для пользователя"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Width="350">
