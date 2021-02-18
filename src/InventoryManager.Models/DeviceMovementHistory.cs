@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManager.Models
 {
@@ -24,6 +25,11 @@ namespace InventoryManager.Models
 			DataContext.DeviceMovementHistory.ToList();
 
 		public List<DeviceMovementHistory> All(Device device) =>
-			DataContext.DeviceMovementHistory.Where(dh => dh.DeviceID == device.ID).ToList();
+			DataContext.
+			DeviceMovementHistory.
+			Include(dmh => dmh.Device).
+			Include(dmh => dmh.TargetCabinet).
+			ThenInclude(cabinet => cabinet.Housing).
+			Where(dh => dh.DeviceID == device.ID).ToList();
 	}
 }
