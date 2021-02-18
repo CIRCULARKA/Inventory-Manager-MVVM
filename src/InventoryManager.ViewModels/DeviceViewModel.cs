@@ -218,6 +218,7 @@ namespace InventoryManager.ViewModels
 					try
 					{
 						DeviceModel.Update(SelectedDevice);
+
 						var newRecord = new DeviceMovementHistory()
 						{
 							DeviceID = SelectedDevice.ID,
@@ -228,9 +229,17 @@ namespace InventoryManager.ViewModels
 							Reason = "Перемещение"
 						};
 
-						try { DeviceMovementHistoryModel.Add(newRecord); } catch {}
+						try
+						{
+							DeviceMovementHistoryModel.Add(newRecord);
+							DeviceMovementHistoryModel.SaveChanges();
+						}
+						catch
+						{
+							DeviceMovementHistoryModel.Remove(newRecord);
+						}
+
 						DeviceModel.SaveChanges();
-						DeviceMovementHistoryModel.SaveChanges();
 					}
 					catch (System.Exception e)
 					{
