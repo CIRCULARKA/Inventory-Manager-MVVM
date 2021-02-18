@@ -6,7 +6,8 @@
             "command": "dotnet",
             "type": "process",
             "args": [
-                "build"
+                "build",
+                "InventoryManager"
             ],
             "presentation": {
                 "echo": true,
@@ -23,7 +24,9 @@
             "command": "dotnet",
             "type": "process",
             "args": [
-                "run"
+                "run",
+                "--project",
+                "InventoryManager"
             ],
             "presentation": {
                 "echo": true,
@@ -34,6 +37,19 @@
                 "clear": false
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Run Tests",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "test"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         },
         {
             "label": "Build & Run",

@@ -1,0 +1,33 @@
+<src:ViewBase x:Class="InventoryManager.Views.MainView"
+	xmlns:src="clr-namespace:InventoryManager.Views"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Окно пользователя"
+	WindowStartupLocation="CenterScreen"
+	ResizeMode="NoResize"
+	SizeToContent="Height"
+	Width="450">
+	<StackPanel>
+		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
+		<TabControl>
+			<TabItem>
+				<TabItem.Header>Устройства</TabItem.Header>
+				<TabItem.Content>
+					<src:DevicesManagementView />
+				</TabItem.Content>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>Пользователи</TabItem.Header>
+				<TabItem.Content>
+					<src:UsersManagementView />
+				</TabItem.Content>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>Сертификаты</TabItem.Header>
+				<TabItem.Content>
+					<src:CertificatesManagementView />
+				</TabItem.Content>
+			</TabItem>
+		</TabControl>
+	</StackPanel>
+</src:ViewBase>
