@@ -1,8 +1,8 @@
 namespace InventoryManager.Views
 {
-	public partial class DeviceMovementView : ViewBase
+	public partial class DeviceMovementHistoryView : ViewBase
 	{
-		public DeviceMovementView()
+		public DeviceMovementHistoryView()
 		{
 			InitializeComponent();
 		}

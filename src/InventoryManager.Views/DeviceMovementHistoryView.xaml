@@ -1,4 +1,5 @@
-<UserControl x:Class="InventoryManager.Views.DeviceMovementView"
+<src:ViewBase x:Class="InventoryManager.Views.DeviceMovementHistoryView"
+		xmlns:src="clr-namespace:InventoryManager.Views"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
@@ -13,4 +14,4 @@
 			</DataGrid.Columns>
 		</DataGrid>
     </StackPanel>
-</UserControl>
+</src:ViewBase>
