@@ -33,7 +33,7 @@
                 <RowDefinition Height="35" />
             </Grid.RowDefinitions>
             <ListBox ItemsSource="{Binding AllDevices, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDevice}"
-                Width="245"
+                Width="245" Height="450"
                 HorizontalAlignment="Left"
                 Grid.Row="0">
                 <ListBox.ItemTemplate>
