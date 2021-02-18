@@ -15,10 +15,10 @@ namespace InventoryManager.Models
 
 		public void Update(T entity) => DataContext.Update<T>(entity);
 
-		public void Find(T entity) => DataContext.Find<T>(entity);
+		public T Find(params object[] keys) => DataContext.Find<T>(keys);
 
 		public void SaveChanges() => DataContext.SaveChanges();
 
-		public abstract IEnumerable<T> All();
+		public abstract IEnumerable<T> All { get; }
 	}
 }

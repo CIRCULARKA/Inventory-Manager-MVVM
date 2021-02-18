@@ -35,8 +35,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						UserModel.Add(newUser);
-						UserModel.SaveChanges();
+						Users.Add(newUser);
+						Users.SaveChanges();
 
 						// Load user group explicitly to display user group in users list
 						newUser.UserGroup = SelectedUserGroup;
@@ -66,9 +66,9 @@ namespace InventoryManager.ViewModels
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var userToRemove = UserModel.Find(SelectedUser.Login);
-					UserModel.Remove(userToRemove);
-					UserModel.SaveChanges();
+					var userToRemove = Users.Find(SelectedUser.Login);
+					Users.Remove(userToRemove);
+					Users.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
@@ -85,14 +85,14 @@ namespace InventoryManager.ViewModels
 		}
 
 		public ObservableCollection<User> UsersToShow =>
-			UserModel.All().ToObservableCollection();
+			Users.All.ToObservableCollection();
 
-		public ObservableCollection<Group> UserGroups =>
-			GroupModel.All().ToObservableCollection();
+		public ObservableCollection<UserGroup> UserGroupsToShow =>
+			Users.AllUserGroups.ToObservableCollection();
 
 		public User SelectedUser { get; set; }
 
-		public Group SelectedUserGroup { get; set; }
+		public UserGroup SelectedUserGroup { get; set; }
 
 		public ButtonCommand AddUserCommand { get; }
 

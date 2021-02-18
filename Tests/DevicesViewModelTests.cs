@@ -3,7 +3,7 @@ using Xunit;
 
 namespace InventoryManager.Tests
 {
-    public class UnitTest1
+    public class DevicesViewModelTests
     {
         [Fact]
         public void Test1()

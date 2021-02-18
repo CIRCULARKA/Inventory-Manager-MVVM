@@ -1,6 +1,6 @@
 namespace InventoryManager.Models
 {
-	public class Group
+	public class UserGroup
 	{
 		public int ID { get; set; }
 

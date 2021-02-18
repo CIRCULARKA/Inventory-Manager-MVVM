@@ -43,9 +43,9 @@ namespace InventoryManager.ViewModels
 		{
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
-			_allHousings = HousingModel.All();
-			_allCabinets = CabinetModel.All();
-			_allDevices = DeviceModel.All().ToObservableCollection();
+			_allHousings = Locations.AllHousings as List<Housing>;
+			_allCabinets = Locations.AllCabinets as List<Cabinet>;
+			_allDevices = Devices.All.ToObservableCollection();
 			foreach (var device in _allDevices)
 			{
 				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
@@ -84,12 +84,12 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						DeviceModel.Add(newDevice);
-						DeviceModel.SaveChanges();
+						Devices.Add(newDevice);
+						Devices.SaveChanges();
 
 						// Add DeviceType and Cabinet object explicitly in order to avoid db future exceptions
 						newDevice.DeviceType = SelectedDeviceType;
-						newDevice.Cabinet = CabinetModel.Find(newDevice.CabinetID);
+						newDevice.Cabinet = Locations.Find(newDevice.CabinetID);
 						newDevice.Cabinet.Housing = _allHousings.Find(h => h.ID == newDevice.Cabinet.HousingID);
 						AllDevices.Add(newDevice);
 
@@ -100,7 +100,7 @@ namespace InventoryManager.ViewModels
 					catch (System.Exception e)
 					{
 						MessageToUser = e.Message;
-						DeviceModel.Remove(newDevice);
+						Devices.Remove(newDevice);
 					}
 				},
 				(obj) =>
@@ -114,8 +114,8 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceCommand = new ButtonCommand(
 				(obj) =>
 				{
-					DeviceModel.Remove(SelectedDevice);
-					DeviceModel.SaveChanges();
+					Devices.Remove(SelectedDevice);
+					Devices.SaveChanges();
 					AllDevices.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
@@ -143,8 +143,9 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						DeviceAccountModel.Add(newAcc);
-						DeviceAccountModel.SaveChanges();
+						Devices.AddDeviceAccount(newAcc);
+						Devices.SaveChanges();
+
 						SelectedDeviceAccounts.Add(newAcc);
 
 						InputtedDeviceAccountLogin = "";
@@ -155,7 +156,7 @@ namespace InventoryManager.ViewModels
 					catch (System.Exception)
 					{
 						MessageToUser = "Учётная запись с таким логином уже существует";
-						DeviceAccountModel.Remove(newAcc);
+						Devices.RemoveDeviceAccount(newAcc);
 					}
 				},
 				(obj) => !(string.IsNullOrWhiteSpace(InputtedDeviceAccountLogin) ||
@@ -165,8 +166,8 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceAccountCommand = new ButtonCommand(
 				(obj) =>
 				{
-					DeviceAccountModel.Remove(SelectedDeviceAccount);
-					DeviceAccountModel.SaveChanges();
+					Devices.RemoveDeviceAccount(SelectedDeviceAccount);
+					Devices.SaveChanges();
 
 					SelectedDeviceAccounts.Remove(SelectedDeviceAccount);
 				},
@@ -194,8 +195,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						IPAddressModel.Add(newIP);
-						IPAddressModel.SaveChanges();
+						Devices.AddIPAddress(newIP);
+						Devices.SaveChanges();
 						SelectedDeviceIPAddresses.Add(newIP);
 
 						InputtedIPAddress = "";
@@ -204,7 +205,7 @@ namespace InventoryManager.ViewModels
 					catch (System.Exception e)
 					{
 						MessageToUser = "Такой адрес уже используется";
-						IPAddressModel.Remove(newIP);
+						Devices.RemoveIPAddress(newIP);
 					}
 				}
 			);
@@ -212,8 +213,8 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceIPCommand = new ButtonCommand(
 				(obj) =>
 				{
-					IPAddressModel.Remove(SelectedDeviceIP);
-					IPAddressModel.SaveChanges();
+					Devices.RemoveIPAddress(SelectedDeviceIP);
+					Devices.SaveChanges();
 
 					SelectedDeviceIPAddresses.Remove(SelectedDeviceIP);
 				},
@@ -228,7 +229,7 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						DeviceModel.Update(SelectedDevice);
+						Devices.Update(SelectedDevice);
 
 						var newRecord = new DeviceMovementHistory()
 						{
@@ -242,15 +243,15 @@ namespace InventoryManager.ViewModels
 
 						try
 						{
-							DeviceMovementHistoryModel.Add(newRecord);
-							DeviceMovementHistoryModel.SaveChanges();
+							Devices.NoteDeviceMovemet(newRecord);
+							Devices.SaveChanges();
 						}
 						catch
 						{
-							DeviceMovementHistoryModel.Remove(newRecord);
+							Devices.RemoveDeviceMovementNote(newRecord);
 						}
 
-						DeviceModel.SaveChanges();
+						Devices.SaveChanges();
 					}
 					catch (System.Exception e)
 					{
@@ -284,10 +285,10 @@ namespace InventoryManager.ViewModels
 		}
 
 		public List<DeviceMovementHistory> SelectedDeviceMovementHistory =>
-			DeviceMovementHistoryModel.All(SelectedDevice);
+			Devices.GetAllDeviceHistoryNotes(SelectedDevice) as List<DeviceMovementHistory>;
 
 		public List<DeviceType> AllDeviceTypes =>
-			DeviceTypeModel.All();
+			Devices.AllDeviceTypes as List<DeviceType>;
 
 		public List<Housing> AllHousings => _allHousings;
 
@@ -311,19 +312,16 @@ namespace InventoryManager.ViewModels
 				if (SelectedDevice != null)
 				{
 					// Getting all device's accounts
-					SelectedDeviceAccounts = DeviceAccountModel.All().
+					SelectedDeviceAccounts = Devices.AllDeviceAccounts.
 						Where(a => a.DeviceID == SelectedDevice.ID).
 						ToObservableCollection();
 
 					// Getting all device's IP's
-					SelectedDeviceIPAddresses = IPAddressModel.All().
-						Where(ip => ip.DeviceID == SelectedDevice.ID).
+					SelectedDeviceIPAddresses = Devices.GetAllDeviceIPAddresses(SelectedDevice).
 						ToObservableCollection();
 
 					// Getting device's housing
 					SelectedHousing = SelectedDevice.Cabinet.Housing;
-
-					// Selecting device's cabinet
 				}
 				else
 				{

@@ -1,7 +1,5 @@
 using InventoryManager.Commands;
 using InventoryManager.Views;
-using InventoryManager.Models;
-using InventoryManager.Data;
 
 namespace InventoryManager.ViewModels
 {
@@ -14,7 +12,7 @@ namespace InventoryManager.ViewModels
 			LoginCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var findedUser = UserModel.Find(InputtedLogin);
+					var findedUser = Users.Find(InputtedLogin);
 
 					if (findedUser != null && findedUser.Password == InputtedPassword)
 					{

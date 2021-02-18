@@ -14,7 +14,7 @@ namespace InventoryManager.Models
 
 		public int UserGroupID { get; set; }
 
-		public Group UserGroup { get; set; }
+		public UserGroup UserGroup { get; set; }
 
 		public string FullName => $"{LastName} {FirstName} {MiddleName}";
 	}

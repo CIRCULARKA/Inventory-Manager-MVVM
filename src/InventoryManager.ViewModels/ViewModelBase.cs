@@ -2,29 +2,25 @@ using InventoryManager.Models;
 
 namespace InventoryManager.ViewModels
 {
-	public class ViewModelBase : NotifyingModel
+	public abstract class ViewModelBase : NotifyingModel
 	{
 		private string _messageToUser;
 
-		private Device _deviceModel = new Device();
+		private UserRepository _userRepo = new UserRepository();
 
-		private DeviceType _deviceTypeModel = new DeviceType();
+		private CertificateRepository _certificateRepo = new CertificateRepository();
 
-		private User _userModel = new User();
+		private LocationRepository _locationRepo = new LocationRepository();
 
-		private Group _groupModel = new Group();
+		private DeviceRepository _deviceRepo = new DeviceRepository();
 
-		private Housing _housingModel = new Housing();
+		protected UserRepository Users => _userRepo;
 
-		private Cabinet _cabinetModel = new Cabinet();
+		protected DeviceRepository Devices => _deviceRepo;
 
-		private Certificate _certificateModel = new Certificate();
+		protected CertificateRepository Certificates => _certificateRepo;
 
-		private IPAddress _ipAddressModel = new IPAddress();
-
-		private DeviceAccount _accountModel = new DeviceAccount();
-
-		private DeviceMovementHistory _deviceMovementHistory = new DeviceMovementHistory();
+		protected LocationRepository Locations => _locationRepo;
 
 		public string MessageToUser
 		{
@@ -35,25 +31,5 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("MessageToUser");
 			}
 		}
-
-		public DeviceMovementHistory DeviceMovementHistoryModel => _deviceMovementHistory;
-
-		public Device DeviceModel => _deviceModel;
-
-		public DeviceAccount DeviceAccountModel => _accountModel;
-
-		public Cabinet CabinetModel => _cabinetModel;
-
-		public Certificate CertificateModel => _certificateModel;
-
-		public DeviceType DeviceTypeModel => _deviceTypeModel;
-
-		public Group GroupModel => _groupModel;
-
-		public Housing HousingModel => _housingModel;
-
-		public IPAddress IPAddressModel => _ipAddressModel;
-
-		public User UserModel => _userModel;
 	}
 }

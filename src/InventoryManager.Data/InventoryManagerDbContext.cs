@@ -6,7 +6,7 @@ namespace InventoryManager.Data
 {
 	public class InventoryManagerDbContext : DbContext
 	{
-		public DbSet<Group> Groups { get; set; }
+		public DbSet<UserGroup> UserGroups { get; set; }
 
 		public DbSet<User> Users { get; set; }
 
@@ -33,7 +33,7 @@ namespace InventoryManager.Data
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			builder.ApplyConfiguration<Group>(new GroupModelConfiguration());
+			builder.ApplyConfiguration<UserGroup>(new UserGroupModelConfiguration());
 			builder.ApplyConfiguration<User>(new UserModelConfiguration());
 			builder.ApplyConfiguration<DeviceType>(new DeviceTypeModelConfiguration());
 			builder.ApplyConfiguration<Device>(new DeviceModelConfiguration());
