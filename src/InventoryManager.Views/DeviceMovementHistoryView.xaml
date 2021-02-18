@@ -1,0 +1,16 @@
+<UserControl x:Class="InventoryManager.Views.DeviceMovementView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:InventoryManager.ViewModels">
+    <StackPanel>
+		<DataGrid Height="300">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Дата" Binding="{Binding Path=Data}" />
+				<DataGridTextColumn Header="Инвентарный номер" Binding="{Binding Path=Device.InventoryNumber}" />
+				<DataGridTextColumn Header="Корпус" Binding="{Binding Path=TargetCabinet.Housing.Name}" />
+				<DataGridTextColumn Header="Кабинет" Binding="{Binding Path=TargetCabinet.Name}" />
+				<DataGridTextColumn Header="Комментарий" Binding="{Binding Reason}" />
+			</DataGrid.Columns>
+		</DataGrid>
+    </StackPanel>
+</UserControl>
