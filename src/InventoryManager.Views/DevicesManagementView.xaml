@@ -74,54 +74,56 @@
                 <RowDefinition />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListBox
-                ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedDeviceAccount}"
-                Height="100"
-                Margin="0 0 0 3"
-                Grid.Row="0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding Path=Password}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <StackPanel Orientation="Horizontal"
-                Grid.Row="1">
-                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding ShowAddDeviceAccountViewCommand}" />
-                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding RemoveDeviceAccountCommand}" />
-            </StackPanel>
-            <TextBlock Text="IP-адреса"
-                FontSize="14" FontWeight="Bold"
-                Margin="0 10 0 3"
-                Grid.Row="2" />
-            <ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedDeviceIP}"
-                Height="100"
-                Margin="0 0 0 3"
-                Grid.Row="3">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Address}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <StackPanel Orientation="Horizontal"
-                Grid.Row="4">
-                <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding ShowAddIPViewCommand}" />
-                <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
-                    Command="{Binding RemoveDeviceIPCommand}" />
+            <StackPanel Grid.Row="0">
+                <ListBox
+                    ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedDeviceAccount}"
+                    Height="100"
+                    Margin="0 0 0 3"
+                    >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Path=Password}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Orientation="Horizontal"
+                    >
+                    <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+                        Command="{Binding ShowAddDeviceAccountViewCommand}" />
+                    <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+                        Command="{Binding RemoveDeviceAccountCommand}" />
+                </StackPanel>
+                <TextBlock Text="IP-адреса"
+                    FontSize="14" FontWeight="Bold"
+                    Margin="0 10 0 3"
+                    />
+                <ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedDeviceIP}"
+                    Height="100"
+                    Margin="0 0 0 3"
+                    >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=Address}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Orientation="Horizontal"
+                    >
+                    <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+                        Command="{Binding ShowAddIPViewCommand}" />
+                    <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+                        Command="{Binding RemoveDeviceIPCommand}" />
+                </StackPanel>
             </StackPanel>
             <GroupBox Margin="0 10 0 0"
-                Grid.Row="5">
+                Grid.Row="1">
                 <GroupBox.Header>
                     <TextBlock Text="Расположение" FontSize="14" FontWeight="Bold" />
                 </GroupBox.Header>
