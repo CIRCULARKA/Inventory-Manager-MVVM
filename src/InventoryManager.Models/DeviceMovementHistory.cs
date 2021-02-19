@@ -8,8 +8,6 @@ namespace InventoryManager.Models
 
 		public int DeviceID { get; set; }
 
-		public Device Device { get; set; }
-
 		public int TargetCabinetID { get; set; }
 
 		public Cabinet TargetCabinet { get; set; }
