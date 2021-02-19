@@ -15,6 +15,9 @@ namespace InventoryManager.Models
 		void UpdateCabinet(Cabinet cabinetToUpdate) =>
 			DataContext.Cabinets.Update(cabinetToUpdate);
 
+		Cabinet FindCabinet(params object[] keys) =>
+			DataContext.Cabinets.Find(keys);
+
 		IEnumerable<Cabinet> AllCabinets =>
 			DataContext.
 			Cabinets.
