@@ -8,6 +8,7 @@ namespace InventoryManager.ViewModels
 	{
 		public AuthorizationViewModel(ViewBase view, IUserRelatedRepository repo)
 		{
+			Repository = repo;
 			AuthorizationView = view;
 
 			LoginCommand = new ButtonCommand(
