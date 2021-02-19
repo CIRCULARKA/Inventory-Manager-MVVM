@@ -11,7 +11,6 @@ namespace InventoryManager.Models
 		void RemoveDeviceType(DeviceType typeToRemove) =>
 			DataContext.DeviceTypes.Remove(typeToRemove);
 
-
 		void UpdateDeviceType(DeviceType typeToUpdate) =>
 			DataContext.DeviceTypes.Update(typeToUpdate);
 
