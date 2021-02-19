@@ -6,7 +6,8 @@
             "command": "dotnet",
             "type": "process",
             "args": [
-                "build"
+                "build",
+                "src"
             ],
             "presentation": {
                 "echo": true,
@@ -85,7 +86,9 @@
             "args": [
                 "ef",
                 "migrations",
-                "remove"
+                "remove",
+                "--project",
+                "src"
             ],
             "presentation": {
                 "echo": true,
@@ -103,7 +106,9 @@
                 "ef",
                 "migrations",
                 "add",
-                "Init"
+                "Init",
+                "--project",
+                "src"
             ],
             "presentation": {
                 "echo": true,
@@ -121,7 +126,9 @@
                 "ef",
                 "database",
                 "drop",
-                "-f"
+                "-f",
+                "--project",
+                "src"
             ],
             "presentation": {
                 "echo": true,
@@ -138,7 +145,9 @@
             "args": [
                 "ef",
                 "database",
-                "update"
+                "update",
+                "--project",
+                "src"
             ],
             "presentation": {
                 "echo": true,
