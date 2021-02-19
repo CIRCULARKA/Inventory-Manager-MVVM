@@ -4,28 +4,8 @@ using InventoryManager.Models.Configuration;
 
 namespace InventoryManager.Data
 {
-	public class DefaultDbContext : DbContext, IDbContext
+	public class DefaultDbContext : BaseDbContext
 	{
-		public DbSet<UserGroup> UserGroups { get; set; }
-
-		public DbSet<User> Users { get; set; }
-
-		public DbSet<DeviceType> DeviceTypes { get; set; }
-
-		public DbSet<Device> Devices { get; set; }
-
-		public DbSet<IPAddress> IPAddresses { get; set; }
-
-		public DbSet<Certificate> Certificates { get; set; }
-
-		public DbSet<Housing> Housings { get; set; }
-
-		public DbSet<Cabinet> Cabinets { get; set; }
-
-		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
-
-		public DbSet<DeviceMovementHistoryNote> DeviceMovementHistory { get; set; }
-
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=(local);Database=InventoryManagerDb;Trusted_Connection=True");

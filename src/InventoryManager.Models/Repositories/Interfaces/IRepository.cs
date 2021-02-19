@@ -4,6 +4,8 @@ namespace InventoryManager.Models
 {
 	public interface IRepository
 	{
-		IDbContext DataContext { get; }
+		BaseDbContext DataContext { get; }
+
+		void SaveChanges() => DataContext.SaveChanges();
 	}
 }

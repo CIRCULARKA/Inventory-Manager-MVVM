@@ -3,26 +3,26 @@ using InventoryManager.Models;
 
 namespace InventoryManager.Data
 {
-	public interface IDbContext
+	public abstract class BaseDbContext : DbContext
 	{
-		DbSet<UserGroup> UserGroups { get; set; }
+		public DbSet<UserGroup> UserGroups { get; set; }
 
-		DbSet<User> Users { get; set; }
+		public DbSet<User> Users { get; set; }
 
-		DbSet<DeviceType> DeviceTypes { get; set; }
+		public DbSet<DeviceType> DeviceTypes { get; set; }
 
-		DbSet<Device> Devices { get; set; }
+		public DbSet<Device> Devices { get; set; }
 
-		DbSet<IPAddress> IPAddresses { get; set; }
+		public DbSet<IPAddress> IPAddresses { get; set; }
 
-		DbSet<Certificate> Certificates { get; set; }
+		public DbSet<Certificate> Certificates { get; set; }
 
-		DbSet<Housing> Housings { get; set; }
+		public DbSet<Housing> Housings { get; set; }
 
-		DbSet<Cabinet> Cabinets { get; set; }
+		public DbSet<Cabinet> Cabinets { get; set; }
 
-		DbSet<DeviceAccount> DeviceAccounts { get; set; }
+		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
-		DbSet<DeviceMovementHistoryNote> DeviceMovementHistory { get; set; }
+		public DbSet<DeviceMovementHistoryNote> DeviceMovementHistory { get; set; }
 	}
 }
