@@ -15,6 +15,9 @@ namespace InventoryManager.Models
 		void UpdateDevice(Device deviceToUpdate) =>
 			DataContext.Devices.Update(deviceToUpdate);
 
+		void FindDevice(params object[] keys) =>
+			DataContext.Devices.Find(keys);
+
 		IEnumerable<Device> AllDevices =>
 			DataContext.
 			Devices.
