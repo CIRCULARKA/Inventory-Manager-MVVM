@@ -4,7 +4,7 @@ using InventoryManager.Models.Configuration;
 
 namespace InventoryManager.Data
 {
-	public class InventoryManagerDbContext : DbContext, IDbContext
+	public class DefaultDbContext : DbContext, IDbContext
 	{
 		public DbSet<UserGroup> UserGroups { get; set; }
 
