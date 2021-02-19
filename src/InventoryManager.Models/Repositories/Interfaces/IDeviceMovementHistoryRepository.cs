@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace InventoryManager.Models
 {
 	public interface IDeviceMovementHistoryNoteRepository : IRepository
