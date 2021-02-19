@@ -12,7 +12,7 @@ namespace InventoryManager.Models
 			DataContext.Housings.Remove(housingToRemove);
 
 		void UpdateHousing(Housing housingToUpdate) =>
-			DataContext.Housings.Remove(housingToUpdate);
+			DataContext.Housings.Update(housingToUpdate);
 
 		IEnumerable<Housing> AllHousing =>
 			DataContext.Housings.ToList();
