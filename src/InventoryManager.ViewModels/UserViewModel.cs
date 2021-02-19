@@ -68,9 +68,9 @@ namespace InventoryManager.ViewModels
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var userToRemove = Users.Find(SelectedUser.Login);
-					Users.Remove(userToRemove);
-					Users.SaveChanges();
+					var userToRemove = Repository.FindUser(SelectedUser.Login);
+					Repository.RemoveUser(userToRemove);
+					Repository.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
 				(obj) => SelectedUser != null
@@ -89,10 +89,10 @@ namespace InventoryManager.ViewModels
 		private IUserRelatedRepository Repository { get; }
 
 		public ObservableCollection<User> UsersToShow =>
-			Users.All.ToObservableCollection();
+			Repository.AllUsers.ToObservableCollection();
 
 		public ObservableCollection<UserGroup> UserGroupsToShow =>
-			Users.AllUserGroups.ToObservableCollection();
+			Repository.AllUserGroups.ToObservableCollection();
 
 		public User SelectedUser { get; set; }
 
