@@ -1,4 +1,6 @@
 using System.Windows.Controls;
+using InventoryManager.Models;
+using InventoryManager.ViewModels;
 
 namespace InventoryManager.Views
 {
@@ -7,6 +9,8 @@ namespace InventoryManager.Views
 		public UsersManagementView()
 		{
 			InitializeComponent();
+
+			DataContext = new UserViewModel(new DefaultUserRelatedRepository());
 		}
 	}
 }

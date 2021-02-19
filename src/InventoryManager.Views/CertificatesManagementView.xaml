@@ -2,9 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
-    <UserControl.DataContext>
-        <vms:CertificateViewModel />
-    </UserControl.DataContext>
     <StackPanel>
         <TextBlock Text="Управление сертификатами"
             FontSize="16" FontWeight="Bold"
