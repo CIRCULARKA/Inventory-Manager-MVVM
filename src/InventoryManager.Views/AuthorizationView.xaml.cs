@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using InventoryManager.ViewModels;
+﻿using InventoryManager.ViewModels;
+using InventoryManager.Models;
 
 namespace InventoryManager.Views
 {
@@ -9,7 +9,7 @@ namespace InventoryManager.Views
 		{
 			InitializeComponent();
 
-			ViewModel = new AuthorizationViewModel(this);
+			ViewModel = new AuthorizationViewModel(this, new DefaultUserRelatedRepository());
 			DataContext = ViewModel;
 		}
 
