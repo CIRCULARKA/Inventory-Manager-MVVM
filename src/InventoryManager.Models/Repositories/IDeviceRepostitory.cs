@@ -4,11 +4,11 @@ namespace InventoryManager.Models
 {
 	public interface IDeviceRepostiroy
 	{
-		void AddDevice(Device device);
+		void AddDevice(Device newDevice);
 
-		void RemoveDevice(Device device);
+		void RemoveDevice(Device deviceToDelete);
 
-		void UpdateDevice(Device device);
+		void UpdateDevice(Device deviceToUpdate);
 
 		IEnumerable<Device> AllDevices { get; }
 	}
