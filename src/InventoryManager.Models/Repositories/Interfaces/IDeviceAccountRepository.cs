@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 
 namespace InventoryManager.Models
 {
@@ -13,6 +13,6 @@ namespace InventoryManager.Models
 		void UpdateDeviceAccount(DeviceAccount accToUpdate) =>
 			DataContext.DeviceAccounts.Update(accToUpdate);
 
-		IEnumerable<DeviceAccount> AllDeviceAccounts { get; }
+		IQueryable<DeviceAccount> AllDeviceAccounts { get; }
 	}
 }
