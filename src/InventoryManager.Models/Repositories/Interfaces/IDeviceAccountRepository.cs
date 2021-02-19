@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace InventoryManager.Models
 {
 	public interface IDeviceAccountRepository : IRepository
@@ -12,7 +10,5 @@ namespace InventoryManager.Models
 
 		void UpdateDeviceAccount(DeviceAccount accToUpdate) =>
 			DataContext.DeviceAccounts.Update(accToUpdate);
-
-		IQueryable<DeviceAccount> AllDeviceAccounts { get; }
 	}
 }
