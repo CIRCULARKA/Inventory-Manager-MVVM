@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InventoryManager.Extensions
 {
-	public static class ListExtenstions
+	public static class IEnumerableEstensions
 	{
 		public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> list)
 		{
