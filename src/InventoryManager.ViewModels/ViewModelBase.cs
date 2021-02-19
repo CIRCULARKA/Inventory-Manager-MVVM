@@ -4,8 +4,6 @@ namespace InventoryManager.ViewModels
 {
 	public abstract class ViewModelBase : NotifyingModel
 	{
-		protected abstract IRepository Repository { get; }
-
 		private string _messageToUser;
 
 		public string MessageToUser
