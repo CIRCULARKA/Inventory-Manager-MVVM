@@ -23,6 +23,6 @@ namespace InventoryManager.Data
 
 		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
-		public DbSet<DeviceMovementHistoryNote> DeviceMovementHistory { get; set; }
+		public DbSet<DeviceMovementHistoryNote> DeviceMovementHistoryNotes { get; set; }
 	}
 }

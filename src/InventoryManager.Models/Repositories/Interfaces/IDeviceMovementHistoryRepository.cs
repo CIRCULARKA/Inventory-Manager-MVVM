@@ -3,12 +3,12 @@ namespace InventoryManager.Models
 	public interface IDeviceMovementHistoryNoteRepository : IRepository
 	{
 		void FixDeviceMovement(DeviceMovementHistoryNote newNote) =>
-			DataContext.DeviceMovementHistory.Add(newNote);
+			DataContext.DeviceMovementHistoryNotes.Add(newNote);
 
 		void RemoveDeviceMovementNote(DeviceMovementHistoryNote noteToRemove) =>
-			DataContext.DeviceMovementHistory.Remove(noteToRemove);
+			DataContext.DeviceMovementHistoryNotes.Remove(noteToRemove);
 
 		void UpdateMovementNote(DeviceMovementHistoryNote noteToUpdate) =>
-			DataContext.DeviceMovementHistory.Update(noteToUpdate);
+			DataContext.DeviceMovementHistoryNotes.Update(noteToUpdate);
 	}
 }

@@ -11,7 +11,7 @@ namespace InventoryManager.Models
 			DataContext.DeviceAccounts.Where(a => a.DeviceID == device.ID);
 
 		IQueryable<DeviceMovementHistoryNote> GetAllDeviceHistoryNotes(Device device) =>
-			DataContext.DeviceMovementHistory.Where(dmn => dmn.DeviceID == device.ID);
+			DataContext.DeviceMovementHistoryNotes.Where(dmn => dmn.DeviceID == device.ID);
 
 		IQueryable<IPAddress> GetAllDeviceIPAddresses(Device device) =>
 			DataContext.IPAddresses.Where(ip => ip.DeviceID == device.ID);
