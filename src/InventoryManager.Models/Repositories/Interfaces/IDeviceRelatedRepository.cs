@@ -9,5 +9,8 @@ namespace InventoryManager.Models
 	{
 		IQueryable<DeviceAccount> GetAllDeviceAccounts(Device device) =>
 			DataContext.DeviceAccounts.Where(a => a.DeviceID == device.ID);
+
+		IQueryable<DeviceMovementHistoryNote> GetAllDeviceHistoryNotes(Device device) =>
+			DataContext.DeviceMovementHistory.Where(dmn => dmn.DeviceID == device.ID);
 	}
 }
