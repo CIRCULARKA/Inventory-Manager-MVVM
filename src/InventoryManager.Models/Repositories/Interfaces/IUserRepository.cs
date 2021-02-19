@@ -15,6 +15,9 @@ namespace InventoryManager.Models
 		void UpdateUser(User userToUpdate) =>
 			DataContext.Users.Update(userToUpdate);
 
+		User FindUser(params object[] keys) =>
+			DataContext.Users.Find(keys);
+
 		IEnumerable<User> AllUsers =>
 			DataContext.
 			Users.
