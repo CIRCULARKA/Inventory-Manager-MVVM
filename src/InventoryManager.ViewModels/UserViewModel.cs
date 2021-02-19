@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class UserViewModel : ViewModelBase
+	public class UserViewModel : ViewBase
 	{
 		private string _inputtedLogin;
 
@@ -18,8 +18,10 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedMiddleName;
 
-		public UserViewModel()
+		public UserViewModel(IUserRelatedRepository repo)
 		{
+			Repository = repo;
+
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
 				{
@@ -35,8 +37,8 @@ namespace InventoryManager.ViewModels
 
 					try
 					{
-						Users.Add(newUser);
-						Users.SaveChanges();
+						Repository.AddUser(newUser);
+						Repository.SaveChanges();
 
 						// Load user group explicitly to display user group in users list
 						newUser.UserGroup = SelectedUserGroup;
@@ -83,6 +85,8 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
+
+		private IUserRelatedRepository Repository { get; }
 
 		public ObservableCollection<User> UsersToShow =>
 			Users.All.ToObservableCollection();
