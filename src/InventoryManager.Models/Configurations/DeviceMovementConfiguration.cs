@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace InventoryManager.Models.Configuration
 {
-	public class DeviceMovementHistoryConfiguration : IEntityTypeConfiguration<DeviceMovementHistory>
+	public class DeviceMovementHistoryNoteConfiguration : IEntityTypeConfiguration<DeviceMovementHistoryNote>
 	{
-		public void Configure(EntityTypeBuilder<DeviceMovementHistory> builder)
+		public void Configure(EntityTypeBuilder<DeviceMovementHistoryNote> builder)
 		{
 			builder.HasKey(dmh => new { dmh.ID, dmh.TargetCabinetID });
 			builder.Property(dmh => dmh.ID).UseIdentityColumn();

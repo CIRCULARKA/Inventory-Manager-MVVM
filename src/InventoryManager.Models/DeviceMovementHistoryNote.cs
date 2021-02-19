@@ -2,7 +2,7 @@ using System;
 
 namespace InventoryManager.Models
 {
-	public class DeviceMovementHistory
+	public class DeviceMovementHistoryNote
 	{
 		public int ID { get; set; }
 

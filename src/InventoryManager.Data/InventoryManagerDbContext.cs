@@ -24,7 +24,7 @@ namespace InventoryManager.Data
 
 		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
-		public DbSet<DeviceMovementHistory> DeviceMovementHistory { get; set; }
+		public DbSet<DeviceMovementHistoryNote> DeviceMovementHistory { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -42,7 +42,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Housing>(new HousingModelConfiguration());
 			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
 			builder.ApplyConfiguration<DeviceAccount>(new DeviceAccountModelConfiguration());
-			builder.ApplyConfiguration<DeviceMovementHistory>(new DeviceMovementHistoryConfiguration());
+			builder.ApplyConfiguration<DeviceMovementHistoryNote>(new DeviceMovementHistoryNoteConfiguration());
 		}
 	}
 }
