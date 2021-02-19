@@ -2,13 +2,16 @@ using System.Collections.Generic;
 
 namespace InventoryManager.Models
 {
-	public interface IDeviceAccountRepository
+	public interface IDeviceAccountRepository : IRepository
 	{
-		void AddDeviceAccount(DeviceAccount newAcc);
+		void AddDeviceAccount(DeviceAccount newAcc) =>
+			DataContext.DeviceAccounts.Add(newAcc);
 
-		void RemoveDeviceAccount(DeviceAccount accToRemove);
+		void RemoveDeviceAccount(DeviceAccount accToRemove) =>
+			DataContext.DeviceAccounts.Remove(accToRemove);
 
-		void UpdateDeviceAccount(DeviceAccount accToUpdate);
+		void UpdateDeviceAccount(DeviceAccount accToUpdate) =>
+			DataContext.DeviceAccounts.Update(accToUpdate);
 
 		IEnumerable<DeviceAccount> AllDeviceAccounts { get; }
 	}

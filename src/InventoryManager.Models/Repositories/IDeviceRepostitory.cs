@@ -1,15 +1,26 @@
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace InventoryManager.Models
 {
-	public interface IDeviceRepostiroy
+	public interface IDeviceRepository : IRepository
 	{
-		void AddDevice(Device newDevice);
+		void AddDevice(Device newDevice) =>
+			DataContext.Devices.Add(newDevice);
 
-		void RemoveDevice(Device deviceToDelete);
+		void RemoveDevice(Device deviceToDelete) =>
+			DataContext.Devices.Remove(deviceToDelete);
 
-		void UpdateDevice(Device deviceToUpdate);
+		void UpdateDevice(Device deviceToUpdate) =>
+			DataContext.Devices.Update(deviceToUpdate);
 
-		IEnumerable<Device> AllDevices { get; }
+		IEnumerable<Device> AllDevices =>
+			DataContext.
+			Devices.
+			Include(d => d.Cabinet).
+				ThenInclude(c => c.Housing).
+			Include(d => d.DeviceType).
+			ToList();
 	}
 }

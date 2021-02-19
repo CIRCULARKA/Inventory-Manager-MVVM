@@ -3,7 +3,7 @@ using InventoryManager.Models;
 
 namespace InventoryManager.Data
 {
-	interface IDbContext
+	public interface IDbContext
 	{
 		DbSet<UserGroup> UserGroups { get; set; }
 
@@ -22,5 +22,7 @@ namespace InventoryManager.Data
 		DbSet<Cabinet> Cabinets { get; set; }
 
 		DbSet<DeviceAccount> DeviceAccounts { get; set; }
+
+		DbSet<DeviceMovementHistoryNote> DeviceMovementHistory { get; set; }
 	}
 }
