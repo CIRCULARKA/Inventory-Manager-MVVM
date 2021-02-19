@@ -3,6 +3,6 @@ using System.Linq;
 
 namespace InventoryManager.Models
 {
-	public interface IUserRelateRepository
+	public interface IUserRelatedRepository
 		: IUserRepository, IUserGroupRepository { }
 }
