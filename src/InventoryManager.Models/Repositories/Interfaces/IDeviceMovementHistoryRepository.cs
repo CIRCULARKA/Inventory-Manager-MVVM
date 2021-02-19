@@ -7,7 +7,7 @@ namespace InventoryManager.Models
 		void FixDeviceMovement(DeviceMovementHistoryNote newNote) =>
 			DataContext.DeviceMovementHistory.Add(newNote);
 
-		void RemoveMovementNote(DeviceMovementHistoryNote noteToRemove) =>
+		void RemoveDeviceMovementNote(DeviceMovementHistoryNote noteToRemove) =>
 			DataContext.DeviceMovementHistory.Remove(noteToRemove);
 
 		void UpdateMovementNote(DeviceMovementHistoryNote noteToUpdate) =>
