@@ -231,7 +231,7 @@ namespace InventoryManager.ViewModels
 					{
 						Devices.Update(SelectedDevice);
 
-						var newRecord = new DeviceMovementHistory()
+						var newRecord = new DeviceMovementHistoryNote()
 						{
 							DeviceID = SelectedDevice.ID,
 							TargetCabinetID = SelectedDevice.Cabinet.ID,
@@ -284,8 +284,8 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public List<DeviceMovementHistory> SelectedDeviceMovementHistory =>
-			Devices.GetAllDeviceHistoryNotes(SelectedDevice) as List<DeviceMovementHistory>;
+		public List<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNote =>
+			Devices.GetAllDeviceHistoryNotes(SelectedDevice) as List<DeviceMovementHistoryNote>;
 
 		public List<DeviceType> AllDeviceTypes =>
 			Devices.AllDeviceTypes as List<DeviceType>;
