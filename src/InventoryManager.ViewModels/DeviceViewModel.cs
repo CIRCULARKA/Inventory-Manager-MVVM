@@ -97,7 +97,7 @@ namespace InventoryManager.ViewModels
 						InputtedNetworkName = "";
 						MessageToUser = "Устройство добавлено";
 					}
-					catch (System.Exception e)
+					catch (Exception e)
 					{
 						MessageToUser = e.Message;
 						Devices.Remove(newDevice);
@@ -153,7 +153,7 @@ namespace InventoryManager.ViewModels
 
 						MessageToUser = "Учётная запись успешно добавлена";
 					}
-					catch (System.Exception)
+					catch (Exception)
 					{
 						MessageToUser = "Учётная запись с таким логином уже существует";
 						Devices.RemoveDeviceAccount(newAcc);
@@ -202,7 +202,7 @@ namespace InventoryManager.ViewModels
 						InputtedIPAddress = "";
 						MessageToUser = "Адрес успешно добавлен";
 					}
-					catch (System.Exception e)
+					catch (Exception)
 					{
 						MessageToUser = "Такой адрес уже используется";
 						Devices.RemoveIPAddress(newIP);
@@ -253,7 +253,7 @@ namespace InventoryManager.ViewModels
 
 						Devices.SaveChanges();
 					}
-					catch (System.Exception e)
+					catch (Exception e)
 					{
 						MessageToUser = e.Message;
 					}
