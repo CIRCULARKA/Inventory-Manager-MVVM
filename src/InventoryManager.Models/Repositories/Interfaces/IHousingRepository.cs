@@ -14,7 +14,7 @@ namespace InventoryManager.Models
 		void UpdateHousing(Housing housingToUpdate) =>
 			DataContext.Housings.Update(housingToUpdate);
 
-		IEnumerable<Housing> AllHousing =>
+		IEnumerable<Housing> AllHousings =>
 			DataContext.Housings.ToList();
 	}
 }
