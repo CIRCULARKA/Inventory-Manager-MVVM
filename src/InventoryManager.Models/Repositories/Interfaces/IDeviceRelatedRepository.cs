@@ -1,7 +1,5 @@
 namespace InventoryManager.Models
 {
 	public interface IDeviceRelatedRepository
-		: IDeviceRepository, IDeviceAccountRepository, IIPAddressRepository, IDeviceTypeRepository
-	{
-	}
+		: IDeviceRepository, IDeviceAccountRepository, IIPAddressRepository, IDeviceTypeRepository { }
 }
