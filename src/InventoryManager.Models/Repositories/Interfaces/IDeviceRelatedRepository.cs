@@ -5,7 +5,7 @@ namespace InventoryManager.Models
 	public interface IDeviceRelatedRepository
 		: IDeviceRepository, IDeviceAccountRepository, IIPAddressRepository, IDeviceTypeRepository
 	{
-		IQueryable<DeviceAccount> AllDeviceAccounts(Device device) =>
+		IQueryable<DeviceAccount> GetAllDeviceAccounts(Device device) =>
 			DataContext.DeviceAccounts.Where(a => a.DeviceID == device.ID);
 	}
 }
