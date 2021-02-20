@@ -12,7 +12,7 @@ namespace InventoryManager.Models
 		IQueryable<DeviceAccount> GetAllDeviceAccounts(Device device) =>
 			DataContext.DeviceAccounts.Where(a => a.DeviceID == device.ID);
 
-		IEnumerable<DeviceMovementHistoryNote> GetAllDeviceHistoryNotes(Device device) =>
+		IQueryable<DeviceMovementHistoryNote> GetAllDeviceHistoryNotes(Device device) =>
 			DataContext.
 			DeviceMovementHistoryNotes.
 			Include(h => h.TargetCabinet).
