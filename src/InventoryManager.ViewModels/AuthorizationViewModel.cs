@@ -14,9 +14,9 @@ namespace InventoryManager.ViewModels
 			LoginCommand = new ButtonCommand(
 				(obj) =>
 				{
-					var findedUser = Repository.FindUser(InputtedLogin);
+					AuthorizedUser = Repository.FindUser(InputtedLogin);
 
-					if (IsUserPasswordCorrect(findedUser))
+					if (IsUserPasswordCorrect())
 					{
 						var mainView = new MainView();
 						mainView.Show();
@@ -26,6 +26,8 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
+
+		public User AuthorizedUser { get; set; }
 
 		private IUserRelatedRepository Repository { get; }
 
@@ -37,7 +39,7 @@ namespace InventoryManager.ViewModels
 
 		public string InputtedPassword { get; set; }
 
-		public bool IsUserPasswordCorrect(User user) =>
-			user == null ? false : user.Password == InputtedPassword;
+		public bool IsUserPasswordCorrect() =>
+			AuthorizedUser == null ? false : AuthorizedUser.Password == InputtedPassword;
 	}
 }
