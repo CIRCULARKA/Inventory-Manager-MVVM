@@ -92,7 +92,19 @@ namespace InventoryManager.ViewModels
 						Repository.AddDevice(newDevice);
 						Repository.SaveChanges();
 
-						// Add DeviceType and Cabinet object explicitly in order to avoid db future exceptions
+						// Device should be counted as added to storage when added
+						var addedDeviceNote = new DeviceMovementHistoryNote
+						{
+							// N/A cabinet in N/A housing
+							TargetCabinetID = -4,
+							DeviceID = newDevice.ID,
+							Reason = "Доставлено на склад",
+							Date = DateTime.Now
+						};
+						Repository.FixDeviceMovement(addedDeviceNote);
+						Repository.SaveChanges();
+
+						// Add DeviceType and Cabinet object explicitly to show em in ListBox
 						newDevice.DeviceType = SelectedDeviceType;
 						newDevice.Cabinet = Repository.FindCabinet(newDevice.CabinetID);
 						newDevice.Cabinet.Housing = _allHousings.Find(h => h.ID == newDevice.Cabinet.HousingID);
@@ -120,6 +132,10 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					Repository.RemoveDevice(SelectedDevice);
+
+					// Delete also all device movement history
+					Repository.DeleteAllDeviceMovementHistory(SelectedDevice);
+
 					Repository.SaveChanges();
 					AllDevices.Remove(SelectedDevice);
 				},
