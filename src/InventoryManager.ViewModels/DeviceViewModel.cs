@@ -21,6 +21,8 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedDevicePassword;
 
+		private bool _isDeviceLocationChoosingAvailable;
+
 		private Device _selectedDevice;
 
 		private Housing _selectedHousing;
@@ -260,7 +262,8 @@ namespace InventoryManager.ViewModels
 					{
 						MessageToUser = e.Message;
 					}
-				}
+				},
+				(obj) => SelectedDevice != null
 			);
 		}
 
@@ -316,6 +319,9 @@ namespace InventoryManager.ViewModels
 
 				if (SelectedDevice != null)
 				{
+					// Enabling possibility to chose device location
+					IsDeviceLocationChoosingAvailable = true;
+
 					// Getting all device's accounts
 					SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(SelectedDevice).
 						ToObservableCollection();
@@ -333,6 +339,7 @@ namespace InventoryManager.ViewModels
 					SelectedDeviceIPAddresses = null;
 					SelectedHousing = null;
 					SelectedCabinet = null;
+					IsDeviceLocationChoosingAvailable = false;
 				}
 
 				OnPropertyChanged("SelectedDevice");
@@ -368,6 +375,16 @@ namespace InventoryManager.ViewModels
 			{
 				_selectedCabinet = value;
 				OnPropertyChanged("SelectedCabinet");
+			}
+		}
+
+		public bool IsDeviceLocationChoosingAvailable
+		{
+			get => _isDeviceLocationChoosingAvailable;
+			set
+			{
+				_isDeviceLocationChoosingAvailable = value;
+				OnPropertyChanged(nameof(IsDeviceLocationChoosingAvailable));
 			}
 		}
 
