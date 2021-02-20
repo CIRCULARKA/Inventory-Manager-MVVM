@@ -21,5 +21,16 @@ namespace InventoryManager.Models
 
 		IQueryable<IPAddress> GetAllDeviceIPAddresses(Device device) =>
 			DataContext.IPAddresses.Where(ip => ip.DeviceID == device.ID);
+
+		void DeleteAllDeviceMovementHistory(Device device)
+		{
+			DataContext.
+			DeviceMovementHistoryNotes.
+			RemoveRange(
+				DataContext.
+				DeviceMovementHistoryNotes.
+				Where(n => n.DeviceID == device.ID)
+			);
+		}
 	}
 }
