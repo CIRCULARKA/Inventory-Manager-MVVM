@@ -45,8 +45,8 @@ namespace InventoryManager.ViewModels
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
-			_allHousings = Repository.AllHousings as List<Housing>;
-			_allCabinets = Repository.AllCabinets as List<Cabinet>;
+			_allHousings = Repository.AllHousings.ToList();
+			_allCabinets = Repository.AllCabinets.ToList();
 			_allDevices = Repository.AllDevices.ToObservableCollection();
 
 			foreach (var device in _allDevices)
@@ -289,11 +289,11 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public List<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNote =>
-			Repository.GetAllDeviceHistoryNotes(SelectedDevice) as List<DeviceMovementHistoryNote>;
+		public List<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes =>
+			Repository.GetAllDeviceHistoryNotes(SelectedDevice).ToList();
 
 		public List<DeviceType> AllDeviceTypes =>
-			Repository.AllDeviceTypes as List<DeviceType>;
+			Repository.AllDeviceTypes.ToList();
 
 		public List<Housing> AllHousings => _allHousings;
 
