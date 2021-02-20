@@ -16,7 +16,8 @@ namespace InventoryManager.Models
 			DataContext.
 			DeviceMovementHistoryNotes.
 			Include(h => h.TargetCabinet).
-			Where(dmn => dmn.DeviceID == device.ID);
+			Where(dmn => dmn.DeviceID == device.ID).
+			OrderByDescending(dmn => dmn.ID);
 
 		IQueryable<IPAddress> GetAllDeviceIPAddresses(Device device) =>
 			DataContext.IPAddresses.Where(ip => ip.DeviceID == device.ID);
