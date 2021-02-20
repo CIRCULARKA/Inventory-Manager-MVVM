@@ -5,7 +5,7 @@
 		ResizeMode="NoResize"
 		SizeToContent="WidthAndHeight">
     <StackPanel>
-		<ListView Height="300" ItemsSource="{Binding SelectedDeviceMovementHistoryNote}"
+		<ListView Height="300" ItemsSource="{Binding SelectedDeviceMovementHistoryNotes}"
 			SelectionMode="Single">
 			<ListView.View>
 				<GridView>
