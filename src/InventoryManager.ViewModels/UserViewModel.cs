@@ -3,6 +3,7 @@ using InventoryManager.Models;
 using InventoryManager.Extensions;
 using InventoryManager.Views;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
@@ -18,9 +19,12 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedMiddleName;
 
+		private ObservableCollection<User> _allUsersToShow;
+
 		public UserViewModel(IUserRelatedRepository repo)
 		{
 			Repository = repo;
+			_allUsersToShow = Repository.AllUsers.ToObservableCollection();
 
 			AddUserCommand = new ButtonCommand(
 				(obj) =>
@@ -89,7 +93,7 @@ namespace InventoryManager.ViewModels
 		private IUserRelatedRepository Repository { get; }
 
 		public ObservableCollection<User> UsersToShow =>
-			Repository.AllUsers.ToObservableCollection();
+			_allUsersToShow;
 
 		public ObservableCollection<UserGroup> UserGroupsToShow =>
 			Repository.AllUserGroups.ToObservableCollection();
