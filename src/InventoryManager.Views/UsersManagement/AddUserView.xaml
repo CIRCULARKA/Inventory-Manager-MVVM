@@ -35,13 +35,7 @@
 		<TextBlock Text="Пароль" />
 		<TextBox Text="{Binding InputtedPassword, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Группа" />
-		<ComboBox ItemsSource="{Binding UserGroups}" SelectedItem="{Binding SelectedUserGroup}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+		<ComboBox ItemsSource="{Binding UserGroupsToShow}" SelectedItem="{Binding SelectedUserGroup}" DisplayMemberPath="Name" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddUserCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
