@@ -4,6 +4,7 @@ using InventoryManager.Commands;
 using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Extensions;
+using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
@@ -74,6 +75,9 @@ namespace InventoryManager.ViewModels
 		}
 
 		public ObservableCollection<Certificate> CertificatesToShow => _allCertificates;
+
+		public IEnumerable<Certificate> AllCertificates =>
+			Repository.AllCertificates;
 
 		public Certificate SelectedCertificate { get; set; }
 
