@@ -3,6 +3,7 @@ using Moq;
 using InventoryManager.Models;
 using InventoryManager.ViewModels;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace InventoryManager.Tests
@@ -36,5 +37,23 @@ namespace InventoryManager.Tests
 			Assert.Equal(_seedCertificates, listToShow);
 		}
 
+		[Fact]
+		public void IsAddedCertificateShowsToUser()
+		{
+			// Arrange
+			var moq = new Mock<ICertificateRelatedRepository>();
+			_seedCertificates = BuildSeedCertificates();
+			moq.Setup(c => c.AllCertificates).Returns(_seedCertificates);
+
+			var vm1 = new CertificateViewModel(moq.Object);
+			var newCertificate = new Certificate { ID = 10, Subject = "Amazon" };
+			vm1.InputtedSubject = newCertificate.Subject;
+
+			// Act
+			vm1.AddCertificateCommand.Execute(null);
+
+			// Assert
+			Assert.NotEmpty(vm1.CertificatesToShow.Where(c => c.Subject == newCertificate.Subject));
+		}
 	}
 }
