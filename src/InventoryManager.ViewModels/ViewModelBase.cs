@@ -20,7 +20,7 @@ namespace InventoryManager.ViewModels
 
 		protected ButtonCommand RegisterCommandAction(
 			Action<object> action,
-			Func<object, bool> conditionOfWork
+			Func<object, bool> conditionOfWork = null
 		) => new ButtonCommand(action, conditionOfWork);
 	}
 }
