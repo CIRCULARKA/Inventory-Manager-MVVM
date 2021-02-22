@@ -8,65 +8,12 @@ namespace InventoryManager.ViewModels
 {
 	public class UserViewModel : ViewModelBase
 	{
-		private string _inputtedLogin;
-
-		private string _inputtedPassword;
-
-		private string _inputtedFirstName;
-
-		private string _inputtedLastName;
-
-		private string _inputtedMiddleName;
-
 		private ObservableCollection<User> _allUsersToShow;
 
 		public UserViewModel(IUserRelatedRepository repo)
 		{
 			Repository = repo;
 			_allUsersToShow = Repository.AllUsers.ToObservableCollection();
-
-			AddUserCommand = new ButtonCommand(
-				(obj) =>
-				{
-					var newUser = new User
-					{
-						LastName = InputtedLastName,
-						FirstName = InputtedFirstName,
-						MiddleName = InputtedMiddleName,
-						Login = InputtedLogin,
-						Password = InputtedPassword,
-						UserGroupID = SelectedUserGroup.ID
-					};
-
-					try
-					{
-						Repository.AddUser(newUser);
-						Repository.SaveChanges();
-
-						// Load user group explicitly to display user group in users list
-						newUser.UserGroup = SelectedUserGroup;
-						UsersToShow.Add(newUser);
-
-						MessageToUser = "Пользователь добавлен";
-
-						InputtedFirstName = "";
-						InputtedLastName = "";
-						InputtedMiddleName = "";
-						InputtedLogin = "";
-						InputtedPassword = "";
-					}
-					catch (System.Exception)
-					{
-						MessageToUser = "Вы не ввели все данные, либо пользователь уже существует";
-					}
-				},
-				(obj) => !(string.IsNullOrWhiteSpace(InputtedLogin) ||
-					string.IsNullOrWhiteSpace(InputtedPassword) ||
-					string.IsNullOrWhiteSpace(InputtedFirstName) ||
-					string.IsNullOrWhiteSpace(InputtedLastName) ||
-					string.IsNullOrWhiteSpace(InputtedMiddleName) ||
-					string.IsNullOrWhiteSpace(InputtedPassword)) && SelectedUserGroup != null
-			);
 
 			RemoveUserCommand = new ButtonCommand(
 				(obj) =>
@@ -83,7 +30,9 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					var addUserDialog = new AddUserView();
-					addUserDialog.DataContext = this;
+					addUserDialog.DataContext = new AddUserViewModel(Repository);
+					(addUserDialog.DataContext as AddUserViewModel).OnUserAdded +=
+						(user) => UsersToShow.Add(user);
 					addUserDialog.ShowDialog();
 				}
 			);
@@ -94,67 +43,12 @@ namespace InventoryManager.ViewModels
 		public ObservableCollection<User> UsersToShow =>
 			_allUsersToShow;
 
-		public ObservableCollection<UserGroup> UserGroupsToShow =>
-			Repository.AllUserGroups.ToObservableCollection();
-
 		public User SelectedUser { get; set; }
 
 		public UserGroup SelectedUserGroup { get; set; }
 
-		public ButtonCommand AddUserCommand { get; }
-
 		public ButtonCommand RemoveUserCommand { get; }
 
 		public ButtonCommand ShowAddUserViewCommand { get; }
-
-		public string InputtedLogin
-		{
-			get => _inputtedLogin;
-			set
-			{
-				_inputtedLogin = value;
-				OnPropertyChanged("InputtedLogin");
-			}
-		}
-
-		public string InputtedPassword
-		{
-			get => _inputtedPassword;
-			set
-			{
-				_inputtedPassword = value;
-				OnPropertyChanged("InputtedPassword");
-			}
-		}
-
-		public string InputtedFirstName
-		{
-			get => _inputtedFirstName;
-			set
-			{
-				_inputtedFirstName = value;
-				OnPropertyChanged("InputtedFirstName");
-			}
-		}
-
-		public string InputtedLastName
-		{
-			get => _inputtedLastName;
-			set
-			{
-				_inputtedLastName = value;
-				OnPropertyChanged("InputtedLastName");
-			}
-		}
-
-		public string InputtedMiddleName
-		{
-			get => _inputtedMiddleName;
-			set
-			{
-				_inputtedMiddleName = value;
-				OnPropertyChanged("InputtedMiddleName");
-			}
-		}
 	}
 }
