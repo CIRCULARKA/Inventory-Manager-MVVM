@@ -16,6 +16,7 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 			AddUserViewModel = addUserVM;
 			AddUserView = addUserView;
+			AddUserView.DataContext = AddUserViewModel;
 
 			SubscribeActionOnUserAddition(
 				(user) => UsersToShow.Add(user)
@@ -35,12 +36,7 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddUserViewCommand = new ButtonCommand(
-				(obj) =>
-				{
-					var addUserDialog = new AddUserView();
-					addUserDialog.DataContext = AddUserViewModel;
-					addUserDialog.ShowDialog();
-				}
+				(obj) => AddUserView.ShowDialog()
 			);
 		}
 
