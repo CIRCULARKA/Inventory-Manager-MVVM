@@ -11,7 +11,7 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 			AuthorizationView = view;
 
-			LoginCommand = new ButtonCommand(
+			LoginCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					AuthorizingUser = Repository.FindUser(InputtedLogin);
