@@ -3,7 +3,6 @@ using InventoryManager.Models;
 using InventoryManager.Extensions;
 using InventoryManager.Views;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
