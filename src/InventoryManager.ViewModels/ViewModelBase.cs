@@ -1,4 +1,6 @@
 using InventoryManager.Models;
+using InventoryManager.Commands;
+using System;
 
 namespace InventoryManager.ViewModels
 {
@@ -15,5 +17,10 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("MessageToUser");
 			}
 		}
+
+		protected ButtonCommand RegisterCommandAction(
+			Action<object> action,
+			Func<object, bool> conditionOfWork
+		) => new ButtonCommand(action, conditionOfWork);
 	}
 }
