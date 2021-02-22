@@ -10,9 +10,10 @@ namespace InventoryManager.ViewModels
 	{
 		private ObservableCollection<User> _allUsersToShow;
 
-		public UserViewModel(IUserRelatedRepository repo)
+		public UserViewModel(IUserRelatedRepository repo, ViewModelBase addUserVM)
 		{
 			Repository = repo;
+			AddUserViewModel = addUserVM;
 			_allUsersToShow = Repository.AllUsers.ToObservableCollection();
 
 			RemoveUserCommand = new ButtonCommand(
@@ -50,5 +51,7 @@ namespace InventoryManager.ViewModels
 		public ButtonCommand RemoveUserCommand { get; }
 
 		public ButtonCommand ShowAddUserViewCommand { get; }
+
+		public ViewModelBase AddUserViewModel { get; set; }
 	}
 }
