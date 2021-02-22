@@ -31,7 +31,7 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					var addUserDialog = new AddUserView();
-					addUserDialog.DataContext = new AddUserViewModel(Repository);
+					addUserDialog.DataContext = AddUserViewModel;
 					(addUserDialog.DataContext as AddUserViewModel).OnUserAdded +=
 						(user) => UsersToShow.Add(user);
 					addUserDialog.ShowDialog();
