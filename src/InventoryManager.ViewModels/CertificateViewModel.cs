@@ -19,7 +19,7 @@ namespace InventoryManager.ViewModels
 
 			_allCertificates = Repository.AllCertificates.ToObservableCollection();
 
-			ShowAddCertificateViewCommand = new ButtonCommand(
+			ShowAddCertificateViewCommand = RegisterCommandAction(
 				(o) =>
 				{
 					var addCertificateView = new AddCertificateView();
@@ -28,7 +28,7 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			AddCertificateCommand = new ButtonCommand(
+			AddCertificateCommand = RegisterCommandAction(
 				(o) =>
 				{
 					var newCertificate = new Certificate
@@ -50,7 +50,7 @@ namespace InventoryManager.ViewModels
 				(o) => !string.IsNullOrWhiteSpace(InputtedSubject)
 			);
 
-			RemoveCertificateCommand = new ButtonCommand(
+			RemoveCertificateCommand = RegisterCommandAction(
 				(o) =>
 				{
 					Repository.RemoveCertificate(SelectedCertificate);

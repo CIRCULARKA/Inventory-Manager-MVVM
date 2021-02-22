@@ -22,7 +22,7 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
-			AddUserCommand = new ButtonCommand(
+			AddUserCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var newUser = new User

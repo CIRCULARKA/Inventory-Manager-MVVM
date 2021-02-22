@@ -24,7 +24,7 @@ namespace InventoryManager.ViewModels
 
 			_allUsersToShow = Repository.AllUsers.ToObservableCollection();
 
-			RemoveUserCommand = new ButtonCommand(
+			RemoveUserCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var userToRemove = Repository.FindUser(SelectedUser.Login);
@@ -35,7 +35,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedUser != null
 			);
 
-			ShowAddUserViewCommand = new ButtonCommand(
+			ShowAddUserViewCommand = RegisterCommandAction(
 				(obj) => AddUserView.ShowDialog()
 			);
 		}

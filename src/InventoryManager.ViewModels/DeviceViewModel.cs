@@ -57,7 +57,7 @@ namespace InventoryManager.ViewModels
 				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 			}
 
-			ShowDeviceMovementHistoryCommand = new ButtonCommand(
+			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var deviceHistoryView = new DeviceMovementHistoryView();
@@ -68,7 +68,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			OpenAddDeviceViewCommand = new ButtonCommand(
+			OpenAddDeviceViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var addDeviceWindow = new AddDeviceView();
@@ -77,7 +77,7 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			AddDeviceCommand = new ButtonCommand(
+			AddDeviceCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var newDevice = new Device
@@ -128,7 +128,7 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			RemoveDeviceCommand = new ButtonCommand(
+			RemoveDeviceCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					Repository.RemoveDevice(SelectedDevice);
@@ -142,7 +142,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			ShowAddDeviceAccountViewCommand = new ButtonCommand(
+			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var addAccountView = new AddDeviceAccountView();
@@ -152,7 +152,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType.Name != "Коммутатор"
 			);
 
-			AddDeviceAccountCommand = new ButtonCommand(
+			AddDeviceAccountCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var newAcc = new DeviceAccount
@@ -184,7 +184,7 @@ namespace InventoryManager.ViewModels
 					string.IsNullOrWhiteSpace(InputtedDeviceAccountPassword))
 			);
 
-			RemoveDeviceAccountCommand = new ButtonCommand(
+			RemoveDeviceAccountCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					Repository.RemoveDeviceAccount(SelectedDeviceAccount);
@@ -195,7 +195,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDeviceAccount != null
 			);
 
-			ShowAddIPViewCommand = new ButtonCommand(
+			ShowAddIPViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var addIpView = new AddIPAddressView();
@@ -205,7 +205,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			AddDeviceIPCommand = new ButtonCommand(
+			AddDeviceIPCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					var newIP = new IPAddress
@@ -231,7 +231,7 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			RemoveDeviceIPCommand = new ButtonCommand(
+			RemoveDeviceIPCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					Repository.RemoveIPAddress(SelectedDeviceIP);
@@ -242,7 +242,7 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDeviceIP != null
 			);
 
-			ApplyDeviceLocationChangesCommand = new ButtonCommand(
+			ApplyDeviceLocationChangesCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					SelectedDevice.Cabinet = SelectedCabinet;
