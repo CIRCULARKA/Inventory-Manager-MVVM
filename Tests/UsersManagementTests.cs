@@ -40,7 +40,7 @@ namespace InventoryManager.Tests
 			var testUsers = BuildTestUsers();
 			mock.Setup(r => r.AllUsers).Returns(testUsers);
 
-			var vm1 = new UserViewModel(mock.Object);
+			var vm1 = new UserViewModel(mock.Object, null, null);
 
 			// Act
 			var result = vm1.UsersToShow;
@@ -55,24 +55,21 @@ namespace InventoryManager.Tests
 			// Arrange
 			var mock = new Mock<IUserRelatedRepository>();
 
-			var vm1 = new UserViewModel(mock.Object);
+			var addUserVM = new AddUserViewModel(mock.Object);
+			var mainUserVM = new UserViewModel(mock.Object, addUserVM, null);
 			var userToAdd = new User
 			{
-				Login = "testAddedUserLogin",
-				Password = "testAddedUserPassword",
-				FirstName = "testAddedFirstName",
-				LastName = "testAddedLastName",
-				MiddleName = "testAddedMiddleName",
+				Login = "testAddedUserLogin"
 			};
 
-			vm1.InputtedLogin = userToAdd.Login;
-			vm1.SelectedUserGroup = new UserGroup { ID = 1 };
+			addUserVM.InputtedLogin = userToAdd.Login;
+			addUserVM.SelectedUserGroup = new UserGroup { ID = 1 };
 
 			// Act
-			vm1.AddUserCommand.Execute(null);
+			addUserVM.AddUserCommand.Execute(null);
 
 			// Assert
-			Assert.NotEmpty(vm1.UsersToShow.Where(u => u.Login == userToAdd.Login));
+			Assert.NotEmpty(mainUserVM.UsersToShow.Where(u => u.Login == userToAdd.Login));
 		}
 
 		[Fact]
@@ -82,7 +79,7 @@ namespace InventoryManager.Tests
 			var mock = new Mock<IUserRelatedRepository>();
 			mock.Setup(r => r.AllUsers).Returns(BuildTestUsers());
 
-			var vm1 = new UserViewModel(mock.Object);
+			var vm1 = new UserViewModel(mock.Object, null, null);
 
 			var userLoginToRemove = "user1";
 
