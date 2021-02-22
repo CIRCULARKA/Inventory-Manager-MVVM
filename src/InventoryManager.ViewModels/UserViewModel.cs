@@ -10,10 +10,16 @@ namespace InventoryManager.ViewModels
 	{
 		private ObservableCollection<User> _allUsersToShow;
 
-		public UserViewModel(IUserRelatedRepository repo, ViewModelBase addUserVM)
+		public UserViewModel(IUserRelatedRepository repo, ViewModelBase addUserVM, ViewBase addUserView)
 		{
 			Repository = repo;
+
 			AddUserViewModel = addUserVM;
+			(AddUserViewModel as AddUserViewModel).OnUserAdded +=
+				(user) => UsersToShow.Add(user);
+
+			AddUserView = addUserView;
+
 			_allUsersToShow = Repository.AllUsers.ToObservableCollection();
 
 			RemoveUserCommand = new ButtonCommand(
@@ -32,8 +38,6 @@ namespace InventoryManager.ViewModels
 				{
 					var addUserDialog = new AddUserView();
 					addUserDialog.DataContext = AddUserViewModel;
-					(addUserDialog.DataContext as AddUserViewModel).OnUserAdded +=
-						(user) => UsersToShow.Add(user);
 					addUserDialog.ShowDialog();
 				}
 			);
@@ -52,6 +56,8 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand ShowAddUserViewCommand { get; }
 
-		public ViewModelBase AddUserViewModel { get; set; }
+		public ViewBase AddUserView { get; }
+
+		public ViewModelBase AddUserViewModel { get; }
 	}
 }
