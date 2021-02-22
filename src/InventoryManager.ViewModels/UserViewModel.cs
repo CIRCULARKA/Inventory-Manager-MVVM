@@ -3,6 +3,7 @@ using InventoryManager.Models;
 using InventoryManager.Extensions;
 using InventoryManager.Views;
 using System.Collections.ObjectModel;
+using System;
 
 namespace InventoryManager.ViewModels
 {
@@ -13,12 +14,12 @@ namespace InventoryManager.ViewModels
 		public UserViewModel(IUserRelatedRepository repo, ViewModelBase addUserVM, ViewBase addUserView)
 		{
 			Repository = repo;
-
 			AddUserViewModel = addUserVM;
-			(AddUserViewModel as AddUserViewModel).OnUserAdded +=
-				(user) => UsersToShow.Add(user);
-
 			AddUserView = addUserView;
+
+			SubscribeActionOnUserAddition(
+				(user) => UsersToShow.Add(user)
+			);
 
 			_allUsersToShow = Repository.AllUsers.ToObservableCollection();
 
@@ -59,5 +60,11 @@ namespace InventoryManager.ViewModels
 		public ViewBase AddUserView { get; }
 
 		public ViewModelBase AddUserViewModel { get; }
+
+		private void SubscribeActionOnUserAddition(Action<User> action)
+		{
+			if (AddUserViewModel != null)
+				(AddUserViewModel as AddUserViewModel).OnUserAdded += action;
+		}
 	}
 }
