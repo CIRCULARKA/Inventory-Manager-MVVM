@@ -12,12 +12,6 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkName;
 
-		private string _inputtedIPAddress;
-
-		private string _inputtedDeviceAccountName;
-
-		private string _inputtedDevicePassword;
-
 		public AddDeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -100,6 +94,5 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("InputtedNetworkName");
 			}
 		}
-
 	}
 }
