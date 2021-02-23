@@ -4,13 +4,13 @@ using InventoryManager.Commands;
 
 namespace InventoryManager.ViewModels
 {
-	public class AddDeviceAccountViewModel : ViewModelBase
+	public class DeviceAccountViewModel : ViewModelBase
 	{
 		private string _inputtedDeviceAccountName;
 
 		private string _inputtedDevicePassword;
 
-		public AddDeviceAccountViewModel(IDeviceRelatedRepository repo)
+		public DeviceAccountViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
 

@@ -37,7 +37,7 @@ namespace InventoryManager.ViewModels
 
 			AddDeviceViewModel = new AddDeviceViewModel(Repository);
 			AddIPAddressViewModel = new AddIPAddressViewModel(new DefaultIPAddressRepository());
-			AddDeviceAccountViewModel = new AddDeviceAccountViewModel(Repository);
+			DeviceAccountViewModel = new DeviceAccountViewModel(Repository);
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
@@ -103,8 +103,8 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					AddDeviceAccountView = new AddDeviceAccountView();
-					AddDeviceAccountView.DataContext = AddDeviceAccountViewModel;
-					AddDeviceAccountViewModel.TargetDevice = SelectedDevice;
+					AddDeviceAccountView.DataContext = DeviceAccountViewModel;
+					DeviceAccountViewModel.TargetDevice = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType?.Name != "Коммутатор"
@@ -113,7 +113,7 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceAccountCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AddDeviceAccountViewModel.RemoveAccountFromDevice(SelectedDeviceAccount);
+					DeviceAccountViewModel.RemoveAccountFromDevice(SelectedDeviceAccount);
 					SelectedDeviceAccounts.Remove(SelectedDeviceAccount);
 				},
 				(obj) => SelectedDeviceAccount != null
@@ -197,7 +197,7 @@ namespace InventoryManager.ViewModels
 
 		public AddDeviceAccountView AddDeviceAccountView { get; set; }
 
-		public AddDeviceAccountViewModel AddDeviceAccountViewModel { get; }
+		public DeviceAccountViewModel DeviceAccountViewModel { get; }
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -339,7 +339,7 @@ namespace InventoryManager.ViewModels
 			AddIPAddressViewModel.OnIPAdded += action;
 
 		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
-			AddDeviceAccountViewModel.OnDeviceAccountAdded += action;
+			DeviceAccountViewModel.OnDeviceAccountAdded += action;
 
 		private void InitDevicesLocationWithInstances()
 		{
