@@ -59,5 +59,11 @@ namespace InventoryManager.ViewModels
 				Repository.RemoveIPAddress(newIP);
 			}
 		}
+
+		public void RemoveIPAddress(IPAddress ip)
+		{
+			Repository.RemoveIPAddress(ip);
+			Repository.SaveChanges();
+		}
 	}
 }
