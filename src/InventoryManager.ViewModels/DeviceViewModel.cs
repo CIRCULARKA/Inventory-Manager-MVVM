@@ -58,7 +58,7 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnDeviceAddition(
 				(device) =>
 				{
-					device.DeviceType = SelectedDeviceType;
+					device.DeviceType = Repository.AllDeviceTypes.Single(dt => dt.ID == device.DeviceTypeID);
 					device.Cabinet = Repository.FindCabinet(device.CabinetID);
 					device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 					DevicesToShow.Add(device);
@@ -111,7 +111,7 @@ namespace InventoryManager.ViewModels
 					AddDeviceAccountViewModel.DeviceToAddAccountTo = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
 				},
-				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType.Name != "Коммутатор"
+				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType?.Name != "Коммутатор"
 			);
 
 			RemoveDeviceAccountCommand = RegisterCommandAction(
