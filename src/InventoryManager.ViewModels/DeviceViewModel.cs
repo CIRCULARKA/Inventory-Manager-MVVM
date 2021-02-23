@@ -133,9 +133,7 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceIPCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					Repository.RemoveIPAddress(SelectedDeviceIP);
-					Repository.SaveChanges();
-
+					DeviceIPViewModel.RemoveIPAddress(SelectedDeviceIP);
 					SelectedDeviceIPAddresses.Remove(SelectedDeviceIP);
 				},
 				(obj) => SelectedDeviceIP != null
