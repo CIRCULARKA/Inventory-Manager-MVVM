@@ -11,13 +11,9 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceViewModel : ViewModelBase
 	{
-		private string _inputtedInventoryNumber;
-
-		private string _inputtedNetworkName;
-
 		private string _inputtedIPAddress;
 
-		private string _inputtedDeviceDeviceAccountName;
+		private string _inputtedDeviceAccountName;
 
 		private string _inputtedDevicePassword;
 
@@ -41,9 +37,10 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
-		public DeviceViewModel(IDeviceRelatedRepository repo)
+		public DeviceViewModel(IDeviceRelatedRepository repo, AddDeviceViewModel addDeviceViewModel, AddDeviceView addDeviceView)
 		{
 			Repository = repo;
+			AddDeviceViewModel = addDeviceViewModel;
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
@@ -51,11 +48,18 @@ namespace InventoryManager.ViewModels
 			_allCabinets = Repository.AllCabinets.ToList();
 			_allDevices = Repository.AllDevices.ToObservableCollection();
 
-			foreach (var device in _allDevices)
-			{
-				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
-				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
-			}
+			InitDevicesCabinetsWithInstances();
+
+			SubscribeActionOnDeviceAddition(
+				(device) =>
+				{
+					device.DeviceType = SelectedDeviceType;
+					device.Cabinet = Repository.FindCabinet(device.CabinetID);
+					device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
+					DevicesToShow.Add(device);
+				}
+			);
+
 
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
@@ -77,57 +81,6 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			AddDeviceCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					var newDevice = new Device
-					{
-						InventoryNumber = InputtedInventoryNumber,
-						DeviceTypeID = SelectedDeviceType.ID,
-						NetworkName = InputtedNetworkName,
-					};
-
-					try
-					{
-						Repository.AddDevice(newDevice);
-						Repository.SaveChanges();
-
-						// Device should be counted as added to storage when added
-						var addedDeviceNote = new DeviceMovementHistoryNote
-						{
-							// N/A cabinet in N/A housing
-							TargetCabinetID = -4,
-							DeviceID = newDevice.ID,
-							Reason = "Доставлено на склад",
-							Date = DateTime.Now
-						};
-						Repository.FixDeviceMovement(addedDeviceNote);
-						Repository.SaveChanges();
-
-						// Add DeviceType and Cabinet object explicitly to show em in ListBox
-						newDevice.DeviceType = SelectedDeviceType;
-						newDevice.Cabinet = Repository.FindCabinet(newDevice.CabinetID);
-						newDevice.Cabinet.Housing = _allHousings.Find(h => h.ID == newDevice.Cabinet.HousingID);
-						AllDevices.Add(newDevice);
-
-						InputtedInventoryNumber = "";
-						InputtedNetworkName = "";
-						MessageToUser = "Устройство добавлено";
-					}
-					catch (Exception e)
-					{
-						MessageToUser = e.Message;
-						Repository.RemoveDevice(newDevice);
-					}
-				},
-				(obj) =>
-				{
-					return !string.IsNullOrEmpty(InputtedInventoryNumber) &&
-						!string.IsNullOrEmpty(InputtedNetworkName) &&
-						SelectedDeviceType != null;
-				}
-			);
-
 			RemoveDeviceCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -137,7 +90,7 @@ namespace InventoryManager.ViewModels
 					Repository.DeleteAllDeviceMovementHistory(SelectedDevice);
 
 					Repository.SaveChanges();
-					AllDevices.Remove(SelectedDevice);
+					DevicesToShow.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
 			);
@@ -285,8 +238,12 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public ObservableCollection<Device> AllDevices =>
+		public ObservableCollection<Device> DevicesToShow =>
 			_allDevices;
+
+		public AddDeviceView AddDeviceView { get; }
+
+		public AddDeviceViewModel AddDeviceViewModel { get; }
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -310,9 +267,6 @@ namespace InventoryManager.ViewModels
 
 		public List<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes =>
 			Repository.GetAllDeviceHistoryNotes(SelectedDevice).ToList();
-
-		public List<DeviceType> AllDeviceTypes =>
-			Repository.AllDeviceTypes.ToList();
 
 		public List<Housing> AllHousings => _allHousings;
 
@@ -404,60 +358,12 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public DeviceAccount SelectedDeviceAccount { get; set; }
-
-		public IPAddress SelectedDeviceIP { get; set; }
-
-		public DeviceType SelectedDeviceType { get; set; }
-
-		public ButtonCommand ShowDeviceMovementHistoryCommand { get; set; }
-
-		public ButtonCommand AddDeviceCommand { get; }
-
-		public ButtonCommand RemoveDeviceCommand { get; }
-
-		public ButtonCommand OpenAddDeviceViewCommand { get; }
-
-		public ButtonCommand ShowAddDeviceAccountViewCommand { get; }
-
-		public ButtonCommand ShowAddIPViewCommand { get; set; }
-
-		public ButtonCommand AddDeviceIPCommand { get; }
-
-		public ButtonCommand RemoveDeviceIPCommand { get; }
-
-		public ButtonCommand AddDeviceAccountCommand { get; }
-
-		public ButtonCommand RemoveDeviceAccountCommand { get; }
-
-		public ButtonCommand ApplyDeviceLocationChangesCommand { get; }
-
-		public string InputtedInventoryNumber
-		{
-			get => _inputtedInventoryNumber;
-			set
-			{
-				_inputtedInventoryNumber = value;
-				OnPropertyChanged("InputtedInventoryNumber");
-			}
-		}
-
-		public string InputtedNetworkName
-		{
-			get => _inputtedNetworkName;
-			set
-			{
-				_inputtedNetworkName = value;
-				OnPropertyChanged("InputtedNetworkName");
-			}
-		}
-
 		public string InputtedDeviceAccountLogin
 		{
-			get => _inputtedDeviceDeviceAccountName;
+			get => _inputtedDeviceAccountName;
 			set
 			{
-				_inputtedDeviceDeviceAccountName = value;
+				_inputtedDeviceAccountName = value;
 				OnPropertyChanged("InputtedDeviceDeviceAccountName");
 			}
 		}
@@ -479,6 +385,47 @@ namespace InventoryManager.ViewModels
 			{
 				_inputtedIPAddress = value;
 				OnPropertyChanged(nameof(InputtedIPAddress));
+			}
+		}
+
+		public DeviceAccount SelectedDeviceAccount { get; set; }
+
+		public IPAddress SelectedDeviceIP { get; set; }
+
+		public DeviceType SelectedDeviceType { get; set; }
+
+		public ButtonCommand ShowDeviceMovementHistoryCommand { get; set; }
+
+		public ButtonCommand RemoveDeviceCommand { get; }
+
+		public ButtonCommand OpenAddDeviceViewCommand { get; }
+
+		public ButtonCommand ShowAddDeviceAccountViewCommand { get; }
+
+		public ButtonCommand ShowAddIPViewCommand { get; set; }
+
+		public ButtonCommand AddDeviceIPCommand { get; }
+
+		public ButtonCommand RemoveDeviceIPCommand { get; }
+
+		public ButtonCommand AddDeviceAccountCommand { get; }
+
+		public ButtonCommand RemoveDeviceAccountCommand { get; }
+
+		public ButtonCommand ApplyDeviceLocationChangesCommand { get; }
+
+		private void SubscribeActionOnDeviceAddition(Action<Device> action)
+		{
+			if (AddDeviceViewModel != null)
+				AddDeviceViewModel.OnDeviceAdded += action;
+		}
+
+		private void InitDevicesCabinetsWithInstances()
+		{
+			foreach (var device in _allDevices)
+			{
+				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
+				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 			}
 		}
 	}
