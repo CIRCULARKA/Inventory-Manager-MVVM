@@ -11,8 +11,6 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceViewModel : ViewModelBase
 	{
-		private string _inputtedIPAddress;
-
 		private string _inputtedDeviceAccountName;
 
 		private string _inputtedDevicePassword;
@@ -37,10 +35,11 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
-		public DeviceViewModel(IDeviceRelatedRepository repo, AddDeviceViewModel addDeviceViewModel, AddDeviceView addDeviceView)
+		public DeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
-			AddDeviceViewModel = addDeviceViewModel;
+			AddDeviceViewModel = new AddDeviceViewModel(Repository);
+			AddIPAddressViewModel = new AddIPAddressViewModel(new DefaultIPAddressRepository());
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
@@ -60,6 +59,9 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
+			SubscribeActionOnIPAddition(
+				(ipAddress) => SelectedDeviceIPAddresses.Add(ipAddress)
+			);
 
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
@@ -161,26 +163,6 @@ namespace InventoryManager.ViewModels
 			AddDeviceIPCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var newIP = new IPAddress
-					{
-						Address = InputtedIPAddress,
-						DeviceID = SelectedDevice.ID
-					};
-
-					try
-					{
-						Repository.AddIPAddress(newIP);
-						Repository.SaveChanges();
-						SelectedDeviceIPAddresses.Add(newIP);
-
-						InputtedIPAddress = "";
-						MessageToUser = "Адрес успешно добавлен";
-					}
-					catch (Exception)
-					{
-						MessageToUser = "Такой адрес уже используется";
-						Repository.RemoveIPAddress(newIP);
-					}
 				}
 			);
 
@@ -244,6 +226,8 @@ namespace InventoryManager.ViewModels
 		public AddDeviceView AddDeviceView { get; }
 
 		public AddDeviceViewModel AddDeviceViewModel { get; }
+
+		public AddIPAddressViewModel AddIPAddressViewModel { get; }
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -378,16 +362,6 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedIPAddress
-		{
-			get => _inputtedIPAddress;
-			set
-			{
-				_inputtedIPAddress = value;
-				OnPropertyChanged(nameof(InputtedIPAddress));
-			}
-		}
-
 		public DeviceAccount SelectedDeviceAccount { get; set; }
 
 		public IPAddress SelectedDeviceIP { get; set; }
@@ -418,6 +392,12 @@ namespace InventoryManager.ViewModels
 		{
 			if (AddDeviceViewModel != null)
 				AddDeviceViewModel.OnDeviceAdded += action;
+		}
+
+		private void SubscribeActionOnIPAddition(Action<IPAddress> action)
+		{
+			if (AddIPAddressViewModel != null)
+				AddIPAddressViewModel.OnIPAdded += action;
 		}
 
 		private void InitDevicesCabinetsWithInstances()
