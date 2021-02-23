@@ -106,7 +106,11 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
-				(obj) => AddDeviceAccountView.ShowDialog(),
+				(obj) =>
+				{
+					AddDeviceAccountViewModel.DeviceToAddAccountTo = SelectedDevice;
+					AddDeviceAccountView.ShowDialog();
+				},
 				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType.Name != "Коммутатор"
 			);
 
@@ -122,7 +126,11 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddIPViewCommand = RegisterCommandAction(
-				(obj) => AddIPAddressView.ShowDialog(),
+				(obj) =>
+				{
+					AddIPAddressViewModel.DeviceToAddIPTo = SelectedDevice;
+					AddIPAddressView.ShowDialog();
+				},
 				(obj) => SelectedDevice != null
 			);
 
