@@ -11,10 +11,6 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceViewModel : ViewModelBase
 	{
-		private string _inputtedDeviceAccountName;
-
-		private string _inputtedDevicePassword;
-
 		private bool _isDeviceLocationChoosingAvailable;
 
 		private Device _selectedDevice;
@@ -38,8 +34,18 @@ namespace InventoryManager.ViewModels
 		public DeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
+
 			AddDeviceViewModel = new AddDeviceViewModel(Repository);
+			AddDeviceView = new AddDeviceView();
+			AddDeviceView.DataContext = AddDeviceViewModel;
+
 			AddIPAddressViewModel = new AddIPAddressViewModel(new DefaultIPAddressRepository());
+			AddIPAddressView = new AddIPAddressView();
+			AddIPAddressView.DataContext = AddIPAddressViewModel;
+
+			AddDeviceAccountViewModel = new AddDeviceAccountViewModel(Repository);
+			AddDeviceAccountView = new AddDeviceAccountView();
+			AddDeviceAccountView.DataContext = AddDeviceAccountViewModel;
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
@@ -63,6 +69,10 @@ namespace InventoryManager.ViewModels
 				(ipAddress) => SelectedDeviceIPAddresses.Add(ipAddress)
 			);
 
+			SubscribeActionOnDeviceAccountAddition(
+				(newAcc) => SelectedDeviceAccounts.Add(newAcc)
+			);
+
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -77,9 +87,7 @@ namespace InventoryManager.ViewModels
 			OpenAddDeviceViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var addDeviceWindow = new AddDeviceView();
-					addDeviceWindow.DataContext = this;
-					addDeviceWindow.ShowDialog();
+					AddDeviceView.ShowDialog();
 				}
 			);
 
@@ -98,45 +106,8 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					var addAccountView = new AddDeviceAccountView();
-					addAccountView.DataContext = this;
-					addAccountView.ShowDialog();
-				},
+				(obj) => AddDeviceAccountView.ShowDialog(),
 				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType.Name != "Коммутатор"
-			);
-
-			AddDeviceAccountCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					var newAcc = new DeviceAccount
-					{
-						DeviceID = SelectedDevice.ID,
-						Login = InputtedDeviceAccountLogin,
-						Password = InputtedDeviceAccountPassword
-					};
-
-					try
-					{
-						Repository.AddDeviceAccount(newAcc);
-						Repository.SaveChanges();
-
-						SelectedDeviceAccounts.Add(newAcc);
-
-						InputtedDeviceAccountLogin = "";
-						InputtedDeviceAccountPassword = "";
-
-						MessageToUser = "Учётная запись успешно добавлена";
-					}
-					catch (Exception)
-					{
-						MessageToUser = "Учётная запись с таким логином уже существует";
-						Repository.RemoveDeviceAccount(newAcc);
-					}
-				},
-				(obj) => !(string.IsNullOrWhiteSpace(InputtedDeviceAccountLogin) ||
-					string.IsNullOrWhiteSpace(InputtedDeviceAccountPassword))
 			);
 
 			RemoveDeviceAccountCommand = RegisterCommandAction(
@@ -151,19 +122,8 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddIPViewCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					var addIpView = new AddIPAddressView();
-					addIpView.DataContext = this;
-					addIpView.ShowDialog();
-				},
+				(obj) => AddIPAddressView.ShowDialog(),
 				(obj) => SelectedDevice != null
-			);
-
-			AddDeviceIPCommand = RegisterCommandAction(
-				(obj) =>
-				{
-				}
 			);
 
 			RemoveDeviceIPCommand = RegisterCommandAction(
@@ -227,7 +187,13 @@ namespace InventoryManager.ViewModels
 
 		public AddDeviceViewModel AddDeviceViewModel { get; }
 
+		public AddIPAddressView AddIPAddressView { get; }
+
 		public AddIPAddressViewModel AddIPAddressViewModel { get; }
+
+		public AddDeviceAccountView AddDeviceAccountView { get; }
+
+		public AddDeviceAccountViewModel AddDeviceAccountViewModel { get; }
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -342,25 +308,6 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string InputtedDeviceAccountLogin
-		{
-			get => _inputtedDeviceAccountName;
-			set
-			{
-				_inputtedDeviceAccountName = value;
-				OnPropertyChanged("InputtedDeviceDeviceAccountName");
-			}
-		}
-
-		public string InputtedDeviceAccountPassword
-		{
-			get => _inputtedDevicePassword;
-			set
-			{
-				_inputtedDevicePassword = value;
-				OnPropertyChanged("InputtedDevicePassword");
-			}
-		}
 
 		public DeviceAccount SelectedDeviceAccount { get; set; }
 
@@ -378,27 +325,20 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand ShowAddIPViewCommand { get; set; }
 
-		public ButtonCommand AddDeviceIPCommand { get; }
-
 		public ButtonCommand RemoveDeviceIPCommand { get; }
-
-		public ButtonCommand AddDeviceAccountCommand { get; }
 
 		public ButtonCommand RemoveDeviceAccountCommand { get; }
 
 		public ButtonCommand ApplyDeviceLocationChangesCommand { get; }
 
-		private void SubscribeActionOnDeviceAddition(Action<Device> action)
-		{
-			if (AddDeviceViewModel != null)
-				AddDeviceViewModel.OnDeviceAdded += action;
-		}
+		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
+			AddDeviceViewModel.OnDeviceAdded += action;
 
-		private void SubscribeActionOnIPAddition(Action<IPAddress> action)
-		{
-			if (AddIPAddressViewModel != null)
-				AddIPAddressViewModel.OnIPAdded += action;
-		}
+		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
+			AddIPAddressViewModel.OnIPAdded += action;
+
+		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
+			AddDeviceAccountViewModel.OnDeviceAccountAdded += action;
 
 		private void InitDevicesCabinetsWithInstances()
 		{
