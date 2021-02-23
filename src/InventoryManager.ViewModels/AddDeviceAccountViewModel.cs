@@ -15,36 +15,14 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 
 			AddDeviceAccountCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					var newAcc = new DeviceAccount
-					{
-						DeviceID = TargetDevice.ID,
-						Login = InputtedDeviceAccountLogin,
-						Password = InputtedDeviceAccountPassword
-					};
-
-					try
-					{
-						Repository.AddDeviceAccount(newAcc);
-						Repository.SaveChanges();
-
-						OnDeviceAccountAdded?.Invoke(newAcc);
-
-						InputtedDeviceAccountLogin = "";
-						InputtedDeviceAccountPassword = "";
-
-						MessageToUser = "Учётная запись успешно добавлена";
-					}
-					catch (Exception)
-					{
-						MessageToUser = "Учётная запись с таким логином уже существует";
-						Repository.RemoveDeviceAccount(newAcc);
-					}
-				},
+				(obj) => AddAccountToDevice(),
 				(obj) => !(string.IsNullOrWhiteSpace(InputtedDeviceAccountLogin) ||
 					string.IsNullOrWhiteSpace(InputtedDeviceAccountPassword))
 			);
+
+			// RemoveDeviceAccountCommand = RegisterCommandAction(
+			// 	(obj) =>
+			// );
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -54,6 +32,8 @@ namespace InventoryManager.ViewModels
 		public Device TargetDevice { get; set; }
 
 		public ButtonCommand AddDeviceAccountCommand { get; }
+
+		public ButtonCommand RemoveDeviceAccountCommand { get; }
 
 		public string InputtedDeviceAccountLogin
 		{
@@ -74,5 +54,41 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("InputtedDevicePassword");
 			}
 		}
+
+		public void AddAccountToDevice()
+		{
+			var newAcc = new DeviceAccount
+			{
+				DeviceID = TargetDevice.ID,
+				Login = InputtedDeviceAccountLogin,
+				Password = InputtedDeviceAccountPassword
+			};
+
+			try
+			{
+				Repository.AddDeviceAccount(newAcc);
+				Repository.SaveChanges();
+
+				OnDeviceAccountAdded?.Invoke(newAcc);
+
+				InputtedDeviceAccountLogin = "";
+				InputtedDeviceAccountPassword = "";
+
+				MessageToUser = "Учётная запись успешно добавлена";
+			}
+			catch (Exception)
+			{
+				MessageToUser = "Учётная запись с таким логином уже существует";
+				Repository.RemoveDeviceAccount(newAcc);
+			}
+		}
+
+		// public void RemoveAccountFromDevice()
+		// {
+		// 	Repository.RemoveDeviceAccount(SelectedDeviceAccount);
+		// 	Repository.SaveChanges();
+
+		// 	SelectedDeviceAccounts.Remove(SelectedDeviceAccount);
+		// }
 	}
 }
