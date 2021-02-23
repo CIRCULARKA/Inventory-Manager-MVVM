@@ -25,8 +25,6 @@ namespace InventoryManager.ViewModels
 
 		public event Action<DeviceAccount> OnDeviceAccountAdded;
 
-		public event Action<DeviceAccount> OnDeviceAccountRemoved;
-
 		public Device TargetDevice { get; set; }
 
 		public ButtonCommand AddDeviceAccountCommand { get; }
@@ -81,12 +79,10 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		// public void RemoveAccountFromDevice()
-		// {
-		// 	Repository.RemoveDeviceAccount(SelectedDeviceAccount);
-		// 	Repository.SaveChanges();
-
-		// 	SelectedDeviceAccounts.Remove(SelectedDeviceAccount);
-		// }
+		public void RemoveAccountFromDevice(DeviceAccount acc)
+		{
+			Repository.RemoveDeviceAccount(acc);
+			Repository.SaveChanges();
+		}
 	}
 }
