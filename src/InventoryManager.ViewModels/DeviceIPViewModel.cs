@@ -13,30 +13,7 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 
 			AddIPToDeviceCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					var newIP = new IPAddress
-					{
-						Address = InputtedIPAddress,
-						DeviceID = DeviceToAddIPTo.ID
-					};
-
-					try
-					{
-						Repository.AddIPAddress(newIP);
-						Repository.SaveChanges();
-
-						OnIPAdded?.Invoke(newIP);
-
-						InputtedIPAddress = "";
-						MessageToUser = "Адрес успешно добавлен";
-					}
-					catch (Exception)
-					{
-						MessageToUser = "Такой адрес уже используется";
-						Repository.RemoveIPAddress(newIP);
-					}
-				}
+				(obj) => AddIPToDevice()
 			);
 		}
 
@@ -55,6 +32,31 @@ namespace InventoryManager.ViewModels
 			{
 				_inputtedIPAddress = value;
 				OnPropertyChanged(nameof(InputtedIPAddress));
+			}
+		}
+
+		public void AddIPToDevice()
+		{
+			var newIP = new IPAddress
+			{
+				Address = InputtedIPAddress,
+				DeviceID = DeviceToAddIPTo.ID
+			};
+
+			try
+			{
+				Repository.AddIPAddress(newIP);
+				Repository.SaveChanges();
+
+				OnIPAdded?.Invoke(newIP);
+
+				InputtedIPAddress = "";
+				MessageToUser = "Адрес успешно добавлен";
+			}
+			catch (Exception)
+			{
+				MessageToUser = "Такой адрес уже используется";
+				Repository.RemoveIPAddress(newIP);
 			}
 		}
 	}
