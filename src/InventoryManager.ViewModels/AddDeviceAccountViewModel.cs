@@ -19,15 +19,13 @@ namespace InventoryManager.ViewModels
 				(obj) => !(string.IsNullOrWhiteSpace(InputtedDeviceAccountLogin) ||
 					string.IsNullOrWhiteSpace(InputtedDeviceAccountPassword))
 			);
-
-			// RemoveDeviceAccountCommand = RegisterCommandAction(
-			// 	(obj) =>
-			// );
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
 
 		public event Action<DeviceAccount> OnDeviceAccountAdded;
+
+		public event Action<DeviceAccount> OnDeviceAccountRemoved;
 
 		public Device TargetDevice { get; set; }
 
