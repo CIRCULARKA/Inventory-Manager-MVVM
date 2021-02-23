@@ -4,11 +4,11 @@ using System;
 
 namespace InventoryManager.ViewModels
 {
-	public class AddIPAddressViewModel : ViewModelBase
+	public class DeviceIPViewModel : ViewModelBase
 	{
 		private string _inputtedIPAddress;
 
-		public AddIPAddressViewModel(IIPAddressRepository repo)
+		public DeviceIPViewModel(IIPAddressRepository repo)
 		{
 			Repository = repo;
 
