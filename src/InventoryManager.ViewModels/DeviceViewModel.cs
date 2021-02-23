@@ -36,16 +36,8 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 
 			AddDeviceViewModel = new AddDeviceViewModel(Repository);
-			AddDeviceView = new AddDeviceView();
-			AddDeviceView.DataContext = AddDeviceViewModel;
-
 			AddIPAddressViewModel = new AddIPAddressViewModel(new DefaultIPAddressRepository());
-			AddIPAddressView = new AddIPAddressView();
-			AddIPAddressView.DataContext = AddIPAddressViewModel;
-
 			AddDeviceAccountViewModel = new AddDeviceAccountViewModel(Repository);
-			AddDeviceAccountView = new AddDeviceAccountView();
-			AddDeviceAccountView.DataContext = AddDeviceAccountViewModel;
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
@@ -87,6 +79,8 @@ namespace InventoryManager.ViewModels
 			OpenAddDeviceViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
+					AddDeviceView = new AddDeviceView();
+					AddDeviceView.DataContext = AddDeviceViewModel;
 					AddDeviceView.ShowDialog();
 				}
 			);
@@ -108,6 +102,8 @@ namespace InventoryManager.ViewModels
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
+					AddDeviceAccountView = new AddDeviceAccountView();
+					AddDeviceAccountView.DataContext = AddDeviceAccountViewModel;
 					AddDeviceAccountViewModel.DeviceToAddAccountTo = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
 				},
@@ -129,6 +125,8 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					AddIPAddressViewModel.DeviceToAddIPTo = SelectedDevice;
+					AddIPAddressView = new AddIPAddressView();
+					AddIPAddressView.DataContext = AddIPAddressViewModel;
 					AddIPAddressView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
@@ -191,15 +189,15 @@ namespace InventoryManager.ViewModels
 		public ObservableCollection<Device> DevicesToShow =>
 			_allDevices;
 
-		public AddDeviceView AddDeviceView { get; }
+		public AddDeviceView AddDeviceView { get; set; }
 
 		public AddDeviceViewModel AddDeviceViewModel { get; }
 
-		public AddIPAddressView AddIPAddressView { get; }
+		public AddIPAddressView AddIPAddressView { get; set; }
 
 		public AddIPAddressViewModel AddIPAddressViewModel { get; }
 
-		public AddDeviceAccountView AddDeviceAccountView { get; }
+		public AddDeviceAccountView AddDeviceAccountView { get; set; }
 
 		public AddDeviceAccountViewModel AddDeviceAccountViewModel { get; }
 
