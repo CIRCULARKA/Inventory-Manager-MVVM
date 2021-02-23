@@ -45,7 +45,7 @@ namespace InventoryManager.ViewModels
 			_allCabinets = Repository.AllCabinets.ToList();
 			_allDevices = Repository.AllDevices.ToObservableCollection();
 
-			InitDevicesCabinetsWithInstances();
+			InitDevicesLocationWithInstances();
 
 			SubscribeActionOnDeviceAddition(
 				(device) =>
@@ -314,12 +314,9 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-
 		public DeviceAccount SelectedDeviceAccount { get; set; }
 
 		public IPAddress SelectedDeviceIP { get; set; }
-
-		public DeviceType SelectedDeviceType { get; set; }
 
 		public ButtonCommand ShowDeviceMovementHistoryCommand { get; set; }
 
@@ -346,7 +343,7 @@ namespace InventoryManager.ViewModels
 		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
 			AddDeviceAccountViewModel.OnDeviceAccountAdded += action;
 
-		private void InitDevicesCabinetsWithInstances()
+		private void InitDevicesLocationWithInstances()
 		{
 			foreach (var device in _allDevices)
 			{
