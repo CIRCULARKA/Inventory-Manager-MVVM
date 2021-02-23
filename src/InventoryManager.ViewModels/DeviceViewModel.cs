@@ -113,9 +113,7 @@ namespace InventoryManager.ViewModels
 			RemoveDeviceAccountCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					Repository.RemoveDeviceAccount(SelectedDeviceAccount);
-					Repository.SaveChanges();
-
+					AddDeviceAccountViewModel.RemoveAccountFromDevice(SelectedDeviceAccount);
 					SelectedDeviceAccounts.Remove(SelectedDeviceAccount);
 				},
 				(obj) => SelectedDeviceAccount != null
