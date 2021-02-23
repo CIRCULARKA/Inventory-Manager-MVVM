@@ -104,7 +104,7 @@ namespace InventoryManager.ViewModels
 				{
 					AddDeviceAccountView = new AddDeviceAccountView();
 					AddDeviceAccountView.DataContext = AddDeviceAccountViewModel;
-					AddDeviceAccountViewModel.DeviceToAddAccountTo = SelectedDevice;
+					AddDeviceAccountViewModel.TargetDevice = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null && SelectedDevice?.DeviceType?.Name != "Коммутатор"

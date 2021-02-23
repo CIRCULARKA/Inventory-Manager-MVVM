@@ -19,7 +19,7 @@ namespace InventoryManager.ViewModels
 				{
 					var newAcc = new DeviceAccount
 					{
-						DeviceID = DeviceToAddAccountTo.ID,
+						DeviceID = TargetDevice.ID,
 						Login = InputtedDeviceAccountLogin,
 						Password = InputtedDeviceAccountPassword
 					};
@@ -51,7 +51,7 @@ namespace InventoryManager.ViewModels
 
 		public event Action<DeviceAccount> OnDeviceAccountAdded;
 
-		public Device DeviceToAddAccountTo { get; set; }
+		public Device TargetDevice { get; set; }
 
 		public ButtonCommand AddDeviceAccountCommand { get; }
 
