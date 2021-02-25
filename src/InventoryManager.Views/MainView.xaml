@@ -16,6 +16,9 @@
 			<MenuItem Header="Главное">
 				<MenuItem Header="О программе" Command="{Binding ShowAboutProgramDialogCommand}" />
 			</MenuItem>
+			<MenuItem Header="Настройки">
+				<MenuItem Header="Установить маску подсети..." Command="{Binding ShowSetIPMaskDialogCommand}" />
+			</MenuItem>
 		</Menu>
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
 		<TabControl>
