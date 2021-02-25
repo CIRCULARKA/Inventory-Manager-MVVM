@@ -9,6 +9,8 @@ namespace InventoryManager.Models.Configuration
 		{
 			builder.HasKey(c => c.ID);
 			builder.Property(c => c.ID).UseIdentityColumn();
+			builder.Property(c => c.SerialNumber).IsRequired();
+			builder.Property(c => c.ExpirationDate).IsRequired();
 			builder.Ignore(c => c.State);
 		}
 	}

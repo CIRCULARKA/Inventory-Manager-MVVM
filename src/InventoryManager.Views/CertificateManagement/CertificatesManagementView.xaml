@@ -25,9 +25,10 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="18" Text="{Binding Path=Subject}" />
+                        <TextBlock FontSize="18" Text="{Binding Path=SerialNumber}" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Subject}" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Issuer}" />
                         <TextBlock Text="{Binding Path=State}" />
-                        <TextBlock Text="{Binding Path=ID}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

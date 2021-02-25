@@ -34,6 +34,7 @@ namespace InventoryManager.ViewModels
 					var newCertificate = new Certificate
 					{
 						Subject = InputtedSubject,
+						Issuer = InputtedIssuer,
 						ExpirationDate = SelectedExpirationDate
 					};
 
@@ -72,6 +73,10 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		public DateTime SelectedExpirationDate { get; set; }
+
+		public string InputtedIssuer { get; set; }
+
 		public ObservableCollection<Certificate> CertificatesToShow => _allCertificates;
 
 		public Certificate SelectedCertificate { get; set; }
@@ -81,7 +86,5 @@ namespace InventoryManager.ViewModels
 		public Command AddCertificateCommand { get; }
 
 		public Command RemoveCertificateCommand { get; }
-
-		public DateTime SelectedExpirationDate { get; set; }
 	}
 }

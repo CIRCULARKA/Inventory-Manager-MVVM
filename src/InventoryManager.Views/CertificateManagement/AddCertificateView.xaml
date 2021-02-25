@@ -22,8 +22,12 @@
         </Style>
     </Window.Resources>
     <StackPanel>
+        <TextBlock Text="Серийный номер" />
+        <TextBox Text="{Binding InputtedSerialNumber}" />
 		<TextBlock Text="Субъект, выдавший сертификат" />
 		<TextBox Text="{Binding InputtedSubject, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="Кому выдан сертификат" />
+        <TextBox Text="{Binding InputtedIssuer}" />
 		<TextBlock Text="Конец действия сертификата" />
         <Calendar SelectedDate="{Binding SelectedExpirationDate, UpdateSourceTrigger=PropertyChanged}" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddCertificateCommand}" />
