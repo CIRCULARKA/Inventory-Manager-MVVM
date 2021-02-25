@@ -1,5 +1,6 @@
 <src:ViewBase x:Class="InventoryManager.Views.MainView"
 	xmlns:src="clr-namespace:InventoryManager.Views"
+	xmlns:vms="clr-namespace:InventoryManager.ViewModels"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	Title="Окно пользователя"
@@ -9,8 +10,11 @@
 	Width="450">
 	<StackPanel>
 		<Menu>
+			<Menu.DataContext>
+				<vms:MainViewModel />
+			</Menu.DataContext>
 			<MenuItem Header="Главное">
-				<MenuItem Header="О программе" Command="{Binding ShowDialogAboutProgramCommand}" />
+				<MenuItem Header="О программе" Command="{Binding ShowAboutProgramDialogCommand}" />
 			</MenuItem>
 		</Menu>
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
