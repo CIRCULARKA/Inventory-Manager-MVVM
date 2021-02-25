@@ -34,8 +34,7 @@ namespace InventoryManager.ViewModels
 					var newCertificate = new Certificate
 					{
 						Subject = InputtedSubject,
-						ValidFrom = SelectedValidFromDate,
-						ValidTo = SelectedValidUntilDate
+						ExpirationDate = SelectedExpirationDate
 					};
 
 					Repository.AddCertificate(newCertificate);
@@ -83,8 +82,6 @@ namespace InventoryManager.ViewModels
 
 		public Command RemoveCertificateCommand { get; }
 
-		public DateTime SelectedValidFromDate { get; set; }
-
-		public DateTime SelectedValidUntilDate { get; set; }
+		public DateTime SelectedExpirationDate { get; set; }
 	}
 }

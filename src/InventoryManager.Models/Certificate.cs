@@ -8,12 +8,10 @@ namespace InventoryManager.Models
 
 		public string Subject { get; set; }
 
-		public DateTime ValidFrom { get; set; }
-
-		public DateTime ValidTo { get; set; }
+		public DateTime ExpirationDate { get; set; }
 
 		public string State =>
-			ValidTo < DateTime.Now ? "Сертификат недействителен!" :
-				$"Осталось дней: {(ValidTo - DateTime.Now).Days}";
+			ExpirationDate < DateTime.Now ? "Сертификат недействителен!" :
+				$"Осталось дней: {(ExpirationDate - DateTime.Now).Days}";
 	}
 }
