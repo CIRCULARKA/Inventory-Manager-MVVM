@@ -1,0 +1,21 @@
+<src:ViewBase x:Class="InventoryManager.Views.SetIPMaskView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:src="clr-namespace:InventoryManager.Views"
+	WindowStartupLocation="CenterScreen"
+	Title="Настройка маски подсети"
+	SizeToContent="Height"
+	Width="200">
+	<StackPanel>
+		<TextBlock TextWrapping="Wrap">
+			<TextBlock.Text>
+				Введите маску подсети.
+				На её основе вы сможете выбирать IP-адреса для устройств
+				из автоматически сгенерированного диапазона
+			</TextBlock.Text>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="/" />
+				<TextBox Width="50" />
+			</StackPanel>
+		</TextBlock>
+	</StackPanel>
+</src:ViewBase>
