@@ -30,7 +30,7 @@ namespace InventoryManager.ViewModels
 					Repository.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
-				(obj) => SelectedUser != null
+				(obj) => SelectedUser != null && SelectedUser.UserGroup.Name != "Суперпользователь"
 			);
 
 			ShowAddUserViewCommand = RegisterCommandAction(
