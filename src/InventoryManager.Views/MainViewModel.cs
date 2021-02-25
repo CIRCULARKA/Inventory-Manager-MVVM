@@ -1,4 +1,5 @@
 using InventoryManager.Commands;
+using InventoryManager.Views;
 using System.Windows;
 
 namespace InventoryManager.ViewModels
@@ -20,8 +21,21 @@ namespace InventoryManager.ViewModels
 					);
 				}
 			);
+
+			ShowSetIPMaskDialogCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					SetIPMaskView = new SetIPMaskView();
+					SetIPMaskView.DataContext = this;
+					SetIPMaskView.ShowDialog();
+				}
+			);
 		}
 
+		public SetIPMaskView SetIPMaskView { get; private set; }
+
 		public Command ShowAboutProgramDialogCommand { get; }
+
+		public Command ShowSetIPMaskDialogCommand { get; }
 	}
 }
