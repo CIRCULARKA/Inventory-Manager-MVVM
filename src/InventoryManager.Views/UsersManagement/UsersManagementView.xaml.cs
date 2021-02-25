@@ -11,11 +11,7 @@ namespace InventoryManager.Views
 			InitializeComponent();
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
-			DataContext = new UserViewModel(
-				userRelatedRepo,
-				new AddUserViewModel(userRelatedRepo),
-				new AddUserView()
-			);
+			DataContext = new UserViewModel(userRelatedRepo);
 		}
 	}
 }

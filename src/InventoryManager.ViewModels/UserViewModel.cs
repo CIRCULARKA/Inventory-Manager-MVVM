@@ -11,12 +11,10 @@ namespace InventoryManager.ViewModels
 	{
 		private ObservableCollection<User> _allUsersToShow;
 
-		public UserViewModel(IUserRelatedRepository repo, ViewModelBase addUserVM, ViewBase addUserView)
+		public UserViewModel(IUserRelatedRepository repo)
 		{
 			Repository = repo;
-			AddUserViewModel = addUserVM;
-			AddUserView = addUserView;
-			AddUserView.DataContext = AddUserViewModel;
+			AddUserViewModel = new AddUserViewModel(Repository);
 
 			SubscribeActionOnUserAddition(
 				(user) => UsersToShow.Add(user)
@@ -36,7 +34,12 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddUserViewCommand = RegisterCommandAction(
-				(obj) => AddUserView.ShowDialog()
+				(obj) =>
+				{
+					AddUserView = new AddUserView();
+					AddUserView.DataContext = AddUserViewModel;
+					AddUserView.ShowDialog();
+				}
 			);
 		}
 
@@ -53,9 +56,9 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand ShowAddUserViewCommand { get; }
 
-		public ViewBase AddUserView { get; }
+		public AddUserView AddUserView { get; set; }
 
-		public ViewModelBase AddUserViewModel { get; }
+		public AddUserViewModel AddUserViewModel { get; set; }
 
 		private void SubscribeActionOnUserAddition(Action<User> action)
 		{
