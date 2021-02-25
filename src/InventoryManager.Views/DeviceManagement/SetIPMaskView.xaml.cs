@@ -1,6 +1,6 @@
 namespace InventoryManager.Views
 {
-	public class SetIPMaskView : ViewBase
+	public partial class SetIPMaskView : ViewBase
 	{
 		public SetIPMaskView() => InitializeComponent();
 	}
