@@ -68,7 +68,7 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public ButtonCommand AddDeviceCommand { get; }
+		public Command AddDeviceCommand { get; }
 
 		public DeviceType SelectedDeviceType { get; set; }
 

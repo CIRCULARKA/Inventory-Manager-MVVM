@@ -52,9 +52,9 @@ namespace InventoryManager.ViewModels
 
 		public UserGroup SelectedUserGroup { get; set; }
 
-		public ButtonCommand RemoveUserCommand { get; }
+		public Command RemoveUserCommand { get; }
 
-		public ButtonCommand ShowAddUserViewCommand { get; }
+		public Command ShowAddUserViewCommand { get; }
 
 		public AddUserView AddUserView { get; private set; }
 

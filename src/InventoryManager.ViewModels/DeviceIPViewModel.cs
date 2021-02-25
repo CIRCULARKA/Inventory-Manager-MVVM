@@ -23,7 +23,7 @@ namespace InventoryManager.ViewModels
 
 		public Device DeviceToAddIPTo { get; set; }
 
-		public ButtonCommand AddIPToDeviceCommand { get; }
+		public Command AddIPToDeviceCommand { get; }
 
 		public string InputtedIPAddress
 		{

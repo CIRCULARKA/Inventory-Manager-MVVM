@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace InventoryManager.Commands
 {
-	public class ButtonCommand : ICommand
+	public class Command : ICommand
 	{
 		private Action<object> _execute;
 
@@ -15,7 +15,7 @@ namespace InventoryManager.Commands
 			remove { CommandManager.RequerySuggested -= value; }
 		}
 
-		public ButtonCommand(Action<object> action, Func<object, bool> canExecute = null)
+		public Command(Action<object> action, Func<object, bool> canExecute = null)
 		{
 			_execute = action;
 			_canExecute = canExecute;

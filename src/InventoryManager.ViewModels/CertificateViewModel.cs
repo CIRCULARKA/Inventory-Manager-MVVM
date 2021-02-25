@@ -77,11 +77,11 @@ namespace InventoryManager.ViewModels
 
 		public Certificate SelectedCertificate { get; set; }
 
-		public ButtonCommand ShowAddCertificateViewCommand { get; }
+		public Command ShowAddCertificateViewCommand { get; }
 
-		public ButtonCommand AddCertificateCommand { get; }
+		public Command AddCertificateCommand { get; }
 
-		public ButtonCommand RemoveCertificateCommand { get; }
+		public Command RemoveCertificateCommand { get; }
 
 		public DateTime SelectedValidFromDate { get; set; }
 

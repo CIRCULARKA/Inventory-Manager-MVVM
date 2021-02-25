@@ -18,9 +18,9 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		protected ButtonCommand RegisterCommandAction(
+		protected Command RegisterCommandAction(
 			Action<object> action,
 			Func<object, bool> conditionOfWork = null
-		) => new ButtonCommand(action, conditionOfWork);
+		) => new Command(action, conditionOfWork);
 	}
 }

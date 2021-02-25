@@ -27,9 +27,9 @@ namespace InventoryManager.ViewModels
 
 		public Device TargetDevice { get; set; }
 
-		public ButtonCommand AddDeviceAccountCommand { get; }
+		public Command AddDeviceAccountCommand { get; }
 
-		public ButtonCommand RemoveDeviceAccountCommand { get; }
+		public Command RemoveDeviceAccountCommand { get; }
 
 		public string InputtedDeviceAccountLogin
 		{

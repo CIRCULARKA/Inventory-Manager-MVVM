@@ -67,7 +67,7 @@ namespace InventoryManager.ViewModels
 
 		public UserGroup SelectedUserGroup { get; set; }
 
-		public ButtonCommand AddUserCommand { get; }
+		public Command AddUserCommand { get; }
 
 		public string InputtedLogin
 		{

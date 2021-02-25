@@ -314,21 +314,21 @@ namespace InventoryManager.ViewModels
 
 		public IPAddress SelectedDeviceIP { get; set; }
 
-		public ButtonCommand ShowDeviceMovementHistoryCommand { get; set; }
+		public Command ShowDeviceMovementHistoryCommand { get; set; }
 
-		public ButtonCommand RemoveDeviceCommand { get; }
+		public Command RemoveDeviceCommand { get; }
 
-		public ButtonCommand OpenAddDeviceViewCommand { get; }
+		public Command OpenAddDeviceViewCommand { get; }
 
-		public ButtonCommand ShowAddDeviceAccountViewCommand { get; }
+		public Command ShowAddDeviceAccountViewCommand { get; }
 
-		public ButtonCommand ShowAddIPViewCommand { get; set; }
+		public Command ShowAddIPViewCommand { get; set; }
 
-		public ButtonCommand RemoveDeviceIPCommand { get; }
+		public Command RemoveDeviceIPCommand { get; }
 
-		public ButtonCommand RemoveDeviceAccountCommand { get; }
+		public Command RemoveDeviceAccountCommand { get; }
 
-		public ButtonCommand ApplyDeviceLocationChangesCommand { get; }
+		public Command ApplyDeviceLocationChangesCommand { get; }
 
 		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
 			AddDeviceViewModel.OnDeviceAdded += action;

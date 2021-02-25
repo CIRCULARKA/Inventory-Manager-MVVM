@@ -8,6 +8,11 @@
 	SizeToContent="Height"
 	Width="450">
 	<StackPanel>
+		<Menu>
+			<MenuItem Header="Главное">
+				<MenuItem Header="О программе" Command="{Binding ShowDialogAboutProgramCommand}" />
+			</MenuItem>
+		</Menu>
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
 		<TabControl>
 			<TabItem>

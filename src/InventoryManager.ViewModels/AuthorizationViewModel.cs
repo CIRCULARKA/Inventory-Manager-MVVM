@@ -33,7 +33,7 @@ namespace InventoryManager.ViewModels
 
 		private ViewBase AuthorizationView { get; }
 
-		public ButtonCommand LoginCommand { get; }
+		public Command LoginCommand { get; }
 
 		public string InputtedLogin { get; set; }
 
