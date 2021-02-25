@@ -56,7 +56,7 @@ namespace InventoryManager.ViewModels
 
 		public ButtonCommand ShowAddUserViewCommand { get; }
 
-		public AddUserView AddUserView { get; set; }
+		public AddUserView AddUserView { get; private set; }
 
 		public AddUserViewModel AddUserViewModel { get; set; }
 
