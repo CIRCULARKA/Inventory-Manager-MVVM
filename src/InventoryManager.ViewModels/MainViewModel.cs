@@ -1,6 +1,7 @@
 using InventoryManager.Commands;
 using InventoryManager.Views;
 using System.Windows;
+using System.Collections;
 
 namespace InventoryManager.ViewModels
 {
@@ -16,7 +17,8 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					MessageBox.Show(
-						$"Программа для управления инвентарём колледжа.\nАвтор: {_authorName}",
+						$"Программа для управления инвентарём колледжа.\nАвтор: {_authorName}\n" +
+						$"Репозиторий: {_githubUrl}",
 						"О программе"
 					);
 				}
@@ -38,6 +40,8 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
+
+		public IEnumerable MainViewContent { get; set; }
 
 		public SetIPMaskView SetIPMaskView { get; private set; }
 
