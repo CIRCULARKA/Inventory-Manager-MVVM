@@ -30,6 +30,13 @@ namespace InventoryManager.ViewModels
 					SetIPMaskView.ShowDialog();
 				}
 			);
+
+			ApplyIPMaskChangesCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					// TODO
+				}
+			);
 		}
 
 		public SetIPMaskView SetIPMaskView { get; private set; }
@@ -37,5 +44,7 @@ namespace InventoryManager.ViewModels
 		public Command ShowAboutProgramDialogCommand { get; }
 
 		public Command ShowSetIPMaskDialogCommand { get; }
+
+		public Command ApplyIPMaskChangesCommand { get; }
 	}
 }
