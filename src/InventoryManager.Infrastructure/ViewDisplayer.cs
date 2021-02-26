@@ -1,20 +1,16 @@
-using InventoryManager.Views;
+using InventoryManager.ViewModels;
 using InventoryManager.Models;
 
 namespace InventoryManager.Infrastructure
 {
 	public class ViewDisplayer : IViewDisplayer
 	{
-		private MainView _mainView;
-
-		public ViewDisplayer(MainView mainView)
+		public ViewDisplayer(MainViewModel mainView)
 		{
-			_mainView = mainView;
 		}
 
 		public void ShowViewForUserGroup(User user)
 		{
-			
 		}
 	}
 }
