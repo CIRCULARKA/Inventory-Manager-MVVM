@@ -10,7 +10,7 @@ namespace InventoryManager.Views
 		{
 			InitializeComponent();
 
-			DataContext = new CertificateViewModel(new DefaultCertificateRelatedRepository());
+			DataContext = new CertificateViewModel(new X509CertificateRelatedRepository());
 		}
 	}
 }
