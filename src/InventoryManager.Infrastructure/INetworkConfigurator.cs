@@ -5,7 +5,11 @@ namespace InventoryManager.Infrastructure
 {
 	public interface INetworkConfigurator
 	{
-		IEnumerable<IPAddress> IPAddressesOfCurrentMask { get; }
+		/// <summary>
+		/// Range of IP addresses calculated considering
+		/// <see cref="CurrentMask" /> and <see cref="NetworkAddress" />
+		/// </summary>
+		IEnumerable<IPAddress> IPAddresses { get; }
 
 		/// <summary>
 		/// Setting this property will change range of IP addresses
