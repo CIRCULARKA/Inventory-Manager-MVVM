@@ -2,13 +2,10 @@ namespace InventoryManager.Models
 {
 	public interface IDeviceAccountRepository : IRepository
 	{
-		void AddDeviceAccount(DeviceAccount newAcc) =>
-			DataContext.DeviceAccounts.Add(newAcc);
+		void AddDeviceAccount(DeviceAccount newAcc);
 
-		void RemoveDeviceAccount(DeviceAccount accToRemove) =>
-			DataContext.DeviceAccounts.Remove(accToRemove);
+		void RemoveDeviceAccount(DeviceAccount accToRemove);
 
-		void UpdateDeviceAccount(DeviceAccount accToUpdate) =>
-			DataContext.DeviceAccounts.Update(accToUpdate);
+		void UpdateDeviceAccount(DeviceAccount accToUpdate);
 	}
 }
