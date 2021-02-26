@@ -8,7 +8,6 @@ namespace InventoryManager.ViewModels
 	public class MainViewModel : ViewModelBase
 	{
 		const string _githubUrl = "https://github.com/CIRCULARKA/Inventory-Manager-MVVM";
-
 		const string _authorName = "Гачегов Руслан. 318 П/1";
 
 		public MainViewModel()
@@ -27,7 +26,7 @@ namespace InventoryManager.ViewModels
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					SetIPMaskView = new SetIPMaskView();
+					SetIPMaskView = new ConfigureIPSettingsView();
 					SetIPMaskView.DataContext = this;
 					SetIPMaskView.ShowDialog();
 				}
@@ -43,7 +42,7 @@ namespace InventoryManager.ViewModels
 
 		public IEnumerable MainViewContent { get; set; }
 
-		public SetIPMaskView SetIPMaskView { get; private set; }
+		public ConfigureIPSettingsView SetIPMaskView { get; private set; }
 
 		public Command ShowAboutProgramDialogCommand { get; }
 

@@ -1,4 +1,4 @@
-<src:ViewBase x:Class="InventoryManager.Views.SetIPMaskView"
+<src:ViewBase x:Class="InventoryManager.Views.ConfigureIPSettingsView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:src="clr-namespace:InventoryManager.Views"
