@@ -6,12 +6,11 @@ namespace InventoryManager.Extensions
 {
 	public static class X509StoreExtensions
 	{
-		public static List<Certificate> ToList(this X509Store store)
+		public static List<Certificate> ToList(this X509Certificate2Collection store)
 		{
 			var result = new List<Certificate>();
 
-			store.Open(OpenFlags.ReadOnly);
-			foreach (var cert in store.Certificates)
+			foreach (var cert in store)
 				result.Add(cert);
 
 			return result;
