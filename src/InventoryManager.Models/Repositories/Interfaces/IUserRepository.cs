@@ -6,22 +6,14 @@ namespace InventoryManager.Models
 {
 	public interface IUserRepository : IRepository
 	{
-		void AddUser(User newUser) =>
-			DataContext.Users.Add(newUser);
+		void AddUser(User newUser);
 
-		void RemoveUser(User userToRemove) =>
-			DataContext.Users.Remove(userToRemove);
+		void RemoveUser(User userToRemove);
 
-		void UpdateUser(User userToUpdate) =>
-			DataContext.Users.Update(userToUpdate);
+		void UpdateUser(User userToUpdate);
 
-		User FindUser(params object[] keys) =>
-			DataContext.Users.Find(keys);
+		User FindUser(params object[] keys);
 
-		IEnumerable<User> AllUsers =>
-			DataContext.
-			Users.
-			Include(u => u.UserGroup).
-			ToList();
+		IEnumerable<User> AllUsers { get; }
 	}
 }

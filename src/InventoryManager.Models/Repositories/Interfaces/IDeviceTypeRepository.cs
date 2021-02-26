@@ -1,21 +1,16 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace InventoryManager.Models
 {
 	public interface IDeviceTypeRepository : IRepository
 	{
-		void AddDeviceType(DeviceType newType) =>
-			DataContext.DeviceTypes.Add(newType);
+		void AddDeviceType(DeviceType newType);
 
-		void RemoveDeviceType(DeviceType typeToRemove) =>
-			DataContext.DeviceTypes.Remove(typeToRemove);
+		void RemoveDeviceType(DeviceType typeToRemove);
 
-		void UpdateDeviceType(DeviceType typeToUpdate) =>
-			DataContext.DeviceTypes.Update(typeToUpdate);
+		void UpdateDeviceType(DeviceType typeToUpdate);
 
-		IEnumerable<DeviceType> AllDeviceTypes =>
-			DataContext.DeviceTypes.ToList();
+		IEnumerable<DeviceType> AllDeviceTypes { get; }
 	}
 
 }

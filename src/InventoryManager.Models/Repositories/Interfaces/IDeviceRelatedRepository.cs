@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManager.Models
 {
@@ -9,28 +7,12 @@ namespace InventoryManager.Models
 			IIPAddressRepository, IDeviceTypeRepository,
 			IHousingRepository, ICabinetRepository, IDeviceMovementHistoryNoteRepository
 	{
-		IQueryable<DeviceAccount> GetAllDeviceAccounts(Device device) =>
-			DataContext.DeviceAccounts.Where(a => a.DeviceID == device.ID);
+		IQueryable<DeviceAccount> GetAllDeviceAccounts(Device device);
 
-		IQueryable<DeviceMovementHistoryNote> GetAllDeviceHistoryNotes(Device device) =>
-			DataContext.
-			DeviceMovementHistoryNotes.
-			Include(h => h.TargetCabinet).
-			Where(dmn => dmn.DeviceID == device.ID).
-			OrderByDescending(dmn => dmn.ID);
+		IQueryable<DeviceMovementHistoryNote> GetAllDeviceHistoryNotes(Device device);
 
-		IQueryable<IPAddress> GetAllDeviceIPAddresses(Device device) =>
-			DataContext.IPAddresses.Where(ip => ip.DeviceID == device.ID);
+		IQueryable<IPAddress> GetAllDeviceIPAddresses(Device device);
 
-		void DeleteAllDeviceMovementHistory(Device device)
-		{
-			DataContext.
-			DeviceMovementHistoryNotes.
-			RemoveRange(
-				DataContext.
-				DeviceMovementHistoryNotes.
-				Where(n => n.DeviceID == device.ID)
-			);
-		}
+		void DeleteAllDeviceMovementHistory(Device device);
 	}
 }
