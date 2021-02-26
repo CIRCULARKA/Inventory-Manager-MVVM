@@ -33,6 +33,7 @@ namespace InventoryManager.ViewModels
 				{
 					var newCertificate = new Certificate
 					{
+						SerialNumber = InputtedSerialNumber,
 						Subject = InputtedSubject,
 						Issuer = InputtedIssuer,
 						ExpirationDate = SelectedExpirationDate
@@ -74,6 +75,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		public DateTime SelectedExpirationDate { get; set; }
+
+		public string InputtedSerialNumber { get; set; }
 
 		public string InputtedIssuer { get; set; }
 
