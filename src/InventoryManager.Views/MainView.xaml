@@ -21,7 +21,7 @@
 			</MenuItem>
 		</Menu>
 		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
-		<TabControl>
+		<TabControl ItemsSource="{Binding MainViewContent}">
 			<TabItem>
 				<TabItem.Header>Устройства</TabItem.Header>
 				<TabItem.Content>
