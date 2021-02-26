@@ -20,16 +20,18 @@ namespace InventoryManager.ViewModels
 			_allCertificates = Repository.AllCertificates.ToObservableCollection();
 
 			ShowAddCertificateViewCommand = RegisterCommandAction(
-				(o) =>
+				(obj) =>
 				{
 					var addCertificateView = new AddCertificateView();
 					addCertificateView.DataContext = this;
 					addCertificateView.ShowDialog();
-				}
+				},
+				// Can't add new Windows Certificates rn
+				(obj) => false
 			);
 
 			AddCertificateCommand = RegisterCommandAction(
-				(o) =>
+				(obj) =>
 				{
 					var newCertificate = new Certificate
 					{
@@ -48,17 +50,21 @@ namespace InventoryManager.ViewModels
 
 					MessageToUser = "Сертификат добавлен";
 				},
-				(o) => !string.IsNullOrWhiteSpace(InputtedSubject)
+				// (obj) => !string.IsNullOrWhiteSpace(InputtedSubject)
+				// Can't add new Windows Certificate rn
+				(obj) => false
 			);
 
 			RemoveCertificateCommand = RegisterCommandAction(
-				(o) =>
+				(obj) =>
 				{
 					Repository.RemoveCertificate(SelectedCertificate);
 					Repository.SaveChanges();
 					CertificatesToShow.Remove(SelectedCertificate);
 				},
-				(obj) => SelectedCertificate != null
+				// (obj) => SelectedCertificate != null
+				// Same here
+				(obj) => false
 			);
 		}
 
