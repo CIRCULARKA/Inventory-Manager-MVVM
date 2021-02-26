@@ -24,10 +24,10 @@ namespace InventoryManager.Models
 		public static implicit operator Certificate(X509Certificate2 cert)
 		{
 			var result = new Certificate();
-			result.Name = cert.FriendlyName;
+			result.Name = string.IsNullOrWhiteSpace(cert.FriendlyName) ? "Нет имени" : cert.FriendlyName;
 			result.SerialNumber = cert.SerialNumber;
-			result.Subject = cert.Subject;
-			result.Issuer = cert.Issuer;
+			result.Subject = cert.Subject.Remove(0, 3);
+			result.Issuer = cert.Issuer.Remove(0, 3);
 			result.ExpirationDate = DateTime.Parse(cert.GetExpirationDateString());
 
 			return result;
