@@ -25,9 +25,15 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="18" Text="{Binding Path=SerialNumber}" />
-                        <TextBlock FontSize="16" Text="{Binding Path=Subject}" />
-                        <TextBlock FontSize="16" Text="{Binding Path=Issuer}" />
+                        <TextBlock Margin="0 0 0 -2" FontSize="18" FontWeight="Bold" Text="{Binding Path=Name}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="14" Text="от " />
+                            <TextBlock FontSize="14" Text="{Binding Path=Subject}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="14" Text="кому " />
+                            <TextBlock FontSize="14" Text="{Binding Path=Issuer}" />
+                        </StackPanel>
                         <TextBlock Text="{Binding Path=State}" />
                     </StackPanel>
                 </DataTemplate>
