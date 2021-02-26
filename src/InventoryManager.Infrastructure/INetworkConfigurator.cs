@@ -13,8 +13,10 @@ namespace InventoryManager.Infrastructure
 		/// </summary>
 		int CurrentMask { get; set; }
 
+		string NetworkAddress { get; set; }
+
 		/// <summary>
-		/// Write changes made with Mask and resulted range of IP addresses
+		/// Write changes made with Mask
 		/// </summary>
 		void WriteChanges(INetworkConfigurationWriter writer);
 	}
