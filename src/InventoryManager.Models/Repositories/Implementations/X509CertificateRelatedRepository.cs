@@ -1,26 +1,37 @@
-using InventoryManager.Data;
+using InventoryManager.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System;
 
 namespace InventoryManager.Models
 {
 	public class X509CertificateRelatedRepository : ICertificateRelatedRepository
 	{
-		BaseDbContext DataContext { get; } = null;
+		X509Store DataContext { get; } = new X509Store();
 
 		public void AddCertificate(Certificate newCertificate) =>
-			DataContext.Certificates.Add(newCertificate);
+			throw new NotImplementedException();
 
 		public void RemoveCertificate(Certificate certificateToRemove) =>
-			DataContext.Certificates.Remove(certificateToRemove);
+			throw new NotImplementedException();
 
 		public void UpdateCertificate(Certificate certificateToUpdate) =>
-			DataContext.Certificates.Update(certificateToUpdate);
+			throw new NotImplementedException();
 
-		public IEnumerable<Certificate> AllCertificates =>
-			DataContext.Certificates.ToList();
+		public IEnumerable<Certificate> AllCertificates
+		{
+			get
+			{
+				try
+				{
+					DataContext.Open(OpenFlags.ReadOnly);
+					return DataContext.Certificates.ToList();
+				}
+				finally { DataContext.Close(); }
+			}
+		}
 
-		public void SaveChanges() => DataContext.SaveChanges();
+		public void SaveChanges() => throw new NotImplementedException();
 	}
 }
