@@ -7,6 +7,8 @@ namespace InventoryManager.Models
 	{
 		public int ID { get; set; }
 
+		public string Name { get; set; }
+
 		public string SerialNumber { get; set; }
 
 		public string Subject { get; set; }
@@ -22,6 +24,7 @@ namespace InventoryManager.Models
 		public static implicit operator Certificate(X509Certificate2 cert)
 		{
 			var result = new Certificate();
+			result.Name = cert.FriendlyName;
 			result.SerialNumber = cert.SerialNumber;
 			result.Subject = cert.Subject;
 			result.Issuer = cert.Issuer;
