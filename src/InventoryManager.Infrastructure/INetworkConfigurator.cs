@@ -7,20 +7,16 @@ namespace InventoryManager.Infrastructure
 	{
 		/// <summary>
 		/// Range of IP addresses calculated considering
-		/// <see cref="CurrentMask" /> and <see cref="NetworkAddress" />
+		/// <see cref="Mask" /> and <see cref="NetworkAddress" />
 		/// </summary>
 		IEnumerable<IPAddress> IPAddresses { get; }
 
-		/// <summary>
-		/// Setting this property will change range of IP addresses
-		/// in <see cref="IPAddressesOfCurrentMask" />
-		/// </summary>
 		string Mask { get; set; }
 
 		string NetworkAddress { get; set; }
 
 		/// <summary>
-		/// Write changes made with Mask
+		/// Write changes made with Mask into file, specified by <see cref="Writer" />
 		/// </summary>
 		void WriteChanges(INetworkConfigurationWriter writer);
 	}
