@@ -1,7 +1,9 @@
 using InventoryManager.Commands;
+using InventoryManager.Models;
 using InventoryManager.Views;
 using System.Windows;
-using System.Collections;
+using System;
+using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
@@ -10,6 +12,12 @@ namespace InventoryManager.ViewModels
 		private string _inputtedNetworkAddress;
 
 		private string _inputtedNetworkMask;
+
+		public ConfigureIPSettingsViewModel()
+		{
+		}
+
+		public Command ApplyIPSettingsChangesCommand { get; }
 
 		public string InputtedNetworkAddress
 		{
@@ -30,6 +38,5 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged(nameof(InputtedNetworkMask));
 			}
 		}
-
 	}
 }
