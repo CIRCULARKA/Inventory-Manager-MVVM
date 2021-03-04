@@ -15,7 +15,7 @@ namespace InventoryManager.Infrastructure
 		/// Setting this property will change range of IP addresses
 		/// in <see cref="IPAddressesOfCurrentMask" />
 		/// </summary>
-		int CurrentMask { get; set; }
+		string Mask { get; set; }
 
 		string NetworkAddress { get; set; }
 

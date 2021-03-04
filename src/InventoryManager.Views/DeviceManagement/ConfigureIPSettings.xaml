@@ -15,9 +15,7 @@
 				из автоматически сгенерированного диапазона
 			</TextBlock.Text>
 		</TextBlock>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-			<TextBox Width="50" TextAlignment="Center" MaxLength="2" />
-		</StackPanel>
+		<TextBox Width="200" TextAlignment="Center" MaxLength="15" />
 		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyIPMaskChangesCommand}" />
 	</StackPanel>
 </src:ViewBase>
