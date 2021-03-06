@@ -12,6 +12,8 @@ namespace InventoryManager.Infrastructure
 
 		private const int _binaryOcteteSize = 8;
 
+		private const byte _maxMaskValue = 32;
+
 		public string NetworkAddress { get; set; }
 
 		public byte Mask { get; set; }
@@ -46,7 +48,7 @@ namespace InventoryManager.Infrastructure
 		{
 			get
 			{
-				var hostsAmount = (int)Math.Pow(2, Mask) - 2;
+				var hostsAmount = (int)Math.Pow(2, _maxMaskValue - Mask) - 2;
 				var firstHostBytes = GetOctetsFromAddress(FirstHost.Address);
 				var lastHostBytes = GetOctetsFromAddress(LastHost.Address);
 
