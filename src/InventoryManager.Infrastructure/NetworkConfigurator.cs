@@ -38,6 +38,7 @@ namespace InventoryManager.Infrastructure
 				var result = new byte[_octetsAmount];
 				for (int i = 0; i < _octetsAmount; i++)
 					result[i] = (byte)(NetworkAddressOctets[i] | ~MaskOctets[i]);
+				if (result[result.Length - 1] != 0) result[result.Length - 1]--;
 
 				return GetAddressFromOctets(result);
 			}
