@@ -44,7 +44,37 @@ namespace InventoryManager.Infrastructure
 			}
 		}
 
-		public IEnumerable<InventoryManager.Models.IPAddress> IPAddresses => null;
+		public IEnumerable<IPAddress> IPAddresses
+		{
+			get
+			{
+				var hostsAmount = (int)Math.Pow(2, Mask) - 2;
+				var firstHostBytes = GetOctetsFromAddress(FirstHost);
+				var lastHostBytes = GetOctetsFromAddress(LastHost);
+
+				var result = new List<IPAddress>(hostsAmount);
+
+				var currentIP = firstHostBytes;
+				result.Add(new IPAddress { Address = GetAddressFromOctets(currentIP) });
+				for (int i = 0; i < hostsAmount - 1; i++)
+				{
+					var ip = new IPAddress();
+					for (int j = _octetsAmount - 1; j > 0; j--)
+					{
+						if (firstHostBytes[j] < lastHostBytes[j])
+						{
+							currentIP[j]++;
+							result.Add(
+								new IPAddress { Address = GetAddressFromOctets(currentIP) }
+							);
+							break;
+						}
+					}
+				}
+
+				return result;
+			}
+		}
 
 		public void WriteChanges(INetworkConfigurationWriter writer) { }
 
