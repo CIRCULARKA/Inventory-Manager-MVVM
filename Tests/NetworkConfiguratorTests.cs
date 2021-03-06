@@ -15,12 +15,12 @@ namespace InventoryManager.Tests
 			var networkAddress = "192.168.33.72";
 
 			// Act
-			configurator.Mask = "255.255.255.192";
+			configurator.Mask = 26;
 			configurator.NetworkAddress = networkAddress;
 
 			var result1 = configurator.FirstHost;
 
-			configurator.Mask = "255.255.255.252";
+			configurator.Mask = 30;
 			configurator.NetworkAddress = "192.168.54.1";
 
 			var result2 = configurator.FirstHost;
