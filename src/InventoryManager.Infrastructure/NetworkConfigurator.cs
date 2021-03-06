@@ -14,11 +14,9 @@ namespace InventoryManager.Infrastructure
 
 		public string NetworkAddress { get; set; }
 
-		public byte[] NetworkAddressOctets => GetOctetsFromAddress(NetworkAddress);
+		public byte Mask { get; set; }
 
-		public int Mask { get; set; }
-
-		public string FirstHost
+		public IPAddress FirstHost
 		{
 			get
 			{
@@ -27,11 +25,11 @@ namespace InventoryManager.Infrastructure
 					result[i] = (byte)(NetworkAddressOctets[i] & MaskOctets[i]);
 				if (result[result.Length - 1] < 255) result[result.Length - 1]++;
 
-				return GetAddressFromOctets(result);
+				return new IPAddress { Address = GetAddressFromOctets(result) };
 			}
 		}
 
-		public string LastHost
+		public IPAddress LastHost
 		{
 			get
 			{
@@ -40,7 +38,7 @@ namespace InventoryManager.Infrastructure
 					result[i] = (byte)(NetworkAddressOctets[i] | ~MaskOctets[i]);
 				if (result[result.Length - 1] != 0) result[result.Length - 1]--;
 
-				return GetAddressFromOctets(result);
+				return new IPAddress { Address = GetAddressFromOctets(result) };
 			}
 		}
 
@@ -49,8 +47,8 @@ namespace InventoryManager.Infrastructure
 			get
 			{
 				var hostsAmount = (int)Math.Pow(2, Mask) - 2;
-				var firstHostBytes = GetOctetsFromAddress(FirstHost);
-				var lastHostBytes = GetOctetsFromAddress(LastHost);
+				var firstHostBytes = GetOctetsFromAddress(FirstHost.Address);
+				var lastHostBytes = GetOctetsFromAddress(LastHost.Address);
 
 				var result = new List<IPAddress>(hostsAmount);
 
@@ -86,6 +84,8 @@ namespace InventoryManager.Infrastructure
 				return BitConverter.GetBytes(maskValue).Reverse().ToArray();
 			}
 		}
+
+		private byte[] NetworkAddressOctets => GetOctetsFromAddress(NetworkAddress);
 
 		private byte[] GetOctetsFromAddress(string address)
 		{
