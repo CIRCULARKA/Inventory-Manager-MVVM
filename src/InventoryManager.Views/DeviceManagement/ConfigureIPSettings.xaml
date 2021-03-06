@@ -16,6 +16,6 @@
 			</TextBlock.Text>
 		</TextBlock>
 		<TextBox Width="40" TextAlignment="Center" MaxLength="2" />
-		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyIPMaskChangesCommand}" />
+		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyNetworkChangesCommand}" />
 	</StackPanel>
 </src:ViewBase>

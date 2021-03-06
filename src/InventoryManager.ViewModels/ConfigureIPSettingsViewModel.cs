@@ -17,7 +17,7 @@ namespace InventoryManager.ViewModels
 		{
 		}
 
-		public Command ApplyIPSettingsChangesCommand { get; }
+		public Command ApplyNetworkChangesCommand { get; }
 
 		public string InputtedNetworkAddress
 		{
