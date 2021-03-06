@@ -12,20 +12,13 @@ namespace InventoryManager.Infrastructure
 
 		public string NetworkAddress { get; set; }
 
-		public string Mask { get; set; }
+		public int Mask { get; set; }
 
 		public string FirstHost
 		{
 			get
 			{
-				var result = GetOctetsFromAddress(NetworkAddress);
-				var maskOctets = GetOctetsFromAddress(Mask);
-
-				for (int i = 0; i < _octetsAmount; i++)
-					result[i] &= maskOctets[i];
-				result[result.Length - 1]++;
-
-				return GetAddressFromOctets(result);
+				return null;
 			}
 		}
 

@@ -11,7 +11,7 @@ namespace InventoryManager.Infrastructure
 		/// </summary>
 		IEnumerable<IPAddress> IPAddresses { get; }
 
-		string Mask { get; set; }
+		int Mask { get; set; }
 
 		string NetworkAddress { get; set; }
 
