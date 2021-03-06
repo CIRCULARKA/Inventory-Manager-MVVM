@@ -28,5 +28,29 @@ namespace InventoryManager.Tests
 			Assert.Equal("192.168.33.65", result1);
 			Assert.Equal("192.168.54.1", result2);
 		}
+
+
+		[Fact]
+		public void IsLastHostGeneratedProperly()
+		{
+			// Assert
+			var configurator = new NetworkConfigurator();
+
+			var networkAddress = "192.168.33.72";
+
+			// Act
+			configurator.Mask = 26;
+			configurator.NetworkAddress = networkAddress;
+
+			var result1 = configurator.LastHost;
+
+			configurator.Mask = 30;
+			configurator.NetworkAddress = "192.168.54.1";
+
+			var result2 = configurator.LastHost;
+
+			Assert.Equal("192.168.33.126", result1);
+			Assert.Equal("192.168.54.2", result2);
+		}
 	}
 }
