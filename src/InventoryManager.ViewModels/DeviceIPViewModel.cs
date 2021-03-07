@@ -8,7 +8,7 @@ namespace InventoryManager.ViewModels
 	{
 		private string _inputtedIPAddress;
 
-		public DeviceIPViewModel(IIPAddressRepository repo)
+		public DeviceIPViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
 
@@ -17,11 +17,11 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
-		private IIPAddressRepository Repository { get; }
+		private IDeviceRelatedRepository Repository { get; }
 
 		public event Action<IPAddress> OnIPAdded;
 
-		public Device DeviceToAddIPTo { get; set; }
+		public Device TargetDevice { get; set; }
 
 		public Command AddIPToDeviceCommand { get; }
 
@@ -40,12 +40,12 @@ namespace InventoryManager.ViewModels
 			var newIP = new IPAddress
 			{
 				Address = InputtedIPAddress,
-				DeviceID = DeviceToAddIPTo.ID
+				DeviceID = TargetDevice.ID
 			};
 
 			try
 			{
-				Repository.AddIPAddress(newIP);
+				Repository.AddIPToDevice(newIP, TargetDevice);
 				Repository.SaveChanges();
 
 				OnIPAdded?.Invoke(newIP);
@@ -53,16 +53,15 @@ namespace InventoryManager.ViewModels
 				InputtedIPAddress = "";
 				MessageToUser = "Адрес успешно добавлен";
 			}
-			catch (Exception)
+			catch (Exception m)
 			{
-				MessageToUser = "Такой адрес уже используется";
-				Repository.RemoveIPAddress(newIP);
+				MessageToUser = m.Message;
 			}
 		}
 
 		public void RemoveIPAddress(IPAddress ip)
 		{
-			Repository.RemoveIPAddress(ip);
+			Repository.RemoveIPFromDevice(ip, TargetDevice);
 			Repository.SaveChanges();
 		}
 	}

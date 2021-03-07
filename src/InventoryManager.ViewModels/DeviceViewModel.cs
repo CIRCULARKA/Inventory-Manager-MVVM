@@ -36,7 +36,7 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 
 			AddDeviceViewModel = new AddDeviceViewModel(Repository);
-			DeviceIPViewModel = new DeviceIPViewModel(new DefaultIPAddressRepository());
+			DeviceIPViewModel = new DeviceIPViewModel(Repository);
 			DeviceAccountViewModel = new DeviceAccountViewModel(Repository);
 
 			// Load devices housings and cabinets explicitly because device must have them from
@@ -122,7 +122,7 @@ namespace InventoryManager.ViewModels
 			ShowAddIPViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					DeviceIPViewModel.DeviceToAddIPTo = SelectedDevice;
+					DeviceIPViewModel.TargetDevice = SelectedDevice;
 					AddIPAddressView = new AddIPAddressView();
 					AddIPAddressView.DataContext = DeviceIPViewModel;
 					AddIPAddressView.ShowDialog();
