@@ -27,17 +27,17 @@ namespace InventoryManager.ViewModels
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					SetIPMaskView = new ConfigureIPSettingsView();
-					SetIPMaskView.DataContext =
+					NetworkConfigurationView = new ConfigureIPSettingsView();
+					NetworkConfigurationView.DataContext =
 						new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository());
-					SetIPMaskView.ShowDialog();
+					NetworkConfigurationView.ShowDialog();
 				}
 			);
 		}
 
 		public IEnumerable MainViewContent { get; set; }
 
-		public ConfigureIPSettingsView SetIPMaskView { get; private set; }
+		public ConfigureIPSettingsView NetworkConfigurationView { get; private set; }
 
 		public Command ShowAboutProgramDialogCommand { get; }
 
