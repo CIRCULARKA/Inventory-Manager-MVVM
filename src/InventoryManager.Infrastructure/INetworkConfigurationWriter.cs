@@ -2,9 +2,9 @@ namespace InventoryManager.Infrastructure
 {
 	public interface INetworkConfigurationWriter
 	{
-		void WriteNetworkAddress();
+		void WriteNetworkAddress(string address);
 
-		void WriteMask();
+		void WriteMask(byte mask);
 	}
 
 }
