@@ -8,14 +8,14 @@ namespace InventoryManager.Models
 	{
 		BaseDbContext DataContext { get; } = new DefaultDbContext();
 
-		public void AddIPAddress(IPAddress newIP) =>
-			DataContext.IPAddresses.Add(newIP);
+		public void SetNewRangeOfIPAddresses(IEnumerable<IPAddress> range)
+		{
+			DataContext.IPAddresses.RemoveRange(
+				DataContext.IPAddresses
+			);
 
-		public void RemoveIPAddress(IPAddress IPtoRemove) =>
-			DataContext.IPAddresses.Remove(IPtoRemove);
-
-		public void UpdateIPAddress(IPAddress IPtoUpdate) =>
-			DataContext.IPAddresses.Update(IPtoUpdate);
+			DataContext.IPAddresses.AddRange(range);
+		}
 
 		public IEnumerable<IPAddress> AllIPAddresses =>
 			DataContext.IPAddresses.ToList();
