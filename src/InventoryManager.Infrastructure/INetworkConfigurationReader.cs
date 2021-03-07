@@ -4,6 +4,6 @@ namespace InventoryManager.Infrastructure
 	{
 		byte GetMaskFromConfiguration();
 
-		byte GetNetworkAddressFromConfiguration();
+		string GetNetworkAddressFromConfiguration();
 	}
 }
