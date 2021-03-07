@@ -9,5 +9,7 @@ namespace InventoryManager.Models
 		public int DeviceID { get; set; }
 
 		public Device Device { get; set; }
+
+		public bool IsAvailable => DeviceID <= 0;
 	}
 }
