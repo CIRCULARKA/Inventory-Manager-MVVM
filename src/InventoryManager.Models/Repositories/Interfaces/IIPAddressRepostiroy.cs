@@ -4,11 +4,7 @@ namespace InventoryManager.Models
 {
 	public interface IIPAddressRepository : IRepository
 	{
-		void AddIPAddress(IPAddress newIP);
-
-		void RemoveIPAddress(IPAddress IPtoRemove);
-
-		void UpdateIPAddress(IPAddress IPtoUpdate);
+		void SetNewRangeOfIPAddresses(IEnumerable<IPAddress> range);
 
 		IEnumerable<IPAddress> AllIPAddresses { get; }
 	}

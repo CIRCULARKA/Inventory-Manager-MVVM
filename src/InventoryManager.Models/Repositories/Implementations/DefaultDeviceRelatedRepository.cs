@@ -59,17 +59,17 @@ namespace InventoryManager.Models
 		public IEnumerable<DeviceType> AllDeviceTypes =>
 			DataContext.DeviceTypes.ToList();
 
-		public void AddIPAddress(IPAddress newIP) =>
-			DataContext.IPAddresses.Add(newIP);
-
-		public void RemoveIPAddress(IPAddress IPtoRemove) =>
-			DataContext.IPAddresses.Remove(IPtoRemove);
-
-		public void UpdateIPAddress(IPAddress IPtoUpdate) =>
-			DataContext.IPAddresses.Update(IPtoUpdate);
-
 		public IEnumerable<IPAddress> AllIPAddresses =>
 			DataContext.IPAddresses.ToList();
+
+		public void SetNewRangeOfIPAddresses(IEnumerable<IPAddress> range)
+		{
+			DataContext.IPAddresses.RemoveRange(
+				DataContext.IPAddresses
+			);
+
+			DataContext.IPAddresses.AddRange(range);
+		}
 
 		public void AddHousing(Housing newHousing) =>
 			DataContext.Housings.Add(newHousing);
