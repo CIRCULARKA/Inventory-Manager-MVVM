@@ -15,7 +15,7 @@
 				из автоматически сгенерированного диапазона
 			</TextBlock.Text>
 		</TextBlock>
-		<TextBox Width="40" TextAlignment="Center" MaxLength="2" />
-		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyNetworkChangesCommand}" />
+		<TextBox Width="40" TextAlignment="Center" MaxLength="2" Text="{Binding InputtedNetworkMask}" />
+		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyNetworkSettingsChangesCommand}" />
 	</StackPanel>
 </src:ViewBase>
