@@ -1,9 +1,13 @@
+using System.Configuration;
+
 namespace InventoryManager.Infrastructure
 {
 	public interface INetworkConfigurationReader
 	{
-		byte GetMaskFromConfiguration();
+		static byte GetMaskFromConfiguration() =>
+			byte.Parse(ConfigurationManager.AppSettings["networkMask"]);
 
-		string GetNetworkAddressFromConfiguration();
+		static string GetNetworkAddressFromConfiguration() =>
+			ConfigurationManager.AppSettings["networkAddress"];
 	}
 }
