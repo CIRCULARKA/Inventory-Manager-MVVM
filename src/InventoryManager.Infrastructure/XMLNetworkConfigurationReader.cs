@@ -6,12 +6,21 @@ namespace InventoryManager.Infrastructure
 	{
 		private static XMLNetworkConfigurationReader _instance;
 
+		private static object _syncObj = new object();
+
 		public XMLNetworkConfigurationReader Instance
 		{
 			get
 			{
 				if (_instance == null)
-					return new XMLNetworkConfigurationReader();
+				{
+					lock (_syncObj)
+					{
+						if (_instance == null)
+							_instance = new XMLNetworkConfigurationReader();
+					}
+				}
+
 				return _instance;
 			}
 		}
