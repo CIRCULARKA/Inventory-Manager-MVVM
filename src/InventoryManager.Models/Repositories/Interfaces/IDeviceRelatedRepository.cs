@@ -13,6 +13,10 @@ namespace InventoryManager.Models
 
 		IQueryable<IPAddress> GetAllDeviceIPAddresses(Device device);
 
+		void AddIPToDevice(IPAddress ip, Device device);
+
+		void RemoveIPFromDevice(IPAddress ip, Device device);
+
 		void DeleteAllDeviceMovementHistory(Device device);
 	}
 }

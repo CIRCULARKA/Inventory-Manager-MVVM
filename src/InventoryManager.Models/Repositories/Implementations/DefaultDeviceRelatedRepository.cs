@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using InventoryManager.Data;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace InventoryManager.Models
 {
@@ -69,6 +70,25 @@ namespace InventoryManager.Models
 			);
 
 			DataContext.IPAddresses.AddRange(range);
+		}
+
+		public void AddIPToDevice(IPAddress ip, Device device)
+		{
+			var ipToAssing = DataContext.IPAddresses.Find(ip.ID);
+			if (ipToAssing.DeviceID > 0)
+			{
+				ipToAssing.DeviceID = device.ID;
+				DataContext.IPAddresses.Update(ipToAssing);
+			}
+			else
+				throw new Exception("Этот IP-адрес занят другим устройством");
+		}
+
+		public void RemoveIPFromDevice(IPAddress ip, Device device)
+		{
+			var targetIP = DataContext.IPAddresses.Find(ip);
+			targetIP.DeviceID = 0;
+			DataContext.IPAddresses.Update(targetIP);
 		}
 
 		public void AddHousing(Housing newHousing) =>
