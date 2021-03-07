@@ -8,7 +8,7 @@ namespace InventoryManager.Infrastructure
 
 		private static object _syncObj = new object();
 
-		public XMLNetworkConfigurationReader Instance
+		public static INetworkConfigurationReader Instance
 		{
 			get
 			{

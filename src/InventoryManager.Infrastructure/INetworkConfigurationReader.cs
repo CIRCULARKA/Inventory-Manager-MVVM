@@ -8,6 +8,6 @@ namespace InventoryManager.Infrastructure
 
 		string GetNetworkAddressFromConfiguration();
 
-		INetworkConfigurationReader Instance { get; }
+		static INetworkConfigurationReader Instance { get; }
 	}
 }
