@@ -22,6 +22,8 @@ namespace InventoryManager.Infrastructure
 		/// <summary>
 		/// Write changes made with Mask into file, specified by <see cref="Writer" />
 		/// </summary>
-		void WriteChanges(INetworkConfigurationWriter writer);
+		void WriteMask(INetworkConfigurationWriter writer);
+
+		void WriteNetworkAddress(INetworkConfigurationWriter writer);
 	}
 }
