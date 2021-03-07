@@ -1,5 +1,6 @@
 using InventoryManager.Commands;
 using InventoryManager.Views;
+using InventoryManager.Models;
 using System.Windows;
 using System.Collections;
 
@@ -27,15 +28,9 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					SetIPMaskView = new ConfigureIPSettingsView();
-					SetIPMaskView.DataContext = this;
+					SetIPMaskView.DataContext =
+						new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository());
 					SetIPMaskView.ShowDialog();
-				}
-			);
-
-			ApplyIPMaskChangesCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					// TODO
 				}
 			);
 		}
