@@ -76,7 +76,9 @@ namespace InventoryManager.Infrastructure
 			}
 		}
 
-		public void WriteChanges(INetworkConfigurationWriter writer) { }
+		public void WriteMask(INetworkConfigurationWriter writer) => writer.WriteNetworkAddress(NetworkAddress);
+
+		public void WriteNetworkAddress(INetworkConfigurationWriter writer) => writer.WriteMask(Mask);
 
 		private byte[] MaskOctets
 		{
