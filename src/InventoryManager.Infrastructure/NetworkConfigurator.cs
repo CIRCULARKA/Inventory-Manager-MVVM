@@ -14,6 +14,12 @@ namespace InventoryManager.Infrastructure
 
 		private const byte _maxMaskValue = 32;
 
+		public NetworkConfigurator()
+		{
+			NetworkAddress = XMLNetworkConfigurationReader.Instance.GetNetworkAddressFromConfiguration();
+			Mask = XMLNetworkConfigurationReader.Instance.GetMaskFromConfiguration();
+		}
+
 		public string NetworkAddress { get; set; }
 
 		public byte Mask { get; set; }
@@ -27,7 +33,7 @@ namespace InventoryManager.Infrastructure
 					result[i] = (byte)(NetworkAddressOctets[i] & MaskOctets[i]);
 				if (result[result.Length - 1] < 255) result[result.Length - 1]++;
 
-				return new IPAddress { Address = GetAddressFromOctets(result) };
+				return new IPAddress { Address = GetAddressFromOctets(result), DeviceID = -1 };
 			}
 		}
 
@@ -58,7 +64,6 @@ namespace InventoryManager.Infrastructure
 				result.Add(new IPAddress { Address = GetAddressFromOctets(currentIP) });
 				for (int i = 0; i < hostsAmount - 1; i++)
 				{
-					var ip = new IPAddress();
 					for (int j = _octetsAmount - 1; j > 0; j--)
 					{
 						if (firstHostBytes[j] < lastHostBytes[j])
