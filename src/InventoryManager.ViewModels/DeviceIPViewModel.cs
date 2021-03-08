@@ -29,6 +29,8 @@ namespace InventoryManager.ViewModels
 
 		public Device TargetDevice { get; set; }
 
+		public IPAddress SelectedIPAddress { get; set; }
+
 		public Command AddIPToDeviceCommand { get; }
 
 		public string InputtedIPAddress
@@ -43,18 +45,12 @@ namespace InventoryManager.ViewModels
 
 		public void AddIPToDevice()
 		{
-			var newIP = new IPAddress
-			{
-				Address = InputtedIPAddress,
-				DeviceID = TargetDevice.ID
-			};
-
 			try
 			{
-				Repository.AddIPToDevice(newIP, TargetDevice);
+				Repository.AddIPToDevice(SelectedIPAddress, TargetDevice);
 				Repository.SaveChanges();
 
-				OnIPAdded?.Invoke(newIP);
+				OnIPAdded?.Invoke(SelectedIPAddress);
 
 				InputtedIPAddress = "";
 				MessageToUser = "Адрес успешно добавлен";
