@@ -1,4 +1,5 @@
 using InventoryManager.Commands;
+using InventoryManager.Infrastructure;
 using InventoryManager.Models;
 using InventoryManager.Views;
 using System.Windows;
@@ -13,11 +14,31 @@ namespace InventoryManager.ViewModels
 
 		private string _inputtedNetworkMask;
 
-		public ConfigureIPSettingsViewModel()
+		public ConfigureIPSettingsViewModel(IIPAddressRepository repo)
 		{
+			NetworkConfigurator = new NetworkConfigurator();
+			Repository = repo;
+
+			ApplyNetworkSettingsChangesCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					try
+					{
+						NetworkConfigurator.Mask = byte.Parse(InputtedNetworkMask);
+						Repository.SetNewRangeOfIPAddresses(NetworkConfigurator.IPAddresses);
+						Repository.SaveChanges();
+					}
+					catch (Exception e)
+					{
+						MessageToUser = e.Message;
+					}
+				}
+			);
 		}
 
-		public Command ApplyNetworkChangesCommand { get; }
+		private IIPAddressRepository Repository { get; }
+
+		public Command ApplyNetworkSettingsChangesCommand { get; }
 
 		public string InputtedNetworkAddress
 		{
@@ -38,5 +59,7 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged(nameof(InputtedNetworkMask));
 			}
 		}
+
+		private INetworkConfigurator NetworkConfigurator { get; }
 	}
 }
