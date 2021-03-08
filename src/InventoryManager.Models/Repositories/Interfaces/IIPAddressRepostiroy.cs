@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InventoryManager.Models
 {
@@ -7,5 +8,7 @@ namespace InventoryManager.Models
 		void SetNewRangeOfIPAddresses(IEnumerable<IPAddress> range);
 
 		IEnumerable<IPAddress> AllIPAddresses { get; }
+
+		IQueryable<IPAddress> AllAvailableIPAddresses { get; }
 	}
 }
