@@ -32,6 +32,17 @@ namespace InventoryManager.ViewModels
 					{
 						MessageToUser = e.Message;
 					}
+				},
+				(obj) =>
+				{
+					// Move to special validator class soon
+					try
+					{
+						var mask = byte.Parse(InputtedNetworkMask);
+						if (mask >= 32 && mask <= 0) return true;
+						return false;
+					}
+					catch { return false; }
 				}
 			);
 		}
