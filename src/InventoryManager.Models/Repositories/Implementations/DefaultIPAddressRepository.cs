@@ -20,6 +20,9 @@ namespace InventoryManager.Models
 		public IEnumerable<IPAddress> AllIPAddresses =>
 			DataContext.IPAddresses.ToList();
 
+		public IQueryable<IPAddress> AllAvailableIPAddresses =>
+			DataContext.IPAddresses.Where(ip => ip.DeviceID == null);
+
 		public void SaveChanges() => DataContext.SaveChanges();
 	}
 }
