@@ -63,6 +63,9 @@ namespace InventoryManager.Models
 		public IEnumerable<IPAddress> AllIPAddresses =>
 			DataContext.IPAddresses.ToList();
 
+		public IQueryable<IPAddress> AllAvailableIPAddresses =>
+			DataContext.IPAddresses.Where(ip => ip.DeviceID == null);
+
 		public void SetNewRangeOfIPAddresses(IEnumerable<IPAddress> range)
 		{
 			DataContext.IPAddresses.RemoveRange(
