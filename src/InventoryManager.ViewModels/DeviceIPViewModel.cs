@@ -1,6 +1,9 @@
 using InventoryManager.Models;
 using InventoryManager.Commands;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
@@ -20,6 +23,9 @@ namespace InventoryManager.ViewModels
 		private IDeviceRelatedRepository Repository { get; }
 
 		public event Action<IPAddress> OnIPAdded;
+
+		public IEnumerable<IPAddress> AllAvailableIPAddresses =>
+			Repository.AllAvailableIPAddresses.ToList();
 
 		public Device TargetDevice { get; set; }
 

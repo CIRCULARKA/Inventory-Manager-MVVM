@@ -77,11 +77,11 @@ namespace InventoryManager.Models
 
 		public void AddIPToDevice(IPAddress ip, Device device)
 		{
-			var ipToAssing = DataContext.IPAddresses.Find(ip.ID);
-			if (ipToAssing.DeviceID > 0)
+			var ipToAssign = DataContext.IPAddresses.Find(ip.ID);
+			if (ipToAssign.DeviceID == null)
 			{
-				ipToAssing.DeviceID = device.ID;
-				DataContext.IPAddresses.Update(ipToAssing);
+				ipToAssign.DeviceID = device.ID;
+				DataContext.IPAddresses.Update(ipToAssign);
 			}
 			else
 				throw new Exception("Этот IP-адрес занят другим устройством");
@@ -89,9 +89,8 @@ namespace InventoryManager.Models
 
 		public void RemoveIPFromDevice(IPAddress ip, Device device)
 		{
-			var targetIP = DataContext.IPAddresses.Find(ip);
-			targetIP.DeviceID = 0;
-			DataContext.IPAddresses.Update(targetIP);
+			ip.DeviceID = null;
+			DataContext.IPAddresses.Update(ip);
 		}
 
 		public void AddHousing(Housing newHousing) =>
