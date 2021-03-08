@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:src="clr-namespace:InventoryManager.Views"
 	WindowStartupLocation="CenterScreen"
-	Title="Настройка маски подсети"
+	Title="Настройка сети"
 	SizeToContent="Height"
 	Width="400"
 	ResizeMode="NoResize">
@@ -16,6 +16,6 @@
 			</TextBlock.Text>
 		</TextBlock>
 		<TextBox Width="40" TextAlignment="Center" MaxLength="2" Text="{Binding InputtedNetworkMask}" />
-		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyNetworkSettingsChangesCommand}" />
+		<Button Content="Применить" Height="30" Margin="12" Command="{Binding ApplyNetworkSettingsChangesCommand, UpdateSourceTrigger=PropertyChanged}" />
 	</StackPanel>
 </src:ViewBase>
