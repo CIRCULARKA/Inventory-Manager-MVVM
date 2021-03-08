@@ -10,7 +10,8 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "enableStepFiltering": false
         },
         {
             "name": ".NET Core Attach",
