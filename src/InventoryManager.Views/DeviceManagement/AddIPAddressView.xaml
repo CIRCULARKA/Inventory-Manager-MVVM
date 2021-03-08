@@ -11,7 +11,7 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
-        <Style TargetType="TextBox">
+        <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5 0 5 10" />
         </Style>
         <Style TargetType="Button">
@@ -20,8 +20,8 @@
     </Window.Resources>
     <StackPanel>
 		<TextBlock Text="Адрес" />
-		<!-- Make it possible to pick IP from combo box with all available IP's -->
-		<TextBox Text="{Binding InputtedIPAddress, UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox ItemsSource="{Binding AllAvailableIPAddresses}" DisplayMemberPath="Address"
+            SelectedItem="{Binding SelectedIPAddress, UpdateSourceTrigger=PropertyChanged}" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddIPToDeviceCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
