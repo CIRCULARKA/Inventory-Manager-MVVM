@@ -1,4 +1,5 @@
 using Xunit;
+using Moq;
 using System.Collections.Generic;
 using System.Linq;
 using InventoryManager.Infrastructure;
@@ -11,12 +12,13 @@ namespace InventoryManager.Tests
 		public void IsFirstHostGeneratedProperly()
 		{
 			// Assert
-			INetworkConfigurator configurator = new NetworkConfigurator();
+			var mock = new Mock<INetworkConfigurationReader>();
+			mock.Setup(r => r.GetMaskFromConfiguration()).Returns(26);
+			mock.Setup(r => r.GetNetworkAddressFromConfiguration()).Returns("192.168.33.72");
+
+			INetworkConfigurator configurator = new NetworkConfigurator(mock.Object);
 
 			// Act
-			configurator.Mask = 26;
-			configurator.NetworkAddress = "192.168.33.72";
-
 			var result1 = configurator.FirstHost;
 
 			configurator.Mask = 30;
@@ -45,14 +47,13 @@ namespace InventoryManager.Tests
 		public void IsLastHostGeneratedProperly()
 		{
 			// Assert
-			INetworkConfigurator configurator = new NetworkConfigurator();
+			var mock = new Mock<INetworkConfigurationReader>();
+			mock.Setup(r => r.GetMaskFromConfiguration()).Returns(26);
+			mock.Setup(r => r.GetNetworkAddressFromConfiguration()).Returns("192.168.33.72");
 
-			var networkAddress = "192.168.33.72";
+			INetworkConfigurator configurator = new NetworkConfigurator(mock.Object);
 
 			// Act
-			configurator.Mask = 26;
-			configurator.NetworkAddress = networkAddress;
-
 			var result1 = configurator.LastHost;
 
 			configurator.Mask = 30;
@@ -80,7 +81,12 @@ namespace InventoryManager.Tests
 		public void IsIPRangeGeneratedProperly()
 		{
 			// Arrange
-			INetworkConfigurator configurator = new NetworkConfigurator();
+			var mock = new Mock<INetworkConfigurationReader>();
+			mock.Setup(r => r.GetMaskFromConfiguration()).Returns(30);
+			mock.Setup(r => r.GetNetworkAddressFromConfiguration()).Returns("192.168.54.1");
+
+			INetworkConfigurator configurator = new NetworkConfigurator(mock.Object);
+
 			var expectedRange1 = new string[]
 			{
 				"192.168.54.1",
@@ -106,8 +112,6 @@ namespace InventoryManager.Tests
 			};
 
 			// Act
-			configurator.NetworkAddress = "192.168.54.1";
-			configurator.Mask = 30;
 			var result1 = configurator.IPAddresses.ToList();
 
 			configurator.Mask = 28;
