@@ -7,7 +7,5 @@ namespace InventoryManager.Infrastructure
 		byte GetMaskFromConfiguration();
 
 		string GetNetworkAddressFromConfiguration();
-
-		static INetworkConfigurationReader Instance { get; }
 	}
 }

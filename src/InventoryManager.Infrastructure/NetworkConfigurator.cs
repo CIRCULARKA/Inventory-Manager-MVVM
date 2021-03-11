@@ -14,10 +14,10 @@ namespace InventoryManager.Infrastructure
 
 		private const byte _maxMaskValue = 32;
 
-		public NetworkConfigurator()
+		public NetworkConfigurator(INetworkConfigurationReader reader)
 		{
-			NetworkAddress = XMLNetworkConfigurationReader.Instance.GetNetworkAddressFromConfiguration();
-			Mask = XMLNetworkConfigurationReader.Instance.GetMaskFromConfiguration();
+			NetworkAddress = reader.GetNetworkAddressFromConfiguration();
+			Mask = reader.GetMaskFromConfiguration();
 		}
 
 		public string NetworkAddress { get; set; }

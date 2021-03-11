@@ -16,7 +16,7 @@ namespace InventoryManager.ViewModels
 
 		public ConfigureIPSettingsViewModel(IIPAddressRepository repo)
 		{
-			NetworkConfigurator = new NetworkConfigurator();
+			NetworkConfigurator = new NetworkConfigurator(new XMLNetworkConfigurationReader());
 			Repository = repo;
 
 			ApplyNetworkSettingsChangesCommand = RegisterCommandAction(
