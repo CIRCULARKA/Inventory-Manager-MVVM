@@ -27,6 +27,8 @@ namespace InventoryManager.ViewModels
 						NetworkConfigurator.Mask = byte.Parse(InputtedNetworkMask);
 						Repository.SetNewRangeOfIPAddresses(NetworkConfigurator.IPAddresses);
 						Repository.SaveChanges();
+
+						InventoryManagerEvents.RaiseOnNetworkMaskChangedEvent();
 					}
 					catch (Exception e)
 					{
