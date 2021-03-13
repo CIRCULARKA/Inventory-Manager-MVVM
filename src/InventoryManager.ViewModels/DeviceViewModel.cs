@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using InventoryManager.Views;
 using InventoryManager.Extensions;
+using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
 {
@@ -64,6 +65,8 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnDeviceAccountAddition(
 				(newAcc) => SelectedDeviceAccounts.Add(newAcc)
 			);
+
+			SubscribeActionOnNetworkMaskChanges(ClearDevicesIPLists);
 
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
@@ -338,6 +341,12 @@ namespace InventoryManager.ViewModels
 
 		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
 			DeviceAccountViewModel.OnDeviceAccountAdded += action;
+
+		private void SubscribeActionOnNetworkMaskChanges(Action action)	=>
+			InventoryManagerEvents.OnNetworkMaskChanged += action;
+
+		private void ClearDevicesIPLists() =>
+			SelectedDeviceIPAddresses.Clear();
 
 		private void InitDevicesLocationWithInstances()
 		{
