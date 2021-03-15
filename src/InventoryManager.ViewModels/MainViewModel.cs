@@ -9,6 +9,7 @@ namespace InventoryManager.ViewModels
 	public class MainViewModel : ViewModelBase
 	{
 		const string _githubUrl = "https://github.com/CIRCULARKA/Inventory-Manager-MVVM";
+
 		const string _authorName = "Гачегов Руслан. 318 П/1";
 
 		public MainViewModel()
