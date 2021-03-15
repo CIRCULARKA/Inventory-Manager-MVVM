@@ -32,13 +32,16 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
-		public DeviceViewModel(IDeviceRelatedRepository repo)
+		public DeviceViewModel(
+			IDeviceRelatedRepository repo, AddDeviceViewModel addDeviceViewModel,
+			DeviceIPViewModel deviceIPViewModel, DeviceAccountViewModel deviceAccountViewModel
+		)
 		{
 			Repository = repo;
 
-			AddDeviceViewModel = new AddDeviceViewModel(Repository);
-			DeviceIPViewModel = new DeviceIPViewModel(Repository);
-			DeviceAccountViewModel = new DeviceAccountViewModel(Repository);
+			AddDeviceViewModel =  addDeviceViewModel;
+			DeviceIPViewModel = deviceIPViewModel;
+			DeviceAccountViewModel = deviceAccountViewModel;
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
