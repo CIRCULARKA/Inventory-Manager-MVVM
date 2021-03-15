@@ -9,7 +9,12 @@ namespace InventoryManager.Views
 		public DevicesManagementView()
 		{
 			InitializeComponent();
-			DataContext = new DeviceViewModel(new DefaultDeviceRelatedRepository());
+
+			var repo = new DefaultDeviceRelatedRepository();
+			DataContext = new DeviceViewModel(
+				repo, new AddDeviceViewModel(repo), new DeviceIPViewModel(repo),
+				new DeviceAccountViewModel(repo)
+			);
 		}
 	}
 }
