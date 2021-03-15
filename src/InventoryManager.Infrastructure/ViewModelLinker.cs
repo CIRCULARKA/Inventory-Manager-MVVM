@@ -3,6 +3,9 @@ using InventoryManager.Views;
 
 namespace InventoryManager.Infrastructure
 {
+	/// <summary>
+	/// Class for linking views with view models for farther bindings
+	/// </summary>
 	public class ViewModelLinker
 	{
 		/// <summary>
