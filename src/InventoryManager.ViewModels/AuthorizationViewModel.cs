@@ -6,7 +6,7 @@ namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : ViewModelBase
 	{
-		public AuthorizationViewModel(ViewBase view, IUserRelatedRepository repo)
+		public AuthorizationViewModel(AuthorizationView view, IUserRelatedRepository repo)
 		{
 			Repository = repo;
 			AuthorizationView = view;
