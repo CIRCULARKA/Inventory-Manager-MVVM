@@ -2,6 +2,9 @@
 
 using System.Windows;
 using InventoryManager.Views;
+using InventoryManager.ViewModels;
+using InventoryManager.Models;
+using InventoryManager.Infrastructure;
 
 namespace InventoryManager
 {
@@ -10,6 +13,27 @@ namespace InventoryManager
 		protected override void OnStartup(StartupEventArgs info)
 		{
 			base.OnStartup(info);
+
+			ViewModelLinker.RegisterViewModel(new MainViewModel());
+
+			var userRelatedRepo = new DefaultUserRelatedRepository();
+			ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
+
+			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new AddUserViewModel(userRelatedRepo));
+
+			var certificateRelatedRepo = new X509CertificateRelatedRepository();
+			ViewModelLinker.RegisterViewModel(new CertificateViewModel(certificateRelatedRepo));
+
+			var deviceRelatedRepo = new DefaultDeviceRelatedRepository();
+			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new AddDeviceViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceAccountViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceIPViewModel(deviceRelatedRepo));
+
+			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
+
+			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel());
 
 #if RELEASE
 			var authWindow = new AuthorizationView();
