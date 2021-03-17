@@ -16,11 +16,11 @@ namespace InventoryManager.Tests
 				Password = "123321"
 			};
 
-			var vm1 = new AuthorizationViewModel(null, null);
+			var vm1 = new AuthorizationViewModel(null);
 			vm1.AuthorizingUser = userTryingToPass;
 			vm1.InputtedPassword = "123321";
 
-			var vm2 = new AuthorizationViewModel(null, null);
+			var vm2 = new AuthorizationViewModel(null);
 			vm2.AuthorizingUser = userTryingToPass;
 			vm2.InputtedPassword = "123";
 
