@@ -15,11 +15,18 @@ namespace InventoryManager.Infrastructure
 		private static Dictionary<string, ViewModelBase> _registeredViewModels { get; } =
 			new Dictionary<string, ViewModelBase>();
 
-		public static void RegisterView<T>(T view) where T : ViewBase =>
-			_registeredViews.Add(nameof(view), view);
+		public static void RegisterView<T>(T view) where T : ViewBase
+		{
+			try { _registeredViews.Add(nameof(view), view); }
+			catch { }
+		}
 
-		public static void RegisterViewModel<T>(T viewModel) where T : ViewModelBase =>
+		public static void RegisterViewModel<T>(T viewModel) where T : ViewModelBase
+		{
 			_registeredViewModels.Add(nameof(viewModel), viewModel);
+			try { _registeredViewModels.Add(nameof(viewModel), viewModel); }
+			catch { }
+		}
 
 		/// <summary>
 		/// You can link only one view model for same view.
