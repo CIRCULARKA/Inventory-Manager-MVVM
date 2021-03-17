@@ -18,6 +18,7 @@ namespace InventoryManager
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
 			ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
 
 			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddUserViewModel(userRelatedRepo));
