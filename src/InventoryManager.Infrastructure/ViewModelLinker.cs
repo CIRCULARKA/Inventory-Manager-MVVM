@@ -17,14 +17,13 @@ namespace InventoryManager.Infrastructure
 
 		public static void RegisterView<T>(T view) where T : ViewBase
 		{
-			try { _registeredViews.Add(nameof(view), view); }
+			try { _registeredViews.Add(view.GetType().Name, view); }
 			catch { }
 		}
 
 		public static void RegisterViewModel<T>(T viewModel) where T : ViewModelBase
 		{
-			_registeredViewModels.Add(nameof(viewModel), viewModel);
-			try { _registeredViewModels.Add(nameof(viewModel), viewModel); }
+			try { _registeredViewModels.Add(viewModel.GetType().Name, viewModel); }
 			catch { }
 		}
 
