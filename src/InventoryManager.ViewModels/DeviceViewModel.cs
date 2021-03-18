@@ -32,16 +32,9 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
-		public DeviceViewModel(
-			IDeviceRelatedRepository repo, AddDeviceViewModel addDeviceViewModel,
-			DeviceIPViewModel deviceIPViewModel, DeviceAccountViewModel deviceAccountViewModel
-		)
+		public DeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
-
-			AddDeviceViewModel =  addDeviceViewModel;
-			DeviceIPViewModel = deviceIPViewModel;
-			DeviceAccountViewModel = deviceAccountViewModel;
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
@@ -85,7 +78,7 @@ namespace InventoryManager.ViewModels
 			OpenAddDeviceViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AddDeviceView = new AddDeviceView();
+					// AddDeviceView = new AddDeviceView();
 					AddDeviceView.DataContext = AddDeviceViewModel;
 					AddDeviceView.ShowDialog();
 				}
@@ -108,7 +101,7 @@ namespace InventoryManager.ViewModels
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AddDeviceAccountView = new AddDeviceAccountView();
+					// AddDeviceAccountView = new AddDeviceAccountView();
 					AddDeviceAccountView.DataContext = DeviceAccountViewModel;
 					DeviceAccountViewModel.TargetDevice = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
@@ -129,7 +122,7 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					DeviceIPViewModel.TargetDevice = SelectedDevice;
-					AddIPAddressView = new AddIPAddressView();
+					// AddIPAddressView = new AddIPAddressView();
 					AddIPAddressView.DataContext = DeviceIPViewModel;
 					AddIPAddressView.ShowDialog();
 				},
@@ -191,17 +184,35 @@ namespace InventoryManager.ViewModels
 		public ObservableCollection<Device> DevicesToShow =>
 			_allDevices;
 
-		public AddDeviceView AddDeviceView { get; set; }
+		public AddDeviceView AddDeviceView =>
+			ViewModelLinker.
+				GetRegisteredView(nameof(AddDeviceView))
+				as AddDeviceView;
 
-		public AddDeviceViewModel AddDeviceViewModel { get; }
+		public AddDeviceViewModel AddDeviceViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel(nameof(AddDeviceViewModel))
+				as AddDeviceViewModel;
 
-		public AddIPAddressView AddIPAddressView { get; set; }
+		public AddIPAddressView AddIPAddressView =>
+			ViewModelLinker.
+				GetRegisteredView(nameof(AddIPAddressView))
+				as AddIPAddressView;
 
-		public DeviceIPViewModel DeviceIPViewModel { get; }
+		public DeviceIPViewModel DeviceIPViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel(nameof(DeviceIPViewModel))
+				as DeviceIPViewModel;
 
-		public AddDeviceAccountView AddDeviceAccountView { get; set; }
+		public AddDeviceAccountView AddDeviceAccountView =>
+			ViewModelLinker.
+				GetRegisteredView(nameof(DeviceIPViewModel))
+				as AddDeviceAccountView;
 
-		public DeviceAccountViewModel DeviceAccountViewModel { get; }
+		public DeviceAccountViewModel DeviceAccountViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel(nameof(DeviceAccountViewModel))
+				as DeviceAccountViewModel;
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
