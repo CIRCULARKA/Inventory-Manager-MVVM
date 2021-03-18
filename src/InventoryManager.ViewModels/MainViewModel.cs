@@ -72,12 +72,12 @@ namespace InventoryManager.ViewModels
 				new TabItem()
 				{
 					Header = "Пользователи",
-					Content = ViewModelLinker.GetRegisteredPartialView(nameof(DevicesManagementView))
+					Content = ViewModelLinker.GetRegisteredPartialView(nameof(UsersManagementView))
 				},
 				new TabItem()
 				{
 					Header = "Сертификаты",
-					Content = ViewModelLinker.GetRegisteredPartialView(nameof(DevicesManagementView))
+					Content = ViewModelLinker.GetRegisteredPartialView(nameof(CertificatesManagementView))
 				}
 			};
 		}
