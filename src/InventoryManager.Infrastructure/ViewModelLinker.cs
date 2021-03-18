@@ -47,5 +47,8 @@ namespace InventoryManager.Infrastructure
 
 		public static ViewModelBase GetRegisteredViewModel(string viewModelName) =>
 			_registeredViewModels[viewModelName];
+
+		public static ViewBase GetRegisteredView(string viewName) =>
+			_registeredViews[viewName];
 	}
 }
