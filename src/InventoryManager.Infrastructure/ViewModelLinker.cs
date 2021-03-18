@@ -12,12 +12,21 @@ namespace InventoryManager.Infrastructure
 		private static Dictionary<string, ViewBase> _registeredViews { get; } =
 			new Dictionary<string, ViewBase>();
 
+		private static Dictionary<string, System.Windows.Controls.UserControl> _registeredPartialViews { get; } =
+			new Dictionary<string, System.Windows.Controls.UserControl>();
+
 		private static Dictionary<string, ViewModelBase> _registeredViewModels { get; } =
 			new Dictionary<string, ViewModelBase>();
 
 		public static void RegisterView<T>(T view) where T : ViewBase
 		{
 			try { _registeredViews.Add(view.GetType().Name, view); }
+			catch { }
+		}
+
+		public static void RegisterPartialView<T>(T view) where T : System.Windows.Controls.UserControl
+		{
+			try { _registeredPartialViews.Add(view.GetType().Name, view); }
 			catch { }
 		}
 
