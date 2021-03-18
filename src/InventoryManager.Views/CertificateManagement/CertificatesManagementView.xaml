@@ -20,7 +20,7 @@
         <StackPanel Orientation="Horizontal">
         </StackPanel>
         <ListBox ItemsSource="{Binding CertificatesToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCertificate}"
-            Height="450"
+            Height="450" Width="450"
             Grid.Row="1" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
