@@ -53,5 +53,8 @@ namespace InventoryManager.Infrastructure
 
 		public static ViewBase GetRegisteredView(string viewName) =>
 			_registeredViews[viewName];
+
+		public static System.Windows.Controls.UserControl GetRegisteredPartialView(string viewName) =>
+			_registeredPartialViews[viewName];
 	}
 }
