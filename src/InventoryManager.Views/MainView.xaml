@@ -9,9 +9,6 @@
 	SizeToContent="WidthAndHeight">
 	<StackPanel>
 		<Menu Margin="0 0 0 10">
-			<Menu.DataContext>
-				<vms:MainViewModel />
-			</Menu.DataContext>
 			<MenuItem Header="Главное">
 				<MenuItem Header="О программе" Command="{Binding ShowAboutProgramDialogCommand}" />
 			</MenuItem>
