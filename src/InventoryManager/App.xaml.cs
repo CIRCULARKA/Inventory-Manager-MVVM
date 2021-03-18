@@ -14,6 +14,19 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
+			RegisterViewModels();
+
+#if RELEASE
+			var authWindow = new AuthorizationView();
+			authWindow.Show();
+#else
+			var mainView = new MainView();
+			mainView.Show();
+#endif
+		}
+
+		public void RegisterViewModels()
+		{
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
@@ -35,14 +48,6 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 
 			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel());
-
-#if RELEASE
-			var authWindow = new AuthorizationView();
-			authWindow.Show();
-#else
-			var mainView = new MainView();
-			mainView.Show();
-#endif
 		}
 	}
 }
