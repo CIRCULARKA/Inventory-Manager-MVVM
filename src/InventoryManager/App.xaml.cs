@@ -16,13 +16,15 @@ namespace InventoryManager
 
 			RegisterViewModels();
 			RegisterViews();
+			LinkViewsWithViewModels();
+
 
 #if RELEASE
-			var authWindow = new AuthorizationView();
-			authWindow.Show();
+			ViewModelLinker.GetRegisteredView(nameof(AuthorizationView))
+				.Show();
 #else
-			var mainView = new MainView();
-			mainView.Show();
+			ViewModelLinker.GetRegisteredView(nameof(MainView))
+				.Show();
 #endif
 		}
 
@@ -63,11 +65,15 @@ namespace InventoryManager
 			ViewModelLinker.RegisterView(new AuthorizationView());
 
 			ViewModelLinker.RegisterView(new MainView());
+			ViewModelLinker.RegisterPartialView(new DevicesManagementView());
+			ViewModelLinker.RegisterPartialView(new UsersManagementView());
+			ViewModelLinker.RegisterPartialView(new CertificatesManagementView());
 
 			ViewModelLinker.RegisterView(new AddCertificateView());
 
 			ViewModelLinker.RegisterView(new AddDeviceAccountView());
 			ViewModelLinker.RegisterView(new AddIPAddressView());
+			ViewModelLinker.RegisterView(new AddDeviceAccountView());
 			ViewModelLinker.RegisterView(new ConfigureIPSettingsView());
 			ViewModelLinker.RegisterView(new DeviceMovementHistoryView());
 
@@ -86,9 +92,10 @@ namespace InventoryManager
 				nameof(MainViewModel)
 			);
 
-			// ViewModelLinker.LinkViewWithViewModel(
-			// 	nameof()
-			// );
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(UsersManagementView),
+				nameof(UserViewModel)
+			);
 		}
 	}
 }
