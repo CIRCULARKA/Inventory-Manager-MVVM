@@ -51,13 +51,8 @@ namespace InventoryManager.Infrastructure
 		public static ViewModelBase GetRegisteredViewModel(string viewModelName) =>
 			_registeredViewModels[viewModelName];
 
-		public static T GetRegisteredView<T>() where T : ViewBase, new()
-		{
-			var viewName = typeof(T).Name;
-			if (_registeredViews[viewName].IsLoaded)
-				_registeredViews[viewName] = new T();
-			return _registeredViews[viewName] as T;
-		}
+		public static T GetRegisteredView<T>() where T : ViewBase, new() =>
+			_registeredViews[typeof(T).Name] as T;
 
 		public static System.Windows.Controls.UserControl GetRegisteredPartialView(string viewName) =>
 			_registeredPartialViews[viewName];
