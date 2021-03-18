@@ -5,14 +5,7 @@ namespace InventoryManager.Views
 {
 	public partial class AuthorizationView : ViewBase
 	{
-		public AuthorizationView()
-		{
+		public AuthorizationView() =>
 			InitializeComponent();
-
-			ViewModel = new AuthorizationViewModel(this, new DefaultUserRelatedRepository());
-			DataContext = ViewModel;
-		}
-
-		private AuthorizationViewModel ViewModel { get; }
 	}
 }
