@@ -2,9 +2,7 @@ namespace InventoryManager.Views
 {
 	public partial class AddCertificateView : ViewBase
 	{
-		public AddCertificateView()
-		{
+		public AddCertificateView() =>
 			InitializeComponent();
-		}
 	}
 }
