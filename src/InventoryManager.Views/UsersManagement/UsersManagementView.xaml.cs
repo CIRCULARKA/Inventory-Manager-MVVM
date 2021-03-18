@@ -6,12 +6,7 @@ namespace InventoryManager.Views
 {
 	public partial class UsersManagementView : UserControl
 	{
-		public UsersManagementView()
-		{
+		public UsersManagementView() =>
 			InitializeComponent();
-
-			var userRelatedRepo = new DefaultUserRelatedRepository();
-			DataContext = new UserViewModel(userRelatedRepo);
-		}
 	}
 }
