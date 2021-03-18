@@ -67,21 +67,14 @@ namespace InventoryManager.ViewModels
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var deviceHistoryView = new DeviceMovementHistoryView();
-					deviceHistoryView.DataContext = this;
-					deviceHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
-					deviceHistoryView.ShowDialog();
+					DeviceMovementHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
+					DeviceMovementHistoryView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
 			);
 
 			OpenAddDeviceViewCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					// AddDeviceView = new AddDeviceView();
-					AddDeviceView.DataContext = AddDeviceViewModel;
-					AddDeviceView.ShowDialog();
-				}
+				(obj) => AddDeviceView.ShowDialog()
 			);
 
 			RemoveDeviceCommand = RegisterCommandAction(
@@ -101,8 +94,6 @@ namespace InventoryManager.ViewModels
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					// AddDeviceAccountView = new AddDeviceAccountView();
-					AddDeviceAccountView.DataContext = DeviceAccountViewModel;
 					DeviceAccountViewModel.TargetDevice = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
 				},
@@ -122,8 +113,6 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					DeviceIPViewModel.TargetDevice = SelectedDevice;
-					// AddIPAddressView = new AddIPAddressView();
-					AddIPAddressView.DataContext = DeviceIPViewModel;
 					AddIPAddressView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
@@ -205,6 +194,10 @@ namespace InventoryManager.ViewModels
 		public AddDeviceAccountView AddDeviceAccountView =>
 			ViewModelLinker.
 				GetRegisteredView<AddDeviceAccountView>();
+
+		public DeviceMovementHistoryView DeviceMovementHistoryView =>
+			ViewModelLinker.
+				GetRegisteredView<DeviceMovementHistoryView>();
 
 		public DeviceAccountViewModel DeviceAccountViewModel =>
 			ViewModelLinker.
