@@ -15,6 +15,7 @@ namespace InventoryManager
 			base.OnStartup(info);
 
 			RegisterViewModels();
+			RegisterViews();
 
 #if RELEASE
 			var authWindow = new AuthorizationView();
@@ -48,6 +49,22 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 
 			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel());
+		}
+
+		public void RegisterViews()
+		{
+			ViewModelLinker.RegisterView(new AuthorizationView());
+
+			ViewModelLinker.RegisterView(new MainView());
+
+			ViewModelLinker.RegisterView(new AddCertificateView());
+
+			ViewModelLinker.RegisterView(new AddDeviceAccountView());
+			ViewModelLinker.RegisterView(new AddIPAddressView());
+			ViewModelLinker.RegisterView(new ConfigureIPSettingsView());
+			ViewModelLinker.RegisterView(new DeviceMovementHistoryView());
+
+			ViewModelLinker.RegisterView(new AddUserView());
 		}
 	}
 }
