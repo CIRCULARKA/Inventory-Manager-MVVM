@@ -14,8 +14,8 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
-			RegisterViewModels();
 			RegisterViews();
+			RegisterViewModels();
 			LinkViewsWithViewModels();
 
 
@@ -37,7 +37,6 @@ namespace InventoryManager
 			// DeviceViewModel calls GetRegisteredViewModel and try to get
 			// AddDeviceViewModel wich is not yet registered.
 			// Need to fix it somehow (sometime)
-			ViewModelLinker.RegisterViewModel(new MainViewModel());
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
 			ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
@@ -58,6 +57,8 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 
 			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel());
+
+			ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
 
 		public void RegisterViews()
@@ -95,6 +96,16 @@ namespace InventoryManager
 			ViewModelLinker.LinkPartialViewWithViewModel(
 				nameof(UsersManagementView),
 				nameof(UserViewModel)
+			);
+
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(DevicesManagementView),
+				nameof(DeviceViewModel)
+			);
+
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(CertificatesManagementView),
+				nameof(CertificateViewModel)
 			);
 		}
 	}
