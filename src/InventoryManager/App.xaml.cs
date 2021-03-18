@@ -28,6 +28,13 @@ namespace InventoryManager
 
 		public void RegisterViewModels()
 		{
+			// !!!WARNING!!!
+			// Order of registration is important for proper work
+			// For example: if you register DeviceViewModel first and only then
+			// AddDeviceViewModel then you'll get an exception because
+			// DeviceViewModel calls GetRegisteredViewModel and try to get
+			// AddDeviceViewModel wich is not yet registered.
+			// Need to fix it somehow (sometime)
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
@@ -41,10 +48,10 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new CertificateViewModel(certificateRelatedRepo));
 
 			var deviceRelatedRepo = new DefaultDeviceRelatedRepository();
-			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddDeviceViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceAccountViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceIPViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
 
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 
@@ -65,6 +72,23 @@ namespace InventoryManager
 			ViewModelLinker.RegisterView(new DeviceMovementHistoryView());
 
 			ViewModelLinker.RegisterView(new AddUserView());
+		}
+
+		public void LinkViewsWithViewModels()
+		{
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(AuthorizationView),
+				nameof(AuthorizationViewModel)
+			);
+
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(MainView),
+				nameof(MainViewModel)
+			);
+
+			// ViewModelLinker.LinkViewWithViewModel(
+			// 	nameof()
+			// );
 		}
 	}
 }
