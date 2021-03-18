@@ -186,8 +186,7 @@ namespace InventoryManager.ViewModels
 
 		public AddDeviceView AddDeviceView =>
 			ViewModelLinker.
-				GetRegisteredView(nameof(AddDeviceView))
-				as AddDeviceView;
+				GetRegisteredView<AddDeviceView>();
 
 		public AddDeviceViewModel AddDeviceViewModel =>
 			ViewModelLinker.
@@ -196,8 +195,7 @@ namespace InventoryManager.ViewModels
 
 		public AddIPAddressView AddIPAddressView =>
 			ViewModelLinker.
-				GetRegisteredView(nameof(AddIPAddressView))
-				as AddIPAddressView;
+				GetRegisteredView<AddIPAddressView>();
 
 		public DeviceIPViewModel DeviceIPViewModel =>
 			ViewModelLinker.
@@ -206,8 +204,7 @@ namespace InventoryManager.ViewModels
 
 		public AddDeviceAccountView AddDeviceAccountView =>
 			ViewModelLinker.
-				GetRegisteredView(nameof(DeviceIPViewModel))
-				as AddDeviceAccountView;
+				GetRegisteredView<AddDeviceAccountView>();
 
 		public DeviceAccountViewModel DeviceAccountViewModel =>
 			ViewModelLinker.
