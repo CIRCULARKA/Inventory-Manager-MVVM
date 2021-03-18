@@ -20,11 +20,9 @@ namespace InventoryManager
 
 
 #if RELEASE
-			ViewModelLinker.GetRegisteredView(nameof(AuthorizationView))
-				.Show();
+			ViewModelLinker.GetRegisteredView<AuthorizationView>().Show();
 #else
-			ViewModelLinker.GetRegisteredView(nameof(MainView))
-				.Show();
+			ViewModelLinker.GetRegisteredView<MainView>().Show();
 #endif
 		}
 
@@ -73,6 +71,7 @@ namespace InventoryManager
 			ViewModelLinker.RegisterView(new AddCertificateView());
 
 			ViewModelLinker.RegisterView(new AddDeviceAccountView());
+			ViewModelLinker.RegisterView(new AddDeviceView());
 			ViewModelLinker.RegisterView(new AddIPAddressView());
 			ViewModelLinker.RegisterView(new AddDeviceAccountView());
 			ViewModelLinker.RegisterView(new ConfigureIPSettingsView());

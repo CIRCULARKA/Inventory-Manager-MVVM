@@ -16,7 +16,6 @@
 				<MenuItem Header="Установить маску подсети..." Command="{Binding ShowSetIPMaskDialogCommand}" />
 			</MenuItem>
 		</Menu>
-		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
 		<TabControl ItemsSource="{Binding MainViewTabs}">
 		</TabControl>
 	</StackPanel>
