@@ -44,5 +44,8 @@ namespace InventoryManager.Infrastructure
 		/// </summary>
 		public static void LinkViewWithViewModel(string viewName, string viewModelName) =>
 			_registeredViews[viewName].DataContext = _registeredViewModels[viewModelName];
+
+		public static ViewModelBase GetRegisteredViewModel<T>(string viewModelName) =>
+			_registeredViewModels[viewModelName];
 	}
 }
