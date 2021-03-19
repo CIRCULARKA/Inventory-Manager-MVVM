@@ -16,7 +16,7 @@
 				<MenuItem Header="Установить маску подсети..." Command="{Binding ShowSetIPMaskDialogCommand}" />
 			</MenuItem>
 		</Menu>
-		<TabControl ItemsSource="{Binding MainViewTabs}">
+		<TabControl ItemsSource="{Binding MainViewTabs}" SelectedIndex="0">
 		</TabControl>
 	</StackPanel>
 </src:ViewBase>
