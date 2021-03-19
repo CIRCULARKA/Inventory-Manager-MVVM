@@ -28,7 +28,7 @@ namespace InventoryManager.ViewModels
 						Repository.SetNewRangeOfIPAddresses(NetworkConfigurator.IPAddresses);
 						Repository.SaveChanges();
 
-						InventoryManagerEvents.RaiseOnNetworkMaskChangedEvent();
+						OnNetworkMaskChanged?.Invoke();
 					}
 					catch (Exception e)
 					{
@@ -48,6 +48,8 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
+
+		public event Action OnNetworkMaskChanged;
 
 		private IIPAddressRepository Repository { get; }
 
