@@ -7,7 +7,7 @@ namespace InventoryManager.Infrastructure
 	/// <summary>
 	/// Class for linking views with view models for farther bindings
 	/// </summary>
-	public class ViewModelLinker
+	public static class ViewModelLinker
 	{
 		private static Dictionary<string, ViewBase> _registeredViews { get; } =
 			new Dictionary<string, ViewBase>();
