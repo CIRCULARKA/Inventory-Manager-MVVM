@@ -57,10 +57,7 @@ namespace InventoryManager.ViewModels
 		public AddUserViewModel AddUserViewModel =>
 			ViewModelLinker.GetRegisteredViewModel<AddUserViewModel>();
 
-		private void SubscribeActionOnUserAddition(Action<User> action)
-		{
-			if (AddUserViewModel != null)
-				(AddUserViewModel as AddUserViewModel).OnUserAdded += action;
-		}
+		private void SubscribeActionOnUserAddition(Action<User> action) =>
+			AddUserViewModel.OnUserAdded += action;
 	}
 }
