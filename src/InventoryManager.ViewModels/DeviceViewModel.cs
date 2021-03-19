@@ -348,7 +348,7 @@ namespace InventoryManager.ViewModels
 				.OnNetworkMaskChanged += action;
 
 		private void ClearDevicesIPLists() =>
-			SelectedDeviceIPAddresses.Clear();
+			SelectedDeviceIPAddresses?.Clear();
 
 		private void InitDevicesLocationWithInstances()
 		{
