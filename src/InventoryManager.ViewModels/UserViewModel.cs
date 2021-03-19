@@ -15,7 +15,6 @@ namespace InventoryManager.ViewModels
 		public UserViewModel(IUserRelatedRepository repo)
 		{
 			Repository = repo;
-			AddUserViewModel = new AddUserViewModel(Repository);
 
 			SubscribeActionOnUserAddition(
 				(user) => UsersToShow.Add(user)
@@ -55,7 +54,8 @@ namespace InventoryManager.ViewModels
 		public AddUserView AddUserView =>
 			ViewModelLinker.GetRegisteredView<AddUserView>();
 
-		public AddUserViewModel AddUserViewModel { get; set; }
+		public AddUserViewModel AddUserViewModel =>
+			ViewModelLinker.GetRegisteredViewModel<AddUserViewModel>();
 
 		private void SubscribeActionOnUserAddition(Action<User> action)
 		{
