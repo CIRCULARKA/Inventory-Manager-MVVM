@@ -92,9 +92,29 @@ namespace InventoryManager
 				nameof(MainViewModel)
 			);
 
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(AddDeviceView),
+				nameof(AddDeviceViewModel)
+			);
+
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(AddIPAddressView),
+				nameof(DeviceIPViewModel)
+			);
+
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(AddDeviceAccountView),
+				nameof(DeviceAccountViewModel)
+			);
+
 			ViewModelLinker.LinkPartialViewWithViewModel(
 				nameof(UsersManagementView),
 				nameof(UserViewModel)
+			);
+
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(AddUserView),
+				nameof(AddUserViewModel)
 			);
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
