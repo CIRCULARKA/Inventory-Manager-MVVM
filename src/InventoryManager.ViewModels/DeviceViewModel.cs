@@ -347,7 +347,8 @@ namespace InventoryManager.ViewModels
 			DeviceAccountViewModel.OnDeviceAccountAdded += action;
 
 		private void SubscribeActionOnNetworkMaskChanges(Action action)	=>
-			InventoryManagerEvents.OnNetworkMaskChanged += action;
+			(ViewModelLinker.GetRegisteredViewModel(nameof(ConfigureIPSettingsViewModel)) as
+				ConfigureIPSettingsViewModel).OnNetworkMaskChanged += action;
 
 		private void ClearDevicesIPLists() =>
 			SelectedDeviceIPAddresses.Clear();
