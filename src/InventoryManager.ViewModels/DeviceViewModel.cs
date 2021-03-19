@@ -179,8 +179,7 @@ namespace InventoryManager.ViewModels
 
 		public AddDeviceViewModel AddDeviceViewModel =>
 			ViewModelLinker.
-				GetRegisteredViewModel(nameof(AddDeviceViewModel))
-				as AddDeviceViewModel;
+				GetRegisteredViewModel<AddDeviceViewModel>();
 
 		public AddIPAddressView AddIPAddressView =>
 			ViewModelLinker.
@@ -188,8 +187,7 @@ namespace InventoryManager.ViewModels
 
 		public DeviceIPViewModel DeviceIPViewModel =>
 			ViewModelLinker.
-				GetRegisteredViewModel(nameof(DeviceIPViewModel))
-				as DeviceIPViewModel;
+				GetRegisteredViewModel<DeviceIPViewModel>();
 
 		public AddDeviceAccountView AddDeviceAccountView =>
 			ViewModelLinker.
@@ -201,8 +199,7 @@ namespace InventoryManager.ViewModels
 
 		public DeviceAccountViewModel DeviceAccountViewModel =>
 			ViewModelLinker.
-				GetRegisteredViewModel(nameof(DeviceAccountViewModel))
-				as DeviceAccountViewModel;
+				GetRegisteredViewModel<DeviceAccountViewModel>();
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -347,8 +344,8 @@ namespace InventoryManager.ViewModels
 			DeviceAccountViewModel.OnDeviceAccountAdded += action;
 
 		private void SubscribeActionOnNetworkMaskChanges(Action action)	=>
-			(ViewModelLinker.GetRegisteredViewModel(nameof(ConfigureIPSettingsViewModel)) as
-				ConfigureIPSettingsViewModel).OnNetworkMaskChanged += action;
+			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>()
+				.OnNetworkMaskChanged += action;
 
 		private void ClearDevicesIPLists() =>
 			SelectedDeviceIPAddresses.Clear();

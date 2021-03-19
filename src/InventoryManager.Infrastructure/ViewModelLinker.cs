@@ -48,8 +48,8 @@ namespace InventoryManager.Infrastructure
 		public static void LinkPartialViewWithViewModel(string viewName, string viewModelName) =>
 			_registeredPartialViews[viewName].DataContext = _registeredViewModels[viewModelName];
 
-		public static ViewModelBase GetRegisteredViewModel(string viewModelName) =>
-			_registeredViewModels[viewModelName];
+		public static T GetRegisteredViewModel<T>() where T : ViewModelBase =>
+			_registeredViewModels[typeof(T).Name] as T;
 
 		public static T GetRegisteredView<T>() where T : ViewBase, new() =>
 			_registeredViews[typeof(T).Name] as T;
