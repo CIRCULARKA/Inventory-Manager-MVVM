@@ -32,13 +32,7 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					NetworkConfigurationView = new ConfigureIPSettingsView();
-					NetworkConfigurationView.DataContext =
-						new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository());
-					NetworkConfigurationView.ShowDialog();
-				}
+				(obj) => NetworkConfigurationView.ShowDialog()
 			);
 		}
 
@@ -52,7 +46,8 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public ConfigureIPSettingsView NetworkConfigurationView { get; private set; }
+		public ConfigureIPSettingsView NetworkConfigurationView =>
+			ViewModelLinker.GetRegisteredView<ConfigureIPSettingsView>();
 
 		public Command ShowAboutProgramDialogCommand { get; }
 
