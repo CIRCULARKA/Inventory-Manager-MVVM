@@ -89,6 +89,11 @@ namespace InventoryManager
 			);
 
 			ViewModelLinker.LinkViewWithViewModel(
+				nameof(ConfigureIPSettingsView),
+				nameof(ConfigureIPSettingsViewModel)
+			);
+
+			ViewModelLinker.LinkViewWithViewModel(
 				nameof(AddDeviceView),
 				nameof(AddDeviceViewModel)
 			);
