@@ -12,11 +12,6 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Управление сертификатами"
-            FontSize="16" FontWeight="Bold"
-            HorizontalAlignment="Center"
-            Margin="0 5 0 10"
-            Grid.ColumnSpan="2" />
         <StackPanel Orientation="Horizontal">
         </StackPanel>
         <ListBox ItemsSource="{Binding CertificatesToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCertificate}"
