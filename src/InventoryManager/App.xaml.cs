@@ -38,10 +38,8 @@ namespace InventoryManager
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
 			ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
-			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
-
-			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddUserViewModel(userRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
 
 			var certificateRelatedRepo = new X509CertificateRelatedRepository();
 			ViewModelLinker.RegisterViewModel(new CertificateViewModel(certificateRelatedRepo));
@@ -50,11 +48,9 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new AddDeviceViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceAccountViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceIPViewModel(deviceRelatedRepo));
-			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
-
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
-
 			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel());
+			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
 
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
