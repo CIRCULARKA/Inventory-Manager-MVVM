@@ -18,6 +18,7 @@ namespace InventoryManager.ViewModels
 		{
 			NetworkConfigurator = new NetworkConfigurator(new XMLNetworkConfigurationReader());
 			Repository = repo;
+			InputtedNetworkMask = NetworkConfigurator.Mask.ToString();
 
 			ApplyNetworkSettingsChangesCommand = RegisterCommandAction(
 				(obj) =>
@@ -27,6 +28,9 @@ namespace InventoryManager.ViewModels
 						NetworkConfigurator.Mask = byte.Parse(InputtedNetworkMask);
 						Repository.SetNewRangeOfIPAddresses(NetworkConfigurator.IPAddresses);
 						Repository.SaveChanges();
+						NetworkConfigurator.WriteMask(new XMLNetworkConfigurationWriter());
+
+						MessageToUser = "Маска обновлена";
 
 						OnNetworkMaskChanged?.Invoke();
 					}
