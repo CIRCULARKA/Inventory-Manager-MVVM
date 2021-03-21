@@ -8,14 +8,6 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceSearchAndFilteringViewModel : ViewModelBase
 	{
-		private bool _includeServers;
-
-		private bool _includePC;
-
-		private bool _includeSwitches;
-
-		private IEnumerable<Device> _filteredDevices;
-
 		public DeviceSearchAndFilteringViewModel(IEnumerable<Device> allDevices)
 		{
 			AllDevices = allDevices;
