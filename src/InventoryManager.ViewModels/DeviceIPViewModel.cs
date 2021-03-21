@@ -32,7 +32,8 @@ namespace InventoryManager.ViewModels
 			);
 
 			AddIPToDeviceCommand = RegisterCommandAction(
-				(obj) => AddIPToDevice()
+				(obj) => AddIPToDevice(),
+				(obj) => SelectedIPAddress != null
 			);
 		}
 
