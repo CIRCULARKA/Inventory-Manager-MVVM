@@ -14,66 +14,74 @@ namespace InventoryManager.ViewModels
 
 		private bool _includeSwitches;
 
+		private IEnumerable<Device> _filteredDevices;
+
 		public DeviceSearchAndFilteringViewModel(IEnumerable<Device> allDevices)
 		{
 			AllDevices = allDevices;
-		}
 
-		public DeviceSearchAndFilteringViewModel() { }
+			OnDevicesFilteringConditionsChanged += FilterDevices;
+		}
 
 		public IEnumerable<Device> AllDevices { get; }
 
-		public event Action<IEnumerable<Device>> OnDevicesFilteringConditionsChanged;
+		public event Action OnDevicesFilteringConditionsChanged;
 
-		public bool IsServersIncluded
+		public bool IncludeServers
 		{
 			get => _includeServers;
 			set
 			{
 				_includeServers = value;
-				OnDevicesFilteringConditionsChanged?.Invoke(GetFilteredDevicesList());
+				OnDevicesFilteringConditionsChanged?.Invoke();
 			}
 		}
 
-		public bool IsPCIncluded
+		public bool IncludePC
 		{
 			get => _includePC;
 			set
 			{
 				_includePC = value;
-				OnDevicesFilteringConditionsChanged?.Invoke(GetFilteredDevicesList());
+				OnDevicesFilteringConditionsChanged?.Invoke();
 			}
 		}
 
-		public bool IsSwitchesIncluded
+		public bool IncludeSwitches
 		{
 			get => _includeSwitches;
 			set
 			{
 				_includeSwitches = value;
-				OnDevicesFilteringConditionsChanged?.Invoke(GetFilteredDevicesList());
+				OnDevicesFilteringConditionsChanged?.Invoke();
 			}
 		}
 
-		public string InputtedSearchQuery { get; set; }
+		public string SearchQuery { get; set; }
 
-		public IEnumerable<Device> GetFilteredDevicesList()
+		private void FilterDevices()
 		{
 			var result = AllDevices.
 				Where(
-					d => d.DeviceType.Name.Contains(InputtedSearchQuery) ||
-						d.InventoryNumber.Contains(InputtedSearchQuery) ||
-						d.NetworkName.Contains(InputtedSearchQuery)
+					d => d.DeviceType.Name.Contains(SearchQuery) ||
+						d.InventoryNumber.Contains(SearchQuery) ||
+						d.NetworkName.Contains(SearchQuery)
 				).AsQueryable();
 
-			if (IsServersIncluded)
+			if (IncludeServers)
 				result = result.Where(d => d.DeviceType.Name == "Сервер");
-			if (IsPCIncluded)
+			if (IncludePC)
 				result = result.Where(d => d.DeviceType.Name == "Персональный компьютер");
-			if (IsSwitchesIncluded)
+			if (IncludeSwitches)
 				result = result.Where(d => d.DeviceType.Name == "Коммутатор");
 
-			return result.ToList();
+			FilteredDevicesList = result;
+		}
+
+		public IEnumerable<Device> FilteredDevicesList
+		{
+			private set => _filteredDevices = value;
+			get => _filteredDevices;
 		}
 	}
 }
