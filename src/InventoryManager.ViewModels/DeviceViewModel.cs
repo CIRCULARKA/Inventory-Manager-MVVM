@@ -32,6 +32,8 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
+		private IEnumerable<DeviceMovementHistoryNote> _allDeviceHistoryNotes;
+
 		public DeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -67,6 +69,7 @@ namespace InventoryManager.ViewModels
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
 				{
+					RefreshSelectedDeviceHistory();
 					DeviceMovementHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
 					DeviceMovementHistoryView.ShowDialog();
 				},
@@ -221,8 +224,15 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public List<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes =>
-			Repository.GetAllDeviceHistoryNotes(SelectedDevice).ToList();
+		public IEnumerable<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes
+		{
+			get => _allDeviceHistoryNotes;
+			set
+			{
+				_allDeviceHistoryNotes = value;
+				OnPropertyChanged(nameof(SelectedDeviceMovementHistoryNotes));
+			}
+		}
 
 		public List<Housing> AllHousings => _allHousings;
 
@@ -358,5 +368,10 @@ namespace InventoryManager.ViewModels
 				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 			}
 		}
+
+		private void RefreshSelectedDeviceHistory() =>
+			SelectedDeviceMovementHistoryNotes =
+				Repository.GetAllDeviceHistoryNotes(SelectedDevice).ToList();
+
 	}
 }
