@@ -1,9 +1,9 @@
 using InventoryManager.Models;
 using InventoryManager.Commands;
-using Microsoft.EntityFrameworkCore;
+using InventoryManager.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
@@ -11,9 +11,25 @@ namespace InventoryManager.ViewModels
 	{
 		private string _inputtedIPAddress;
 
+		private IEnumerable<IPAddress> _allAvailableIPs;
+
 		public DeviceIPViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
+
+			RefreshAvailableIPList();
+
+			SubscribeActionOnNetworkConfigurationChanges(
+				RefreshAvailableIPList
+			);
+
+			SubscribeActionOnIPAssigning(
+				(d) => RefreshAvailableIPList()
+			);
+
+			SubscribeActionOnIpRemoving(
+				(d) => RefreshAvailableIPList()
+			);
 
 			AddIPToDeviceCommand = RegisterCommandAction(
 				(obj) => AddIPToDevice()
@@ -22,10 +38,19 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public event Action<IPAddress> OnIPAdded;
+		public event Action<IPAddress> OnIPAssigned;
 
-		public IEnumerable<IPAddress> AllAvailableIPAddresses =>
-			Repository.AllAvailableIPAddresses.ToList();
+		public event Action<IPAddress> OnIPRemoved;
+
+		public IEnumerable<IPAddress> AllAvailableIPAddresses
+		{
+			get => _allAvailableIPs;
+			set
+			{
+				_allAvailableIPs = Repository.AllAvailableIPAddresses.ToList();
+				OnPropertyChanged(nameof(AllAvailableIPAddresses));
+			}
+		}
 
 		public Device TargetDevice { get; set; }
 
@@ -50,7 +75,7 @@ namespace InventoryManager.ViewModels
 				Repository.AddIPToDevice(SelectedIPAddress, TargetDevice);
 				Repository.SaveChanges();
 
-				OnIPAdded?.Invoke(SelectedIPAddress);
+				OnIPAssigned?.Invoke(SelectedIPAddress);
 
 				InputtedIPAddress = "";
 				MessageToUser = "Адрес успешно добавлен";
@@ -65,6 +90,21 @@ namespace InventoryManager.ViewModels
 		{
 			Repository.RemoveIPFromDevice(ip, TargetDevice);
 			Repository.SaveChanges();
+			OnIPRemoved?.Invoke(ip);
 		}
+
+		public void RefreshAvailableIPList() =>
+			AllAvailableIPAddresses =
+				Repository.AllAvailableIPAddresses.ToList();
+
+		private void SubscribeActionOnNetworkConfigurationChanges(Action action) =>
+			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>().
+				OnNetworkMaskChanged += action;
+
+		private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
+			this.OnIPRemoved += action;
+
+		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
+			this.OnIPAssigned += action;
 	}
 }
