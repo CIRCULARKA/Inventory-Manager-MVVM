@@ -19,47 +19,19 @@ namespace InventoryManager.ViewModels
 		public DeviceSearchAndFilteringViewModel(IEnumerable<Device> allDevices)
 		{
 			AllDevices = allDevices;
-
-			OnDevicesFilteringConditionsChanged += FilterDevices;
 		}
 
 		public IEnumerable<Device> AllDevices { get; }
 
-		public event Action OnDevicesFilteringConditionsChanged;
+		public bool IncludeServers { get; set; }
 
-		public bool IncludeServers
-		{
-			get => _includeServers;
-			set
-			{
-				_includeServers = value;
-				OnDevicesFilteringConditionsChanged?.Invoke();
-			}
-		}
+		public bool IncludePC { get; set; }
 
-		public bool IncludePC
-		{
-			get => _includePC;
-			set
-			{
-				_includePC = value;
-				OnDevicesFilteringConditionsChanged?.Invoke();
-			}
-		}
-
-		public bool IncludeSwitches
-		{
-			get => _includeSwitches;
-			set
-			{
-				_includeSwitches = value;
-				OnDevicesFilteringConditionsChanged?.Invoke();
-			}
-		}
+		public bool IncludeSwitches { get; set; }
 
 		public string SearchQuery { get; set; }
 
-		private void FilterDevices()
+		private IEnumerable<Device> FilterDevices()
 		{
 			var result = AllDevices.
 				Where(
@@ -75,13 +47,9 @@ namespace InventoryManager.ViewModels
 			if (IncludeSwitches)
 				result = result.Where(d => d.DeviceType.Name == "Коммутатор");
 
-			FilteredDevicesList = result;
+			return result;
 		}
 
-		public IEnumerable<Device> FilteredDevicesList
-		{
-			private set => _filteredDevices = value;
-			get => _filteredDevices;
-		}
+		public IEnumerable<Device> FilteredDevicesList => FilterDevices();
 	}
 }
