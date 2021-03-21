@@ -338,7 +338,7 @@ namespace InventoryManager.ViewModels
 			AddDeviceViewModel.OnDeviceAdded += action;
 
 		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
-			DeviceIPViewModel.OnIPAdded += action;
+			DeviceIPViewModel.OnIPAssigned += action;
 
 		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
 			DeviceAccountViewModel.OnDeviceAccountAdded += action;
