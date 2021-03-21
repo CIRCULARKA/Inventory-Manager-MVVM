@@ -127,6 +127,11 @@ namespace InventoryManager
 				nameof(CertificatesManagementView),
 				nameof(CertificateViewModel)
 			);
+
+			ViewModelLinker.LinkViewWithViewModel(
+				nameof(DeviceMovementHistoryView),
+				nameof(DeviceViewModel)
+			);
 		}
 	}
 }
