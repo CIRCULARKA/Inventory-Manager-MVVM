@@ -49,7 +49,6 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new DeviceAccountViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 			ViewModelLinker.RegisterViewModel(new DeviceIPViewModel(deviceRelatedRepo));
-			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel());
 			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
 
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
