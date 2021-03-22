@@ -8,27 +8,18 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceSearchAndFilteringViewModel : ViewModelBase
 	{
-		public DeviceSearchAndFilteringViewModel(IEnumerable<Device> allDevices)
-		{
-			InitialList = allDevices.ToList();
-
-			IncludeServers = true;
-			IncludePC = true;
-			IncludeSwitches = true;
-		}
-
 		public List<Device> InitialList { get; }
 
-		public bool IncludeServers { get; set; }
+		public bool IncludeServers { get; set; } = true;
 
-		public bool IncludePC { get; set; }
+		public bool IncludePC { get; set; } = true;
 
-		public bool IncludeSwitches { get; set; }
+		public bool IncludeSwitches { get; set; } = true;
 
 		public string SearchQuery { get; set; } = "";
 
-		private IEnumerable<Device> FilterDevices() =>
-			InitialList.Where(d => IsDeviceMeetsSearchAndFilteringCriteria(d));
+		public IEnumerable<Device> GetFilteredDevicesList(IEnumerable<Device> list) =>
+			list.Where(d => IsDeviceMeetsSearchAndFilteringCriteria(d));
 
 		public bool IsDeviceMeetsSearchAndFilteringCriteria(Device device)
 		{
@@ -45,7 +36,5 @@ namespace InventoryManager.ViewModels
 				return false;
 			} else return false;
 		}
-
-		public IEnumerable<Device> FilteredDevicesList => FilterDevices();
 	}
 }
