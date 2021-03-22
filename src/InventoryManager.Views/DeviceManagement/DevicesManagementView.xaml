@@ -46,15 +46,18 @@
                 </GroupBox.Header>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="0 3 2 0" IsChecked="True" />
+                        <CheckBox Margin="0 3 2 0" IsChecked="{Binding IsServersIncluded}"
+                            Command="{Binding FilterDevicesCommand}" />
                         <TextBlock Text="Серверы" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="0 3 2 0" IsChecked="True" />
+                        <CheckBox Margin="0 3 2 0" IsChecked="{Binding IsPCIncluded}"
+                            Command="{Binding FilterDevicesCommand}" />
                         <TextBlock Text="ПК" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="0 3 2 0" IsChecked="True" />
+                        <CheckBox Margin="0 3 2 0" IsChecked="{Binding IsSwitchesIncluded}"
+                            Command="{Binding FilterDevicesCommand}" />
                         <TextBlock Text="Коммутаторы" />
                     </StackPanel>
                 </StackPanel>
