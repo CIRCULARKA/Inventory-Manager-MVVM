@@ -28,8 +28,6 @@ namespace InventoryManager.ViewModels
 
 		private ObservableCollection<Device> _devicesToShow;
 
-		private ObservableCollection<Device> _allDevices;
-
 		private List<Cabinet> _selectedHousingCabinets;
 
 		private List<Housing> _allHousings;
@@ -48,14 +46,14 @@ namespace InventoryManager.ViewModels
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
 			_allHousings = Repository.AllHousings.ToList();
 			_allCabinets = Repository.AllCabinets.ToList();
-			_allDevices = Repository.AllDevices.ToObservableCollection();
+			AllDevices = Repository.AllDevices.ToList();
 
 			_deviceFilter = new DeviceSearchAndFilteringViewModel();
 
 			InitDevicesLocationWithInstances();
 
 			DevicesToShow = _deviceFilter.
-				GetFilteredDevicesList(_allDevices).
+				GetFilteredDevicesList(AllDevices).
 				ToObservableCollection();
 
 			SubscribeActionOnDeviceAddition(
@@ -65,7 +63,7 @@ namespace InventoryManager.ViewModels
 					device.Cabinet = Repository.FindCabinet(device.CabinetID);
 					device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 
-					_allDevices.Add(device);
+					AllDevices.Add(device);
 					if (_deviceFilter.IsDeviceMeetsSearchAndFilteringCriteria(device))
 						DevicesToShow.Add(device);
 				}
@@ -104,6 +102,7 @@ namespace InventoryManager.ViewModels
 					Repository.DeleteAllDeviceMovementHistory(SelectedDevice);
 
 					Repository.SaveChanges();
+					AllDevices.Remove(AllDevices.Find(d => d.ID == SelectedDevice.ID));
 					DevicesToShow.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
@@ -193,7 +192,7 @@ namespace InventoryManager.ViewModels
 					_deviceFilter.IncludePC = IsPCIncluded;
 
 					DevicesToShow = _deviceFilter.
-						GetFilteredDevicesList(_allDevices).
+						GetFilteredDevicesList(AllDevices).
 						ToObservableCollection();
 				}
 			);
@@ -210,6 +209,8 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged(nameof(DevicesToShow));
 			}
 		}
+
+		public List<Device> AllDevices { get; set; }
 
 		public AddDeviceView AddDeviceView =>
 			ViewModelLinker.
@@ -367,7 +368,7 @@ namespace InventoryManager.ViewModels
 				_inputtedSearchQuery = value;
 				_deviceFilter.SearchQuery = value;
 				DevicesToShow = _deviceFilter.
-					GetFilteredDevicesList(_allDevices).
+					GetFilteredDevicesList(AllDevices).
 					ToObservableCollection();
 			}
 		}
@@ -418,7 +419,7 @@ namespace InventoryManager.ViewModels
 
 		private void InitDevicesLocationWithInstances()
 		{
-			foreach (var device in _allDevices)
+			foreach (var device in AllDevices)
 			{
 				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
 				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
