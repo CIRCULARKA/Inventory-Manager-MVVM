@@ -36,7 +36,7 @@ namespace InventoryManager.ViewModels
 
 		private IEnumerable<DeviceMovementHistoryNote> _allDeviceHistoryNotes;
 
-		private DeviceSearchAndFilteringViewModel _deviceFilter;
+		private DeviceFilter _deviceFilter;
 
 		public DeviceViewModel(IDeviceRelatedRepository repo)
 		{
@@ -48,7 +48,7 @@ namespace InventoryManager.ViewModels
 			_allCabinets = Repository.AllCabinets.ToList();
 			AllDevices = Repository.AllDevices.ToList();
 
-			_deviceFilter = new DeviceSearchAndFilteringViewModel();
+			_deviceFilter = new DeviceFilter();
 
 			InitDevicesLocationWithInstances();
 

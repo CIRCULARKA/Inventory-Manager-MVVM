@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceSearchAndFilteringViewModel : ViewModelBase
+	public class DeviceFilter : ViewModelBase
 	{
 		public List<Device> InitialList { get; }
 
