@@ -1,6 +1,6 @@
 namespace InventoryManager.Views
 {
-	public partial class AddIPAddressView : ViewBase
+	public partial class AddIPAddressView : DialogBase
 	{
 		public AddIPAddressView() => InitializeComponent();
 	}

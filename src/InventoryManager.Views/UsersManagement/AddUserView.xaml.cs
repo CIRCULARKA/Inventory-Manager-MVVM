@@ -1,10 +1,8 @@
 namespace InventoryManager.Views
 {
-	public partial class AddUserView : ViewBase
+	public partial class AddUserView : DialogBase
 	{
-		public AddUserView()
-		{
+		public AddUserView() =>
 			InitializeComponent();
-		}
 	}
 }

@@ -1,10 +1,8 @@
 namespace InventoryManager.Views
 {
-	public partial class AddCertificateView : ViewBase
+	public partial class AddCertificateView : DialogBase
 	{
-		public AddCertificateView()
-		{
+		public AddCertificateView() =>
 			InitializeComponent();
-		}
 	}
 }

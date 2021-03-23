@@ -14,6 +14,8 @@ namespace InventoryManager.ViewModels
 	{
 		private bool _isDeviceLocationChoosingAvailable;
 
+		private string _inputtedSearchQuery;
+
 		private Device _selectedDevice;
 
 		private Housing _selectedHousing;
@@ -24,7 +26,7 @@ namespace InventoryManager.ViewModels
 
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 
-		private ObservableCollection<Device> _allDevices;
+		private ObservableCollection<Device> _devicesToShow;
 
 		private List<Cabinet> _selectedHousingCabinets;
 
@@ -32,21 +34,27 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
+		private IEnumerable<DeviceMovementHistoryNote> _allDeviceHistoryNotes;
+
+		private DeviceFilter _deviceFilter;
+
 		public DeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
-
-			AddDeviceViewModel = new AddDeviceViewModel(Repository);
-			DeviceIPViewModel = new DeviceIPViewModel(Repository);
-			DeviceAccountViewModel = new DeviceAccountViewModel(Repository);
 
 			// Load devices housings and cabinets explicitly because device must have them from
 			// _allHousings and _allCabinets instances so SelectedHousing and SelectedCabinet bindings will work
 			_allHousings = Repository.AllHousings.ToList();
 			_allCabinets = Repository.AllCabinets.ToList();
-			_allDevices = Repository.AllDevices.ToObservableCollection();
+			AllDevices = Repository.AllDevices.ToList();
+
+			_deviceFilter = new DeviceFilter();
 
 			InitDevicesLocationWithInstances();
+
+			DevicesToShow = _deviceFilter.
+				GetFilteredDevicesList(AllDevices).
+				ToObservableCollection();
 
 			SubscribeActionOnDeviceAddition(
 				(device) =>
@@ -54,7 +62,10 @@ namespace InventoryManager.ViewModels
 					device.DeviceType = Repository.AllDeviceTypes.Single(dt => dt.ID == device.DeviceTypeID);
 					device.Cabinet = Repository.FindCabinet(device.CabinetID);
 					device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
-					DevicesToShow.Add(device);
+
+					AllDevices.Add(device);
+					if (_deviceFilter.IsDeviceMeetsSearchAndFilteringCriteria(device))
+						DevicesToShow.Add(device);
 				}
 			);
 
@@ -71,21 +82,15 @@ namespace InventoryManager.ViewModels
 			ShowDeviceMovementHistoryCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var deviceHistoryView = new DeviceMovementHistoryView();
-					deviceHistoryView.DataContext = this;
-					deviceHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
-					deviceHistoryView.ShowDialog();
+					RefreshSelectedDeviceHistory();
+					DeviceMovementHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
+					DeviceMovementHistoryView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
 			);
 
 			OpenAddDeviceViewCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					AddDeviceView = new AddDeviceView();
-					AddDeviceView.DataContext = AddDeviceViewModel;
-					AddDeviceView.ShowDialog();
-				}
+				(obj) => AddDeviceView.ShowDialog()
 			);
 
 			RemoveDeviceCommand = RegisterCommandAction(
@@ -97,6 +102,7 @@ namespace InventoryManager.ViewModels
 					Repository.DeleteAllDeviceMovementHistory(SelectedDevice);
 
 					Repository.SaveChanges();
+					AllDevices.Remove(AllDevices.Find(d => d.ID == SelectedDevice.ID));
 					DevicesToShow.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
@@ -105,8 +111,6 @@ namespace InventoryManager.ViewModels
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AddDeviceAccountView = new AddDeviceAccountView();
-					AddDeviceAccountView.DataContext = DeviceAccountViewModel;
 					DeviceAccountViewModel.TargetDevice = SelectedDevice;
 					AddDeviceAccountView.ShowDialog();
 				},
@@ -126,8 +130,6 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					DeviceIPViewModel.TargetDevice = SelectedDevice;
-					AddIPAddressView = new AddIPAddressView();
-					AddIPAddressView.DataContext = DeviceIPViewModel;
 					AddIPAddressView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
@@ -181,24 +183,62 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedDevice != null
 			);
+
+			FilterDevicesCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					_deviceFilter.IncludeServers = IsServersIncluded;
+					_deviceFilter.IncludeSwitches = IsSwitchesIncluded;
+					_deviceFilter.IncludePC = IsPCIncluded;
+
+					DevicesToShow = _deviceFilter.
+						GetFilteredDevicesList(AllDevices).
+						ToObservableCollection();
+				}
+			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public ObservableCollection<Device> DevicesToShow =>
-			_allDevices;
+		public ObservableCollection<Device> DevicesToShow
+		{
+			get => _devicesToShow;
+			set
+			{
+				_devicesToShow = value;
+				OnPropertyChanged(nameof(DevicesToShow));
+			}
+		}
 
-		public AddDeviceView AddDeviceView { get; set; }
+		public List<Device> AllDevices { get; set; }
 
-		public AddDeviceViewModel AddDeviceViewModel { get; }
+		public AddDeviceView AddDeviceView =>
+			ViewModelLinker.
+				GetRegisteredView<AddDeviceView>();
 
-		public AddIPAddressView AddIPAddressView { get; set; }
+		public AddDeviceViewModel AddDeviceViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel<AddDeviceViewModel>();
 
-		public DeviceIPViewModel DeviceIPViewModel { get; }
+		public AddIPAddressView AddIPAddressView =>
+			ViewModelLinker.
+				GetRegisteredView<AddIPAddressView>();
 
-		public AddDeviceAccountView AddDeviceAccountView { get; set; }
+		public DeviceIPViewModel DeviceIPViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceIPViewModel>();
 
-		public DeviceAccountViewModel DeviceAccountViewModel { get; }
+		public AddDeviceAccountView AddDeviceAccountView =>
+			ViewModelLinker.
+				GetRegisteredView<AddDeviceAccountView>();
+
+		public DeviceMovementHistoryView DeviceMovementHistoryView =>
+			ViewModelLinker.
+				GetRegisteredView<DeviceMovementHistoryView>();
+
+		public DeviceAccountViewModel DeviceAccountViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceAccountViewModel>();
 
 		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
 		{
@@ -220,8 +260,15 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public List<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes =>
-			Repository.GetAllDeviceHistoryNotes(SelectedDevice).ToList();
+		public IEnumerable<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes
+		{
+			get => _allDeviceHistoryNotes;
+			set
+			{
+				_allDeviceHistoryNotes = value;
+				OnPropertyChanged(nameof(SelectedDeviceMovementHistoryNotes));
+			}
+		}
 
 		public List<Housing> AllHousings => _allHousings;
 
@@ -313,6 +360,25 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		public string InputtedSearchQuery
+		{
+			get => _inputtedSearchQuery;
+			set
+			{
+				_inputtedSearchQuery = value;
+				_deviceFilter.SearchQuery = value;
+				DevicesToShow = _deviceFilter.
+					GetFilteredDevicesList(AllDevices).
+					ToObservableCollection();
+			}
+		}
+
+		public bool IsServersIncluded { get; set; } = true;
+
+		public bool IsPCIncluded { get; set; } = true;
+
+		public bool IsSwitchesIncluded { get; set; } = true;
+
 		public DeviceAccount SelectedDeviceAccount { get; set; }
 
 		public IPAddress SelectedDeviceIP { get; set; }
@@ -333,28 +399,38 @@ namespace InventoryManager.ViewModels
 
 		public Command ApplyDeviceLocationChangesCommand { get; }
 
+		public Command FilterDevicesCommand { get; }
+
 		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
 			AddDeviceViewModel.OnDeviceAdded += action;
 
 		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
-			DeviceIPViewModel.OnIPAdded += action;
+			DeviceIPViewModel.OnIPAssigned += action;
 
 		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
 			DeviceAccountViewModel.OnDeviceAccountAdded += action;
 
-		private void SubscribeActionOnNetworkMaskChanges(Action action)	=>
-			InventoryManagerEvents.OnNetworkMaskChanged += action;
+		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
+			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>()
+				.OnNetworkMaskChanged += action;
 
 		private void ClearDevicesIPLists() =>
-			SelectedDeviceIPAddresses.Clear();
+			SelectedDeviceIPAddresses?.Clear();
 
 		private void InitDevicesLocationWithInstances()
 		{
-			foreach (var device in _allDevices)
+			foreach (var device in AllDevices)
 			{
 				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
 				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 			}
 		}
+
+		private void RefreshSelectedDeviceHistory() =>
+			SelectedDeviceMovementHistoryNotes =
+				Repository.GetAllDeviceHistoryNotes(SelectedDevice).ToList();
+
+		private void AddNewDeviceToInitialList(Device newDevice) =>
+			_deviceFilter.InitialList.Add(newDevice);
 	}
 }

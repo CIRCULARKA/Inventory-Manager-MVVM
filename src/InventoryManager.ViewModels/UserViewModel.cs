@@ -2,6 +2,7 @@ using InventoryManager.Commands;
 using InventoryManager.Models;
 using InventoryManager.Extensions;
 using InventoryManager.Views;
+using InventoryManager.Infrastructure;
 using System.Collections.ObjectModel;
 using System;
 
@@ -14,7 +15,6 @@ namespace InventoryManager.ViewModels
 		public UserViewModel(IUserRelatedRepository repo)
 		{
 			Repository = repo;
-			AddUserViewModel = new AddUserViewModel(Repository);
 
 			SubscribeActionOnUserAddition(
 				(user) => UsersToShow.Add(user)
@@ -34,12 +34,7 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddUserViewCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					AddUserView = new AddUserView();
-					AddUserView.DataContext = AddUserViewModel;
-					AddUserView.ShowDialog();
-				}
+				(obj) => AddUserView.ShowDialog()
 			);
 		}
 
@@ -56,14 +51,13 @@ namespace InventoryManager.ViewModels
 
 		public Command ShowAddUserViewCommand { get; }
 
-		public AddUserView AddUserView { get; private set; }
+		public AddUserView AddUserView =>
+			ViewModelLinker.GetRegisteredView<AddUserView>();
 
-		public AddUserViewModel AddUserViewModel { get; set; }
+		public AddUserViewModel AddUserViewModel =>
+			ViewModelLinker.GetRegisteredViewModel<AddUserViewModel>();
 
-		private void SubscribeActionOnUserAddition(Action<User> action)
-		{
-			if (AddUserViewModel != null)
-				(AddUserViewModel as AddUserViewModel).OnUserAdded += action;
-		}
+		private void SubscribeActionOnUserAddition(Action<User> action) =>
+			AddUserViewModel.OnUserAdded += action;
 	}
 }

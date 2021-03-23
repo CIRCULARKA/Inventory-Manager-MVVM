@@ -1,16 +1,15 @@
-using System.Windows;
 using System.ComponentModel;
 
 namespace InventoryManager.Views
 {
-	public class ViewBase : Window
+	public class DialogBase : ViewBase
 	{
-		public ViewBase() { }
+		public DialogBase() { }
 
 		protected override void OnClosing(CancelEventArgs info)
 		{
-			Application.Current.Shutdown();
+			info.Cancel = true;
+			this.Hide();
 		}
-
 	}
 }

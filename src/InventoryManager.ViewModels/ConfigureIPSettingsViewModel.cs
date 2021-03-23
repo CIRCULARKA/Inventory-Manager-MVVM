@@ -18,6 +18,7 @@ namespace InventoryManager.ViewModels
 		{
 			NetworkConfigurator = new NetworkConfigurator(new XMLNetworkConfigurationReader());
 			Repository = repo;
+			InputtedNetworkMask = NetworkConfigurator.Mask.ToString();
 
 			ApplyNetworkSettingsChangesCommand = RegisterCommandAction(
 				(obj) =>
@@ -27,8 +28,11 @@ namespace InventoryManager.ViewModels
 						NetworkConfigurator.Mask = byte.Parse(InputtedNetworkMask);
 						Repository.SetNewRangeOfIPAddresses(NetworkConfigurator.IPAddresses);
 						Repository.SaveChanges();
+						NetworkConfigurator.WriteMask(new XMLNetworkConfigurationWriter());
 
-						InventoryManagerEvents.RaiseOnNetworkMaskChangedEvent();
+						MessageToUser = "Маска обновлена";
+
+						OnNetworkMaskChanged?.Invoke();
 					}
 					catch (Exception e)
 					{
@@ -48,6 +52,8 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
+
+		public event Action OnNetworkMaskChanged;
 
 		private IIPAddressRepository Repository { get; }
 

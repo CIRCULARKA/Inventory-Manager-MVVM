@@ -6,13 +6,9 @@
 	Title="Окно пользователя"
 	WindowStartupLocation="CenterScreen"
 	ResizeMode="NoResize"
-	SizeToContent="Height"
-	Width="450">
+	SizeToContent="WidthAndHeight">
 	<StackPanel>
 		<Menu Margin="0 0 0 10">
-			<Menu.DataContext>
-				<vms:MainViewModel />
-			</Menu.DataContext>
 			<MenuItem Header="Главное">
 				<MenuItem Header="О программе" Command="{Binding ShowAboutProgramDialogCommand}" />
 			</MenuItem>
@@ -20,26 +16,7 @@
 				<MenuItem Header="Установить маску подсети..." Command="{Binding ShowSetIPMaskDialogCommand}" />
 			</MenuItem>
 		</Menu>
-		<!-- This is temporary solution with TabControl until I figure out how to load views dynamically -->
-		<TabControl ItemsSource="{Binding MainViewContent}">
-			<TabItem>
-				<TabItem.Header>Устройства</TabItem.Header>
-				<TabItem.Content>
-					<src:DevicesManagementView />
-				</TabItem.Content>
-			</TabItem>
-			<TabItem>
-				<TabItem.Header>Пользователи</TabItem.Header>
-				<TabItem.Content>
-					<src:UsersManagementView />
-				</TabItem.Content>
-			</TabItem>
-			<TabItem>
-				<TabItem.Header>Сертификаты</TabItem.Header>
-				<TabItem.Content>
-					<src:CertificatesManagementView />
-				</TabItem.Content>
-			</TabItem>
+		<TabControl ItemsSource="{Binding MainViewTabs}" SelectedIndex="0">
 		</TabControl>
 	</StackPanel>
 </src:ViewBase>

@@ -1,15 +1,15 @@
 using InventoryManager.Commands;
 using InventoryManager.Views;
 using InventoryManager.Models;
+using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : ViewModelBase
 	{
-		public AuthorizationViewModel(ViewBase view, IUserRelatedRepository repo)
+		public AuthorizationViewModel(IUserRelatedRepository repo)
 		{
 			Repository = repo;
-			AuthorizationView = view;
 
 			LoginCommand = RegisterCommandAction(
 				(obj) =>
@@ -31,7 +31,8 @@ namespace InventoryManager.ViewModels
 
 		private IUserRelatedRepository Repository { get; }
 
-		private ViewBase AuthorizationView { get; }
+		private ViewBase AuthorizationView =>
+			ViewModelLinker.GetRegisteredView<AuthorizationView>();
 
 		public Command LoginCommand { get; }
 

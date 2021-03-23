@@ -6,11 +6,7 @@ namespace InventoryManager.Views
 {
 	public partial class CertificatesManagementView : UserControl
 	{
-		public CertificatesManagementView()
-		{
+		public CertificatesManagementView() =>
 			InitializeComponent();
-
-			DataContext = new CertificateViewModel(new X509CertificateRelatedRepository());
-		}
 	}
 }

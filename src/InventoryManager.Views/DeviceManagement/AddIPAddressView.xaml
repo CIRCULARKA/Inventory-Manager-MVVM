@@ -1,4 +1,4 @@
-<src:ViewBase x:Class="InventoryManager.Views.AddIPAddressView"
+<src:DialogBase x:Class="InventoryManager.Views.AddIPAddressView"
         xmlns:src="clr-namespace:InventoryManager.Views"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -25,4 +25,4 @@
 		<Button Content="Добавить" Height="30" Command="{Binding AddIPToDeviceCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
-</src:ViewBase>
+</src:DialogBase>
