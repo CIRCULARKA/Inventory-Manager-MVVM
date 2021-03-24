@@ -4,7 +4,7 @@ namespace InventoryManager.Views
 {
 	public partial class DevicesListView : UserControl
 	{
-		public DevicesList() =>
+		public DevicesListView() =>
 			InitializeComponent();
 	}
 }
