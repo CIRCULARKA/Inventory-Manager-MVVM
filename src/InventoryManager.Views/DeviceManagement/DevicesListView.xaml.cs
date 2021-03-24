@@ -2,7 +2,7 @@ using System.Windows.Controls;
 
 namespace InventoryManager.Views
 {
-	public partial class DevicesList : UserControl
+	public partial class DevicesListView : UserControl
 	{
 		public DevicesList() =>
 			InitializeComponent();
