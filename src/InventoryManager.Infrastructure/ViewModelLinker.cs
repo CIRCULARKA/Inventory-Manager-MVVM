@@ -54,8 +54,8 @@ namespace InventoryManager.Infrastructure
 		public static T GetRegisteredView<T>() where T : ViewBase, new() =>
 			_registeredViews[typeof(T).Name] as T;
 
-		public static System.Windows.Controls.UserControl GetRegisteredPartialView<T>()
+		public static T GetRegisteredPartialView<T>()
 			where T : System.Windows.Controls.UserControl =>
-			_registeredPartialViews[typeof(T).Name];
+			_registeredPartialViews[typeof(T).Name] as T;
 	}
 }
