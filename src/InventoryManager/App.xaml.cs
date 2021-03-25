@@ -65,6 +65,7 @@ namespace InventoryManager
 			ViewModelLinker.RegisterPartialView(new CertificatesManagementView());
 			ViewModelLinker.RegisterPartialView(new DevicesListView());
 			ViewModelLinker.RegisterPartialView(new DeviceIPListView());
+			ViewModelLinker.RegisterPartialView(new DeviceAccountsListView());
 
 			ViewModelLinker.RegisterView(new AddCertificateView());
 
