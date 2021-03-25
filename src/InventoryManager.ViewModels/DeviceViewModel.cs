@@ -200,6 +200,9 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
+		public DevicesListView DevicesListPartialView =>
+			ViewModelLinker.GetRegisteredPartialView<DevicesListView>();
+
 		public ObservableCollection<Device> DevicesToShow
 		{
 			get => _devicesToShow;
