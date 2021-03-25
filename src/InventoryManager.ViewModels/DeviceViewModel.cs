@@ -89,25 +89,6 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
-			OpenAddDeviceViewCommand = RegisterCommandAction(
-				(obj) => AddDeviceView.ShowDialog()
-			);
-
-			RemoveDeviceCommand = RegisterCommandAction(
-				(obj) =>
-				{
-					Repository.RemoveDevice(SelectedDevice);
-
-					// Delete also all device movement history
-					Repository.DeleteAllDeviceMovementHistory(SelectedDevice);
-
-					Repository.SaveChanges();
-					AllDevices.Remove(AllDevices.Find(d => d.ID == SelectedDevice.ID));
-					DevicesToShow.Remove(SelectedDevice);
-				},
-				(obj) => SelectedDevice != null
-			);
-
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -202,6 +183,18 @@ namespace InventoryManager.ViewModels
 
 		public DevicesListView DevicesListPartialView =>
 			ViewModelLinker.GetRegisteredPartialView<DevicesListView>();
+
+		public DeviceIPListView DeviceIPListPartialView =>
+			ViewModelLinker.GetRegisteredPartialView<DeviceIPListView>();
+
+		public DeviceAccountsListView DeviceAccountsListPartialView =>
+			ViewModelLinker.GetRegisteredPartialView<DeviceAccountsListView>();
+
+		public DeviceLocationView DeviceLocationPartialView =>
+			ViewModelLinker.GetRegisteredPartialView<DeviceLocationView>();
+
+		public DeviceSearchAndFilteringView DeviceSearchAndFilteringPartialView =>
+			ViewModelLinker.GetRegisteredPartialView<DeviceSearchAndFilteringView>();
 
 		public ObservableCollection<Device> DevicesToShow
 		{
@@ -387,10 +380,6 @@ namespace InventoryManager.ViewModels
 		public IPAddress SelectedDeviceIP { get; set; }
 
 		public Command ShowDeviceMovementHistoryCommand { get; set; }
-
-		public Command RemoveDeviceCommand { get; }
-
-		public Command OpenAddDeviceViewCommand { get; }
 
 		public Command ShowAddDeviceAccountViewCommand { get; }
 
