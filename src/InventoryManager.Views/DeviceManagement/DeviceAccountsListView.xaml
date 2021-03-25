@@ -11,24 +11,26 @@
             <Setter Property="Margin" Value="0 0 3 0"/>
         </Style>
 	</UserControl.Resources>
-	<ListBox
-		ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
-		SelectedItem="{Binding SelectedDeviceAccount}"
-		Height="100"
-		Margin="0 0 0 3">
-		<ListBox.ItemTemplate>
-			<DataTemplate>
-				<StackPanel>
-					<TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
-					<TextBlock Text="{Binding Path=Password}" />
-				</StackPanel>
-			</DataTemplate>
-		</ListBox.ItemTemplate>
-	</ListBox>
-	<StackPanel Orientation="Horizontal">
-		<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-			Command="{Binding ShowAddDeviceAccountViewCommand}" />
-		<Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
-			Command="{Binding RemoveDeviceAccountCommand}" />
+	<StackPanel>
+		<ListBox
+			ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
+			SelectedItem="{Binding SelectedDeviceAccount}"
+			Height="100"
+			Margin="0 0 0 3">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
+						<TextBlock Text="{Binding Path=Password}" />
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Orientation="Horizontal">
+			<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+				Command="{Binding ShowAddDeviceAccountViewCommand}" />
+			<Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+				Command="{Binding RemoveDeviceAccountCommand}" />
+		</StackPanel>
 	</StackPanel>
 </UserControl>
