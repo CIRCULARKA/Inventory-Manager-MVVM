@@ -80,26 +80,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
-                <ListBox
-                    ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedItem="{Binding SelectedDeviceAccount}"
-                    Height="100"
-                    Margin="0 0 0 3">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
-                                <TextBlock Text="{Binding Path=Password}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
-                        Command="{Binding ShowAddDeviceAccountViewCommand}" />
-                    <Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
-                        Command="{Binding RemoveDeviceAccountCommand}" />
-                </StackPanel>
+                <UserControl Content="{Binding DeviceAccountsListPartialView}" />
                 <TextBlock Text="IP-адреса"
                     FontSize="14" FontWeight="Bold"
                     Margin="0 10 0 3" />
