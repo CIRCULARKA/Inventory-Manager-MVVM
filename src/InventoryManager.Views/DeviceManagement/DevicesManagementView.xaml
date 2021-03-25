@@ -86,32 +86,8 @@
                     Margin="0 10 0 3" />
                 <UserControl Content="{Binding DeviceIPListPartialView}" />
             </StackPanel>
-            <GroupBox Margin="0 10 0 2"
-                Grid.Row="1" IsEnabled="{Binding IsDeviceLocationChoosingAvailable}">
-                <GroupBox.Header>
-                    <TextBlock Text="Расположение" FontSize="14" FontWeight="Bold" />
-                </GroupBox.Header>
-                <StackPanel>
-                    <TextBlock Text="Корпус"
-                        FontSize="13"
-                        Margin="0 0 0 3" />
-                    <ComboBox
-                        SelectedItem="{Binding SelectedHousing}"
-                        ItemsSource="{Binding AllHousings}"
-                        DisplayMemberPath="Name" />
-                    <TextBlock Text="Кабинет"
-                        FontSize="13"
-                        Margin="0 10 0 3" />
-                    <ComboBox
-                        SelectedItem="{Binding SelectedCabinet}"
-                        ItemsSource="{Binding SelectedHousingCabinets}"
-                        DisplayMemberPath="Name" />
-                    <Button Content="Применить"
-                        Command="{Binding ApplyDeviceLocationChangesCommand}"
-                        Height="25"
-                        Margin="0 5 0 0" />
-                </StackPanel>
-            </GroupBox>
+            <UserControl Content="{Binding DeviceLocationPartialView}"
+                Grid.Row="1" />
             <Button Width="Auto" Content="История"
                 Command="{Binding ShowDeviceMovementHistoryCommand}"
                 Margin="0 5 5 0"
