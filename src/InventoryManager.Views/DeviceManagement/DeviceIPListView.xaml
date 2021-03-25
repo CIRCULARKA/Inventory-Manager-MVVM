@@ -1,0 +1,25 @@
+<UserControl x:Class="InventoryManager.Views.DeviceIPListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:InventoryManager.ViewModels">
+	<StackPanel>
+		<ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}"
+			SelectedItem="{Binding SelectedDeviceIP}"
+			Height="100"
+			Margin="0 0 0 3">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="{Binding Path=Address}" />
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Orientation="Horizontal">
+			<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+				Command="{Binding ShowAddIPViewCommand}" />
+			<Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+				Command="{Binding RemoveDeviceIPCommand}" />
+		</StackPanel>
+	</StackPanel>
+</UserControl>
