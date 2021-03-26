@@ -6,16 +6,25 @@ using InventoryManager.Extensions;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace InventoryManager.ViewModels
 {
 	public class DevicesListViewModel : ViewModelBase
 	{
+		private List<Housing> _allHousings;
+
+		private List<Cabinet> _allCabinets;
+
 		public DevicesListViewModel(IDeviceRelatedRepository repo, DeviceFilter filter)
 		{
 			Repository = repo;
 
+			_allHousings = Repository.AllHousings.ToList();
+			_allCabinets = Repository.AllCabinets.ToList();
 			AllDevices = Repository.AllDevices.ToList();
+
+			InitDevicesLocationWithInstances();
 
 			DevicesFilter = filter;
 
@@ -27,6 +36,7 @@ namespace InventoryManager.ViewModels
 				(obj) => AddDeviceView.ShowDialog()
 
 			);
+
 			RemoveDeviceCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -39,6 +49,19 @@ namespace InventoryManager.ViewModels
 					FilteredDevices.Remove(SelectedDevice);
 				},
 				(obj) => SelectedDevice != null
+			);
+
+			SubscribeActionOnDeviceAddition(
+				(device) =>
+				{
+					device.DeviceType = Repository.AllDeviceTypes.Single(dt => dt.ID == device.DeviceTypeID);
+					device.Cabinet = Repository.FindCabinet(device.CabinetID);
+					device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
+
+					AllDevices.Add(device);
+					if (DevicesFilter.IsDeviceMeetsSearchAndFilteringCriteria(device))
+						FilteredDevices.Add(device);
+				}
 			);
 		}
 
@@ -58,5 +81,19 @@ namespace InventoryManager.ViewModels
 
 		public AddDeviceView AddDeviceView =>
 			ViewModelLinker.GetRegisteredView<AddDeviceView>();
+
+		private void InitDevicesLocationWithInstances()
+		{
+			foreach (var device in AllDevices)
+			{
+				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
+				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
+			}
+		}
+
+		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
+			ViewModelLinker.
+				GetRegisteredViewModel<AddDeviceViewModel>().
+					OnDeviceAdded += action;
 	}
 }
