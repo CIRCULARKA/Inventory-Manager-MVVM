@@ -19,6 +19,18 @@ namespace InventoryManager.ViewModels
 				(obj) => AddIPToDevice(),
 				(obj) => SelectedIPAddress != null
 			);
+
+			SubscribeActionOnIPAssigning(
+				(d) => RefreshAvailableIPList()
+			);
+
+			SubscribeActionOnNetworkMaskChanges(
+				RefreshAvailableIPList
+			);
+
+			SubscribeActionOnIpRemoving(
+				(d) => RefreshAvailableIPList()
+			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -38,8 +50,9 @@ namespace InventoryManager.ViewModels
 		public IPAddress SelectedIPAddress { get; set; }
 
 		public Device SelectedDevice =>
-			ViewModelLinker.GetRegisteredViewModel<DevicesListViewModel>().
-				SelectedDevice;
+			ViewModelLinker.
+				GetRegisteredViewModel<DevicesListViewModel>().
+					SelectedDevice;
 
 		public Command AddIPToDeviceCommand { get; }
 
@@ -59,5 +72,24 @@ namespace InventoryManager.ViewModels
 				MessageToUser = m.Message;
 			}
 		}
+
+		public void RefreshAvailableIPList() =>
+			AllAvailableIPAddresses =
+				Repository.
+					AllAvailableIPAddresses.
+						ToList();
+
+		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
+			OnIPAssigned += action;
+
+		private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceIPListViewModel>().
+					OnIPRemoved += action;
+
+		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
+			ViewModelLinker.
+				GetRegisteredViewModel<ConfigureIPSettingsViewModel>().
+					OnNetworkMaskChanged += action;
 	}
 }

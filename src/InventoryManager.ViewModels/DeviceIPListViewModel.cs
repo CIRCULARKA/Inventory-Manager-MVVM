@@ -13,20 +13,15 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
-			RefreshAvailableIPList();
+			RemoveIPFromDeviceCommand = RegisterCommandAction(
+				(o) =>
+				{
+					Repository.RemoveIPFromDevice(SelectedIPAddress, SelectedDevice);
+					Repository.SaveChanges();
 
-			SubscribeActionOnNetworkMaskChanges(
-				RefreshAvailableIPList
+					OnIPRemoved?.Invoke(SelectedIPAddress);
+				}
 			);
-
-			SubscribeActionOnIPAssigning(
-				(d) => RefreshAvailableIPList()
-			);
-
-			SubscribeActionOnIpRemoving(
-				(d) => RefreshAvailableIPList()
-			);
-
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -38,7 +33,12 @@ namespace InventoryManager.ViewModels
 
 		public IPAddress SelectedIPAddress { get; set; }
 
-		public Command AddIPToDeviceCommand { get; }
+		public Device SelectedDevice =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DevicesListViewModel>().
+					SelectedDevice;
+
+		public Command RemoveIPFromDeviceCommand { get; }
 
 		public void RemoveIPAddress(IPAddress ip)
 		{
@@ -51,20 +51,5 @@ namespace InventoryManager.ViewModels
 			Repository.SaveChanges();
 			OnIPRemoved?.Invoke(ip);
 		}
-
-		public void RefreshAvailableIPList() =>
-				AddIPToDeviceViewModel.
-				AllAvailableIPAddresses =
-				Repository.AllAvailableIPAddresses.ToList();
-
-		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
-			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>().
-				OnNetworkMaskChanged += action;
-
-		private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
-			this.OnIPRemoved += action;
-
-		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
-			AddIPToDeviceViewModel.OnIPAssigned += action;
 	}
 }
