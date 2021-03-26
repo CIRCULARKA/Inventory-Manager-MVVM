@@ -14,13 +14,7 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 
 			RemoveIPFromDeviceCommand = RegisterCommandAction(
-				(o) =>
-				{
-					Repository.RemoveIPFromDevice(SelectedIPAddress, SelectedDevice);
-					Repository.SaveChanges();
-
-					OnIPRemoved?.Invoke(SelectedIPAddress);
-				}
+				(o) => RemoveIPAddress(SelectedIPAddress)
 			);
 		}
 
