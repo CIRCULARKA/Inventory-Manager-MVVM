@@ -2,8 +2,6 @@ using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
@@ -57,14 +55,14 @@ namespace InventoryManager.ViewModels
 
 		}
 
+		private IDeviceRelatedRepository Repository { get; }
+
 		public Cabinet SelectedCabinet { get; set; }
 
 		public Housing SelectedHousing { get; set; }
 
 		private Device SelectedDevice =>
 			ViewModelLinker.GetRegisteredViewModel<DevicesListViewModel>().SelectedDevice;
-
-		private IDeviceRelatedRepository Repository { get; }
 
 		public Command ApplyDeviceLocationChangesCommand { get; }
 
