@@ -28,7 +28,7 @@
 			<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
 				Command="{Binding ShowAddIPViewCommand}" />
 			<Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
-				Command="{Binding RemoveDeviceIPCommand}" />
+				Command="{Binding RemoveIPFromDeviceCommand}" />
 		</StackPanel>
 	</StackPanel>
 </UserControl>
