@@ -95,6 +95,13 @@ namespace InventoryManager.ViewModels
 		public AddDeviceView AddDeviceView =>
 			ViewModelLinker.GetRegisteredView<AddDeviceView>();
 
+		private void EnableDeviceLocationChanges()
+		{
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceLocationViewModel>().
+					IsDeviceLocationChoosingAvailable = true;
+		}
+
 		private void InitDevicesLocationWithInstances()
 		{
 			foreach (var device in AllDevices)
