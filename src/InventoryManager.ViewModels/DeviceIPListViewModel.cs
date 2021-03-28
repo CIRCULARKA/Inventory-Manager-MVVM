@@ -1,8 +1,10 @@
 using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
+using InventoryManager.Extensions;
 using System;
 using System.Linq;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
@@ -12,6 +14,13 @@ namespace InventoryManager.ViewModels
 		public DeviceIPListViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
+
+			SelectedDeviceIPAddresses = Repository.GetAllDeviceIPAddresses(SelectedDevice).
+				ToObservableCollection();
+
+			SubscribeActionOnIPAddition(
+				(ipAddress) => SelectedDeviceIPAddresses.Add(ipAddress)
+			);
 
 			RemoveIPFromDeviceCommand = RegisterCommandAction(
 				(o) => RemoveIPAddress(SelectedIPAddress)
@@ -26,6 +35,8 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.GetRegisteredViewModel<AddIPToDeviceViewModel>();
 
 		public IPAddress SelectedIPAddress { get; set; }
+
+		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses { get; set; }
 
 		public Device SelectedDevice =>
 			ViewModelLinker.
@@ -45,5 +56,10 @@ namespace InventoryManager.ViewModels
 			Repository.SaveChanges();
 			OnIPRemoved?.Invoke(ip);
 		}
+
+		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
+			ViewModelLinker.
+				GetRegisteredViewModel<AddIPToDeviceViewModel>().
+					OnIPAssigned += action;
 	}
 }
