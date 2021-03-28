@@ -54,6 +54,8 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new DevicesListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
 
+			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel(new DeviceFilter()));
+
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
 
@@ -153,6 +155,11 @@ namespace InventoryManager
 			ViewModelLinker.LinkViewWithViewModel(
 				nameof(DeviceMovementHistoryView),
 				nameof(DeviceHistoryViewModel)
+			);
+
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(DeviceSearchAndFilteringView),
+				nameof(DeviceSearchAndFilteringViewModel)
 			);
 		}
 	}
