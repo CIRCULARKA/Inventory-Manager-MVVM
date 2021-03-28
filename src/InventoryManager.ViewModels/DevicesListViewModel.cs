@@ -32,7 +32,7 @@ namespace InventoryManager.ViewModels
 				GetFilteredDevicesList(AllDevices).
 				ToObservableCollection();
 
-			OpenAddDeviceViewCommand = RegisterCommandAction(
+			ShowAddDeviceViewCommand = RegisterCommandAction(
 				(obj) => AddDeviceView.ShowDialog()
 
 			);
@@ -75,7 +75,7 @@ namespace InventoryManager.ViewModels
 
 		public Device SelectedDevice { get; set; }
 
-		public Command OpenAddDeviceViewCommand { get; }
+		public Command ShowAddDeviceViewCommand{ get; }
 
 		public Command RemoveDeviceCommand { get; }
 
