@@ -65,6 +65,22 @@ namespace InventoryManager.ViewModels
 						FilteredDevices.Add(device);
 				}
 			);
+
+			SelectedDeviceChanged += (d) =>
+			{
+				if (d != null) EnableDeviceLocationChanges();
+				else
+				{
+					ClearDeviceAccountsList();
+					ClearDeviceIPList();
+					ClearDeviceLocationLists();
+					DisableDeviceLocationChanges();
+				}
+			};
+
+			SelectedDeviceChanged += (d) =>
+				ViewModelLinker.GetRegisteredViewModel<DeviceAccountsListViewModel>().
+					SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(d).ToObservableCollection();
 		}
 
 		private IDeviceRelatedRepository Repository { get; set; }
@@ -95,12 +111,34 @@ namespace InventoryManager.ViewModels
 		public AddDeviceView AddDeviceView =>
 			ViewModelLinker.GetRegisteredView<AddDeviceView>();
 
-		private void EnableDeviceLocationChanges()
-		{
+		private void EnableDeviceLocationChanges() =>
 			ViewModelLinker.
 				GetRegisteredViewModel<DeviceLocationViewModel>().
 					IsDeviceLocationChoosingAvailable = true;
+
+		private void DisableDeviceLocationChanges() =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceLocationViewModel>().
+					IsDeviceLocationChoosingAvailable = false;
+
+		private void ClearDeviceLocationLists()
+		{
+			var locationVm = ViewModelLinker.
+				GetRegisteredViewModel<DeviceLocationViewModel>();
+
+			locationVm.SelectedCabinet = null;
+			locationVm.SelectedHousing = null;
 		}
+
+		private void ClearDeviceAccountsList() =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceAccountsListViewModel>().
+					SelectedDeviceAccounts = null;
+
+		private void ClearDeviceIPList() =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceIPListViewModel>().
+					SelectedDeviceIPAddresses = null;
 
 		private void InitDevicesLocationWithInstances()
 		{
