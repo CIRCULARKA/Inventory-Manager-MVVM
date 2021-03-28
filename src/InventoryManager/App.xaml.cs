@@ -46,7 +46,7 @@ namespace InventoryManager
 
 			var deviceRelatedRepo = new DefaultDeviceRelatedRepository();
 			ViewModelLinker.RegisterViewModel(new AddDeviceViewModel(deviceRelatedRepo));
-			ViewModelLinker.RegisterViewModel(new DeviceAccountViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceAccountsListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 			ViewModelLinker.RegisterViewModel(new DeviceIPListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddIPToDeviceViewModel(deviceRelatedRepo));
@@ -116,7 +116,7 @@ namespace InventoryManager
 
 			ViewModelLinker.LinkViewWithViewModel(
 				nameof(AddDeviceAccountView),
-				nameof(DeviceAccountViewModel)
+				nameof(AddDeviceAccountViewModel)
 			);
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
