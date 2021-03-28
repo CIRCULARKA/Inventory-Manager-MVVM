@@ -22,8 +22,6 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
-			_allHousings = Repository.AllHousings.ToList();
-			_allCabinets = Repository.AllCabinets.ToList();
 			AllDevices = Repository.AllDevices.ToList();
 
 			InitDevicesLocationWithInstances();
