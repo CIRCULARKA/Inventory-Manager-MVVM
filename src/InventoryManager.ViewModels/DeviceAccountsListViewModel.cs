@@ -21,6 +21,15 @@ namespace InventoryManager.ViewModels
 			SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(SelectedDevice).
 				ToObservableCollection();
 
+			RemoveDeviceAccountCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					RemoveAccountFromDevice(SelectedAccount);
+					SelectedDeviceAccounts.Remove(SelectedAccount);
+				},
+				(obj) => SelectedAccount != null
+			);
+
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -31,6 +40,8 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.
 				GetRegisteredViewModel<DevicesListViewModel>().
 					SelectedDevice;
+
+		public DeviceAccount SelectedAccount { get; set; }
 
 		public Command RemoveDeviceAccountCommand { get; }
 
