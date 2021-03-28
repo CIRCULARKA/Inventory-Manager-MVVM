@@ -9,6 +9,8 @@ namespace InventoryManager.ViewModels
 	{
 		private bool _isDeviceLocationChoosingAvailable;
 
+		private Housing _selectedHousing;
+
 		public DeviceLocationViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -59,9 +61,21 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
+		public event Action<Housing> SelectedHousingChanged;
+
 		public Cabinet SelectedCabinet { get; set; }
 
-		public Housing SelectedHousing { get; set; }
+		public Housing SelectedHousing
+		{
+			get => _selectedHousing;
+			set
+			{
+				_selectedHousing = value;
+
+				SelectedHousingChanged?.Invoke(_selectedHousing);
+				OnPropertyChanged(nameof(SelectedHousing));
+			}
+		}
 
 		private Device SelectedDevice =>
 			ViewModelLinker.GetRegisteredViewModel<DevicesListViewModel>().SelectedDevice;
