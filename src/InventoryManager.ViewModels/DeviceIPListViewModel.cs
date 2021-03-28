@@ -22,6 +22,8 @@ namespace InventoryManager.ViewModels
 				(ipAddress) => SelectedDeviceIPAddresses.Add(ipAddress)
 			);
 
+			SubscribeActionOnNetworkMaskChanges(ClearDevicesIPLists);
+
 			RemoveIPFromDeviceCommand = RegisterCommandAction(
 				(o) => RemoveIPAddress(SelectedIPAddress)
 			);
@@ -57,9 +59,16 @@ namespace InventoryManager.ViewModels
 			OnIPRemoved?.Invoke(ip);
 		}
 
+		private void ClearDevicesIPLists() =>
+			SelectedDeviceIPAddresses?.Clear();
+
 		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
 			ViewModelLinker.
 				GetRegisteredViewModel<AddIPToDeviceViewModel>().
 					OnIPAssigned += action;
+
+		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
+			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>()
+				.OnNetworkMaskChanged += action;
 	}
 }
