@@ -49,12 +49,15 @@ namespace InventoryManager.ViewModels
 
 						Repository.SaveChanges();
 					}
-					catch (Exception e)
-					{
-						MessageToUser = e.Message;
-					}
+					catch (Exception e) { MessageToUser = e.Message; }
 				},
 				(obj) => SelectedDevice != null
+			);
+
+			SubscribeActionOnHousingChanged(
+				(h) =>
+				{
+				}
 			);
 
 		}
@@ -91,5 +94,8 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged(nameof(IsDeviceLocationChoosingAvailable));
 			}
 		}
+
+		public void SubscribeActionOnHousingChanged(Action<Housing> action) =>
+			SelectedHousingChanged += action;
 	}
 }
