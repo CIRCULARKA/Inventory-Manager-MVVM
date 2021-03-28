@@ -50,7 +50,7 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
 			ViewModelLinker.RegisterViewModel(new DeviceIPListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddIPToDeviceViewModel(deviceRelatedRepo));
-			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DevicesManagementViewModel());
 			ViewModelLinker.RegisterViewModel(new DevicesListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
 
@@ -134,7 +134,7 @@ namespace InventoryManager
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
 				nameof(DevicesManagementView),
-				nameof(DeviceViewModel)
+				nameof(DevicesManagementViewModel)
 			);
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
@@ -144,17 +144,12 @@ namespace InventoryManager
 
 			ViewModelLinker.LinkViewWithViewModel(
 				nameof(DeviceMovementHistoryView),
-				nameof(DeviceViewModel)
+				nameof(DeviceHistoryViewModel)
 			);
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
 				nameof(DevicesListView),
 				nameof(DevicesListViewModel)
-			);
-
-			ViewModelLinker.LinkViewWithViewModel(
-				nameof(DeviceMovementHistoryView),
-				nameof(DeviceHistoryViewModel)
 			);
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
