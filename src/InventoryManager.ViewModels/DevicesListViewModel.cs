@@ -12,10 +12,6 @@ namespace InventoryManager.ViewModels
 {
 	public class DevicesListViewModel : ViewModelBase
 	{
-		private List<Housing> _allHousings;
-
-		private List<Cabinet> _allCabinets;
-
 		private Device _selectedDevice;
 
 		public DevicesListViewModel(IDeviceRelatedRepository repo)
@@ -54,7 +50,9 @@ namespace InventoryManager.ViewModels
 				{
 					device.DeviceType = Repository.AllDeviceTypes.Single(dt => dt.ID == device.DeviceTypeID);
 					device.Cabinet = Repository.FindCabinet(device.CabinetID);
-					device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
+					device.Cabinet.Housing = DeviceLocationViewModel.
+						AllHousings.
+							First(h => h.ID == device.Cabinet.HousingID);
 
 					AllDevices.Add(device);
 					if (DevicesFilter.IsDeviceMeetsSearchAndFilteringCriteria(device))
@@ -104,6 +102,10 @@ namespace InventoryManager.ViewModels
 
 		public Command RemoveDeviceCommand { get; }
 
+		public DeviceLocationViewModel DeviceLocationViewModel =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceLocationViewModel>();
+
 		public AddDeviceView AddDeviceView =>
 			ViewModelLinker.GetRegisteredView<AddDeviceView>();
 
@@ -140,8 +142,13 @@ namespace InventoryManager.ViewModels
 		{
 			foreach (var device in AllDevices)
 			{
-				device.Cabinet = _allCabinets.Find(c => c.ID == device.CabinetID);
-				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
+				device.Cabinet = DeviceLocationViewModel.
+					AllCabinets.
+						First(c => c.ID == device.CabinetID);
+
+				device.Cabinet.Housing = DeviceLocationViewModel.
+					AllHousings.
+						First(h => h.ID == device.Cabinet.HousingID);
 			}
 		}
 		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
