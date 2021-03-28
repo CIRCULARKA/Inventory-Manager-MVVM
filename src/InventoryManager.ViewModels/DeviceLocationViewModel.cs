@@ -13,6 +13,8 @@ namespace InventoryManager.ViewModels
 
 		private Housing _selectedHousing;
 
+		private Cabinet _selectedCabinet;
+
 		private IEnumerable<Cabinet> _selectedHousingCabinets;
 
 		public DeviceLocationViewModel(IDeviceRelatedRepository repo)
@@ -64,7 +66,11 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnHousingChanged(
 				(h) =>
 				{
-					SelectedHousingCabinets =
+					if (h != null)
+					{
+						SelectedHousingCabinets = GetAllSelectedHousingCabinets();
+						SelectDeviceCabinetIfHousingIsTheSame();
+					} else SelectedHousingCabinets = null;
 				}
 			);
 
@@ -89,7 +95,15 @@ namespace InventoryManager.ViewModels
 
 		public event Action<Housing> SelectedHousingChanged;
 
-		public Cabinet SelectedCabinet { get; set; }
+		public Cabinet SelectedCabinet
+		{
+			get => _selectedCabinet;
+			set
+			{
+				_selectedCabinet = value;
+				OnPropertyChanged(nameof(SelectedCabinet));
+			}
+		}
 
 		public Housing SelectedHousing
 		{
@@ -122,6 +136,14 @@ namespace InventoryManager.ViewModels
 			AllCabinets.
 				Where(c => c.HousingID == SelectedHousing.ID).
 				ToList();
+
+		public void SelectDeviceCabinetIfHousingIsTheSame()
+		{
+			if (SelectedDevice.Cabinet.HousingID == SelectedHousing.ID)
+				SelectedCabinet = SelectedDevice?.Cabinet;
+			else
+				SelectedCabinet = AllCabinets.First(c => c.HousingID == SelectedHousing.ID);
+		}
 
 		public void SubscribeActionOnHousingChanged(Action<Housing> action) =>
 			SelectedHousingChanged += action;
