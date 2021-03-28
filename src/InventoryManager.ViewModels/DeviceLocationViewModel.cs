@@ -2,6 +2,8 @@ using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
@@ -11,9 +13,14 @@ namespace InventoryManager.ViewModels
 
 		private Housing _selectedHousing;
 
+		private IEnumerable<Cabinet> _selectedHousingCabinets;
+
 		public DeviceLocationViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
+
+			AllHousings = Repository.AllHousings.ToList();
+			AllCabinets = Repository.AllCabinets.ToList();
 
 			IsDeviceLocationChoosingAvailable = true;
 
@@ -57,12 +64,28 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnHousingChanged(
 				(h) =>
 				{
+					SelectedHousingCabinets =
 				}
 			);
 
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
+
+		public IEnumerable<Housing> AllHousings { get; }
+
+		public IEnumerable<Cabinet> AllCabinets { get; }
+
+		public IEnumerable<Cabinet> SelectedHousingCabinets
+		{
+			get => _selectedHousingCabinets;
+			set
+			{
+				_selectedHousingCabinets = value;
+
+				OnPropertyChanged(nameof(SelectedHousingCabinets));
+			}
+		}
 
 		public event Action<Housing> SelectedHousingChanged;
 
@@ -94,6 +117,11 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged(nameof(IsDeviceLocationChoosingAvailable));
 			}
 		}
+
+		public IEnumerable<Cabinet> GetAllSelectedHousingCabinets() =>
+			AllCabinets.
+				Where(c => c.HousingID == SelectedHousing.ID).
+				ToList();
 
 		public void SubscribeActionOnHousingChanged(Action<Housing> action) =>
 			SelectedHousingChanged += action;
