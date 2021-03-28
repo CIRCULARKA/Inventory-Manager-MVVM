@@ -16,6 +16,8 @@ namespace InventoryManager.ViewModels
 
 		private List<Cabinet> _allCabinets;
 
+		private Device _selectedDevice;
+
 		public DevicesListViewModel(IDeviceRelatedRepository repo, DeviceFilter filter)
 		{
 			Repository = repo;
@@ -67,13 +69,24 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; set; }
 
+		public event Action<Device> SelectedDeviceChanged;
+
 		public ObservableCollection<Device> FilteredDevices { get; set; }
 
 		public DeviceFilter DevicesFilter { get; }
 
 		public List<Device> AllDevices { get; }
 
-		public Device SelectedDevice { get; set; }
+		public Device SelectedDevice
+		{
+			get => _selectedDevice;
+			set
+			{
+				_selectedDevice = value;
+
+				SelectedDeviceChanged?.Invoke(_selectedDevice);
+			}
+		}
 
 		public Command ShowAddDeviceViewCommand{ get; }
 
@@ -90,7 +103,6 @@ namespace InventoryManager.ViewModels
 				device.Cabinet.Housing = _allHousings.Find(h => h.ID == device.Cabinet.HousingID);
 			}
 		}
-
 		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
 			ViewModelLinker.
 				GetRegisteredViewModel<AddDeviceViewModel>().
