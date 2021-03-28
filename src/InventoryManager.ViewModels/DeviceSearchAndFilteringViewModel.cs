@@ -18,6 +18,7 @@ namespace InventoryManager.ViewModels
 					DevicesFilter.IncludeServers = IsServersIncluded;
 					DevicesFilter.IncludeSwitches = IsSwitchesIncluded;
 					DevicesFilter.IncludePC = IsPCIncluded;
+					DevicesFilter.SearchQuery = InputtedSearchQuery;
 
 					OnFilterCriteriaChanged?.Invoke(
 						DevicesFilter.GetFilteredDevicesList(
@@ -37,6 +38,8 @@ namespace InventoryManager.ViewModels
 		public bool IsPCIncluded { get; set; } = true;
 
 		public bool IsSwitchesIncluded { get; set; } = true;
+
+		public string InputtedSearchQuery { get; set; } = "";
 
 		public DeviceFilter DevicesFilter { get; }
 
