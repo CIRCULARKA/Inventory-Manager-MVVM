@@ -51,7 +51,7 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new DeviceIPListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddIPToDeviceViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceViewModel(deviceRelatedRepo));
-			ViewModelLinker.RegisterViewModel(new DevicesListViewModel(deviceRelatedRepo, new DeviceFilter()));
+			ViewModelLinker.RegisterViewModel(new DevicesListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
 
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
