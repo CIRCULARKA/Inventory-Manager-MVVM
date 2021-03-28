@@ -13,6 +13,8 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
+			IsDeviceLocationChoosingAvailable = true;
+
 			ApplyDeviceLocationChangesCommand = RegisterCommandAction(
 				(obj) =>
 				{
