@@ -18,15 +18,13 @@ namespace InventoryManager.ViewModels
 
 		private Device _selectedDevice;
 
-		public DevicesListViewModel(IDeviceRelatedRepository repo, DeviceFilter filter)
+		public DevicesListViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
 
 			AllDevices = Repository.AllDevices.ToList();
 
 			InitDevicesLocationWithInstances();
-
-			DevicesFilter = filter;
 
 			FilteredDevices = DevicesFilter.
 				GetFilteredDevicesList(AllDevices).
