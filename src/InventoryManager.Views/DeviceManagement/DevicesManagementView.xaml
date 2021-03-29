@@ -68,6 +68,7 @@
                 Command="{Binding ShowDeviceMovementHistoryCommand}"
                 Margin="0 5 5 0"
                 Grid.Row="2" />
+            <UserControl Content="{Binding DeviceHistoryPartialView}" />
         </Grid>
     </Grid>
 </UserControl>
