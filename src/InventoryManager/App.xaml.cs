@@ -47,15 +47,16 @@ namespace InventoryManager
 			var deviceRelatedRepo = new DefaultDeviceRelatedRepository();
 			ViewModelLinker.RegisterViewModel(new AddDeviceViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddDeviceAccountViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceLocationViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel(new DeviceFilter()));
+			ViewModelLinker.RegisterViewModel(new DevicesListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceAccountsListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new ConfigureIPSettingsViewModel(new DefaultIPAddressRepository()));
-			ViewModelLinker.RegisterViewModel(new DeviceIPListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddIPToDeviceViewModel(deviceRelatedRepo));
+			ViewModelLinker.RegisterViewModel(new DeviceIPListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DevicesManagementViewModel());
-			ViewModelLinker.RegisterViewModel(new DevicesListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
 
-			ViewModelLinker.RegisterViewModel(new DeviceSearchAndFilteringViewModel(new DeviceFilter()));
 
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
@@ -73,9 +74,9 @@ namespace InventoryManager
 			ViewModelLinker.RegisterPartialView(new DeviceAccountsListView());
 			ViewModelLinker.RegisterPartialView(new DeviceLocationView());
 			ViewModelLinker.RegisterPartialView(new DeviceSearchAndFilteringView());
+			ViewModelLinker.RegisterPartialView(new DeviceHistoryView());
 
 			ViewModelLinker.RegisterView(new AddCertificateView());
-
 			ViewModelLinker.RegisterView(new AddDeviceAccountView());
 			ViewModelLinker.RegisterView(new AddDeviceView());
 			ViewModelLinker.RegisterView(new AddIPAddressView());
@@ -93,9 +94,24 @@ namespace InventoryManager
 				nameof(AuthorizationViewModel)
 			);
 
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(DeviceAccountsListView),
+				nameof(DeviceAccountsListViewModel)
+			);
+
 			ViewModelLinker.LinkViewWithViewModel(
 				nameof(MainView),
 				nameof(MainViewModel)
+			);
+
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(DeviceHistoryView),
+				nameof(DeviceHistoryViewModel)
+			);
+
+			ViewModelLinker.LinkPartialViewWithViewModel(
+				nameof(DeviceLocationView),
+				nameof(DeviceLocationViewModel)
 			);
 
 			ViewModelLinker.LinkViewWithViewModel(
