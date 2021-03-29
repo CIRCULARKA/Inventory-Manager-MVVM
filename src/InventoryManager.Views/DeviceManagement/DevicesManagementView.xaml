@@ -64,11 +64,7 @@
             </StackPanel>
             <UserControl Content="{Binding DeviceLocationPartialView}"
                 Grid.Row="1" />
-            <Button Width="Auto" Content="История"
-                Command="{Binding ShowDeviceMovementHistoryCommand}"
-                Margin="0 5 5 0"
-                Grid.Row="2" />
-            <UserControl Content="{Binding DeviceHistoryPartialView}" />
+            <UserControl Content="{Binding DeviceHistoryPartialView}" Grid.Row="2" />
         </Grid>
     </Grid>
 </UserControl>
