@@ -19,5 +19,8 @@ namespace InventoryManager.ViewModels
 
 		public DeviceSearchAndFilteringView DeviceSearchAndFilteringPartialView =>
 			ViewModelLinker.GetRegisteredPartialView<DeviceSearchAndFilteringView>();
+
+		public DeviceHistoryView DeviceHistoryPartialView =>
+			ViewModelLinker.GetRegisteredPartialView<DeviceHistoryView>();
 	}
 }
