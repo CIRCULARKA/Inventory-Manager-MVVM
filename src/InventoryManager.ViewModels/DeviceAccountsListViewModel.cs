@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using InventoryManager.Models;
+using InventoryManager.Views;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
 using InventoryManager.Infrastructure;
@@ -18,8 +19,13 @@ namespace InventoryManager.ViewModels
 				(newAcc) => SelectedDeviceAccounts.Add(newAcc)
 			);
 
-			SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(SelectedDevice).
-				ToObservableCollection();
+			// SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(SelectedDevice).
+			// 	ToObservableCollection();
+
+			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
+				(obj) => AddDeviceAccountView.ShowDialog(),
+				(obj) => SelectedDevice != null
+			);
 
 			RemoveDeviceAccountCommand = RegisterCommandAction(
 				(obj) =>
@@ -41,7 +47,12 @@ namespace InventoryManager.ViewModels
 				GetRegisteredViewModel<DevicesListViewModel>().
 					SelectedDevice;
 
+		public AddDeviceAccountView AddDeviceAccountView =>
+			ViewModelLinker.GetRegisteredView<AddDeviceAccountView>();
+
 		public DeviceAccount SelectedAccount { get; set; }
+
+		public Command ShowAddDeviceAccountViewCommand { get; }
 
 		public Command RemoveDeviceAccountCommand { get; }
 
