@@ -74,6 +74,13 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
+			SubscribeActionOnDeviceSelectionChanging(
+				(device) =>
+				{
+					SelectedHousing = device.Cabinet.Housing;
+					SelectedCabinet = device.Cabinet;
+				}
+			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -147,5 +154,10 @@ namespace InventoryManager.ViewModels
 
 		public void SubscribeActionOnHousingChanged(Action<Housing> action) =>
 			SelectedHousingChanged += action;
+
+		public void SubscribeActionOnDeviceSelectionChanging(Action<Device> action) =>
+			ViewModelLinker.
+				GetRegisteredViewModel<DevicesListViewModel>().
+					SelectedDeviceChanged += action;
 	}
 }
