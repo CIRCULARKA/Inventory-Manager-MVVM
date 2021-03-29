@@ -13,7 +13,7 @@
 	</UserControl.Resources>
 	<StackPanel>
 		<ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}"
-			SelectedItem="{Binding SelectedDeviceIP}"
+			SelectedItem="{Binding SelectedIPAddress}"
 			Height="100"
 			Margin="0 0 0 3">
 			<ListBox.ItemTemplate>
