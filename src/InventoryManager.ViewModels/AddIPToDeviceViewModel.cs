@@ -28,9 +28,9 @@ namespace InventoryManager.ViewModels
 				RefreshAvailableIPList
 			);
 
-			SubscribeActionOnIpRemoving(
-				(d) => RefreshAvailableIPList()
-			);
+			// SubscribeActionOnIpRemoving(
+			// 	(d) => RefreshAvailableIPList()
+			// );
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -82,10 +82,10 @@ namespace InventoryManager.ViewModels
 		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
 			OnIPAssigned += action;
 
-		private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DeviceIPListViewModel>().
-					OnIPRemoved += action;
+		// private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
+		// 	ViewModelLinker.
+		// 		GetRegisteredViewModel<DeviceIPListViewModel>().
+		// 			OnIPRemoved += action;
 
 		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
 			ViewModelLinker.
