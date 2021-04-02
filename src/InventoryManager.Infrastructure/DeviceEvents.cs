@@ -19,5 +19,10 @@ namespace InventoryManager.Infrastructure
 
 		public static void RaiseOnDeviceAccountAdded(DeviceAccount acc) =>
 			OnDeviceAccountAdded?.Invoke(acc);
+
+		public static event Action<IPAddress> OnDeviceIPAdded;
+
+		public static void RaiseOnDeviceIPAdded(IPAddress ip) =>
+			OnDeviceIPAdded?.Invoke(ip);
 	}
 }
