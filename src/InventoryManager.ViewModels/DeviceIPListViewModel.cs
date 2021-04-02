@@ -39,14 +39,16 @@ namespace InventoryManager.ViewModels
 			);
 
 			RemoveIPFromDeviceCommand = RegisterCommandAction(
-				(o) => RemoveIPAddress(SelectedIPAddress),
+				(o) =>
+				{
+					RemoveIPAddress(SelectedIPAddress);
+					SelectedDeviceIPAddresses.Remove(SelectedIPAddress);
+				},
 				(obj) => SelectedIPAddress != null
 			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
-
-		public event Action<IPAddress> OnIPRemoved;
 
 		public AddIPAddressView AddIPToDeviceView =>
 			ViewModelLinker.GetRegisteredView<AddIPAddressView>();
@@ -80,8 +82,9 @@ namespace InventoryManager.ViewModels
 					GetRegisteredViewModel<DevicesListViewModel>().
 					SelectedDevice
 			);
+
 			Repository.SaveChanges();
-			OnIPRemoved?.Invoke(ip);
+			DeviceEvents.RaiseOnDeviceIPRemoved(ip);
 		}
 
 		private void ClearDevicesIPLists() =>
