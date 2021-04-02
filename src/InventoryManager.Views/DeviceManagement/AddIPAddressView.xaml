@@ -21,7 +21,7 @@
     <StackPanel>
 		<TextBlock Text="Адрес" />
         <ComboBox ItemsSource="{Binding AllAvailableIPAddresses}" DisplayMemberPath="Address"
-            SelectedItem="{Binding SelectedIPAddress, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedItem="{Binding SelectedIPAddress, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddIPToDeviceCommand}" />
         <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
     </StackPanel>
