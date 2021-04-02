@@ -1,5 +1,6 @@
-using System;
 using InventoryManager.Models;
+using System;
+using System.Collections.Generic;
 
 namespace InventoryManager.Events
 {
@@ -29,5 +30,11 @@ namespace InventoryManager.Events
 
 		public static void RaiseOnDeviceIPRemoved(IPAddress ip) =>
 			OnDeviceIPRemoved?.Invoke(ip);
+
+		public static event Action<IEnumerable<Device>> OnDeviceFilteringCriteriaChanged;
+
+		public static void RaiseOnDeviceFilteringCriteriaChanged(IEnumerable<Device> filteredList) =>
+			OnDeviceFilteringCriteriaChanged?.Invoke(filteredList);
+
 	}
 }
