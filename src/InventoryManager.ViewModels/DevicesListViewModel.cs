@@ -59,7 +59,7 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			SelectedDeviceChanged += (d) =>
+			DeviceEvents.OnDeviceSelectionChanged += (d) =>
 			{
 				if (d != null) EnableDeviceLocationChanges();
 				else
@@ -71,7 +71,7 @@ namespace InventoryManager.ViewModels
 				}
 			};
 
-			SelectedDeviceChanged += (d) =>
+			DeviceEvents.OnDeviceSelectionChanged += (d) =>
 				ViewModelLinker.GetRegisteredViewModel<DeviceAccountsListViewModel>().
 					SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(d).ToObservableCollection();
 		}
