@@ -65,9 +65,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		private void SubscribeActionOnDeviceAccountAddition(Action<DeviceAccount> action) =>
-			ViewModelLinker.
-				GetRegisteredViewModel<AddDeviceAccountViewModel>().
-					OnDeviceAccountAdded += action;
+			DeviceEvents.OnDeviceAccountAdded += action;
 
 		private void SubscribeActionOnDeviceSelectionChanged(Action<Device> action) =>
 			DeviceEvents.OnDeviceSelectionChanged += action;

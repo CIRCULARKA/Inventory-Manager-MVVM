@@ -27,8 +27,6 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public event Action<DeviceAccount> OnDeviceAccountAdded;
-
 		public Device SelectedDevice =>
 			ViewModelLinker.
 				GetRegisteredViewModel<DevicesListViewModel>().
@@ -70,7 +68,7 @@ namespace InventoryManager.ViewModels
 				Repository.AddDeviceAccount(newAcc);
 				Repository.SaveChanges();
 
-				OnDeviceAccountAdded?.Invoke(newAcc);
+				DeviceEvents.RaiseOnDeviceAccountAdded(newAcc);
 
 				InputtedLogin = "";
 				InputtedPassword = "";
