@@ -156,8 +156,6 @@ namespace InventoryManager.ViewModels
 			SelectedHousingChanged += action;
 
 		public void SubscribeActionOnDeviceSelectionChanging(Action<Device> action) =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDeviceChanged += action;
+			DeviceEvents.OnDeviceSelectionChanged += action;
 	}
 }
