@@ -69,9 +69,7 @@ namespace InventoryManager.ViewModels
 			SelectedDeviceIPAddresses?.Clear();
 
 		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
-			ViewModelLinker.
-				GetRegisteredViewModel<AddIPToDeviceViewModel>().
-					OnIPAssigned += action;
+			DeviceEvents.OnDeviceIPAdded += action;
 
 		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
 			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>()

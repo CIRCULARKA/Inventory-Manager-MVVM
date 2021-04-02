@@ -35,8 +35,6 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public event Action<IPAddress> OnIPAssigned;
-
 		public IEnumerable<IPAddress> AllAvailableIPAddresses
 		{
 			get => _allAvailableIPs;
@@ -63,7 +61,7 @@ namespace InventoryManager.ViewModels
 				Repository.AddIPToDevice(SelectedIPAddress, SelectedDevice);
 				Repository.SaveChanges();
 
-				OnIPAssigned?.Invoke(SelectedIPAddress);
+				DeviceEvents.RaiseOnDeviceIPAdded(SelectedIPAddress);
 
 				MessageToUser = "Адрес успешно добавлен";
 			}
@@ -80,7 +78,7 @@ namespace InventoryManager.ViewModels
 						ToList();
 
 		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
-			OnIPAssigned += action;
+			DeviceEvents.OnDeviceIPAdded += action;
 
 		// private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
 		// 	ViewModelLinker.
