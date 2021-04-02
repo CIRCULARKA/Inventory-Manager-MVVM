@@ -9,14 +9,20 @@ namespace InventoryManager.ViewModels
 {
 	public class AddIPToDeviceViewModel : ViewModelBase
 	{
-		private IEnumerable<IPAddress> _allAvailableIPs;
+		private List<IPAddress> _allAvailableIPs;
+
+		private IPAddress _selectedIP;
 
 		public AddIPToDeviceViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
 
 			AddIPToDeviceCommand = RegisterCommandAction(
-				(obj) => AddIPToDevice(),
+				(obj) =>
+				{
+					AddIPToDevice();
+					SelectFirstIPInList();
+				},
 				(obj) => SelectedIPAddress != null
 			);
 
@@ -29,16 +35,20 @@ namespace InventoryManager.ViewModels
 			);
 
 			SubscribeActionOnShowAddIPAddressViewCommandExecution(
-				() => AllAvailableIPAddresses =
-					Repository.
-						AllAvailableIPAddresses.
-							ToList()
+				() =>
+				{
+					AllAvailableIPAddresses =
+						Repository.
+							AllAvailableIPAddresses.
+								ToList();
+					SelectFirstIPInList();
+				}
 			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public IEnumerable<IPAddress> AllAvailableIPAddresses
+		public List<IPAddress> AllAvailableIPAddresses
 		{
 			get => _allAvailableIPs;
 			set
@@ -48,7 +58,15 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public IPAddress SelectedIPAddress { get; set; }
+		public IPAddress SelectedIPAddress
+		{
+			get => _selectedIP;
+			set
+			{
+				_selectedIP = value;
+				OnPropertyChanged(nameof(SelectedIPAddress));
+			}
+		}
 
 		public Device SelectedDevice =>
 			ViewModelLinker.
@@ -72,6 +90,12 @@ namespace InventoryManager.ViewModels
 			{
 				MessageToUser = m.Message;
 			}
+		}
+
+		private void SelectFirstIPInList()
+		{
+			if (AllAvailableIPAddresses.Count > 0)
+				SelectedIPAddress = AllAvailableIPAddresses.First();
 		}
 
 		public void RefreshAvailableIPList() =>
