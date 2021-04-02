@@ -78,8 +78,6 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; set; }
 
-		public event Action<Device> SelectedDeviceChanged;
-
 		public ObservableCollection<Device> FilteredDevices { get; set; }
 
 		public DeviceFilter DevicesFilter =>
