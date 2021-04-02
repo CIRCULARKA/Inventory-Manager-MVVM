@@ -32,7 +32,6 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedAccount != null
 			);
-
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
