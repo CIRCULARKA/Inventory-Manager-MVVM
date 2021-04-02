@@ -27,10 +27,6 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnNetworkMaskChanges(
 				RefreshAvailableIPList
 			);
-
-			// SubscribeActionOnIpRemoving(
-			// 	(d) => RefreshAvailableIPList()
-			// );
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
