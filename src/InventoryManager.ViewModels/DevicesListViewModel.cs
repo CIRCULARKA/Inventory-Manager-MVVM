@@ -61,7 +61,8 @@ namespace InventoryManager.ViewModels
 			);
 
 			SubscribeActionOnFilteringCriteraChanges(
-				(filteredDevices) => FilterDevicesAccordingToCriteria()
+				(filteredDevices) =>
+					FilteredDevices = filteredDevices.ToObservableCollection()
 			);
 
 			DeviceEvents.OnDeviceSelectionChanged += (d) =>
