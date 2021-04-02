@@ -8,8 +8,6 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceFilter : ViewModelBase
 	{
-		public List<Device> InitialList { get; }
-
 		public bool IncludeServers { get; set; } = true;
 
 		public bool IncludePC { get; set; } = true;
