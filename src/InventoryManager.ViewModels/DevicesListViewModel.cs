@@ -94,7 +94,8 @@ namespace InventoryManager.ViewModels
 			{
 				_selectedDevice = value;
 
-				SelectedDeviceChanged?.Invoke(_selectedDevice);
+				DeviceEvents.
+					RaiseOnDeviceSelectionChanged(_selectedDevice);
 			}
 		}
 
