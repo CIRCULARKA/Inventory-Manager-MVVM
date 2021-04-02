@@ -1,7 +1,7 @@
 using System;
 using InventoryManager.Models;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Events
 {
 	public static class DeviceEvents
 	{
