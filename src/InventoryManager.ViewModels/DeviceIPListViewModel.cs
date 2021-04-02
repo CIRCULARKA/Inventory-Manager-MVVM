@@ -32,8 +32,8 @@ namespace InventoryManager.ViewModels
 			ShowAddIPViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AddIPToDeviceView.ShowDialog();
 					UIEvents.RaiseOnShowAddIPAddressViewCommandExecuted();
+					AddIPToDeviceView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
 			);
