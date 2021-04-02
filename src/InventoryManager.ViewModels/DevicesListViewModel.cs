@@ -1,12 +1,13 @@
-using InventoryManager.Models;
-using InventoryManager.Commands;
 using InventoryManager.Views;
-using InventoryManager.Infrastructure;
+using InventoryManager.Models;
+using InventoryManager.Events;
+using InventoryManager.Commands;
 using InventoryManager.Extensions;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Linq;
+using InventoryManager.Infrastructure;
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {

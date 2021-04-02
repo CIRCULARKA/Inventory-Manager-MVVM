@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using InventoryManager.Models;
 using InventoryManager.Views;
+using InventoryManager.Models;
+using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
 using InventoryManager.Infrastructure;
+using System;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {

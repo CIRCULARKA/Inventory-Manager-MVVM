@@ -1,6 +1,6 @@
 using System;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Events
 {
 	public static class UIEvents
 	{
