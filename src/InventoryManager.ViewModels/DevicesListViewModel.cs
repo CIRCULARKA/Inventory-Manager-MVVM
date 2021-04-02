@@ -70,10 +70,6 @@ namespace InventoryManager.ViewModels
 					DisableDeviceLocationChanges();
 				}
 			};
-
-			DeviceEvents.OnDeviceSelectionChanged += (d) =>
-				ViewModelLinker.GetRegisteredViewModel<DeviceAccountsListViewModel>().
-					SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(d).ToObservableCollection();
 		}
 
 		private IDeviceRelatedRepository Repository { get; set; }

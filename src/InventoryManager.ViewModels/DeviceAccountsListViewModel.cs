@@ -19,6 +19,12 @@ namespace InventoryManager.ViewModels
 				(newAcc) => SelectedDeviceAccounts.Add(newAcc)
 			);
 
+			SubscribeActionOnDeviceSelectionChanged(
+				(device) => SelectedDeviceAccounts = Repository.
+					GetAllDeviceAccounts(device).
+						ToObservableCollection()
+			);
+
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) => AddDeviceAccountView.ShowDialog(),
 				(obj) => SelectedDevice != null
@@ -62,5 +68,8 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.
 				GetRegisteredViewModel<AddDeviceAccountViewModel>().
 					OnDeviceAccountAdded += action;
+
+		private void SubscribeActionOnDeviceSelectionChanged(Action<Device> action) =>
+			DeviceEvents.OnDeviceSelectionChanged += action;
 	}
 }
