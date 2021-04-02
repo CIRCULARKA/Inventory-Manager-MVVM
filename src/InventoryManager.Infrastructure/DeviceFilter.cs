@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using InventoryManager.Models;
-using InventoryManager.Commands;
-using System;
 using System.Linq;
 
 namespace InventoryManager.ViewModels
