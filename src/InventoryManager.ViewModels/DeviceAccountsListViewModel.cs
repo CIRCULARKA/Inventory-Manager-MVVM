@@ -19,9 +19,6 @@ namespace InventoryManager.ViewModels
 				(newAcc) => SelectedDeviceAccounts.Add(newAcc)
 			);
 
-			// SelectedDeviceAccounts = Repository.GetAllDeviceAccounts(SelectedDevice).
-			// 	ToObservableCollection();
-
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) => AddDeviceAccountView.ShowDialog(),
 				(obj) => SelectedDevice != null
