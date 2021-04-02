@@ -1,9 +1,6 @@
-using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
-using System.Collections.Generic;
-using System;
 
 namespace InventoryManager.ViewModels
 {
