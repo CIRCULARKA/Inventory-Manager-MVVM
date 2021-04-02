@@ -22,8 +22,12 @@ namespace InventoryManager.ViewModels
 			);
 
 			SubscribeActionOnDeviceSelectionChanged(
-				(device) => SelectedDeviceIPAddresses =
-					Repository.GetAllDeviceIPAddresses(device).ToObservableCollection()
+				(device) =>
+				{
+					if (device != null)
+						SelectedDeviceIPAddresses =
+							Repository.GetAllDeviceIPAddresses(device).ToObservableCollection();
+				}
 			);
 
 			SubscribeActionOnNetworkMaskChanges(ClearDevicesIPLists);

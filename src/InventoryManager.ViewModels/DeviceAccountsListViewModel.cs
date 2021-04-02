@@ -22,9 +22,15 @@ namespace InventoryManager.ViewModels
 			);
 
 			SubscribeActionOnDeviceSelectionChanged(
-				(device) => SelectedDeviceAccounts = Repository.
-					GetAllDeviceAccounts(device).
-						ToObservableCollection()
+				(device) =>
+				{
+					if (device != null)
+					{
+						SelectedDeviceAccounts = Repository.
+							GetAllDeviceAccounts(device).
+								ToObservableCollection();
+					}
+				}
 			);
 
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
