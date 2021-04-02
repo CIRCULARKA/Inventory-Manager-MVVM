@@ -80,11 +80,6 @@ namespace InventoryManager.ViewModels
 		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
 			DeviceEvents.OnDeviceIPAdded += action;
 
-		// private void SubscribeActionOnIpRemoving(Action<IPAddress> action) =>
-		// 	ViewModelLinker.
-		// 		GetRegisteredViewModel<DeviceIPListViewModel>().
-		// 			OnIPRemoved += action;
-
 		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
 			ViewModelLinker.
 				GetRegisteredViewModel<ConfigureIPSettingsViewModel>().
