@@ -15,6 +15,8 @@ namespace InventoryManager.ViewModels
 	{
 		private Device _selectedDevice;
 
+		private ObservableCollection<Device> _filteredDevices;
+
 		public DevicesListViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -23,9 +25,7 @@ namespace InventoryManager.ViewModels
 
 			InitDevicesLocationWithInstances();
 
-			FilteredDevices = DevicesFilter.
-				GetFilteredDevicesList(AllDevices).
-				ToObservableCollection();
+			FilterDevicesAccordingToCriteria();
 
 			ShowAddDeviceViewCommand = RegisterCommandAction(
 				(obj) => AddDeviceView.ShowDialog()
@@ -60,6 +60,10 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
+			SubscribeActionOnFilteringCriteraChanges(
+				(filteredDevices) => FilterDevicesAccordingToCriteria()
+			);
+
 			DeviceEvents.OnDeviceSelectionChanged += (d) =>
 			{
 				if (d != null) EnableDeviceLocationChanges();
@@ -75,7 +79,15 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; set; }
 
-		public ObservableCollection<Device> FilteredDevices { get; set; }
+		public ObservableCollection<Device> FilteredDevices
+		{
+			get => _filteredDevices;
+			set
+			{
+				_filteredDevices = value;
+				OnPropertyChanged(nameof(FilteredDevices));
+			}
+		}
 
 		public DeviceFilter DevicesFilter =>
 			ViewModelLinker.GetRegisteredViewModel<DeviceSearchAndFilteringViewModel>().DevicesFilter;
@@ -149,5 +161,12 @@ namespace InventoryManager.ViewModels
 		}
 		private void SubscribeActionOnDeviceAddition(Action<Device> action) =>
 			DeviceEvents.OnNewDeviceAdded += action;
+
+		private void SubscribeActionOnFilteringCriteraChanges(Action<IEnumerable<Device>> action) =>
+			DeviceEvents.OnDeviceFilteringCriteriaChanged += action;
+		private void FilterDevicesAccordingToCriteria() =>
+			FilteredDevices = DevicesFilter.
+				GetFilteredDevicesList(AllDevices).
+					ToObservableCollection();
 	}
 }
