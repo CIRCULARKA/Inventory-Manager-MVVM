@@ -9,5 +9,10 @@ namespace InventoryManager.Infrastructure
 
 		public static void RaiseOnDeviceSelectionChanged(Device device) =>
 			OnDeviceSelectionChanged?.Invoke(device);
+
+		public static event Action<Device> OnNewDeviceAdded;
+
+		public static void RaiseOnNewDeviceAdded(Device device) =>
+			OnNewDeviceAdded?.Invoke(device);
 	}
 }
