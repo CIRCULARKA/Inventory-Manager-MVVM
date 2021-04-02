@@ -11,6 +11,8 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceAccountsListViewModel : ViewModelBase
 	{
+		private ObservableCollection<DeviceAccount> _selectedDeviceAccounts;
+
 		public DeviceAccountsListViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -42,7 +44,16 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public ObservableCollection<DeviceAccount> SelectedDeviceAccounts { get; set; }
+		public ObservableCollection<DeviceAccount> SelectedDeviceAccounts
+		{
+			get => _selectedDeviceAccounts;
+			set
+			{
+				_selectedDeviceAccounts = value;
+
+				OnPropertyChanged(nameof(SelectedDeviceAccounts));
+			}
+		}
 
 		public Device SelectedDevice =>
 			ViewModelLinker.
