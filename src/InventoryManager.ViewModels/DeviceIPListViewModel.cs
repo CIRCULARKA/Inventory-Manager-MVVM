@@ -12,6 +12,8 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceIPListViewModel : ViewModelBase
 	{
+		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
+
 		public DeviceIPListViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -47,7 +49,15 @@ namespace InventoryManager.ViewModels
 
 		public IPAddress SelectedIPAddress { get; set; }
 
-		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses { get; set; }
+		public ObservableCollection<IPAddress> SelectedDeviceIPAddresses
+		{
+			get => _selectedDeviceIPAddresses;
+			set
+			{
+				_selectedDeviceIPAddresses = value;
+				OnPropertyChanged(nameof(SelectedDeviceIPAddresses));
+			}
+		}
 
 		public Device SelectedDevice =>
 			ViewModelLinker.
