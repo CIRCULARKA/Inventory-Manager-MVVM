@@ -30,7 +30,11 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnNetworkMaskChanges(ClearDevicesIPLists);
 
 			ShowAddIPViewCommand = RegisterCommandAction(
-				(obj) => AddIPToDeviceView.ShowDialog(),
+				(obj) =>
+				{
+					AddIPToDeviceView.ShowDialog();
+					UIEvents.RaiseOnShowAddIPAddressViewCommandExecuted();
+				},
 				(obj) => SelectedDevice != null
 			);
 
