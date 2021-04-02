@@ -1,4 +1,5 @@
 using InventoryManager.Models;
+using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace InventoryManager.ViewModels
 					DevicesFilter.IncludePC = IsPCIncluded;
 					DevicesFilter.SearchQuery = InputtedSearchQuery;
 
-					OnFilterCriteriaChanged?.Invoke(
+					DeviceEvents.RaiseOnDeviceFilteringCriteriaChanged(
 						DevicesFilter.GetFilteredDevicesList(
 							ViewModelLinker.
 								GetRegisteredViewModel<DevicesListViewModel>().
@@ -30,8 +31,6 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
-
-		public Action<IEnumerable<Device>> OnFilterCriteriaChanged;
 
 		public bool IsServersIncluded { get; set; } = true;
 
