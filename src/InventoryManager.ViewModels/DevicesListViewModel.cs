@@ -164,6 +164,7 @@ namespace InventoryManager.ViewModels
 
 		private void SubscribeActionOnFilteringCriteraChanges(Action<IEnumerable<Device>> action) =>
 			DeviceEvents.OnDeviceFilteringCriteriaChanged += action;
+
 		private void FilterDevicesAccordingToCriteria() =>
 			FilteredDevices = DevicesFilter.
 				GetFilteredDevicesList(AllDevices).
