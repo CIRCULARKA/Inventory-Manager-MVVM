@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using InventoryManager.Commands;
+using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
 {
@@ -43,7 +44,7 @@ namespace InventoryManager.ViewModels
 						Repository.FixDeviceMovement(addedDeviceNote);
 						Repository.SaveChanges();
 
-						OnDeviceAdded?.Invoke(newDevice);
+						DeviceEvents.RaiseOnNewDeviceAdded(newDevice);
 
 						InputtedInventoryNumber = "";
 						InputtedNetworkName = "";
@@ -63,8 +64,6 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
-
-		public event Action<Device> OnDeviceAdded;
 
 		private IDeviceRelatedRepository Repository { get; }
 
