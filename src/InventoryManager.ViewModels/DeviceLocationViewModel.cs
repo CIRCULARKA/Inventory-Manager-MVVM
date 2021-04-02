@@ -78,8 +78,11 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnDeviceSelectionChanging(
 				(device) =>
 				{
-					SelectedHousing = device.Cabinet.Housing;
-					SelectedCabinet = device.Cabinet;
+					if (device != null)
+					{
+						SelectedHousing = device.Cabinet.Housing;
+						SelectedCabinet = device.Cabinet;
+					}
 				}
 			);
 		}
