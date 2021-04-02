@@ -27,6 +27,13 @@ namespace InventoryManager.ViewModels
 			SubscribeActionOnNetworkMaskChanges(
 				RefreshAvailableIPList
 			);
+
+			SubscribeActionOnShowAddIPAddressViewCommandExecution(
+				() => AllAvailableIPAddresses =
+					Repository.
+						AllAvailableIPAddresses.
+							ToList()
+			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -36,7 +43,7 @@ namespace InventoryManager.ViewModels
 			get => _allAvailableIPs;
 			set
 			{
-				_allAvailableIPs = Repository.AllAvailableIPAddresses.ToList();
+				_allAvailableIPs = value;
 				OnPropertyChanged(nameof(AllAvailableIPAddresses));
 			}
 		}
@@ -80,5 +87,8 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.
 				GetRegisteredViewModel<ConfigureIPSettingsViewModel>().
 					OnNetworkMaskChanged += action;
+
+		private void SubscribeActionOnShowAddIPAddressViewCommandExecution(Action action) =>
+			UIEvents.OnShowAddIPAddressViewCommandExecuted += action;
 	}
 }
