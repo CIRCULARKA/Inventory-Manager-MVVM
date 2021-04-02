@@ -27,7 +27,7 @@ namespace InventoryManager.Infrastructure
 
 		public static event Action<IPAddress> OnDeviceIPRemoved;
 
-		public static void RaiseOnDeviceIOPRemoved(IPAddress ip) =>
+		public static void RaiseOnDeviceIPRemoved(IPAddress ip) =>
 			OnDeviceIPRemoved?.Invoke(ip);
 	}
 }
