@@ -18,7 +18,6 @@ namespace InventoryManager
 			RegisterViewModels();
 			LinkViewsWithViewModels();
 
-
 #if RELEASE
 			ViewModelLinker.GetRegisteredView<AuthorizationView>().Show();
 #else
@@ -56,7 +55,6 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new DeviceIPListViewModel(deviceRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new DevicesManagementViewModel());
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
-
 
 			ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
