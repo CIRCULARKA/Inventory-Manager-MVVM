@@ -61,7 +61,8 @@ namespace InventoryManager.ViewModels
 					}
 					catch (Exception e) { MessageToUser = e.Message; }
 				},
-				(obj) => SelectedDevice != null
+				(obj) => (SelectedDevice != null) &&
+					(SelectedDevice.Cabinet != SelectedCabinet)
 			);
 
 			SubscribeActionOnHousingChanged(
