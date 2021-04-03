@@ -36,5 +36,9 @@ namespace InventoryManager.Events
 		public static void RaiseOnDeviceFilteringCriteriaChanged(IEnumerable<Device> filteredList) =>
 			OnDeviceFilteringCriteriaChanged?.Invoke(filteredList);
 
+		public static event Action<Housing> OnDeviceHosuingChanged;
+
+		public static void RaiseOnDeviceHousingChanged(Housing housing) =>
+			OnDeviceHosuingChanged?.Invoke(housing);
 	}
 }
