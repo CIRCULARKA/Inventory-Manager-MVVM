@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using InventoryManager.Models;
-using InventoryManager.Commands;
-using System;
 using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
 	public class DeviceFilter : ViewModelBase
 	{
-		public List<Device> InitialList { get; }
-
 		public bool IncludeServers { get; set; } = true;
 
 		public bool IncludePC { get; set; } = true;
