@@ -104,8 +104,6 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public event Action<Housing> SelectedHousingChanged;
-
 		public Cabinet SelectedCabinet
 		{
 			get => _selectedCabinet;
@@ -123,7 +121,7 @@ namespace InventoryManager.ViewModels
 			{
 				_selectedHousing = value;
 
-				SelectedHousingChanged?.Invoke(_selectedHousing);
+				DeviceEvents.RaiseOnDeviceHousingChanged(_selectedHousing);
 				OnPropertyChanged(nameof(SelectedHousing));
 			}
 		}
@@ -157,7 +155,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		public void SubscribeActionOnHousingChanged(Action<Housing> action) =>
-			SelectedHousingChanged += action;
+			DeviceEvents.OnDeviceHosuingChanged += action;
 
 		public void SubscribeActionOnDeviceSelectionChanging(Action<Device> action) =>
 			DeviceEvents.OnDeviceSelectionChanged += action;
