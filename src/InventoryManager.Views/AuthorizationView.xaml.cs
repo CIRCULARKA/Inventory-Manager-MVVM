@@ -1,7 +1,4 @@
-﻿using InventoryManager.ViewModels;
-using InventoryManager.Models;
-
-namespace InventoryManager.Views
+﻿namespace InventoryManager.Views
 {
 	public partial class AuthorizationView : ViewBase
 	{

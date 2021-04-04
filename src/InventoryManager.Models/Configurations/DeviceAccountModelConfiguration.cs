@@ -9,7 +9,7 @@ namespace InventoryManager.Models.Configuration
 		{
 			builder.HasKey(a => a.ID);
 			builder.Property(a => a.ID).UseIdentityColumn();
-			builder.HasIndex(a => a.Login).IsUnique();
+			builder.HasIndex(a => new { a.Login, a.DeviceID }).IsUnique();
 			builder.HasData(
 				new DeviceAccount
 				{
