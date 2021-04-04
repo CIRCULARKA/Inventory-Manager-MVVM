@@ -1,10 +1,11 @@
-using InventoryManager.Commands;
-using InventoryManager.Models;
-using InventoryManager.Extensions;
 using InventoryManager.Views;
+using InventoryManager.Models;
+using InventoryManager.Events;
+using InventoryManager.Commands;
+using InventoryManager.Extensions;
 using InventoryManager.Infrastructure;
-using System.Collections.ObjectModel;
 using System;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
@@ -58,6 +59,6 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.GetRegisteredViewModel<AddUserViewModel>();
 
 		private void SubscribeActionOnUserAddition(Action<User> action) =>
-			AddUserViewModel.OnUserAdded += action;
+			UserEvents.OnUserAdded += action;
 	}
 }
