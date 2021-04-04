@@ -1,10 +1,7 @@
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 using InventoryManager.Models;
-using InventoryManager.Views;
-using System.Windows;
 using System;
-using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {

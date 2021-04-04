@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using System.Configuration;
 using System.Xml;
 
@@ -5,16 +7,23 @@ namespace InventoryManager.Infrastructure
 {
 	public class XMLNetworkConfigurationWriter : INetworkConfigurationWriter
 	{
-		public void WriteNetworkAddress(string address) =>
-			ConfigurationManager.AppSettings.Set("networkAddress", address);
+		private Configuration _exeConfiguration =
+			ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+		public void WriteNetworkAddress(string address)
+		{
+			_exeConfiguration.AppSettings.Settings["networkAddress"].Value = address;
+			_exeConfiguration.Save();
+
+			ConfigurationManager.RefreshSection("appSettings");
+		}
 
 		public void WriteMask(byte mask)
 		{
-			ConfigXmlDocument xmlConfigurator = new ConfigXmlDocument();
-			xmlConfigurator.Load(@"D:\Inventory-Manager-MVVM\src\app.config");
-			
-			var maskNode = xmlConfigurator.SelectSingleNode("//add[@key='networkMask']") as XmlElement;
-			maskNode?.SetAttribute("value", mask.ToString());
+			_exeConfiguration.AppSettings.Settings["networkMask"].Value = mask.ToString();
+			_exeConfiguration.Save();
+
+			ConfigurationManager.RefreshSection("appSettings");
 		}
 	}
 }
