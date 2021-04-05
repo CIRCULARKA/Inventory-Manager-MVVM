@@ -1,9 +1,10 @@
-using System;
-using System.Collections.ObjectModel;
-using InventoryManager.Commands;
 using InventoryManager.Views;
 using InventoryManager.Models;
+using InventoryManager.Commands;
 using InventoryManager.Extensions;
+using InventoryManager.Infrastructure;
+using System;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
@@ -27,7 +28,8 @@ namespace InventoryManager.ViewModels
 					addCertificateView.ShowDialog();
 				},
 				// Can't add new Windows Certificates rn
-				(obj) => false
+				(obj) => false &&
+					AuthorizedUser.IsAllowedTo(UserActions.AddCertificate)
 			);
 
 			AddCertificateCommand = RegisterCommandAction(
@@ -52,7 +54,8 @@ namespace InventoryManager.ViewModels
 				},
 				// (obj) => !string.IsNullOrWhiteSpace(InputtedSubject)
 				// Can't add new Windows Certificate rn
-				(obj) => false
+				(obj) => false &&
+					AuthorizedUser.IsAllowedTo(UserActions.RemoveCerificate)
 			);
 
 			RemoveCertificateCommand = RegisterCommandAction(

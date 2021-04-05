@@ -53,7 +53,8 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
-				(obj) => NetworkConfigurationView.ShowDialog()
+				(obj) => NetworkConfigurationView.ShowDialog(),
+				(obj) => AuthorizedUser.IsAllowedTo(UserActions.ChangeNetworkSettings)
 			);
 		}
 

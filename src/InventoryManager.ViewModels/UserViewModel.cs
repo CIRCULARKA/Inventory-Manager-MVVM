@@ -31,11 +31,13 @@ namespace InventoryManager.ViewModels
 					Repository.SaveChanges();
 					UsersToShow.Remove(SelectedUser);
 				},
-				(obj) => SelectedUser != null && SelectedUser.UserGroup.Name != "Суперпользователь"
+				(obj) => SelectedUser != null && SelectedUser.UserGroup.Name != "Суперпользователь" &&
+					AuthorizedUser.IsAllowedTo(UserActions.RemoveUser)
 			);
 
 			ShowAddUserViewCommand = RegisterCommandAction(
-				(obj) => AddUserView.ShowDialog()
+				(obj) => AddUserView.ShowDialog(),
+				(obj) => AuthorizedUser.IsAllowedTo(UserActions.AddUser)
 			);
 		}
 
