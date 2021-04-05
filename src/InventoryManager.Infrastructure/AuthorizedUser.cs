@@ -6,7 +6,7 @@ namespace InventoryManager.Infrastructure
 	{
 		public static User User { get; set; }
 
-		public static UserAccessRights AuthorizedUserAccessLevel =>
+		public static UserAccessRights AccessLevel =>
 			(UserAccessRights)User.UserGroupID;
 	}
 }

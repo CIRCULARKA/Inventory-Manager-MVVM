@@ -21,6 +21,7 @@ namespace InventoryManager.ViewModels
 						AuthorizationView.Hide();
 
 						MainViewModel.AuthorizedUser = AuthorizingUser;
+						AuthorizedUser.User = AuthorizingUser;
 						MainViewModel.LoadTabItemsContent();
 
 						MainView.Show();
