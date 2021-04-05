@@ -3,7 +3,7 @@ namespace InventoryManager.Infrastructure
 	public enum UserActions
 	{
 		InspectUsers,
-		AddNewUser,
+		AddUser,
 		RemoveUser,
 
 		InspectDevices,
