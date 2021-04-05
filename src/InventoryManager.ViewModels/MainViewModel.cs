@@ -57,8 +57,6 @@ namespace InventoryManager.ViewModels
 			);
 		}
 
-		public User AuthorizedUser { get; set; }
-
 		public List<TabItem> MainViewTabs
 		{
 			get => _mainViewTabs;
@@ -92,9 +90,9 @@ namespace InventoryManager.ViewModels
 		{
 			MainViewTabs = new List<TabItem>();
 
-			if (AuthorizedUser.UserGroup.Name == "Техник")
+			if (AuthorizedUser.AccessLevel == UserAccessRights.Technician)
 				MainViewTabs.AddRange(new TabItem[] { _devicesTab, _certificatesTab });
-			else if (AuthorizedUser.UserGroup.Name == "Администратор")
+			else if (AuthorizedUser.AccessLevel == UserAccessRights.Administrator)
 				MainViewTabs.AddRange(new TabItem[] { _devicesTab, _usersTab, _certificatesTab });
 			else MainViewTabs.AddRange(new TabItem[] { _devicesTab, _usersTab, _certificatesTab });
 
