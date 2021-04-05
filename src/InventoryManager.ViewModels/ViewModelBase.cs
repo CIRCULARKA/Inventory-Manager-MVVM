@@ -1,5 +1,6 @@
 using InventoryManager.Models;
 using InventoryManager.Commands;
+using InventoryManager.Infrastructure;
 using System;
 
 namespace InventoryManager.ViewModels
@@ -17,6 +18,8 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("MessageToUser");
 			}
 		}
+
+		public AuthorizedUser AuthorizedUser { get; set; }
 
 		protected Command RegisterCommandAction(
 			Action<object> action,
