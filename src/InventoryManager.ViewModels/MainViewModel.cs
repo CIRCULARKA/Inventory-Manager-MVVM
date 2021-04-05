@@ -90,13 +90,17 @@ namespace InventoryManager.ViewModels
 		{
 			MainViewTabs = new List<TabItem>();
 
-			if (AuthorizedUser.AccessLevel == UserAccessRights.Technician)
-				MainViewTabs.AddRange(new TabItem[] { _devicesTab, _certificatesTab });
-			else if (AuthorizedUser.AccessLevel == UserAccessRights.Administrator)
-				MainViewTabs.AddRange(new TabItem[] { _devicesTab, _usersTab, _certificatesTab });
-			else MainViewTabs.AddRange(new TabItem[] { _devicesTab, _usersTab, _certificatesTab });
+			if (AuthorizedUser.IsAllowedTo(UserActions.InspectDevices))
+				MainViewTabs.Add(_devicesTab);
+			if (AuthorizedUser.IsAllowedTo(UserActions.InspectUsers))
+				MainViewTabs.Add(_usersTab);
+			if (AuthorizedUser.IsAllowedTo(UserActions.InspectCertificates))
+				MainViewTabs.Add(_certificatesTab);
 
-			SelectedTab = MainViewTabs[0];
+			SelectFirstTab();
 		}
+
+		private void SelectFirstTab() =>
+			SelectedTab = MainViewTabs[0];
 	}
 }
