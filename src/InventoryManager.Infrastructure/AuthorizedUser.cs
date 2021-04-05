@@ -2,11 +2,11 @@ using InventoryManager.Models;
 
 namespace InventoryManager.Infrastructure
 {
-	public static class AuthorizedUser
+	public class AuthorizedUser
 	{
-		public static User User { get; set; }
+		public User User { get; set; }
 
-		public static UserAccessRights AccessLevel =>
+		public UserAccessRights AccessLevel =>
 			(UserAccessRights)User.UserGroupID;
 	}
 }
