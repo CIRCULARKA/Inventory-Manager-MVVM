@@ -14,8 +14,6 @@ namespace InventoryManager.Infrastructure
 			_rules = rules;
 		}
 
-		public User User { get; set; }
-
 		public static UserAccessRights GetUserAccessLevel(User user) =>
 			(UserAccessRights)user.UserGroupID;
 
