@@ -57,12 +57,12 @@ namespace InventoryManager.ViewModels
 		private void ShowMainView() =>
 			MainView.Show();
 
-		private AuthorizedUser GetAuthorizedUser()
+		private void AuthorizeUser()
 		{
-			return new AuthorizedUser(
+			UserSession.AuthorizeUser(
 				AuthorizingUser,
 				UserRightsBuilder.GetUserRights(
-					AuthorizedUser.GetUserAccessLevel(AuthorizingUser)
+					UserSession.GetUserAccessLevel(AuthorizingUser)
 				)
 			);
 		}

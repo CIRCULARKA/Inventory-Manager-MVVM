@@ -93,21 +93,16 @@ namespace InventoryManager.ViewModels
 
 		public Command ApplyIPMaskChangesCommand { get; }
 
-		public void LoadTabItemsContent(AuthorizedUser user)
+		public void LoadTabItemsContent()
 		{
 			MainViewTabs = new List<TabItem>();
 
-			try
-			{
-				if (user.IsAllowedTo(UserActions.InspectDevices))
-					MainViewTabs.Add(_devicesTab);
-				if (user.IsAllowedTo(UserActions.InspectUsers))
-					MainViewTabs.Add(_usersTab);
-				if (user.IsAllowedTo(UserActions.InspectCertificates))
-					MainViewTabs.Add(_certificatesTab);
-			}
-			catch (NullReferenceException)
-			{ throw new Exception("Can't load tabs. Set AuthorizedUser property first"); }
+			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectDevices))
+				MainViewTabs.Add(_devicesTab);
+			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectUsers))
+				MainViewTabs.Add(_usersTab);
+			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectCertificates))
+				MainViewTabs.Add(_certificatesTab);
 
 			SelectFirstTab();
 		}
