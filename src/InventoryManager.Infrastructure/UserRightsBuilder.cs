@@ -14,7 +14,6 @@ namespace InventoryManager.Infrastructure
 					rules.AllowAction(UserActions.InspectDevices);
 					rules.AllowAction(UserActions.AddDevice);
 					rules.AllowAction(UserActions.RemoveDevice);
-
 					rules.AllowAction(UserActions.InspectCertificates);
 					break;
 				case UserAccessRights.Administrator:
