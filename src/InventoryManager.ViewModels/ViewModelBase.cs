@@ -19,8 +19,6 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public AuthorizedUser AuthorizedUser { get; set; }
-
 		protected Command RegisterCommandAction(
 			Action<object> action,
 			Func<object, bool> conditionOfWork = null
