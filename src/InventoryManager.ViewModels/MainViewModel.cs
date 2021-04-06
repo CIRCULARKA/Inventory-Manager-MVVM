@@ -1,7 +1,7 @@
 using InventoryManager.Views;
-using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
+using System;
 using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -97,12 +97,16 @@ namespace InventoryManager.ViewModels
 		{
 			MainViewTabs = new List<TabItem>();
 
-			if (user.IsAllowedTo(UserActions.InspectDevices))
-				MainViewTabs.Add(_devicesTab);
-			if (user.IsAllowedTo(UserActions.InspectUsers))
-				MainViewTabs.Add(_usersTab);
-			if (user.IsAllowedTo(UserActions.InspectCertificates))
-				MainViewTabs.Add(_certificatesTab);
+			try
+			{
+				if (user.IsAllowedTo(UserActions.InspectDevices))
+					MainViewTabs.Add(_devicesTab);
+				if (user.IsAllowedTo(UserActions.InspectUsers))
+					MainViewTabs.Add(_usersTab);
+				if (user.IsAllowedTo(UserActions.InspectCertificates))
+					MainViewTabs.Add(_certificatesTab);
+			}
+			catch (Exception) { throw new Exception("Can't load tabs. Set AuthorizedUser property first"); }
 
 			SelectFirstTab();
 		}
