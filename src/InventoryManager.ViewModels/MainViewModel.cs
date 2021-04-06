@@ -54,7 +54,13 @@ namespace InventoryManager.ViewModels
 
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
 				(obj) => NetworkConfigurationView.ShowDialog(),
-				(obj) => AuthorizedUser.IsAllowedTo(UserActions.ChangeNetworkSettings)
+				(obj) =>
+				{
+					// if (base.AuthorizedUser != null)
+					// 	return base.AuthorizedUser.IsAllowedTo(UserActions.ChangeNetworkSettings);
+					// else return false;
+					return true;
+				}
 			);
 		}
 
@@ -87,15 +93,15 @@ namespace InventoryManager.ViewModels
 
 		public Command ApplyIPMaskChangesCommand { get; }
 
-		public void LoadTabItemsContent()
+		public void LoadTabItemsContent(AuthorizedUser user)
 		{
 			MainViewTabs = new List<TabItem>();
 
-			if (AuthorizedUser.IsAllowedTo(UserActions.InspectDevices))
+			if (user.IsAllowedTo(UserActions.InspectDevices))
 				MainViewTabs.Add(_devicesTab);
-			if (AuthorizedUser.IsAllowedTo(UserActions.InspectUsers))
+			if (user.IsAllowedTo(UserActions.InspectUsers))
 				MainViewTabs.Add(_usersTab);
-			if (AuthorizedUser.IsAllowedTo(UserActions.InspectCertificates))
+			if (user.IsAllowedTo(UserActions.InspectCertificates))
 				MainViewTabs.Add(_certificatesTab);
 
 			SelectFirstTab();
