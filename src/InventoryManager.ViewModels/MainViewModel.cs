@@ -106,7 +106,8 @@ namespace InventoryManager.ViewModels
 				if (user.IsAllowedTo(UserActions.InspectCertificates))
 					MainViewTabs.Add(_certificatesTab);
 			}
-			catch (NullReferenceException) { throw new Exception("Can't load tabs. Set AuthorizedUser property first"); }
+			catch (NullReferenceException)
+			{ throw new Exception("Can't load tabs. Set AuthorizedUser property first"); }
 
 			SelectFirstTab();
 		}
