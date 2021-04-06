@@ -28,8 +28,9 @@ namespace InventoryManager.ViewModels
 					addCertificateView.ShowDialog();
 				},
 				// Can't add new Windows Certificates rn
-				(obj) => false &&
-					AuthorizedUser.IsAllowedTo(UserActions.AddCertificate)
+				(obj) => // false &&
+					// base.AuthorizedUser.IsAllowedTo(UserActions.AddCertificate)
+					false
 			);
 
 			AddCertificateCommand = RegisterCommandAction(
@@ -54,8 +55,12 @@ namespace InventoryManager.ViewModels
 				},
 				// (obj) => !string.IsNullOrWhiteSpace(InputtedSubject)
 				// Can't add new Windows Certificate rn
-				(obj) => false &&
-					AuthorizedUser.IsAllowedTo(UserActions.RemoveCerificate)
+				(obj) =>
+				{
+					return false;
+					// if (base.AuthorizedUser != null)
+					// 	base.AuthorizedUser.IsAllowedTo(UserActions.RemoveCerificate);
+				}
 			);
 
 			RemoveCertificateCommand = RegisterCommandAction(
