@@ -1,4 +1,5 @@
 using InventoryManager.Models;
+using System;
 
 namespace InventoryManager.Infrastructure
 {
@@ -20,10 +21,18 @@ namespace InventoryManager.Infrastructure
 		public static UserAccessRights AuthorizedUserAccessLevel =>
 			(UserAccessRights)_authorizedUser.UserGroupID;
 
-		public static UserAccessRights GetUserAccessLevel(User user) =>
-			(UserAccessRights)_authorizedUser.UserGroupID;
+		public static UserAccessRights GetUserAccessLevel(User user)
+		{
+			try { return (UserAccessRights)_authorizedUser.UserGroupID; }
+			catch { throw new Exception($"No user is authorized. Use \"{nameof(AuthorizeUser)}\" firstly"); }
+		}
 
-		public static bool IsAuthorizedUserAllowedTo(UserActions action) =>
-			_rules.IsActionAllowed(action);
+
+		public static bool IsAuthorizedUserAllowedTo(UserActions action)
+		{
+			try { return _rules.IsActionAllowed(action); }
+			catch (NullReferenceException)
+			{ throw new Exception($"No user is authorized. Use \"{nameof(AuthorizeUser)}\" firstly"); }
+		}
 	}
 }

@@ -30,12 +30,7 @@ namespace InventoryManager.ViewModels
 			ShowAddDeviceViewCommand = RegisterCommandAction(
 				(obj) => AddDeviceView.ShowDialog(),
 				(obj) =>
-				{
-					// if (base.AuthorizedUser != null)
-					// 	return base.AuthorizedUser.IsAllowedTo(UserActions.AddDevice);
-					// else return false;
-					return true;
-				}
+					UserSession.IsAuthorizedUserAllowedTo(UserActions.AddDevice)
 			);
 
 			RemoveDeviceCommand = RegisterCommandAction(
@@ -51,13 +46,9 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) =>
 				{
-					var result = true;
-
-					if (base.AuthorizedUser != null)
-						result = base.AuthorizedUser.IsAllowedTo(UserActions.RemoveDevice);
-					result = result && SelectedDevice != null;
-
-					return result;
+					if (UserSession.IsAuthorizedUserAllowedTo(UserActions.RemoveDevice))
+						return SelectedDevice != null;
+					else return false;
 				}
 			);
 
