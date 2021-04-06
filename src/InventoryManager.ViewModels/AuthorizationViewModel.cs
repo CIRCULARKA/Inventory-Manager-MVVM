@@ -20,6 +20,8 @@ namespace InventoryManager.ViewModels
 					{
 						HideAuthorization();
 
+						AuthorizeUser();
+
 						MainViewModel.LoadTabItemsContent();
 
 						ShowMainView();
