@@ -20,6 +20,9 @@ namespace InventoryManager.Infrastructure
 		public static UserAccessRights AuthorizedUserAccessLevel =>
 			(UserAccessRights)_authorizedUser.UserGroupID;
 
+		public static UserAccessRights GetUserAccessLevel(User user) =>
+			(UserAccessRights)_authorizedUser.UserGroupID;
+
 		public static bool IsAuthorizedUserAllowedTo(UserActions action) =>
 			_rules.IsActionAllowed(action);
 	}
