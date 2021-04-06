@@ -20,8 +20,7 @@ namespace InventoryManager.ViewModels
 					{
 						HideAuthorization();
 
-						SetAuthorizedUser();
-						MainViewModel.LoadTabItemsContent();
+						MainViewModel.LoadTabItemsContent(GetAuthorizedUser());
 
 						ShowMainView();
 					}
@@ -58,9 +57,9 @@ namespace InventoryManager.ViewModels
 		private void ShowMainView() =>
 			MainView.Show();
 
-		private void SetAuthorizedUser()
+		private AuthorizedUser GetAuthorizedUser()
 		{
-			base.AuthorizedUser = new AuthorizedUser(
+			return new AuthorizedUser(
 				AuthorizingUser,
 				UserRightsBuilder.GetUserRights(
 					AuthorizedUser.GetUserAccessLevel(AuthorizingUser)
