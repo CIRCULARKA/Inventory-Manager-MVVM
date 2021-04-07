@@ -1,10 +1,10 @@
-using InventoryManager.Commands;
 using InventoryManager.Views;
-using InventoryManager.Models;
+using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
+using System;
 using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Collections;
 
 namespace InventoryManager.ViewModels
 {
@@ -14,12 +14,33 @@ namespace InventoryManager.ViewModels
 
 		const string _authorName = "Гачегов Руслан. 318 П/1";
 
-		private IEnumerable _mainViewTabs;
+		private List<TabItem> _mainViewTabs;
+
+		private TabItem _selectedTab;
+
+		private TabItem _devicesTab =
+			new TabItem
+			{
+				Header = "Устройства",
+				Content = ViewModelLinker.GetRegisteredPartialView<DevicesManagementView>()
+			};
+
+		private TabItem _usersTab =
+			new TabItem
+			{
+				Header = "Пользователи",
+				Content = ViewModelLinker.GetRegisteredPartialView<UsersManagementView>()
+			};
+
+		private TabItem _certificatesTab =
+			new TabItem
+			{
+				Header = "Сертификаты",
+				Content = ViewModelLinker.GetRegisteredPartialView<CertificatesManagementView>()
+			};
 
 		public MainViewModel()
 		{
-			LoadTabItemsContent();
-
 			ShowAboutProgramDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -32,17 +53,34 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
-				(obj) => NetworkConfigurationView.ShowDialog()
+				(obj) => NetworkConfigurationView.ShowDialog(),
+				(obj) =>
+				{
+					// if (base.AuthorizedUser != null)
+					// 	return base.AuthorizedUser.IsAllowedTo(UserActions.ChangeNetworkSettings);
+					// else return false;
+					return true;
+				}
 			);
 		}
 
-		public IEnumerable MainViewTabs
+		public List<TabItem> MainViewTabs
 		{
 			get => _mainViewTabs;
 			set
 			{
 				_mainViewTabs = value;
 				OnPropertyChanged(nameof(MainViewTabs));
+			}
+		}
+
+		public TabItem SelectedTab
+		{
+			get => _selectedTab;
+			set
+			{
+				_selectedTab = value;
+				OnPropertyChanged(nameof(SelectedTab));
 			}
 		}
 
@@ -57,24 +95,19 @@ namespace InventoryManager.ViewModels
 
 		public void LoadTabItemsContent()
 		{
-			MainViewTabs = new TabItem[]
-			{
-				new TabItem()
-				{
-					Header = "Устройства",
-					Content = ViewModelLinker.GetRegisteredPartialView<DevicesManagementView>()
-				},
-				new TabItem()
-				{
-					Header = "Пользователи",
-					Content = ViewModelLinker.GetRegisteredPartialView<UsersManagementView>()
-				},
-				new TabItem()
-				{
-					Header = "Сертификаты",
-					Content = ViewModelLinker.GetRegisteredPartialView<CertificatesManagementView>()
-				}
-			};
+			MainViewTabs = new List<TabItem>();
+
+			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectDevices))
+				MainViewTabs.Add(_devicesTab);
+			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectUsers))
+				MainViewTabs.Add(_usersTab);
+			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectCertificates))
+				MainViewTabs.Add(_certificatesTab);
+
+			SelectFirstTab();
 		}
+
+		private void SelectFirstTab() =>
+			SelectedTab = MainViewTabs[0];
 	}
 }

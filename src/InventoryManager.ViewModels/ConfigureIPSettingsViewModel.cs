@@ -1,6 +1,7 @@
+using InventoryManager.Models;
+using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
-using InventoryManager.Models;
 using System;
 
 namespace InventoryManager.ViewModels
@@ -29,7 +30,10 @@ namespace InventoryManager.ViewModels
 
 						MessageToUser = "Маска обновлена";
 
-						OnNetworkMaskChanged?.Invoke();
+						DeviceEvents.RaiseOnNetworkConfigurationChanged(
+							InputtedNetworkAddress,
+							byte.Parse(InputtedNetworkMask)
+						);
 					}
 					catch (Exception e)
 					{
@@ -49,8 +53,6 @@ namespace InventoryManager.ViewModels
 				}
 			);
 		}
-
-		public event Action OnNetworkMaskChanged;
 
 		private IIPAddressRepository Repository { get; }
 

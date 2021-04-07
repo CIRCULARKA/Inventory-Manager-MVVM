@@ -40,5 +40,10 @@ namespace InventoryManager.Events
 
 		public static void RaiseOnDeviceHousingChanged(Housing housing) =>
 			OnDeviceHosuingChanged?.Invoke(housing);
+
+		public static event Action<string, byte> OnNetworkConfigurationChanged;
+
+		public static void RaiseOnNetworkConfigurationChanged(string address, byte mask) =>
+			OnNetworkConfigurationChanged?.Invoke(address, mask);
 	}
 }

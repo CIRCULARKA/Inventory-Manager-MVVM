@@ -1,5 +1,6 @@
 using InventoryManager.Models;
 using InventoryManager.Commands;
+using InventoryManager.Infrastructure;
 using System;
 
 namespace InventoryManager.ViewModels

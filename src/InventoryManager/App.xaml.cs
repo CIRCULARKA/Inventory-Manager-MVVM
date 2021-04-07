@@ -1,10 +1,10 @@
 ﻿// #define RELEASE
 
-using System.Windows;
 using InventoryManager.Views;
-using InventoryManager.ViewModels;
 using InventoryManager.Models;
+using InventoryManager.ViewModels;
 using InventoryManager.Infrastructure;
+using System.Windows;
 
 namespace InventoryManager
 {
@@ -21,6 +21,13 @@ namespace InventoryManager
 #if RELEASE
 			ViewModelLinker.GetRegisteredView<AuthorizationView>().Show();
 #else
+			var usr = new User { UserGroupID = 3 };
+			UserSession.AuthorizeUser(
+				usr,
+				UserRightsBuilder.GetUserRights(UserSession.GetUserAccessLevel(usr))
+			);
+
+			ViewModelLinker.GetRegisteredViewModel<MainViewModel>().LoadTabItemsContent();
 			ViewModelLinker.GetRegisteredView<MainView>().Show();
 #endif
 		}

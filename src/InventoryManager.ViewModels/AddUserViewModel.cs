@@ -1,8 +1,9 @@
-using System;
-using System.Collections.ObjectModel;
 using InventoryManager.Models;
+using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
+using System;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
@@ -43,7 +44,7 @@ namespace InventoryManager.ViewModels
 						// Load user group explicitly to display user group in users list
 						newUser.UserGroup = SelectedUserGroup;
 
-						OnUserAdded?.Invoke(newUser);
+						UserEvents.RaiseOnUserAdded(newUser);
 
 						MessageToUser = "Пользователь добавлен";
 
@@ -57,8 +58,6 @@ namespace InventoryManager.ViewModels
 				(obj) => AreInputFieldsNotEmpty
 			);
 		}
-
-		public event Action<User> OnUserAdded;
 
 		private IUserRelatedRepository Repository { get; }
 

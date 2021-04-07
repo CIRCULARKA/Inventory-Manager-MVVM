@@ -28,7 +28,9 @@ namespace InventoryManager.ViewModels
 			FilterDevicesAccordingToCriteria();
 
 			ShowAddDeviceViewCommand = RegisterCommandAction(
-				(obj) => AddDeviceView.ShowDialog()
+				(obj) => AddDeviceView.ShowDialog(),
+				(obj) =>
+					UserSession.IsAuthorizedUserAllowedTo(UserActions.AddDevice)
 			);
 
 			RemoveDeviceCommand = RegisterCommandAction(
@@ -42,7 +44,12 @@ namespace InventoryManager.ViewModels
 					AllDevices.Remove(AllDevices.Find(d => d.ID == SelectedDevice.ID));
 					FilteredDevices.Remove(SelectedDevice);
 				},
-				(obj) => SelectedDevice != null
+				(obj) =>
+				{
+					if (UserSession.IsAuthorizedUserAllowedTo(UserActions.RemoveDevice))
+						return SelectedDevice != null;
+					else return false;
+				}
 			);
 
 			SubscribeActionOnDeviceAddition(
@@ -107,7 +114,7 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public Command ShowAddDeviceViewCommand{ get; }
+		public Command ShowAddDeviceViewCommand { get; }
 
 		public Command RemoveDeviceCommand { get; }
 

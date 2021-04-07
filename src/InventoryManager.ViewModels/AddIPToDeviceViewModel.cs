@@ -32,7 +32,7 @@ namespace InventoryManager.ViewModels
 			);
 
 			SubscribeActionOnNetworkMaskChanges(
-				RefreshAvailableIPList
+				(ip, mask) => RefreshAvailableIPList()
 			);
 
 			SubscribeActionOnShowAddIPAddressViewCommandExecution(
@@ -108,10 +108,8 @@ namespace InventoryManager.ViewModels
 		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
 			DeviceEvents.OnDeviceIPAdded += action;
 
-		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
-			ViewModelLinker.
-				GetRegisteredViewModel<ConfigureIPSettingsViewModel>().
-					OnNetworkMaskChanged += action;
+		private void SubscribeActionOnNetworkMaskChanges(Action<string, byte> action) =>
+			DeviceEvents.OnNetworkConfigurationChanged += action;
 
 		private void SubscribeActionOnShowAddIPAddressViewCommandExecution(Action action) =>
 			UIEvents.OnShowAddIPAddressViewCommandExecuted += action;

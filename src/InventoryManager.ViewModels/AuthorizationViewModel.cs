@@ -18,9 +18,13 @@ namespace InventoryManager.ViewModels
 
 					if (IsUserPasswordCorrect())
 					{
-						var mainView = new MainView();
-						mainView.Show();
-						AuthorizationView.Close();
+						HideAuthorization();
+
+						AuthorizeUser();
+
+						MainViewModel.LoadTabItemsContent();
+
+						ShowMainView();
 					}
 					else MessageToUser = "Логин или пароль введён неверно";
 				}
@@ -34,6 +38,12 @@ namespace InventoryManager.ViewModels
 		private ViewBase AuthorizationView =>
 			ViewModelLinker.GetRegisteredView<AuthorizationView>();
 
+		public MainViewModel MainViewModel =>
+			ViewModelLinker.GetRegisteredViewModel<MainViewModel>();
+
+		public MainView MainView =>
+			ViewModelLinker.GetRegisteredView<MainView>();
+
 		public Command LoginCommand { get; }
 
 		public string InputtedLogin { get; set; }
@@ -42,5 +52,21 @@ namespace InventoryManager.ViewModels
 
 		public bool IsUserPasswordCorrect() =>
 			AuthorizingUser == null ? false : AuthorizingUser.Password == InputtedPassword;
+
+		private void HideAuthorization() =>
+			AuthorizationView.Hide();
+
+		private void ShowMainView() =>
+			MainView.Show();
+
+		private void AuthorizeUser()
+		{
+			UserSession.AuthorizeUser(
+				AuthorizingUser,
+				UserRightsBuilder.GetUserRights(
+					UserSession.GetUserAccessLevel(AuthorizingUser)
+				)
+			);
+		}
 	}
 }

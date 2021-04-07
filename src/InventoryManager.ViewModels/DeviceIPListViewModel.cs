@@ -30,7 +30,7 @@ namespace InventoryManager.ViewModels
 				}
 			);
 
-			SubscribeActionOnNetworkMaskChanges(ClearDevicesIPLists);
+			SubscribeActionOnNetworkMaskChanges((ip, mask) => ClearDevicesIPLists());
 
 			ShowAddIPViewCommand = RegisterCommandAction(
 				(obj) =>
@@ -96,9 +96,8 @@ namespace InventoryManager.ViewModels
 		private void SubscribeActionOnIPAddition(Action<IPAddress> action) =>
 			DeviceEvents.OnDeviceIPAdded += action;
 
-		private void SubscribeActionOnNetworkMaskChanges(Action action) =>
-			ViewModelLinker.GetRegisteredViewModel<ConfigureIPSettingsViewModel>()
-				.OnNetworkMaskChanged += action;
+		private void SubscribeActionOnNetworkMaskChanges(Action<string, byte> action) =>
+			DeviceEvents.OnNetworkConfigurationChanged += action;
 
 		private void SubscribeActionOnDeviceSelectionChanged(Action<Device> action) =>
 			DeviceEvents.OnDeviceSelectionChanged += action;
