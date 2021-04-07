@@ -23,16 +23,15 @@ namespace InventoryManager.Infrastructure
 
 		public static UserAccessRights GetUserAccessLevel(User user)
 		{
-			try { return (UserAccessRights)_authorizedUser.UserGroupID; }
-			catch { throw new Exception($"No user is authorized. Use \"{nameof(AuthorizeUser)}\" firstly"); }
+			try { return (UserAccessRights)user.UserGroupID; }
+			catch { throw new Exception($"User can't be null"); }
 		}
-
 
 		public static bool IsAuthorizedUserAllowedTo(UserActions action)
 		{
 			try { return _rules.IsActionAllowed(action); }
 			catch (NullReferenceException)
-			{ throw new Exception($"No user is authorized. Use \"{nameof(AuthorizeUser)}\" firstly"); }
+			{ return false; }
 		}
 	}
 }
