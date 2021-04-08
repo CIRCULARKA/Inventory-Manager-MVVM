@@ -14,5 +14,10 @@ namespace InventoryManager.Events
 
 		public static void RaiseOnUserLoggedIn(User user) =>
 			OnUserLoggedIn?.Invoke(user);
+
+		public static event Action OnUserLoggedOut;
+
+		public static void RaiseOnUserLoggedOut() =>
+			OnUserLoggedOut?.Invoke();
 	}
 }
