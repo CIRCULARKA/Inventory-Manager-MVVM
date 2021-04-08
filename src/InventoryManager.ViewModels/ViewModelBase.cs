@@ -18,7 +18,6 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("MessageToUser");
 			}
 		}
-
 		protected Command RegisterCommandAction(
 			Action<object> action,
 			Func<object, bool> conditionOfWork = null
