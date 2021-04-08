@@ -51,6 +51,9 @@ namespace InventoryManager.ViewModels
 		public bool IsUserPasswordCorrect() =>
 			AuthorizingUser == null ? false : AuthorizingUser.Password == InputtedPassword;
 
+		private void ClearLoginAndPassword() =>
+			InputtedLogin = InputtedPassword = string.Empty;
+
 		private void HideAuthorizationWindow() =>
 			AuthorizationView.Hide();
 
