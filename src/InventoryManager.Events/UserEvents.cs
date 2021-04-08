@@ -9,5 +9,10 @@ namespace InventoryManager.Events
 
 		public static void RaiseOnUserAdded(User user) =>
 			OnUserAdded?.Invoke(user);
+
+		public static event Action<User> OnUserLoggedIn;
+
+		public static void RaiseOnUserLoggedIn(User user) =>
+			OnUserLoggedIn?.Invoke(user);
 	}
 }
