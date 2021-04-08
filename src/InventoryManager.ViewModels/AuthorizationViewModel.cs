@@ -57,6 +57,12 @@ namespace InventoryManager.ViewModels
 		private void HideAuthorizationWindow() =>
 			AuthorizationView.Hide();
 
+		private void ShowAuthorizationWindow()
+		{
+			AuthorizationView.Show();
+			ClearLoginAndPassword();
+		}
+
 		private void ShowMainView() =>
 			MainView.Show();
 	}
