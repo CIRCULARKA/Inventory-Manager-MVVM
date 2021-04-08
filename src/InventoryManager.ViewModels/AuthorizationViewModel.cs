@@ -27,6 +27,8 @@ namespace InventoryManager.ViewModels
 					else MessageToUser = "Логин или пароль введён неверно";
 				}
 			);
+
+			UserEvents.OnUserLoggedOut += Logout;
 		}
 
 		public User AuthorizingUser { get; set; }
@@ -54,16 +56,11 @@ namespace InventoryManager.ViewModels
 		private void ClearLoginAndPassword() =>
 			InputtedLogin = InputtedPassword = string.Empty;
 
-		private void ShowAuthorizationWindow()
-		{
-			AuthorizationView.Show();
-			ClearLoginAndPassword();
-		}
-
 		private void Logout()
 		{
 			MainView.Hide();
-
+			ClearLoginAndPassword();
+			AuthorizationView.Show();
 		}
 	}
 }
