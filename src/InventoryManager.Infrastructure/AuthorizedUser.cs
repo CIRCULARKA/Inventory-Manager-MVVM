@@ -1,4 +1,5 @@
 using InventoryManager.Models;
+using InventoryManager.Events;
 using System;
 
 namespace InventoryManager.Infrastructure
@@ -8,6 +9,19 @@ namespace InventoryManager.Infrastructure
 		private static UserAccessRules _rules;
 
 		private static User _authorizedUser;
+
+		static UserSession()
+		{
+			UserEvents.OnUserLoggedIn += (user) =>
+			{
+				UserSession.AuthorizeUser(
+					user,
+					UserRightsBuilder.GetUserRights(
+						UserSession.GetUserAccessLevel(user)
+					)
+				);
+			};
+		}
 
 		public static void AuthorizeUser(User user, UserAccessRules rules)
 		{
