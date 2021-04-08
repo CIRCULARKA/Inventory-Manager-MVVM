@@ -19,10 +19,10 @@ namespace InventoryManager.ViewModels
 
 					if (IsUserPasswordCorrect())
 					{
-						HideAuthorizationWindow();
+						AuthorizationView.Hide();
 						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
 						MainViewModel.LoadTabItemsContent();
-						ShowMainView();
+						MainView.Show();
 					}
 					else MessageToUser = "Логин или пароль введён неверно";
 				}
@@ -54,16 +54,16 @@ namespace InventoryManager.ViewModels
 		private void ClearLoginAndPassword() =>
 			InputtedLogin = InputtedPassword = string.Empty;
 
-		private void HideAuthorizationWindow() =>
-			AuthorizationView.Hide();
-
 		private void ShowAuthorizationWindow()
 		{
 			AuthorizationView.Show();
 			ClearLoginAndPassword();
 		}
 
-		private void ShowMainView() =>
-			MainView.Show();
+		private void Logout()
+		{
+			MainView.Hide();
+
+		}
 	}
 }
