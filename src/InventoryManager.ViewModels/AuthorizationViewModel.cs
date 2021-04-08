@@ -1,6 +1,7 @@
-using InventoryManager.Commands;
 using InventoryManager.Views;
+using InventoryManager.Events;
 using InventoryManager.Models;
+using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
@@ -20,7 +21,7 @@ namespace InventoryManager.ViewModels
 					{
 						HideAuthorization();
 
-						AuthorizeUser();
+						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
 
 						MainViewModel.LoadTabItemsContent();
 
@@ -58,15 +59,5 @@ namespace InventoryManager.ViewModels
 
 		private void ShowMainView() =>
 			MainView.Show();
-
-		private void AuthorizeUser()
-		{
-			UserSession.AuthorizeUser(
-				AuthorizingUser,
-				UserRightsBuilder.GetUserRights(
-					UserSession.GetUserAccessLevel(AuthorizingUser)
-				)
-			);
-		}
 	}
 }
