@@ -54,13 +54,7 @@ namespace InventoryManager.ViewModels
 
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
 				(obj) => NetworkConfigurationView.ShowDialog(),
-				(obj) =>
-				{
-					// if (base.AuthorizedUser != null)
-					// 	return base.AuthorizedUser.IsAllowedTo(UserActions.ChangeNetworkSettings);
-					// else return false;
-					return true;
-				}
+				(obj) => UserSession.IsAuthorizedUserAllowedTo(UserActions.ChangeNetworkSettings)
 			);
 		}
 
