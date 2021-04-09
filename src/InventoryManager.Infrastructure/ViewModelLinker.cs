@@ -17,8 +17,8 @@ namespace InventoryManager.Infrastructure
 		private static Dictionary<string, System.Windows.Controls.UserControl> _registeredPartialViews { get; } =
 			new Dictionary<string, System.Windows.Controls.UserControl>();
 
-		private static Dictionary<string, ViewModelBase<IRepository>> _registeredViewModels { get; } =
-			new Dictionary<string, ViewModelBase<IRepository>>();
+		private static Dictionary<string, ViewModelBase> _registeredViewModels { get; } =
+			new Dictionary<string, ViewModelBase>();
 
 		static ViewModelLinker()
 		{
@@ -32,7 +32,7 @@ namespace InventoryManager.Infrastructure
 			catch { }
 		}
 
-		private static void RegisterCreatedViewModel<T>(T vm) where T : ViewModelBase<IRepository>
+		private static void RegisterCreatedViewModel<T>(T vm) where T : ViewModelBase
 		{
 			try { _registeredViewModels.Add(typeof(T).Name, vm); }
 			catch { }
@@ -44,7 +44,7 @@ namespace InventoryManager.Infrastructure
 			catch { }
 		}
 
-		public static void RegisterViewModel<T>(T viewModel) where T : ViewModelBase<IRepository>
+		public static void RegisterViewModel<T>(T viewModel) where T : ViewModelBase
 		{
 			try { _registeredViewModels.Add(viewModel.GetType().Name, viewModel); }
 			catch { }
@@ -62,7 +62,7 @@ namespace InventoryManager.Infrastructure
 		public static void LinkPartialViewWithViewModel(string viewName, string viewModelName) =>
 			_registeredPartialViews[viewName].DataContext = _registeredViewModels[viewModelName];
 
-		public static T GetRegisteredViewModel<T>() where T : ViewModelBase<IRepository> =>
+		public static T GetRegisteredViewModel<T>() where T : ViewModelBase =>
 			_registeredViewModels[typeof(T).Name] as T;
 
 		public static T GetRegisteredView<T>() where T : ViewBase, new() =>
