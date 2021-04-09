@@ -8,11 +8,7 @@ namespace InventoryManager
 		[STAThread]
 		public static void Main()
 		{
-			try
-			{
-				var app = new App();
-				app.Run();
-			}
+			try { new App().Run(); }
 			catch (Exception e)
 			{
 				MessageBox.Show(
