@@ -14,6 +14,15 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
+			var userRelatedRepo = new DefaultUserRelatedRepository();
+
+			ShowStartupView(
+				new AuthorizationView(),
+				new AuthorizationViewModel(
+					userRelatedRepo
+				)
+			);
+
 			RegisterViews();
 			RegisterViewModels();
 			LinkViewsWithViewModels();
@@ -179,5 +188,8 @@ namespace InventoryManager
 				nameof(DeviceSearchAndFilteringViewModel)
 			);
 		}
+
+		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext) =>
+			((viewToShow.DataContext = dataContext) as ViewBase).Show();
 	}
 }
