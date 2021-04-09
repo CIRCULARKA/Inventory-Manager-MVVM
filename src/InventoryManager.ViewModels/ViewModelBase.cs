@@ -5,7 +5,8 @@ using System;
 
 namespace InventoryManager.ViewModels
 {
-	public abstract class ViewModelBase : NotifyingModel
+	public abstract class ViewModelBase<TRepoType> :
+		NotifyingModel where TRepoType : IRepository
 	{
 		private string _messageToUser;
 
@@ -18,6 +19,8 @@ namespace InventoryManager.ViewModels
 				OnPropertyChanged("MessageToUser");
 			}
 		}
+
+		protected TRepoType Repository { get; set; }
 
 		protected Command RegisterCommandAction(
 			Action<object> action,

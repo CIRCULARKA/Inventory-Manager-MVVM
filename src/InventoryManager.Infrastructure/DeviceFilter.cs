@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceFilter : ViewModelBase
+	public class DeviceFilter
 	{
 		public bool IncludeServers { get; set; } = true;
 
