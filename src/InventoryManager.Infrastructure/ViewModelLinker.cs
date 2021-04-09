@@ -1,5 +1,6 @@
-using InventoryManager.ViewModels;
 using InventoryManager.Views;
+using InventoryManager.Events;
+using InventoryManager.ViewModels;
 using System.Collections.Generic;
 
 namespace InventoryManager.Infrastructure
@@ -18,9 +19,21 @@ namespace InventoryManager.Infrastructure
 		private static Dictionary<string, ViewModelBase> _registeredViewModels { get; } =
 			new Dictionary<string, ViewModelBase>();
 
+		static ViewModelLinker()
+		{
+			ViewModelEvents.OnViewModelInitiated += vm =>
+				RegisterCreatedViewModel(vm);
+		}
+
 		public static void RegisterView<T>(T view) where T : ViewBase
 		{
 			try { _registeredViews.Add(view.GetType().Name, view); }
+			catch { }
+		}
+
+		private static void RegisterCreatedViewModel<T>(T vm) where T : ViewModelBase
+		{
+			try { _registeredViewModels.Add(typeof(T).Name, vm); }
 			catch { }
 		}
 
