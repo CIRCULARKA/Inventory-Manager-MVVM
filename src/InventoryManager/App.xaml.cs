@@ -1,6 +1,4 @@
-﻿// #define RELEASE
-
-using InventoryManager.Views;
+﻿using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.ViewModels;
 using InventoryManager.Infrastructure;
@@ -26,19 +24,6 @@ namespace InventoryManager
 			RegisterViews();
 			RegisterViewModels();
 			LinkViewsWithViewModels();
-
-#if RELEASE
-			ViewModelLinker.GetRegisteredView<AuthorizationView>().Show();
-#else
-			var usr = new User { UserGroupID = 3 };
-			UserSession.AuthorizeUser(
-				usr,
-				UserRightsBuilder.GetUserRights(UserSession.GetUserAccessLevel(usr))
-			);
-
-			ViewModelLinker.GetRegisteredViewModel<MainViewModel>().LoadTabItemsContent();
-			ViewModelLinker.GetRegisteredView<MainView>().Show();
-#endif
 		}
 
 		public void RegisterViewModels()
@@ -189,7 +174,10 @@ namespace InventoryManager
 			);
 		}
 
-		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext) =>
-			((viewToShow.DataContext = dataContext) as ViewBase).Show();
+		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext)
+		{
+			viewToShow.DataContext = dataContext;
+			viewToShow.Show();
+		}
 	}
 }
