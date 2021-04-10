@@ -8,6 +8,10 @@ namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : ViewModelBase
 	{
+		private string _login;
+
+		private string _password;
+
 		public AuthorizationViewModel(IUserRelatedRepository repo)
 		{
 			ViewModelEvents.RaiseOnViewModelInitiated(this);
@@ -42,9 +46,25 @@ namespace InventoryManager.ViewModels
 
 		public Command LoginCommand { get; }
 
-		public string InputtedLogin { get; set; }
+		public string InputtedLogin
+		{
+			get => _login;
+			set
+			{
+				_login = value;
+				OnPropertyChanged(nameof(InputtedLogin));
+			}
+		}
 
-		public string InputtedPassword { get; set; }
+		public string InputtedPassword
+		{
+			get => _password;
+			set
+			{
+				_password = value;
+				OnPropertyChanged(nameof(InputtedPassword));
+			}
+		}
 
 		public bool IsUserPasswordCorrect() =>
 			AuthorizingUser == null ? false : AuthorizingUser.Password == InputtedPassword;
