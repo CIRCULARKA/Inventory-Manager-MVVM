@@ -54,7 +54,11 @@ namespace InventoryManager.ViewModels
 
 		private void Logout()
 		{
-			MainView.Hide();
+			ViewModelLinker.
+				GetRegisteredViewModel<MainViewModel>().
+					RelatedView.
+						Close();
+
 			ClearLoginAndPassword();
 			RelatedView.Show();
 		}
