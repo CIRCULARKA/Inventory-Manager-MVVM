@@ -1,5 +1,6 @@
 ﻿using InventoryManager.Views;
 using InventoryManager.Models;
+using InventoryManager.Events;
 using InventoryManager.ViewModels;
 using InventoryManager.Infrastructure;
 using System.Windows;
@@ -14,6 +15,8 @@ namespace InventoryManager
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
 
+			RegisterViews();
+
 			ShowStartupView(
 				new AuthorizationView(),
 				new AuthorizationViewModel(
@@ -21,7 +24,6 @@ namespace InventoryManager
 				)
 			);
 
-			RegisterViews();
 			RegisterViewModels();
 			LinkViewsWithViewModels();
 		}
@@ -37,7 +39,7 @@ namespace InventoryManager
 			// Need to fix it somehow (sometime)
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
-			ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
+			// ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddUserViewModel(userRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
 
@@ -57,7 +59,7 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new DevicesManagementViewModel());
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
 
-			ViewModelLinker.RegisterViewModel(new MainViewModel());
+			// ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
 
 		public void RegisterViews()
@@ -98,10 +100,10 @@ namespace InventoryManager
 				nameof(DeviceAccountsListViewModel)
 			);
 
-			ViewModelLinker.LinkViewWithViewModel(
-				nameof(MainView),
-				nameof(MainViewModel)
-			);
+			// ViewModelLinker.LinkViewWithViewModel(
+			// 	nameof(MainView),
+			// 	nameof(MainViewModel)
+			// );
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
 				nameof(DeviceHistoryView),
@@ -177,6 +179,7 @@ namespace InventoryManager
 		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext)
 		{
 			viewToShow.DataContext = dataContext;
+			dataContext.CorrespondingView = viewToShow;
 			viewToShow.Show();
 		}
 	}
