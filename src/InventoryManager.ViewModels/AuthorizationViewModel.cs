@@ -21,7 +21,7 @@ namespace InventoryManager.ViewModels
 
 					if (IsUserPasswordCorrect())
 					{
-						AuthorizationView.Hide();
+						RelatedView.Hide();
 						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
 
 						ShowView(
