@@ -57,7 +57,7 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.
 				GetRegisteredViewModel<MainViewModel>().
 					RelatedView.
-						Close();
+						Hide();
 
 			ClearLoginAndPassword();
 			RelatedView.Show();
