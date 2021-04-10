@@ -20,6 +20,9 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// View that linked with current ViewModel
+		/// </summary>
 		public ViewBase CorrespondingView { get; set; }
 
 		protected Command RegisterCommandAction(
