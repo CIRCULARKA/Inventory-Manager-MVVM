@@ -10,6 +10,8 @@ namespace InventoryManager.ViewModels
 	{
 		public AuthorizationViewModel(IUserRelatedRepository repo)
 		{
+			ViewModelEvents.RaiseOnViewModelInitiated(this);
+
 			Repository = repo;
 
 			LoginCommand = RegisterCommandAction(
@@ -21,8 +23,11 @@ namespace InventoryManager.ViewModels
 					{
 						AuthorizationView.Hide();
 						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
-						MainViewModel.LoadTabItemsContent();
-						MainView.Show();
+
+						ShowView(
+							new MainView(),
+							new MainViewModel()
+						);
 					}
 					else MessageToUser = "Логин или пароль введён неверно";
 				}
@@ -34,15 +39,6 @@ namespace InventoryManager.ViewModels
 		public User AuthorizingUser { get; set; }
 
 		private IUserRelatedRepository Repository { get; }
-
-		private ViewBase AuthorizationView =>
-			ViewModelLinker.GetRegisteredView<AuthorizationView>();
-
-		public MainViewModel MainViewModel =>
-			ViewModelLinker.GetRegisteredViewModel<MainViewModel>();
-
-		public MainView MainView =>
-			ViewModelLinker.GetRegisteredView<MainView>();
 
 		public Command LoginCommand { get; }
 
@@ -60,7 +56,7 @@ namespace InventoryManager.ViewModels
 		{
 			MainView.Hide();
 			ClearLoginAndPassword();
-			AuthorizationView.Show();
+			RelatedView.Show();
 		}
 	}
 }

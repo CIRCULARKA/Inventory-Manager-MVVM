@@ -179,7 +179,7 @@ namespace InventoryManager
 		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext)
 		{
 			viewToShow.DataContext = dataContext;
-			dataContext.CorrespondingView = viewToShow;
+			dataContext.RelatedView = viewToShow;
 			viewToShow.Show();
 		}
 	}
