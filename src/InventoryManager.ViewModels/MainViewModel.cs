@@ -42,6 +42,8 @@ namespace InventoryManager.ViewModels
 
 		public MainViewModel()
 		{
+			ViewModelEvents.RaiseOnViewModelInitiated(this);
+
 			ShowAboutProgramDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -61,6 +63,8 @@ namespace InventoryManager.ViewModels
 			LogoutCommand = RegisterCommandAction(
 				(obj) => UserEvents.RaiseOnUserLoggedOut()
 			);
+
+			LoadTabItemsForAuthorizedUser();
 		}
 
 		public List<TabItem> MainViewTabs
@@ -94,7 +98,7 @@ namespace InventoryManager.ViewModels
 
 		public Command LogoutCommand { get; }
 
-		public void LoadTabItemsContent()
+		public void LoadTabItemsForAuthorizedUser()
 		{
 			MainViewTabs = new List<TabItem>();
 
