@@ -1,7 +1,6 @@
-﻿// #define RELEASE
-
-using InventoryManager.Views;
+﻿using InventoryManager.Views;
 using InventoryManager.Models;
+using InventoryManager.Events;
 using InventoryManager.ViewModels;
 using InventoryManager.Infrastructure;
 using System.Windows;
@@ -14,22 +13,19 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
-			RegisterViews();
-			RegisterViewModels();
-			LinkViewsWithViewModels();
+			var userRelatedRepo = new DefaultUserRelatedRepository();
 
-#if RELEASE
-			ViewModelLinker.GetRegisteredView<AuthorizationView>().Show();
-#else
-			var usr = new User { UserGroupID = 3 };
-			UserSession.AuthorizeUser(
-				usr,
-				UserRightsBuilder.GetUserRights(UserSession.GetUserAccessLevel(usr))
+			RegisterViews();
+
+			ShowStartupView(
+				new AuthorizationView(),
+				new AuthorizationViewModel(
+					userRelatedRepo
+				)
 			);
 
-			ViewModelLinker.GetRegisteredViewModel<MainViewModel>().LoadTabItemsContent();
-			ViewModelLinker.GetRegisteredView<MainView>().Show();
-#endif
+			RegisterViewModels();
+			LinkViewsWithViewModels();
 		}
 
 		public void RegisterViewModels()
@@ -43,7 +39,7 @@ namespace InventoryManager
 			// Need to fix it somehow (sometime)
 
 			var userRelatedRepo = new DefaultUserRelatedRepository();
-			ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
+			// ViewModelLinker.RegisterViewModel(new AuthorizationViewModel(userRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new AddUserViewModel(userRelatedRepo));
 			ViewModelLinker.RegisterViewModel(new UserViewModel(userRelatedRepo));
 
@@ -63,7 +59,7 @@ namespace InventoryManager
 			ViewModelLinker.RegisterViewModel(new DevicesManagementViewModel());
 			ViewModelLinker.RegisterViewModel(new DeviceHistoryViewModel(deviceRelatedRepo));
 
-			ViewModelLinker.RegisterViewModel(new MainViewModel());
+			// ViewModelLinker.RegisterViewModel(new MainViewModel());
 		}
 
 		public void RegisterViews()
@@ -104,10 +100,10 @@ namespace InventoryManager
 				nameof(DeviceAccountsListViewModel)
 			);
 
-			ViewModelLinker.LinkViewWithViewModel(
-				nameof(MainView),
-				nameof(MainViewModel)
-			);
+			// ViewModelLinker.LinkViewWithViewModel(
+			// 	nameof(MainView),
+			// 	nameof(MainViewModel)
+			// );
 
 			ViewModelLinker.LinkPartialViewWithViewModel(
 				nameof(DeviceHistoryView),
@@ -178,6 +174,13 @@ namespace InventoryManager
 				nameof(DeviceSearchAndFilteringView),
 				nameof(DeviceSearchAndFilteringViewModel)
 			);
+		}
+
+		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext)
+		{
+			viewToShow.DataContext = dataContext;
+			dataContext.RelatedView = viewToShow;
+			viewToShow.Show();
 		}
 	}
 }

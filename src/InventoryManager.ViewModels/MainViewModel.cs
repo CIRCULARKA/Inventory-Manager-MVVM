@@ -1,4 +1,5 @@
 using InventoryManager.Views;
+using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 using System;
@@ -41,6 +42,8 @@ namespace InventoryManager.ViewModels
 
 		public MainViewModel()
 		{
+			ViewModelEvents.RaiseOnViewModelInitiated(this);
+
 			ShowAboutProgramDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -56,6 +59,12 @@ namespace InventoryManager.ViewModels
 				(obj) => NetworkConfigurationView.ShowDialog(),
 				(obj) => UserSession.IsAuthorizedUserAllowedTo(UserActions.ChangeNetworkSettings)
 			);
+
+			LogoutCommand = RegisterCommandAction(
+				(obj) => UserEvents.RaiseOnUserLoggedOut()
+			);
+
+			LoadTabItemsForAuthorizedUser();
 		}
 
 		public List<TabItem> MainViewTabs
@@ -87,7 +96,9 @@ namespace InventoryManager.ViewModels
 
 		public Command ApplyIPMaskChangesCommand { get; }
 
-		public void LoadTabItemsContent()
+		public Command LogoutCommand { get; }
+
+		public void LoadTabItemsForAuthorizedUser()
 		{
 			MainViewTabs = new List<TabItem>();
 

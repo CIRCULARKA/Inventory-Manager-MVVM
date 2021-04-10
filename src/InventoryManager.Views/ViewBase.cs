@@ -11,6 +11,5 @@ namespace InventoryManager.Views
 		{
 			Application.Current.Shutdown();
 		}
-
 	}
 }

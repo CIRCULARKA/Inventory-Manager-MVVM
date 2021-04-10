@@ -8,8 +8,14 @@ namespace InventoryManager.ViewModels
 {
 	public class AuthorizationViewModel : ViewModelBase
 	{
+		private string _login;
+
+		private string _password;
+
 		public AuthorizationViewModel(IUserRelatedRepository repo)
 		{
+			ViewModelEvents.RaiseOnViewModelInitiated(this);
+
 			Repository = repo;
 
 			LoginCommand = RegisterCommandAction(
@@ -19,42 +25,62 @@ namespace InventoryManager.ViewModels
 
 					if (IsUserPasswordCorrect())
 					{
-						HideAuthorizationWindow();
+						RelatedView.Hide();
 						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
-						MainViewModel.LoadTabItemsContent();
-						ShowMainView();
+
+						ShowView(
+							new MainView(),
+							new MainViewModel()
+						);
 					}
 					else MessageToUser = "Логин или пароль введён неверно";
 				}
 			);
+
+			UserEvents.OnUserLoggedOut += Logout;
 		}
 
 		public User AuthorizingUser { get; set; }
 
 		private IUserRelatedRepository Repository { get; }
 
-		private ViewBase AuthorizationView =>
-			ViewModelLinker.GetRegisteredView<AuthorizationView>();
-
-		public MainViewModel MainViewModel =>
-			ViewModelLinker.GetRegisteredViewModel<MainViewModel>();
-
-		public MainView MainView =>
-			ViewModelLinker.GetRegisteredView<MainView>();
-
 		public Command LoginCommand { get; }
 
-		public string InputtedLogin { get; set; }
+		public string InputtedLogin
+		{
+			get => _login;
+			set
+			{
+				_login = value;
+				OnPropertyChanged(nameof(InputtedLogin));
+			}
+		}
 
-		public string InputtedPassword { get; set; }
+		public string InputtedPassword
+		{
+			get => _password;
+			set
+			{
+				_password = value;
+				OnPropertyChanged(nameof(InputtedPassword));
+			}
+		}
 
 		public bool IsUserPasswordCorrect() =>
 			AuthorizingUser == null ? false : AuthorizingUser.Password == InputtedPassword;
 
-		private void HideAuthorizationWindow() =>
-			AuthorizationView.Hide();
+		private void ClearLoginAndPassword() =>
+			InputtedLogin = InputtedPassword = string.Empty;
 
-		private void ShowMainView() =>
-			MainView.Show();
+		private void Logout()
+		{
+			ViewModelLinker.
+				GetRegisteredViewModel<MainViewModel>().
+					RelatedView.
+						Hide();
+
+			ClearLoginAndPassword();
+			RelatedView.Show();
+		}
 	}
 }
