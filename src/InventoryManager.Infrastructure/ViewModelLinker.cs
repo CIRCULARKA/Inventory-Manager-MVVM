@@ -34,7 +34,7 @@ namespace InventoryManager.Infrastructure
 		private static void RegisterCreatedViewModel<T>(T vm) where T : ViewModelBase
 		{
 			try { _registeredViewModels.Add(vm.GetType().Name, vm); }
-			catch { }
+			catch { _registeredViewModels[vm.GetType().Name] = vm; }
 		}
 
 		public static void RegisterPartialView<T>(T view) where T : System.Windows.Controls.UserControl
