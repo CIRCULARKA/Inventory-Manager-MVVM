@@ -1,3 +1,4 @@
+using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
@@ -19,9 +20,17 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
+		public ViewBase CorrespondingView { get; set; }
+
 		protected Command RegisterCommandAction(
 			Action<object> action,
 			Func<object, bool> conditionOfWork = null
 		) => new Command(action, conditionOfWork);
+
+		protected void ShowView(ViewBase view, ViewModelBase dataContext)
+		{
+			view.DataContext = dataContext;
+			view.Show();
+		}
 	}
 }
