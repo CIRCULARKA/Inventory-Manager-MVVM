@@ -30,6 +30,7 @@ namespace InventoryManager.ViewModels
 		protected void ShowView(ViewBase view, ViewModelBase dataContext)
 		{
 			view.DataContext = dataContext;
+			dataContext.RelatedView = view;
 			view.Show();
 		}
 	}
