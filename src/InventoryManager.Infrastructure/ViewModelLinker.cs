@@ -1,5 +1,4 @@
 using InventoryManager.Views;
-using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.ViewModels;
 using System.Collections.Generic;
@@ -34,7 +33,7 @@ namespace InventoryManager.Infrastructure
 
 		private static void RegisterCreatedViewModel<T>(T vm) where T : ViewModelBase
 		{
-			try { _registeredViewModels.Add(typeof(T).Name, vm); }
+			try { _registeredViewModels.Add(vm.GetType().Name, vm); }
 			catch { }
 		}
 
