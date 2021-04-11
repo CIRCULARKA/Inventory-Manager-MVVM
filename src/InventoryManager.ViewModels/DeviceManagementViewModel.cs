@@ -1,10 +1,16 @@
 using InventoryManager.Views;
+using InventoryManager.Events;
 using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
 {
 	public class DevicesManagementViewModel : ViewModelBase
 	{
+		public DevicesManagementViewModel()
+		{
+			ViewModelEvents.RaiseOnViewModelInitiated(this);
+		}
+
 		public DevicesListView DevicesListPartialView =>
 			ViewModelLinker.GetRegisteredPartialView<DevicesListView>();
 
