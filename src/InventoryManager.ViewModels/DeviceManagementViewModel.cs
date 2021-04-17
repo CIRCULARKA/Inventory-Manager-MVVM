@@ -1,6 +1,5 @@
 using InventoryManager.Views;
 using InventoryManager.Events;
-using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
 {
@@ -9,24 +8,25 @@ namespace InventoryManager.ViewModels
 		public DevicesManagementViewModel()
 		{
 			ViewModelEvents.RaiseOnViewModelInitiated(this);
+
+			DevicesListPartialView = new DevicesListView();
+			DeviceIPListPartialView = new DeviceIPListView();
+			DeviceAccountsListPartialView = new DeviceAccountsListView();
+			DeviceLocationPartialView = new DeviceLocationView();
+			DeviceSearchAndFilteringPartialView = new DeviceSearchAndFilteringView();
+			DeviceHistoryPartialView = new DeviceHistoryView();
 		}
 
-		public DevicesListView DevicesListPartialView =>
-			ViewModelLinker.GetRegisteredPartialView<DevicesListView>();
+		public DevicesListView DevicesListPartialView { get; }
 
-		public DeviceIPListView DeviceIPListPartialView =>
-			ViewModelLinker.GetRegisteredPartialView<DeviceIPListView>();
+		public DeviceIPListView DeviceIPListPartialView { get; }
 
-		public DeviceAccountsListView DeviceAccountsListPartialView =>
-			ViewModelLinker.GetRegisteredPartialView<DeviceAccountsListView>();
+		public DeviceAccountsListView DeviceAccountsListPartialView { get; }
 
-		public DeviceLocationView DeviceLocationPartialView =>
-			ViewModelLinker.GetRegisteredPartialView<DeviceLocationView>();
+		public DeviceLocationView DeviceLocationPartialView { get; }
 
-		public DeviceSearchAndFilteringView DeviceSearchAndFilteringPartialView =>
-			ViewModelLinker.GetRegisteredPartialView<DeviceSearchAndFilteringView>();
+		public DeviceSearchAndFilteringView DeviceSearchAndFilteringPartialView { get; }
 
-		public DeviceHistoryView DeviceHistoryPartialView =>
-			ViewModelLinker.GetRegisteredPartialView<DeviceHistoryView>();
+		public DeviceHistoryView DeviceHistoryPartialView { get; }
 	}
 }
