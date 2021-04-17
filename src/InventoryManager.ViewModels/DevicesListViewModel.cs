@@ -122,8 +122,7 @@ namespace InventoryManager.ViewModels
 			ViewModelLinker.
 				GetRegisteredViewModel<DeviceLocationViewModel>();
 
-		public AddDeviceView AddDeviceView =>
-			ViewModelLinker.GetRegisteredView<AddDeviceView>();
+		public AddDeviceView AddDeviceView { get; set; }
 
 		private void EnableDeviceLocationChanges() =>
 			ViewModelLinker.

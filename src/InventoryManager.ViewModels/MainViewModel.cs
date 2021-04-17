@@ -1,4 +1,5 @@
 using InventoryManager.Views;
+using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
@@ -6,6 +7,8 @@ using System;
 using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using Ninject;
+using static InventoryManager.DependencyInjection.NinjectKernel;
 
 namespace InventoryManager.ViewModels
 {
@@ -23,21 +26,31 @@ namespace InventoryManager.ViewModels
 			new TabItem
 			{
 				Header = "Устройства",
-				Content = ViewModelLinker.GetRegisteredPartialView<DevicesManagementView>()
+				Content = new DevicesManagementView() {
+					DataContext = new DevicesManagementViewModel()
+				}
 			};
 
 		private TabItem _usersTab =
 			new TabItem
 			{
 				Header = "Пользователи",
-				Content = ViewModelLinker.GetRegisteredPartialView<UsersManagementView>()
+				Content = new UsersManagementView() {
+					DataContext = new UserViewModel(
+						StandartNinjectKernel.Get<IUserRelatedRepository>()
+					)
+				}
 			};
 
 		private TabItem _certificatesTab =
 			new TabItem
 			{
 				Header = "Сертификаты",
-				Content = ViewModelLinker.GetRegisteredPartialView<CertificatesManagementView>()
+				Content = new CertificatesManagementView() {
+					DataContext = new CertificateViewModel(
+						StandartNinjectKernel.Get<ICertificateRelatedRepository>()
+					)
+				}
 			};
 
 		public MainViewModel()
@@ -87,8 +100,7 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public ConfigureIPSettingsView NetworkConfigurationView =>
-			ViewModelLinker.GetRegisteredView<ConfigureIPSettingsView>();
+		public ConfigureIPSettingsView NetworkConfigurationView { get; set; }
 
 		public Command ShowAboutProgramDialogCommand { get; }
 
@@ -101,6 +113,16 @@ namespace InventoryManager.ViewModels
 		public void LoadTabItemsForAuthorizedUser()
 		{
 			MainViewTabs = new List<TabItem>();
+
+			var devicesManagamentView = new DevicesManagementView();
+			var devicesManagementViewModel = new DevicesManagementViewModel();
+			devicesManagamentView.DataContext = devicesManagementViewModel;
+
+			_devicesTab = new TabItem
+			{
+				Header = "Устройства",
+				Content = new DevicesManagementView()
+			};
 
 			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectDevices))
 				MainViewTabs.Add(_devicesTab);

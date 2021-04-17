@@ -53,8 +53,7 @@ namespace InventoryManager.ViewModels
 
 		private IDeviceRelatedRepository Repository { get; }
 
-		public AddIPAddressView AddIPToDeviceView =>
-			ViewModelLinker.GetRegisteredView<AddIPAddressView>();
+		public AddIPAddressView AddIPToDeviceView { get; set; }
 
 		public IPAddress SelectedIPAddress { get; set; }
 

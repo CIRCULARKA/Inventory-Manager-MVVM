@@ -37,9 +37,7 @@ namespace InventoryManager.ViewModels
 
 		public Command ShowDeviceMovementHistoryCommand { get; set; }
 
-		public DeviceMovementHistoryView DeviceMovementHistoryView =>
-			ViewModelLinker.
-				GetRegisteredView<DeviceMovementHistoryView>();
+		public DeviceMovementHistoryView DeviceMovementHistoryView { get; set; }
 
 		public IEnumerable<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes
 		{

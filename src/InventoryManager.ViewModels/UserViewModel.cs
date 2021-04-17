@@ -59,8 +59,7 @@ namespace InventoryManager.ViewModels
 
 		public Command ShowAddUserViewCommand { get; }
 
-		public AddUserView AddUserView =>
-			ViewModelLinker.GetRegisteredView<AddUserView>();
+		public AddUserView AddUserView { get; set; }
 
 		public AddUserViewModel AddUserViewModel =>
 			ViewModelLinker.GetRegisteredViewModel<AddUserViewModel>();

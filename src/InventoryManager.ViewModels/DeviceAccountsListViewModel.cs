@@ -34,7 +34,15 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
-				(obj) => AddDeviceAccountView.ShowDialog(),
+				(obj) =>
+				{
+					AddDeviceAccountView = new AddDeviceAccountView();
+					ViewModelLinker.LinkViewWithViewModel(
+						AddDeviceAccountView,
+						nameof(DeviceAccountsListViewModel)
+					);
+					AddDeviceAccountView.ShowDialog();
+				},
 				(obj) => SelectedDevice != null
 			);
 
@@ -66,8 +74,7 @@ namespace InventoryManager.ViewModels
 				GetRegisteredViewModel<DevicesListViewModel>().
 					SelectedDevice;
 
-		public AddDeviceAccountView AddDeviceAccountView =>
-			ViewModelLinker.GetRegisteredView<AddDeviceAccountView>();
+		public AddDeviceAccountView AddDeviceAccountView { get; set; }
 
 		public DeviceAccount SelectedAccount { get; set; }
 
