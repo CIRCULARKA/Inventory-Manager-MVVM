@@ -13,6 +13,6 @@ namespace InventoryManager.DependencyInjection
 			);
 		}
 
-		public static StandardKernel Instance => _kernel;
+		public static StandardKernel StandartNinjectKernel => _kernel;
 	}
 }
