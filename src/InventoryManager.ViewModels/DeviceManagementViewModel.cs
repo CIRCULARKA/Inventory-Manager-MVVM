@@ -1,5 +1,4 @@
 using InventoryManager.Views;
-using InventoryManager.Events;
 
 namespace InventoryManager.ViewModels
 {
