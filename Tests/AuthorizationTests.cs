@@ -4,12 +4,6 @@ using InventoryManager.ViewModels;
 
 namespace InventoryManager.Tests
 {
-	internal static class AuhtorizationViewModelExtensions
-	{
-		public static bool IsInputtedPasswordCorrect(this AuthorizationViewModel vm) =>
-			vm.InputtedPassword == vm.AuthenticatedUser.Password;
-	}
-
 	public class AuthorizationTests
 	{
 		[Fact]
