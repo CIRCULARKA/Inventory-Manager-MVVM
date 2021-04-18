@@ -7,8 +7,6 @@ namespace InventoryManager.ViewModels
 	{
 		public DevicesManagementViewModel()
 		{
-			ViewModelEvents.RaiseOnViewModelInitiated(this);
-
 			DevicesListPartialView = new DevicesListView();
 			DeviceIPListPartialView = new DeviceIPListView();
 			DeviceAccountsListPartialView = new DeviceAccountsListView();
