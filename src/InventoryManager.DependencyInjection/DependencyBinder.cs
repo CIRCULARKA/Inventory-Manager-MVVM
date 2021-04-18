@@ -8,7 +8,10 @@ namespace InventoryManager.DependencyInjection
 		public override void Load()
 		{
 			Bind<IDeviceRelatedRepository>().To<DefaultDeviceRelatedRepository>();
+			Bind<IIPAddressRepository>().To<DefaultIPAddressRepository>();
+
 			Bind<IUserRelatedRepository>().To<DefaultUserRelatedRepository>();
+
 			Bind<ICertificateRelatedRepository>().To<DefaultCertificateRelatedRepository>();
 		}
 	}
