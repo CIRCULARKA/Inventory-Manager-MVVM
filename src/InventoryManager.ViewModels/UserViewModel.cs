@@ -57,8 +57,6 @@ namespace InventoryManager.ViewModels
 
 		public User SelectedUser { get; set; }
 
-		public UserGroup SelectedUserGroup { get; set; }
-
 		public Command RemoveUserCommand { get; }
 
 		public Command ShowAddUserViewCommand { get; }
