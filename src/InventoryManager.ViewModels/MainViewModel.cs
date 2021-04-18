@@ -3,7 +3,6 @@ using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
-using System;
 using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -67,7 +66,20 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowSetIPMaskDialogCommand = RegisterCommandAction(
-				(obj) => NetworkConfigurationView.ShowDialog(),
+				(obj) =>
+				{
+					var _ipSettingsView = new ConfigureIPSettingsView();
+
+					var _ipSettingsViewModel = new ConfigureIPSettingsViewModel(
+						StandartNinjectKernel.Get<IIPAddressRepository>()
+					);
+					_ipSettingsViewModel.RelatedView = _ipSettingsView;
+
+					_ipSettingsView.DataContext = _ipSettingsViewModel;
+
+					_ipSettingsView.Show();
+
+				},
 				(obj) => UserSession.IsAuthorizedUserAllowedTo(UserActions.ChangeNetworkSettings)
 			);
 
@@ -98,29 +110,15 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public ConfigureIPSettingsView NetworkConfigurationView { get; set; }
-
 		public Command ShowAboutProgramDialogCommand { get; }
 
 		public Command ShowSetIPMaskDialogCommand { get; }
-
-		public Command ApplyIPMaskChangesCommand { get; }
 
 		public Command LogoutCommand { get; }
 
 		public void LoadViewsForAuthorizedUser()
 		{
 			MainViewTabs = new List<TabItem>();
-
-			var devicesManagamentView = new DevicesManagementView();
-			var devicesManagementViewModel = new DevicesManagementViewModel();
-			devicesManagamentView.DataContext = devicesManagementViewModel;
-
-			_devicesTab = new TabItem
-			{
-				Header = "Устройства",
-				Content = new DevicesManagementView()
-			};
 
 			if (UserSession.IsAuthorizedUserAllowedTo(UserActions.InspectDevices))
 				MainViewTabs.Add(_devicesTab);
