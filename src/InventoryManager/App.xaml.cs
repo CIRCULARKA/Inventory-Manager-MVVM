@@ -13,19 +13,17 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
-			ShowStartupView(
-				new AuthorizationView(),
-				new AuthorizationViewModel(
-					StandartNinjectKernel.Get<IUserRelatedRepository>()
-				)
+			var authorizationViewModel = new AuthorizationViewModel(
+				StandartNinjectKernel.Get<IUserRelatedRepository>()
 			);
-		}
 
-		public void ShowStartupView(ViewBase viewToShow, ViewModelBase dataContext)
-		{
-			viewToShow.DataContext = dataContext;
-			dataContext.RelatedView = viewToShow;
-			viewToShow.Show();
+			var authorizationView = new AuthorizationView() {
+				DataContext = authorizationViewModel
+			};
+
+			authorizationViewModel.RelatedView = authorizationView;
+
+			authorizationView.Show();
 		}
 	}
 }
