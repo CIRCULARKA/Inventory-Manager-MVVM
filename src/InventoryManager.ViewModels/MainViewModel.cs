@@ -75,7 +75,7 @@ namespace InventoryManager.ViewModels
 				(obj) => UserEvents.RaiseOnUserLoggedOut()
 			);
 
-			LoadTabItemsForAuthorizedUser();
+			LoadViewsForAuthorizedUser();
 		}
 
 		public List<TabItem> MainViewTabs
@@ -108,7 +108,7 @@ namespace InventoryManager.ViewModels
 
 		public Command LogoutCommand { get; }
 
-		public void LoadTabItemsForAuthorizedUser()
+		public void LoadViewsForAuthorizedUser()
 		{
 			MainViewTabs = new List<TabItem>();
 
