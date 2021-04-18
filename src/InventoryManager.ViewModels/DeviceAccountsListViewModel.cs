@@ -4,6 +4,8 @@ using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
 using InventoryManager.Infrastructure;
+using Ninject;
+using static InventoryManager.DependencyInjection.NinjectKernel;
 using System;
 using System.Collections.ObjectModel;
 
@@ -36,11 +38,11 @@ namespace InventoryManager.ViewModels
 			ShowAddDeviceAccountViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AddDeviceAccountView = new AddDeviceAccountView();
-					ViewModelLinker.LinkViewWithViewModel(
-						AddDeviceAccountView,
-						nameof(DeviceAccountsListViewModel)
+					var _addDeviceAccountView = new AddDeviceAccountView();
+					_addDeviceAccountView.DataContext = new AddDeviceAccountViewModel(
+						StandartNinjectKernel.Get<IDeviceRelatedRepository>()
 					);
+
 					AddDeviceAccountView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null

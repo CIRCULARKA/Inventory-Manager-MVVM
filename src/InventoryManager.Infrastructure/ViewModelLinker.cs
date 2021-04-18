@@ -26,21 +26,6 @@ namespace InventoryManager.Infrastructure
 			catch { _registeredViewModels[vm.GetType().Name] = vm; }
 		}
 
-		/// <summary>
-		/// You can link only one view model for same view.
-		/// View model must be registered (to do it you should instantiate it at
-		/// least once somewhere)
-		/// </summary>
-		public static void LinkViewWithViewModel(ViewBase view, string viewModelName) =>
-			view.DataContext = _registeredViewModels[viewModelName];
-
-		/// <summary>
-		/// Same as <see href="LinkViewWithViewModel" /> but for views that
-		/// inherited from <see href="UserControl" />
-		/// </summary>
-		public static void LinkPartialViewWithViewModel(UserControl view, string viewModelName) =>
-			view.DataContext = _registeredViewModels[viewModelName];
-
 		public static T GetRegisteredViewModel<T>() where T : ViewModelBase =>
 			_registeredViewModels[typeof(T).Name] as T;
 	}
