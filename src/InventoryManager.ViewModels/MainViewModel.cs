@@ -81,7 +81,7 @@ namespace InventoryManager.ViewModels
 		public List<TabItem> MainViewTabs
 		{
 			get => _mainViewTabs;
-			set
+			private set
 			{
 				_mainViewTabs = value;
 				OnPropertyChanged(nameof(MainViewTabs));
