@@ -21,12 +21,12 @@ namespace InventoryManager.ViewModels
 			LoginCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					AuthorizingUser = Repository.FindUser(InputtedLogin);
+					FindedUser = Repository.FindUser(InputtedLogin);
 
 					if (IsInputtedPasswordCorrect())
 					{
 						RelatedView.Hide();
-						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
+						UserEvents.RaiseOnUserLoggedIn(FindedUser);
 
 						var mainViewModel = new MainViewModel();
 
@@ -52,7 +52,7 @@ namespace InventoryManager.ViewModels
 			};
 		}
 
-		public User AuthorizingUser { get; set; }
+		public User FindedUser { get; set; }
 
 		private IUserRelatedRepository Repository { get; }
 
@@ -82,9 +82,9 @@ namespace InventoryManager.ViewModels
 		{
 			try
 			{
-				return AuthorizingUser == null ?
+				return FindedUser == null ?
 					false :
-					AuthorizingUser.Password == InputtedPassword;
+					FindedUser.Password == InputtedPassword;
 			}
 			catch (NullReferenceException) { return false; }
 			catch
