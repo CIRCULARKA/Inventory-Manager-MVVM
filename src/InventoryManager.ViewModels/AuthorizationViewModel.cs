@@ -2,7 +2,7 @@ using InventoryManager.Views;
 using InventoryManager.Events;
 using InventoryManager.Models;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using System;
 
 namespace InventoryManager.ViewModels
 {
@@ -11,6 +11,8 @@ namespace InventoryManager.ViewModels
 		private string _login;
 
 		private string _password;
+
+		private MainView _mainView;
 
 		public AuthorizationViewModel(IUserRelatedRepository repo)
 		{
@@ -23,21 +25,33 @@ namespace InventoryManager.ViewModels
 				{
 					AuthorizingUser = Repository.FindUser(InputtedLogin);
 
-					if (IsUserPasswordCorrect())
+					if (IsInputtedPasswordCorrect())
 					{
 						RelatedView.Hide();
 						UserEvents.RaiseOnUserLoggedIn(AuthorizingUser);
 
-						ShowView(
-							new MainView(),
-							new MainViewModel()
-						);
+						var mainViewModel = new MainViewModel();
+
+						_mainView = new MainView();
+						_mainView.DataContext = mainViewModel;
+
+						mainViewModel.RelatedView = _mainView;
+
+						_mainView.Show();
+
 					}
 					else MessageToUser = "Логин или пароль введён неверно";
 				}
 			);
 
-			UserEvents.OnUserLoggedOut += Logout;
+			UserEvents.OnUserLoggedOut += () =>
+			{
+				_mainView.Hide();
+
+				InputtedLogin = InputtedPassword = string.Empty;
+
+				RelatedView.Show();
+			};
 		}
 
 		public User AuthorizingUser { get; set; }
@@ -66,21 +80,22 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public bool IsUserPasswordCorrect() =>
-			AuthorizingUser == null ? false : AuthorizingUser.Password == InputtedPassword;
-
-		private void ClearLoginAndPassword() =>
-			InputtedLogin = InputtedPassword = string.Empty;
-
-		private void Logout()
+		public bool IsInputtedPasswordCorrect()
 		{
-			ViewModelLinker.
-				GetRegisteredViewModel<MainViewModel>().
-					RelatedView.
-						Hide();
-
-			ClearLoginAndPassword();
-			RelatedView.Show();
+			try
+			{
+				return AuthorizingUser == null ?
+					false :
+					AuthorizingUser.Password == InputtedPassword;
+			}
+			catch (NullReferenceException) { return false; }
+			catch
+			{
+				throw new Exception(
+					"Error has occured while checking " +
+					"for correctness of inputted password"
+				);
+			}
 		}
 	}
 }

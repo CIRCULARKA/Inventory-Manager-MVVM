@@ -26,12 +26,5 @@ namespace InventoryManager.ViewModels
 			Action<object> action,
 			Func<object, bool> conditionOfWork = null
 		) => new Command(action, conditionOfWork);
-
-		protected void ShowView(ViewBase view, ViewModelBase dataContext)
-		{
-			view.DataContext = dataContext;
-			dataContext.RelatedView = view;
-			view.Show();
-		}
 	}
 }
