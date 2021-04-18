@@ -55,8 +55,6 @@ namespace InventoryManager.ViewModels
 
 		public MainViewModel()
 		{
-			ViewModelEvents.RaiseOnViewModelInitiated(this);
-
 			ShowAboutProgramDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{

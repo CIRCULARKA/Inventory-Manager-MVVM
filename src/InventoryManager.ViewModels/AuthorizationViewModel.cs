@@ -16,8 +16,6 @@ namespace InventoryManager.ViewModels
 
 		public AuthorizationViewModel(IUserRelatedRepository repo)
 		{
-			ViewModelEvents.RaiseOnViewModelInitiated(this);
-
 			Repository = repo;
 
 			LoginCommand = RegisterCommandAction(
