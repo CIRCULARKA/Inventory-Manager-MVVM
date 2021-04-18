@@ -40,7 +40,11 @@ namespace InventoryManager.ViewModels
 			);
 
 			ShowAddUserViewCommand = RegisterCommandAction(
-				(obj) => AddUserView.ShowDialog(),
+				(obj) =>
+				{
+					var _addUserView = new AddUserView();
+					_addUserView.ShowDialog();
+				},
 				(obj) =>
 					UserSession.IsAuthorizedUserAllowedTo(UserActions.AddUser)
 			);
@@ -58,11 +62,6 @@ namespace InventoryManager.ViewModels
 		public Command RemoveUserCommand { get; }
 
 		public Command ShowAddUserViewCommand { get; }
-
-		public AddUserView AddUserView { get; set; }
-
-		public AddUserViewModel AddUserViewModel =>
-			ViewModelLinker.GetRegisteredViewModel<AddUserViewModel>();
 
 		private void SubscribeActionOnUserAddition(Action<User> action) =>
 			UserEvents.OnUserAdded += action;
