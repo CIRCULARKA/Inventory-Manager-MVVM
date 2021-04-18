@@ -4,6 +4,12 @@ using InventoryManager.ViewModels;
 
 namespace InventoryManager.Tests
 {
+	internal static class AuhtorizationViewModelExtensions
+	{
+		public static bool IsInputtedPasswordCorrect(this AuthorizationViewModel vm) =>
+			vm.InputtedPassword == vm.AuthenticatedUser.Password;
+	}
+
 	public class AuthorizationTests
 	{
 		[Fact]
@@ -17,16 +23,16 @@ namespace InventoryManager.Tests
 			};
 
 			var vm1 = new AuthorizationViewModel(null);
-			vm1.AuthorizingUser = userTryingToPass;
+			vm1.AuthenticatedUser = userTryingToPass;
 			vm1.InputtedPassword = "123321";
 
 			var vm2 = new AuthorizationViewModel(null);
-			vm2.AuthorizingUser = userTryingToPass;
+			vm2.AuthenticatedUser = userTryingToPass;
 			vm2.InputtedPassword = "123";
 
 			// Act
-			var result1 = vm1.IsUserPasswordCorrect();
-			var result2 = vm2.IsUserPasswordCorrect();
+			var result1 = vm1.IsInputtedPasswordCorrect();
+			var result2 = vm2.IsInputtedPasswordCorrect();
 
 			// Assert
 			Assert.True(result1);
