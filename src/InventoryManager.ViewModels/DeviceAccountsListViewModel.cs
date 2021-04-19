@@ -56,6 +56,9 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedAccount != null
 			);
+
+			DeviceEvents.OnDeviceSelectionChanged += device =>
+				SelectedDeviceAccounts = null;
 		}
 
 		private IDeviceRelatedRepository Repository { get; }

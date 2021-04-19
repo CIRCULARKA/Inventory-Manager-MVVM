@@ -86,6 +86,19 @@ namespace InventoryManager.ViewModels
 					}
 				}
 			);
+
+			DeviceEvents.OnDeviceSelectionChanged += device =>
+			{
+				if (device != null)
+					IsDeviceLocationChoosingAvailable = true;
+				else
+				{
+					SelectedCabinet = null;
+					SelectedHousing = null;
+
+					IsDeviceLocationChoosingAvailable = false;
+				}
+			};
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
