@@ -4,8 +4,8 @@ namespace InventoryManager.Infrastructure
 {
 	interface IDeviceFilter
 	{
-		bool DoesMeetsSearchingCriteria(Device device);
+		bool DoesMeetSearchingCriteria(Device device);
 
-		bool DoesMeetsFilteringCriteria(Device device);
+		bool DoesMeetFilteringCriteria(Device device);
 	}
 }
