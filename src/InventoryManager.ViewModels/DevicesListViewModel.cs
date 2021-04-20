@@ -62,7 +62,7 @@ namespace InventoryManager.ViewModels
 							First(h => h.ID == device.Cabinet.HousingID);
 
 					AllDevices.Add(device);
-					if (DevicesFilter.IsDeviceMeetsSearchAndFilteringCriteria(device))
+					if (DevicesFilter.DoesMeetSearchingAndFilteringCriteria(device))
 						FilteredDevices.Add(device);
 				}
 			);
