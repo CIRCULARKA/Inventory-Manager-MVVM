@@ -8,6 +8,8 @@ namespace InventoryManager.Infrastructure
 	{
 		Dictionary<DeviceFilterCriteria, bool> Rules { get; }
 
+		string SearchQuery { get; set; }
+
 		bool DoesMeetSearchingCriteria(Device device);
 
 		bool DoesMeetFilteringCriteria(Device device);
