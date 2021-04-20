@@ -1,14 +1,17 @@
 using InventoryManager.Models;
+using InventoryManager.Infrastructure.Filtering;
 using System.Collections.Generic;
 
 namespace InventoryManager.Infrastructure
 {
 	interface IDeviceFilter
 	{
-		Dictionary<string, bool> Rules { get; }
+		Dictionary<DeviceFilterCriteria, bool> Rules { get; }
 
 		bool DoesMeetSearchingCriteria(Device device);
 
 		bool DoesMeetFilteringCriteria(Device device);
+
+		IEnumerable<Device> Filter(IEnumerable<Device> list);
 	}
 }
