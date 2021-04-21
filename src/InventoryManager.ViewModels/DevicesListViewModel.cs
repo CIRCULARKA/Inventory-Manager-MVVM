@@ -86,7 +86,9 @@ namespace InventoryManager.ViewModels
 		}
 
 		public DeviceFilter DevicesFilter =>
-			ViewModelLinker.GetRegisteredViewModel<DeviceSearchAndFilteringViewModel>().DevicesFilter;
+			ViewModelLinker.
+				GetRegisteredViewModel<DeviceSearchAndFilteringViewModel>().
+					DevicesFilter;
 
 		public List<Device> AllDevices { get; }
 
