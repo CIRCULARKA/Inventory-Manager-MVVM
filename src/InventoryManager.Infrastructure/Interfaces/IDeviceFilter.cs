@@ -6,7 +6,7 @@ namespace InventoryManager.Infrastructure
 {
 	interface IDeviceFilter
 	{
-		Dictionary<DeviceFilterCriteria, bool> Rules { get; }
+		List<DeviceFilteringCriteria> Criteria { get; }
 
 		string SearchQuery { get; set; }
 
