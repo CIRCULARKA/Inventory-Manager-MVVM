@@ -133,7 +133,7 @@ namespace InventoryManager.ViewModels
 
 		private void FilterDevicesAccordingToCriteria() =>
 			FilteredDevices = DevicesFilter.
-				GetFilteredDevicesList(AllDevices).
+				Filter(AllDevices).
 					ToObservableCollection();
 	}
 }
