@@ -1,5 +1,7 @@
 using InventoryManager.Views;
 using InventoryManager.Models;
+using InventoryManager.Infrastructure.Filtering;
+using System.Collections.Generic;
 using Ninject;
 using static InventoryManager.DependencyInjection.NinjectKernel;
 
@@ -7,6 +9,13 @@ namespace InventoryManager.ViewModels
 {
 	public class DevicesManagementViewModel : ViewModelBase
 	{
+		public DevicesManagementViewModel(IDeviceRelatedRepository repo)
+		{
+			Repository = repo;
+		}
+
+		public IDeviceRelatedRepository Repository { get; }
+
 		DevicesListView _devicesListPartialView = new DevicesListView();
 
 		DeviceIPListView _deviceIPListPartialView = new DeviceIPListView();
@@ -42,7 +51,14 @@ namespace InventoryManager.ViewModels
 			_deviceLocationPartialView.DataContext = _deviceLocationViewModel;
 
 			var _deviceSearchAndFilteringViewModel = new DeviceSearchAndFilteringViewModel(
-				new DeviceFilter()
+				new DeviceFilter(
+					new List<DeviceFilteringCriteria>()
+					{
+						new DeviceFilteringCriteria("Сервер"),
+						new	DeviceFilteringCriteria("Персональный компьютер"),
+						new DeviceFilteringCriteria("Коммутатор")
+					}
+				)
 			);
 			_deviceSearchAndFilteringPartialView.DataContext = _deviceSearchAndFilteringViewModel;
 
