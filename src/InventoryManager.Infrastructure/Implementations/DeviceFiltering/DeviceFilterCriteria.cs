@@ -1,9 +1,17 @@
 namespace InventoryManager.Infrastructure.Filtering
 {
-	public enum DeviceFilterCriteria
+	public class DeviceFilteringCriteria
 	{
-		IncludeServers,
-		IncludePC,
-		IncludeSwitches
+		public DeviceFilteringCriteria(string criteriaName)
+		{
+			CriteriaName = criteriaName;
+		}
+
+		public string CriteriaName { get; }
+
+		/// <summary>
+		/// Default it true
+		/// </summary>
+		public bool State { get; set; } = true;
 	}
 }
