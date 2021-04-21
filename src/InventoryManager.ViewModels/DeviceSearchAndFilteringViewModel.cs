@@ -1,6 +1,7 @@
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
+using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
@@ -13,13 +14,13 @@ namespace InventoryManager.ViewModels
 			FilterDevicesCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					DevicesFilter.IncludeServers = IsServersIncluded;
-					DevicesFilter.IncludeSwitches = IsSwitchesIncluded;
-					DevicesFilter.IncludePC = IsPCIncluded;
+					DevicesFilter.Criteria.First(c => c.DeviceTypeName == "Сервер").State = IsServersIncluded;
+					DevicesFilter.Criteria.First(c => c.DeviceTypeName == "Коммутатор").State = IsSwitchesIncluded;
+					DevicesFilter.Criteria.First(c => c.DeviceTypeName == "Персональный компьютер").State = IsPCIncluded;
 					DevicesFilter.SearchQuery = InputtedSearchQuery;
 
 					DeviceEvents.RaiseOnDeviceFilteringCriteriaChanged(
-						DevicesFilter.GetFilteredDevicesList(
+						DevicesFilter.Filter(
 							ViewModelLinker.
 								GetRegisteredViewModel<DevicesListViewModel>().
 									AllDevices
