@@ -11,7 +11,7 @@ using static InventoryManager.DependencyInjection.NinjectKernel;
 
 namespace InventoryManager.ViewModels
 {
-	public class MainViewModel : ViewModelBase
+	public class MainViewModel : ViewModelBase, IMainViewModel
 	{
 		const string _githubUrl = "https://github.com/CIRCULARKA/Inventory-Manager-MVVM";
 
