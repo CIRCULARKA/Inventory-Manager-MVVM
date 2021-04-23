@@ -1,7 +1,6 @@
 using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -70,9 +69,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		public Device SelectedDevice =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDevice;
+			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public Command AddIPToDeviceCommand { get; }
 

@@ -1,14 +1,13 @@
 using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceLocationViewModel : ViewModelBase
+	public class DeviceLocationViewModel : ViewModelBase, IDeviceLocationViewModel
 	{
 		private bool _isDeviceLocationChoosingAvailable;
 
@@ -141,7 +140,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		private Device SelectedDevice =>
-			ViewModelLinker.GetRegisteredViewModel<DevicesListViewModel>().SelectedDevice;
+			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public Command ApplyDeviceLocationChangesCommand { get; }
 

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceSearchAndFilteringViewModel : ViewModelBase
+	public class DeviceSearchAndFilteringViewModel : ViewModelBase, IDeviceSearchAndFilteringViewModel
 	{
 		public DeviceSearchAndFilteringViewModel(DeviceFilter filter)
 		{
@@ -21,9 +21,8 @@ namespace InventoryManager.ViewModels
 
 					DeviceEvents.RaiseOnDeviceFilteringCriteriaChanged(
 						DevicesFilter.Filter(
-							ViewModelLinker.
-								GetRegisteredViewModel<DevicesListViewModel>().
-									AllDevices
+							(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+								AllDevices
 						)
 					);
 				}

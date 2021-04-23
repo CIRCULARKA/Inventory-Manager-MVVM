@@ -71,9 +71,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		public Device SelectedDevice =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDevice;
+			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public Command ShowAddIPViewCommand { get; }
 
@@ -83,9 +82,7 @@ namespace InventoryManager.ViewModels
 		{
 			Repository.RemoveIPFromDevice(
 				ip,
-				ViewModelLinker.
-					GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDevice
+				SelectedDevice
 			);
 
 			Repository.SaveChanges();

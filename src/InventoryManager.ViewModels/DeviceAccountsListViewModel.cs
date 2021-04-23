@@ -75,9 +75,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		public Device SelectedDevice =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDevice;
+			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public AddDeviceAccountView AddDeviceAccountView { get; set; }
 

@@ -1,8 +1,7 @@
-using System;
 using InventoryManager.Events;
 using InventoryManager.Models;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using System;
 
 namespace InventoryManager.ViewModels
 {
@@ -26,9 +25,8 @@ namespace InventoryManager.ViewModels
 		private IDeviceRelatedRepository Repository { get; }
 
 		public Device SelectedDevice =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDevice;
+			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public Command AddDeviceAccountCommand { get; }
 

@@ -31,9 +31,8 @@ namespace InventoryManager.ViewModels
 		private IDeviceRelatedRepository Repository { get; }
 
 		public Device SelectedDevice =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DevicesListViewModel>().
-					SelectedDevice;
+			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public Command ShowDeviceMovementHistoryCommand { get; set; }
 

@@ -9,6 +9,15 @@ namespace InventoryManager.DependencyInjection
 		{
 			Bind<IMainViewModel>().
 				To<MainViewModel>().InTransientScope();
+
+			Bind<IDevicesListViewModel>().
+				To<DevicesListViewModel>().InSingletonScope();
+
+			Bind<IDeviceSearchAndFilteringViewModel>().
+				To<DeviceSearchAndFilteringViewModel>().InSingletonScope();
+
+			Bind<IDeviceLocationViewModel>().
+				To<DeviceLocationViewModel>().InSingletonScope();
 		}
 	}
 }

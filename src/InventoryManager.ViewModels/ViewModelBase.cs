@@ -1,7 +1,7 @@
 using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using InventoryManager.DependencyInjection;
 using System;
 
 namespace InventoryManager.ViewModels
@@ -9,6 +9,13 @@ namespace InventoryManager.ViewModels
 	public abstract class ViewModelBase : NotifyingModel
 	{
 		private string _messageToUser;
+
+		private DependencyResolver _resolver;
+
+		public ViewModelBase()
+		{
+			_resolver = new DependencyResolver();
+		}
 
 		public string MessageToUser
 		{
@@ -26,5 +33,7 @@ namespace InventoryManager.ViewModels
 			Action<object> action,
 			Func<object, bool> conditionOfWork = null
 		) => new Command(action, conditionOfWork);
+
+		protected DependencyResolver Resolver => _resolver;
 	}
 }

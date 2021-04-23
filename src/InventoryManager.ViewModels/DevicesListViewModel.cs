@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class DevicesListViewModel : ViewModelBase
+	public class DevicesListViewModel : ViewModelBase, IDevicesListViewModel
 	{
 		private Device _selectedDevice;
 
@@ -86,9 +86,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		public DeviceFilter DevicesFilter =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DeviceSearchAndFilteringViewModel>().
-					DevicesFilter;
+			(Resolver.Resolve<IDeviceSearchAndFilteringViewModel>() as DeviceSearchAndFilteringViewModel).
+				DevicesFilter;
 
 		public List<Device> AllDevices { get; }
 
@@ -109,8 +108,7 @@ namespace InventoryManager.ViewModels
 		public Command RemoveDeviceCommand { get; }
 
 		public DeviceLocationViewModel DeviceLocationViewModel =>
-			ViewModelLinker.
-				GetRegisteredViewModel<DeviceLocationViewModel>();
+			(Resolver.Resolve<IDeviceLocationViewModel>() as DeviceLocationViewModel);
 
 		public AddDeviceView AddDeviceView { get; set; }
 
