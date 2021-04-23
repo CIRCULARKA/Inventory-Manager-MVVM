@@ -4,7 +4,7 @@ using System;
 
 namespace InventoryManager.Infrastructure
 {
-	public class UserSession
+	public class UserSession : IUserSession
 	{
 		private static UserAccessRules _rules;
 
@@ -17,7 +17,7 @@ namespace InventoryManager.Infrastructure
 				UserSession.AuthorizeUser(
 					user,
 					UserRightsBuilder.GetUserRights(
-						UserSession.GetUserAccessLevel(user)
+						UserSession.GetAccessLevel(user)
 					)
 				);
 			};
