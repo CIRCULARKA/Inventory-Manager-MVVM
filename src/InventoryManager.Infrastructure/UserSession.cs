@@ -4,13 +4,13 @@ using System;
 
 namespace InventoryManager.Infrastructure
 {
-	public static class UserSession
+	public class UserSession
 	{
 		private static UserAccessRules _rules;
 
 		private static User _authorizedUser;
 
-		static UserSession()
+		public UserSession()
 		{
 			UserEvents.OnUserLoggedIn += (user) =>
 			{
@@ -35,7 +35,7 @@ namespace InventoryManager.Infrastructure
 		public static UserAccessRights AuthorizedUserAccessLevel =>
 			(UserAccessRights)_authorizedUser.UserGroupID;
 
-		public static UserAccessRights GetUserAccessLevel(User user)
+		public static UserAccessRights GetAccessLevel(User user)
 		{
 			try { return (UserAccessRights)user.UserGroupID; }
 			catch { throw new Exception($"User can't be null"); }
