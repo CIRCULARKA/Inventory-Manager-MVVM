@@ -2,12 +2,12 @@ namespace InventoryManager.Infrastructure.Filtering
 {
 	public class DeviceFilteringCriteria
 	{
-		public DeviceFilteringCriteria(string criteriaName)
+		public DeviceFilteringCriteria(string deviceTypeName)
 		{
-			CriteriaName = criteriaName;
+			DeviceTypeName = deviceTypeName;
 		}
 
-		public string CriteriaName { get; }
+		public string DeviceTypeName { get; }
 
 		/// <summary>
 		/// Default it true

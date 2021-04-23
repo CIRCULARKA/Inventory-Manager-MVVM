@@ -1,5 +1,6 @@
 using InventoryManager.Models;
 using InventoryManager.Infrastructure;
+using InventoryManager.Infrastructure.Filtering;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -7,11 +8,15 @@ namespace InventoryManager.ViewModels
 {
 	public class DeviceFilter : IDeviceFilter
 	{
-		public bool IncludeServers { get; set; } = true;
+		public DeviceFilter(List<DeviceFilteringCriteria> criteria)
+		{
+			Criteria = criteria;
+		}
 
-		public bool IncludePC { get; set; } = true;
 
-		public bool IncludeSwitches { get; set; } = true;
+		// Implement a way to change criteria more easily than changing it by
+		// index
+		public List<DeviceFilteringCriteria> Criteria { get; }
 
 		public string SearchQuery { get; set; } = "";
 
@@ -22,20 +27,14 @@ namespace InventoryManager.ViewModels
 
 		public bool DoesMeetFilteringCriteria(Device device)
 		{
-			if (device.DeviceType.Name == "Сервер" && IncludeServers)
-				return true;
-			if (device.DeviceType.Name == "Персональный компьютер" && IncludePC)
-				return true;
-			if (device.DeviceType.Name == "Коммутатор" && IncludeSwitches)
-				return true;
+			foreach (var criteria in Criteria)
+				if (criteria.State) return true;
+
 			return false;
 		}
 
 		public bool DoesMeetSearchingAndFilteringCriteria(Device device) =>
 			DoesMeetSearchingCriteria(device) && DoesMeetFilteringCriteria(device);
-
-		public IEnumerable<Device> GetFilteredDevicesList(IEnumerable<Device> list) =>
-			list.Where(d => DoesMeetSearchAndFilteringCriteria(d));
 
 		public bool DoesMeetSearchAndFilteringCriteria(Device device)
 		{
@@ -43,5 +42,8 @@ namespace InventoryManager.ViewModels
 				return DoesMeetFilteringCriteria(device);
 			else return false;
 		}
+
+		public IEnumerable<Device> Filter(IEnumerable<Device> list) =>
+			list.Where(d => DoesMeetSearchAndFilteringCriteria(d));
 	}
 }
