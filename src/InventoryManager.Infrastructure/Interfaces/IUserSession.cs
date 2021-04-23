@@ -4,7 +4,7 @@ namespace InventoryManager.Infrastructure
 {
 	interface IUserSession
 	{
-		void AuthorizeUser(User user);
+		void AuthorizeUser(User user, UserAccessRules rules);
 
 		bool IsAuthorizedUserAllowedTo(UserActions action);
 	}
