@@ -7,12 +7,21 @@ namespace InventoryManager.DependencyInjection
 	{
 		public override void Load()
 		{
-			Bind<IDeviceRelatedRepository>().To<DefaultDeviceRelatedRepository>();
-			Bind<IIPAddressRepository>().To<DefaultIPAddressRepository>();
+			Bind<IDeviceRelatedRepository>().
+				To<DefaultDeviceRelatedRepository>().
+					InSingletonScope();
 
-			Bind<IUserRelatedRepository>().To<DefaultUserRelatedRepository>();
+			Bind<IIPAddressRepository>().
+				To<DefaultIPAddressRepository>().
+					InSingletonScope();
 
-			Bind<ICertificateRelatedRepository>().To<DefaultCertificateRelatedRepository>();
+			Bind<IUserRelatedRepository>().
+				To<DefaultUserRelatedRepository>().
+					InSingletonScope();
+
+			Bind<ICertificateRelatedRepository>().
+				To<DefaultCertificateRelatedRepository>().
+					InSingletonScope();
 		}
 	}
 }
