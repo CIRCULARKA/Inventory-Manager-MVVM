@@ -3,7 +3,7 @@ using Ninject.Modules;
 
 namespace InventoryManager.DependencyInjection
 {
-	public class DependencyBinder : NinjectModule
+	public class RepositoriesModule : NinjectModule
 	{
 		public override void Load()
 		{

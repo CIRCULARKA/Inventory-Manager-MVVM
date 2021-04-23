@@ -9,7 +9,8 @@ namespace InventoryManager.DependencyInjection
 		static NinjectKernel()
 		{
 			_kernel = new StandardKernel(
-				new DependencyBinder()
+				new RepositoriesModule(),
+				new ViewModelsModule()
 			);
 		}
 
