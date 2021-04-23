@@ -28,12 +28,10 @@ namespace InventoryManager.ViewModels
 						RelatedView.Hide();
 						UserEvents.RaiseOnUserLoggedIn(AuthenticatedUser);
 
-						var mainViewModel = new MainViewModel();
-
 						_mainView = new MainView();
-						_mainView.DataContext = mainViewModel;
-
-						mainViewModel.RelatedView = _mainView;
+						_mainView.DataContext =
+							Resolver.Resolve<IMainViewModel>()
+								as MainViewModel;
 
 						_mainView.Show();
 
