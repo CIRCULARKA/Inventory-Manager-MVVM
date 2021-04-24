@@ -1,16 +1,13 @@
 using InventoryManager.Models;
 using InventoryManager.Views;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
 using InventoryManager.Extensions;
-using System;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceHistoryViewModel : ViewModelBase
+	public class DeviceHistoryViewModel : ViewModelBase, IDeviceMovementHistoryViewModel
 	{
 		private IEnumerable<DeviceMovementHistoryNote> _allDeviceHistoryNotes;
 

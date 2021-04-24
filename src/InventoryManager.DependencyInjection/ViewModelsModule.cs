@@ -24,6 +24,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IDeviceAccountsListViewModel>().
 				To<DeviceAccountsListViewModel>().InSingletonScope();
+
+			Bind<IDeviceMovementHistoryViewModel>().
+				To<DeviceHistoryViewModel>().InSingletonScope();
 		}
 	}
 }
