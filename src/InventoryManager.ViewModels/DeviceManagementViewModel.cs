@@ -1,5 +1,6 @@
 using InventoryManager.Views;
 using InventoryManager.Models;
+using InventoryManager.Infrastructure;
 using InventoryManager.Infrastructure.Filtering;
 using System.Collections.Generic;
 using Ninject;
@@ -31,7 +32,8 @@ namespace InventoryManager.ViewModels
 		public DevicesManagementViewModel()
 		{
 			var _devicesListViewModel = new DevicesListViewModel(
-				StandartNinjectKernel.Get<IDeviceRelatedRepository>()
+				StandartNinjectKernel.Get<IDeviceRelatedRepository>(),
+				StandartNinjectKernel.Get<IUserSession>()
 			);
 			_devicesListPartialView.DataContext = _devicesListViewModel;
 

@@ -11,15 +11,17 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class DevicesListViewModel : ViewModelBase, IDevicesListViewModel
+	public class DevicesListViewModel : ViewModelBase, IDevicesListViewModel, IUserSessionViewModel
 	{
 		private Device _selectedDevice;
 
 		private ObservableCollection<Device> _filteredDevices;
 
-		public DevicesListViewModel(IDeviceRelatedRepository repo)
+		public DevicesListViewModel(IDeviceRelatedRepository repo, IUserSession userSession)
 		{
 			Repository = repo;
+
+			UserSession = userSession;
 
 			AllDevices = Repository.AllDevices.ToList();
 
@@ -74,6 +76,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		private IDeviceRelatedRepository Repository { get; set; }
+
+		public IUserSession UserSession { get; }
 
 		public ObservableCollection<Device> FilteredDevices
 		{
