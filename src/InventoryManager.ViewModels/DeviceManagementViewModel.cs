@@ -31,42 +31,22 @@ namespace InventoryManager.ViewModels
 
 		public DevicesManagementViewModel()
 		{
-			var _devicesListViewModel = new DevicesListViewModel(
-				StandartNinjectKernel.Get<IDeviceRelatedRepository>(),
-				StandartNinjectKernel.Get<IUserSession>()
-			);
+			var _devicesListViewModel = ResolveDependency<IDevicesListViewModel>();
 			_devicesListPartialView.DataContext = _devicesListViewModel;
 
-			var _deviceIPListViewModel = new DeviceIPListViewModel(
-				StandartNinjectKernel.Get<IDeviceRelatedRepository>()
-			);
-				_deviceIPListPartialView.DataContext = _deviceIPListPartialView;
+			var _deviceIPListViewModel = ResolveDependency<IDeviceIPListViewModel>();
+			_deviceIPListPartialView.DataContext = _deviceIPListPartialView;
 
-			var _deviceAccountsListViewModel = new DeviceAccountsListViewModel(
-				StandartNinjectKernel.Get<IDeviceRelatedRepository>()
-			);
+			var _deviceAccountsListViewModel = ResolveDependency<IDeviceAccountsListViewModel>();
 			_deviceAccountsListPartialView.DataContext = _deviceAccountsListViewModel;
 
-			var _deviceLocationViewModel = new DeviceLocationViewModel(
-				StandartNinjectKernel.Get<IDeviceRelatedRepository>()
-			);
+			var _deviceLocationViewModel = ResolveDependency<IDeviceLocationViewModel>();
 			_deviceLocationPartialView.DataContext = _deviceLocationViewModel;
 
-			var _deviceSearchAndFilteringViewModel = new DeviceSearchAndFilteringViewModel(
-				new DeviceFilter(
-					new List<DeviceFilteringCriteria>()
-					{
-						new DeviceFilteringCriteria("Сервер"),
-						new	DeviceFilteringCriteria("Персональный компьютер"),
-						new DeviceFilteringCriteria("Коммутатор")
-					}
-				)
-			);
+			var _deviceSearchAndFilteringViewModel = ResolveDependency<IDeviceSearchAndFilteringViewModel>();
 			_deviceSearchAndFilteringPartialView.DataContext = _deviceSearchAndFilteringViewModel;
 
-			var _deviceHistoryViewModel = new DeviceHistoryViewModel(
-				StandartNinjectKernel.Get<IDeviceRelatedRepository>()
-			);
+			var _deviceHistoryViewModel = ResolveDependency<IDeviceMovementHistoryViewModel>();
 			_deviceHistoryPartialView.DataContext = _deviceHistoryViewModel;
 		}
 
