@@ -1,5 +1,6 @@
 using InventoryManager.Infrastructure;
 using InventoryManager.Infrastructure.Filtering;
+using System.Collections.Generic;
 using Ninject.Modules;
 
 namespace InventoryManager.DependencyInjection
@@ -9,7 +10,15 @@ namespace InventoryManager.DependencyInjection
 		public override void Load()
 		{
 			Bind<IUserSession>().To<UserSession>().InSingletonScope();
-			Bind<IDeviceFilter>().To<DeviceFilter>().InSingletonScope();
+			Bind<IDeviceFilter>().To<DeviceFilter>().InSingletonScope().
+				WithConstructorArgument(
+					"criteria",
+					new List<DeviceFilteringCriteria> {
+						new DeviceFilteringCriteria("Сервер"),
+						new DeviceFilteringCriteria("Коммутатор"),
+						new DeviceFilteringCriteria("Персональный компьютер")
+					}
+				);
 		}
 	}
 }
