@@ -21,41 +21,47 @@ namespace InventoryManager.ViewModels
 
 		private TabItem _selectedTab;
 
-		private TabItem _devicesTab =
-			new TabItem
-			{
-				Header = "Устройства",
-				Content = new DevicesManagementView() {
-					DataContext = new DevicesManagementViewModel()
-				}
-			};
+		private TabItem _devicesTab;
 
-		private TabItem _usersTab =
-			new TabItem
-			{
-				Header = "Пользователи",
-				Content = new UsersManagementView() {
-					DataContext = new UserViewModel(
-						StandartNinjectKernel.Get<IUserRelatedRepository>(),
-						Resolve<IUserSession>()
-					)
-				}
-			};
+		private TabItem _usersTab;
 
-		private TabItem _certificatesTab =
-			new TabItem
-			{
-				Header = "Сертификаты",
-				Content = new CertificatesManagementView() {
-					DataContext = new CertificateViewModel(
-						StandartNinjectKernel.Get<ICertificateRelatedRepository>()
-					)
-				}
-			};
+		private TabItem _certificatesTab;
 
 		public MainViewModel(IUserSession userSession)
 		{
 			UserSession = userSession;
+
+			_devicesTab = new TabItem
+			{
+				Header = "Устройства",
+				Content = new DevicesManagementView()
+				{
+					DataContext = new DevicesManagementViewModel()
+				}
+			};
+
+			_usersTab = new TabItem
+			{
+				Header = "Пользователи",
+				Content = new UsersManagementView()
+				{
+					DataContext = new UserViewModel(
+						ResolveDependency<IUserRelatedRepository>(),
+						ResolveDependency<IUserSession>()
+					)
+				}
+			};
+
+			_certificatesTab = new TabItem
+			{
+				Header = "Сертификаты",
+				Content = new CertificatesManagementView()
+				{
+					DataContext = new CertificateViewModel(
+					   ResolveDependency<ICertificateRelatedRepository>()
+				   )
+				}
+			};
 
 			ShowAboutProgramDialogCommand = RegisterCommandAction(
 				(obj) =>
