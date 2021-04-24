@@ -34,7 +34,7 @@ namespace InventoryManager.ViewModels
 
 						_mainView = new MainView();
 						_mainView.DataContext =
-							Resolver.Resolve<IMainViewModel>()
+							ResolveDependency<IMainViewModel>()
 								as MainViewModel;
 
 						_mainView.Show();

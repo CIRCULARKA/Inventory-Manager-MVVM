@@ -90,7 +90,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		public DeviceFilter DevicesFilter =>
-			(Resolver.Resolve<IDeviceSearchAndFilteringViewModel>() as DeviceSearchAndFilteringViewModel).
+			(ResolveDependency<IDeviceSearchAndFilteringViewModel>() as DeviceSearchAndFilteringViewModel).
 				DevicesFilter;
 
 		public List<Device> AllDevices { get; }
@@ -112,7 +112,7 @@ namespace InventoryManager.ViewModels
 		public Command RemoveDeviceCommand { get; }
 
 		public DeviceLocationViewModel DeviceLocationViewModel =>
-			(Resolver.Resolve<IDeviceLocationViewModel>() as DeviceLocationViewModel);
+			(ResolveDependency<IDeviceLocationViewModel>() as DeviceLocationViewModel);
 
 		public AddDeviceView AddDeviceView { get; set; }
 

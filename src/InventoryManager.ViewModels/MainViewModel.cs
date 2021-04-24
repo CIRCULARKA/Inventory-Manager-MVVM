@@ -36,7 +36,8 @@ namespace InventoryManager.ViewModels
 				Header = "Пользователи",
 				Content = new UsersManagementView() {
 					DataContext = new UserViewModel(
-						StandartNinjectKernel.Get<IUserRelatedRepository>()
+						StandartNinjectKernel.Get<IUserRelatedRepository>(),
+						Resolve<IUserSession>()
 					)
 				}
 			};

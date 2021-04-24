@@ -21,7 +21,7 @@ namespace InventoryManager.ViewModels
 
 					DeviceEvents.RaiseOnDeviceFilteringCriteriaChanged(
 						DevicesFilter.Filter(
-							(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+							(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
 								AllDevices
 						)
 					);

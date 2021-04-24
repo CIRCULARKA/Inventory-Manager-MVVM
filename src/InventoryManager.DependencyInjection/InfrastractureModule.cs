@@ -7,7 +7,7 @@ namespace InventoryManager.DependencyInjection
 	{
 		public override void Load()
 		{
-			Bind<IUserSession>().To<UserSession>();
+			Bind<IUserSession>().To<UserSession>().InSingletonScope();
 		}
 	}
 }

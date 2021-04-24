@@ -25,7 +25,7 @@ namespace InventoryManager.ViewModels
 		private IDeviceRelatedRepository Repository { get; }
 
 		public Device SelectedDevice =>
-			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
 				SelectedDevice;
 
 		public Command AddDeviceAccountCommand { get; }

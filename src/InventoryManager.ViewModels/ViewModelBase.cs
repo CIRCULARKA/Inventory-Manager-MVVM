@@ -17,6 +17,8 @@ namespace InventoryManager.ViewModels
 			_resolver = new DependencyResolver();
 		}
 
+		private DependencyResolver Resolver => _resolver;
+
 		public string MessageToUser
 		{
 			get => _messageToUser;
@@ -34,6 +36,7 @@ namespace InventoryManager.ViewModels
 			Func<object, bool> conditionOfWork = null
 		) => new Command(action, conditionOfWork);
 
-		protected DependencyResolver Resolver => _resolver;
+		protected T ResolveDependency<T>() =>
+			ResolveDependency<T>();
 	}
 }

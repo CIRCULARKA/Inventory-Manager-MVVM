@@ -69,7 +69,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		public Device SelectedDevice =>
-			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
 				SelectedDevice;
 
 		public Command AddIPToDeviceCommand { get; }

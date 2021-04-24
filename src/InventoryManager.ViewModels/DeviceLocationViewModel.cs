@@ -71,7 +71,8 @@ namespace InventoryManager.ViewModels
 					{
 						SelectedHousingCabinets = GetAllSelectedHousingCabinets();
 						SelectDeviceCabinetIfHousingIsTheSame();
-					} else SelectedHousingCabinets = null;
+					}
+					else SelectedHousingCabinets = null;
 				}
 			);
 
@@ -140,7 +141,7 @@ namespace InventoryManager.ViewModels
 		}
 
 		private Device SelectedDevice =>
-			(Resolver.Resolve<IDevicesListViewModel>() as DevicesListViewModel).
+			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
 				SelectedDevice;
 
 		public Command ApplyDeviceLocationChangesCommand { get; }
