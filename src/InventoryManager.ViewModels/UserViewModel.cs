@@ -44,8 +44,9 @@ namespace InventoryManager.ViewModels
 			ShowAddUserViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var _addUserView = new AddUserView();
-					_addUserView.ShowDialog();
+					var addUserView = new AddUserView();
+					addUserView.DataContext = ResolveDependency<IAddUserViewModel>();
+					addUserView.ShowDialog();
 				},
 				(obj) =>
 					UserSession.IsAuthorizedUserAllowedTo(UserActions.AddUser)
