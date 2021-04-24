@@ -9,13 +9,15 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class UserViewModel : ViewModelBase
+	public class UserViewModel : ViewModelBase, IUserSessionViewModel
 	{
 		private ObservableCollection<User> _allUsersToShow;
 
-		public UserViewModel(IUserRelatedRepository repo)
+		public UserViewModel(IUserRelatedRepository repo, IUserSession userSession)
 		{
 			Repository = repo;
+
+			UserSession = userSession;
 
 			SubscribeActionOnUserAddition(
 				(user) => UsersToShow.Add(user)
@@ -51,6 +53,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		private IUserRelatedRepository Repository { get; }
+
+		public IUserSession UserSession { get; }
 
 		public ObservableCollection<User> UsersToShow =>
 			_allUsersToShow;
