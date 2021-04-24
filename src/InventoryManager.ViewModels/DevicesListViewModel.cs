@@ -30,7 +30,11 @@ namespace InventoryManager.ViewModels
 			FilterDevicesAccordingToCriteria();
 
 			ShowAddDeviceViewCommand = RegisterCommandAction(
-				(obj) => AddDeviceView.ShowDialog(),
+				(obj) =>
+				{
+					AddDeviceView = new AddDeviceView();
+					AddDeviceView.DataContext = ResolveDependency<IAddDeviceViewModel>();
+				},
 				(obj) =>
 					UserSession.IsAuthorizedUserAllowedTo(UserActions.AddDevice)
 			);

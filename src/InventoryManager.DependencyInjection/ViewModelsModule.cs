@@ -27,6 +27,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IDeviceMovementHistoryViewModel>().
 				To<DeviceHistoryViewModel>().InSingletonScope();
+
+			Bind<IAddDeviceViewModel>().
+				To<AddDeviceViewModel>().InTransientScope();
 		}
 	}
 }

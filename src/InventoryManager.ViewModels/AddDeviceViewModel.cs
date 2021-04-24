@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
-	public class AddDeviceViewModel : ViewModelBase
+	public class AddDeviceViewModel : ViewModelBase, IAddDeviceViewModel
 	{
 		private string _inputtedInventoryNumber;
 
