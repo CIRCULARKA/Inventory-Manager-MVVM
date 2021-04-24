@@ -7,7 +7,7 @@ using System;
 
 namespace InventoryManager.ViewModels
 {
-	public class AuthorizationViewModel : ViewModelBase, ISupportingUserSessionViewModel
+	public class AuthorizationViewModel : ViewModelBase, IUserSessionViewModel
 	{
 		private string _login;
 

@@ -2,7 +2,7 @@ using InventoryManager.Infrastructure;
 
 namespace InventoryManager.ViewModels
 {
-	interface ISupportingUserSessionViewModel
+	interface IUserSessionViewModel
 	{
 		IUserSession UserSession { get; }
 	}
