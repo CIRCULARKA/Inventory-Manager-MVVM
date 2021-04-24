@@ -30,6 +30,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IAddDeviceViewModel>().
 				To<AddDeviceViewModel>().InTransientScope();
+
+			Bind<IAddUserViewModel>().
+				To<AddUserViewModel>().InTransientScope();
 		}
 	}
 }

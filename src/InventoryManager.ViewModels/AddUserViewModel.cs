@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class AddUserViewModel : ViewModelBase
+	public class AddUserViewModel : ViewModelBase, IAddUserViewModel
 	{
 		private string _inputtedLogin;
 
