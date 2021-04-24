@@ -2,7 +2,7 @@ using InventoryManager.Models;
 
 namespace InventoryManager.Infrastructure
 {
-	interface IUserSession
+	public interface IUserSession
 	{
 		void AuthorizeUser(User user, UserAccessRules rules);
 
