@@ -21,7 +21,7 @@ namespace InventoryManager.Infrastructure
 		public UserAccessRights AuthorizedUserAccessLevel =>
 			(UserAccessRights)_authorizedUser.UserGroupID;
 
-		public static UserAccessRights GetAccessLevel(User user)
+		public UserAccessRights GetAccessLevel(User user)
 		{
 			try { return (UserAccessRights)user.UserGroupID; }
 			catch { throw new Exception($"User can't be null"); }

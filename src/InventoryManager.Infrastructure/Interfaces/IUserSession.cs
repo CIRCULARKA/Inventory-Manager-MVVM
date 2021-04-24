@@ -7,5 +7,7 @@ namespace InventoryManager.Infrastructure
 		void AuthorizeUser(User user, UserAccessRules rules);
 
 		bool IsAuthorizedUserAllowedTo(UserActions action);
+
+		UserAccessRights GetAccessLevel(User user);
 	}
 }
