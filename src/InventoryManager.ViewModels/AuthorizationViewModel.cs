@@ -26,6 +26,7 @@ namespace InventoryManager.ViewModels
 					if (IsInputtedPasswordCorrect())
 					{
 						RelatedView.Hide();
+
 						UserEvents.RaiseOnUserLoggedIn(AuthenticatedUser);
 
 						_mainView = new MainView();
