@@ -11,7 +11,7 @@ using static InventoryManager.DependencyInjection.NinjectKernel;
 
 namespace InventoryManager.ViewModels
 {
-	public class MainViewModel : ViewModelBase, IMainViewModel
+	public class MainViewModel : ViewModelBase, IMainViewModel, IUserSessionViewModel
 	{
 		const string _githubUrl = "https://github.com/CIRCULARKA/Inventory-Manager-MVVM";
 
@@ -52,8 +52,10 @@ namespace InventoryManager.ViewModels
 				}
 			};
 
-		public MainViewModel()
+		public MainViewModel(IUserSession userSession)
 		{
+			UserSession = userSession;
+
 			ShowAboutProgramDialogCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -89,6 +91,8 @@ namespace InventoryManager.ViewModels
 
 			LoadViewsForAuthorizedUser();
 		}
+
+		public IUserSession UserSession { get; }
 
 		public List<TabItem> MainViewTabs
 		{
