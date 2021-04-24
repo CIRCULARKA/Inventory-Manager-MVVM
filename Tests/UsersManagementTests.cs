@@ -40,7 +40,7 @@ namespace InventoryManager.Tests
 			var testUsers = BuildTestUsers();
 			mock.Setup(r => r.AllUsers).Returns(testUsers);
 
-			var vm1 = new UserViewModel(mock.Object);
+			var vm1 = new UserViewModel(mock.Object, null);
 
 			// Act
 			var result = vm1.UsersToShow;
@@ -56,7 +56,7 @@ namespace InventoryManager.Tests
 			var mock = new Mock<IUserRelatedRepository>();
 
 			var addUserVM = new AddUserViewModel(mock.Object);
-			var mainUserVM = new UserViewModel(mock.Object);
+			var mainUserVM = new UserViewModel(mock.Object, null);
 			var userToAdd = new User
 			{
 				Login = "testAddedUserLogin"
@@ -79,7 +79,7 @@ namespace InventoryManager.Tests
 			var mock = new Mock<IUserRelatedRepository>();
 			mock.Setup(r => r.AllUsers).Returns(BuildTestUsers());
 
-			var vm1 = new UserViewModel(mock.Object);
+			var vm1 = new UserViewModel(mock.Object, null);
 
 			var userLoginToRemove = "user1";
 
