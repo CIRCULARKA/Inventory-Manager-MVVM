@@ -32,6 +32,13 @@ namespace InventoryManager.ViewModels
 
 						UserEvents.RaiseOnUserLoggedIn(AuthenticatedUser);
 
+						UserSession.AuthorizeUser(
+							AuthenticatedUser,
+							UserRightsBuilder.GetUserRights(
+							UserSession.GetAccessLevel(AuthenticatedUser)
+							)
+						);
+
 						_mainView = new MainView();
 						_mainView.DataContext =
 							ResolveDependency<IMainViewModel>()
