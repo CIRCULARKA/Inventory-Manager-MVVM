@@ -1,6 +1,7 @@
 ﻿using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.ViewModels;
+using InventoryManager.Infrastructure;
 using Ninject;
 using System.Windows;
 using static InventoryManager.DependencyInjection.NinjectKernel;
@@ -14,7 +15,8 @@ namespace InventoryManager
 			base.OnStartup(info);
 
 			var authorizationViewModel = new AuthorizationViewModel(
-				StandartNinjectKernel.Get<IUserRelatedRepository>()
+				StandartNinjectKernel.Get<IUserRelatedRepository>(),
+				StandartNinjectKernel.Get<IUserSession>()
 			);
 
 			var authorizationView = new AuthorizationView() {

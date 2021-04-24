@@ -2,11 +2,12 @@ using InventoryManager.Views;
 using InventoryManager.Events;
 using InventoryManager.Models;
 using InventoryManager.Commands;
+using InventoryManager.Infrastructure;
 using System;
 
 namespace InventoryManager.ViewModels
 {
-	public class AuthorizationViewModel : ViewModelBase
+	public class AuthorizationViewModel : ViewModelBase, ISupportingUserSessionViewModel
 	{
 		private string _login;
 
@@ -14,9 +15,11 @@ namespace InventoryManager.ViewModels
 
 		private MainView _mainView;
 
-		public AuthorizationViewModel(IUserRelatedRepository repo)
+		public AuthorizationViewModel(IUserRelatedRepository repo, IUserSession userSession)
 		{
 			Repository = repo;
+
+			UserSession = userSession;
 
 			LoginCommand = RegisterCommandAction(
 				(obj) =>
@@ -50,10 +53,11 @@ namespace InventoryManager.ViewModels
 				RelatedView.Show();
 			};
 		}
+		private IUserRelatedRepository Repository { get; }
 
 		public User AuthenticatedUser { get; set; }
 
-		private IUserRelatedRepository Repository { get; }
+		public IUserSession UserSession { get; }
 
 		public Command LoginCommand { get; }
 
