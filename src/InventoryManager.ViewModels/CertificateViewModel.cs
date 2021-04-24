@@ -83,7 +83,7 @@ namespace InventoryManager.ViewModels
 			set
 			{
 				_inputtedSubject = value;
-				OnPropertyChanged("InputtedSubject");
+				OnPropertyChanged(nameof(InputtedSubject));
 			}
 		}
 
