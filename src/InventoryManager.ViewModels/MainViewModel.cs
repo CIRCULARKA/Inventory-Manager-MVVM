@@ -57,9 +57,7 @@ namespace InventoryManager.ViewModels
 				Header = "Сертификаты",
 				Content = new CertificatesManagementView()
 				{
-					DataContext = new CertificateViewModel(
-					   ResolveDependency<ICertificateRelatedRepository>()
-				   )
+					DataContext = ResolveDependency<ICertificateViewModel>()
 				}
 			};
 

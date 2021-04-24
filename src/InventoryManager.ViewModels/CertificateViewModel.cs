@@ -2,13 +2,12 @@ using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
-using InventoryManager.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class CertificateViewModel : ViewModelBase
+	public class CertificateViewModel : ViewModelBase, ICertificateViewModel
 	{
 		private string _inputtedSubject;
 
