@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceAccountsListViewModel : ViewModelBase
+	public class DeviceAccountsListViewModel : ViewModelBase, IDeviceAccountsListViewModel
 	{
 		private ObservableCollection<DeviceAccount> _selectedDeviceAccounts;
 

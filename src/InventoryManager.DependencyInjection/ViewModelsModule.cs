@@ -21,6 +21,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IDeviceIPListViewModel>().
 				To<DeviceIPListViewModel>().InSingletonScope();
+
+			Bind<IDeviceAccountsListViewModel>().
+				To<DeviceAccountsListViewModel>().InSingletonScope();
 		}
 	}
 }
