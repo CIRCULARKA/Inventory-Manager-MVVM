@@ -34,6 +34,7 @@ namespace InventoryManager.ViewModels
 				{
 					AddDeviceView = new AddDeviceView();
 					AddDeviceView.DataContext = ResolveDependency<IAddDeviceViewModel>();
+					AddDeviceView.ShowDialog();
 				},
 				(obj) =>
 					UserSession.IsAuthorizedUserAllowedTo(UserActions.AddDevice)
