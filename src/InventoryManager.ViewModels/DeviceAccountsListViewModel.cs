@@ -39,11 +39,8 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					var _addDeviceAccountView = new AddDeviceAccountView();
-					_addDeviceAccountView.DataContext = new AddDeviceAccountViewModel(
-						StandartNinjectKernel.Get<IDeviceRelatedRepository>()
-					);
-
-					AddDeviceAccountView.ShowDialog();
+					_addDeviceAccountView.DataContext = ResolveDependency<IAddDeviceAccountViewModel>();
+					_addDeviceAccountView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
 			);
@@ -77,8 +74,6 @@ namespace InventoryManager.ViewModels
 		public Device SelectedDevice =>
 			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
 				SelectedDevice;
-
-		public AddDeviceAccountView AddDeviceAccountView { get; set; }
 
 		public DeviceAccount SelectedAccount { get; set; }
 

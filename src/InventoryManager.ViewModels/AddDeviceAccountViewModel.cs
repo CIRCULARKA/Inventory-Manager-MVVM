@@ -5,7 +5,7 @@ using System;
 
 namespace InventoryManager.ViewModels
 {
-	public class AddDeviceAccountViewModel : ViewModelBase
+	public class AddDeviceAccountViewModel : ViewModelBase, IAddDeviceAccountViewModel
 	{
 		private string _inputtetLogin;
 
