@@ -1,10 +1,8 @@
 using InventoryManager.Models;
-using InventoryManager.Infrastructure;
-using InventoryManager.Infrastructure.Filtering;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace InventoryManager.ViewModels
+namespace InventoryManager.Infrastructure.Filtering
 {
 	public class DeviceFilter : IDeviceFilter
 	{
@@ -12,7 +10,6 @@ namespace InventoryManager.ViewModels
 		{
 			Criteria = criteria;
 		}
-
 
 		// Implement a way to change criteria more easily than changing it by
 		// index
