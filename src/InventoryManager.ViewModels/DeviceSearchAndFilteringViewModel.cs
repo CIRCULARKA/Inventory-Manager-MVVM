@@ -1,12 +1,13 @@
 using InventoryManager.Events;
 using InventoryManager.Commands;
+using InventoryManager.Infrastructure.Filtering;
 using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
 	public class DeviceSearchAndFilteringViewModel : ViewModelBase, IDeviceSearchAndFilteringViewModel
 	{
-		public DeviceSearchAndFilteringViewModel(DeviceFilter filter)
+		public DeviceSearchAndFilteringViewModel(IDeviceFilter filter)
 		{
 			DevicesFilter = filter;
 
@@ -36,7 +37,7 @@ namespace InventoryManager.ViewModels
 
 		public string InputtedSearchQuery { get; set; } = "";
 
-		public DeviceFilter DevicesFilter { get; }
+		public IDeviceFilter DevicesFilter { get; }
 
 		public Command FilterDevicesCommand { get; }
 	}

@@ -4,6 +4,7 @@ using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
 using InventoryManager.Infrastructure;
+using InventoryManager.Infrastructure.Filtering;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -94,7 +95,7 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public DeviceFilter DevicesFilter =>
+		public IDeviceFilter DevicesFilter =>
 			(ResolveDependency<IDeviceSearchAndFilteringViewModel>() as DeviceSearchAndFilteringViewModel).
 				DevicesFilter;
 

@@ -1,10 +1,9 @@
 using InventoryManager.Models;
-using InventoryManager.Infrastructure.Filtering;
 using System.Collections.Generic;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Infrastructure.Filtering
 {
-	interface IDeviceFilter
+	public interface IDeviceFilter
 	{
 		List<DeviceFilteringCriteria> Criteria { get; }
 
@@ -13,6 +12,8 @@ namespace InventoryManager.Infrastructure
 		bool DoesMeetSearchingCriteria(Device device);
 
 		bool DoesMeetFilteringCriteria(Device device);
+
+		bool DoesMeetSearchingAndFilteringCriteria(Device device);
 
 		IEnumerable<Device> Filter(IEnumerable<Device> list);
 	}
