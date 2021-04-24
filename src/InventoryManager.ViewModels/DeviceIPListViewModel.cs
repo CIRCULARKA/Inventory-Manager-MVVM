@@ -3,13 +3,12 @@ using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
-using InventoryManager.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class DeviceIPListViewModel : ViewModelBase
+	public class DeviceIPListViewModel : ViewModelBase, IDeviceIPListViewModel
 	{
 		private ObservableCollection<IPAddress> _selectedDeviceIPAddresses;
 

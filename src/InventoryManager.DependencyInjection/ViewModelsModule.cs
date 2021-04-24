@@ -18,6 +18,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IDeviceLocationViewModel>().
 				To<DeviceLocationViewModel>().InSingletonScope();
+
+			Bind<IDeviceIPListViewModel>().
+				To<DeviceIPListViewModel>().InSingletonScope();
 		}
 	}
 }
