@@ -3,9 +3,6 @@ using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
-using InventoryManager.Infrastructure;
-using Ninject;
-using static InventoryManager.DependencyInjection.NinjectKernel;
 using System;
 using System.Collections.ObjectModel;
 
