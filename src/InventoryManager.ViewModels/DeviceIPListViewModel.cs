@@ -34,8 +34,9 @@ namespace InventoryManager.ViewModels
 			ShowAddIPViewCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					UIEvents.RaiseOnShowAddIPAddressViewCommandExecuted();
-					AddIPToDeviceView.ShowDialog();
+					var _addIpToDeviceView = new AddIPAddressView();
+					_addIpToDeviceView.DataContext = ResolveDependency<IAddIPToDeviceViewModel>();
+					_addIpToDeviceView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
 			);
@@ -54,8 +55,6 @@ namespace InventoryManager.ViewModels
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
-
-		public AddIPAddressView AddIPToDeviceView { get; set; }
 
 		public IPAddress SelectedIPAddress { get; set; }
 
