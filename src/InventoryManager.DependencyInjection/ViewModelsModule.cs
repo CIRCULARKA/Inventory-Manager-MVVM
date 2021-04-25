@@ -17,25 +17,25 @@ namespace InventoryManager.DependencyInjection
 				To<DeviceSearchAndFilteringViewModel>().InSingletonScope();
 
 			Bind<IDeviceLocationViewModel>().
-				To<DeviceLocationViewModel>().InSingletonScope();
+				To<DeviceLocationViewModel>();
 
 			Bind<IDeviceIPListViewModel>().
-				To<DeviceIPListViewModel>().InSingletonScope();
+				To<DeviceIPListViewModel>();
 
 			Bind<IDeviceAccountsListViewModel>().
-				To<DeviceAccountsListViewModel>().InSingletonScope();
+				To<DeviceAccountsListViewModel>();
 
 			Bind<IDeviceMovementHistoryViewModel>().
-				To<DeviceHistoryViewModel>().InSingletonScope();
+				To<DeviceHistoryViewModel>();
 
 			Bind<IAddDeviceViewModel>().
-				To<AddDeviceViewModel>().InTransientScope();
+				To<AddDeviceViewModel>();
 
 			Bind<IAddUserViewModel>().
-				To<AddUserViewModel>().InTransientScope();
+				To<AddUserViewModel>();
 
 			Bind<IAddDeviceAccountViewModel>().
-				To<AddDeviceAccountViewModel>().InTransientScope();
+				To<AddDeviceAccountViewModel>();
 
 			Bind<ICertificateViewModel>().
 				To<CertificateViewModel>().InTransientScope();
