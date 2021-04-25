@@ -38,7 +38,7 @@ namespace InventoryManager.DependencyInjection
 				To<AddDeviceAccountViewModel>();
 
 			Bind<ICertificateViewModel>().
-				To<CertificateViewModel>().InTransientScope();
+				To<CertificateViewModel>();
 		}
 	}
 }
