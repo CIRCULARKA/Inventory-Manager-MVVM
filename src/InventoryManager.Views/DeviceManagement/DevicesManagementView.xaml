@@ -65,9 +65,15 @@
             </StackPanel>
             <UserControl Content="{Binding DeviceLocationPartialView}"
                 Grid.Row="1" />
-            <UserControl Content="{Binding DeviceHistoryPartialView}" Grid.Row="2" />
+            <UserControl Content="{Binding DeviceHistoryPartialView}"
+                Grid.Row="2" />
         </Grid>
+        <TextBlock Text="ПО"
+            VerticalAlignment="Top"
+            FontSize="14" FontWeight="Bold"
+            Margin="3 8 0 0"
+            Grid.Row="0" Grid.Column="3" />
         <UserControl Content="{Binding SoftwareListPartialView}"
-            Grid.Row="1" Grid.Column="4" />
+            Grid.Row="1" Grid.Column="3" />
     </Grid>
 </UserControl>
