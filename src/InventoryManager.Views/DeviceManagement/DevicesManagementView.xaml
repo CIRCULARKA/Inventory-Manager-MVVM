@@ -32,6 +32,7 @@
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="180" />
         </Grid.ColumnDefinitions>
         <TextBlock Text="Поиск и фильтры"
             Style="{StaticResource headerTextStyle}"
@@ -66,5 +67,7 @@
                 Grid.Row="1" />
             <UserControl Content="{Binding DeviceHistoryPartialView}" Grid.Row="2" />
         </Grid>
+        <UserControl Content="{Binding SoftwareListPartialView}"
+            Grid.Row="1" Grid.Column="4" />
     </Grid>
 </UserControl>
