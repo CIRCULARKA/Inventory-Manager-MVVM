@@ -29,6 +29,8 @@ namespace InventoryManager.ViewModels
 
 		DeviceHistoryView _deviceHistoryPartialView = new DeviceHistoryView();
 
+		SoftwareListView _softwareListPartialView = new SoftwareListView();
+
 		public DevicesManagementViewModel()
 		{
 			var _devicesListViewModel = ResolveDependency<IDevicesListViewModel>();
@@ -62,5 +64,7 @@ namespace InventoryManager.ViewModels
 			_deviceSearchAndFilteringPartialView;
 
 		public DeviceHistoryView DeviceHistoryPartialView => _deviceHistoryPartialView;
+
+		public SoftwareListView SoftwareListPartialView => _softwareListPartialView;
 	}
 }
