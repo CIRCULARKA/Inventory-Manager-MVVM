@@ -49,9 +49,6 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) => SelectedIPAddress != null
 			);
-
-			DeviceEvents.OnDeviceSelectionChanged += device =>
-				SelectedDeviceIPAddresses = null;
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
