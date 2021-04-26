@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace InventoryManager.ViewModels
 {
-	public class AddIPToDeviceViewModel : ViewModelBase
+	public class AddIPToDeviceViewModel : ViewModelBase, IAddIPToDeviceViewModel
 	{
 		private List<IPAddress> _allAvailableIPs;
 
