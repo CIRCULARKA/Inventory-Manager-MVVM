@@ -35,7 +35,7 @@ namespace InventoryManager.ViewModels
 			_devicesListPartialView.DataContext = _devicesListViewModel;
 
 			var _deviceIPListViewModel = ResolveDependency<IDeviceIPListViewModel>();
-			_deviceIPListPartialView.DataContext = _deviceIPListPartialView;
+			_deviceIPListPartialView.DataContext = _deviceIPListViewModel;
 
 			var _deviceAccountsListViewModel = ResolveDependency<IDeviceAccountsListViewModel>();
 			_deviceAccountsListPartialView.DataContext = _deviceAccountsListViewModel;
