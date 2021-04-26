@@ -17,32 +17,20 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
+			AllAvailableIPAddresses =
+				Repository.
+					AllAvailableIPAddresses.
+						ToList();
+			SelectFirstIPInList();
+
 			AddIPToDeviceCommand = RegisterCommandAction(
 				(obj) =>
 				{
 					AddIPToDevice();
+					RefreshAvailableIPList();
 					SelectFirstIPInList();
 				},
 				(obj) => SelectedIPAddress != null
-			);
-
-			SubscribeActionOnIPAssigning(
-				(d) => RefreshAvailableIPList()
-			);
-
-			SubscribeActionOnNetworkMaskChanges(
-				(ip, mask) => RefreshAvailableIPList()
-			);
-
-			SubscribeActionOnShowAddIPAddressViewCommandExecution(
-				() =>
-				{
-					AllAvailableIPAddresses =
-						Repository.
-							AllAvailableIPAddresses.
-								ToList();
-					SelectFirstIPInList();
-				}
 			);
 		}
 
@@ -102,14 +90,5 @@ namespace InventoryManager.ViewModels
 				Repository.
 					AllAvailableIPAddresses.
 						ToList();
-
-		private void SubscribeActionOnIPAssigning(Action<IPAddress> action) =>
-			DeviceEvents.OnDeviceIPAdded += action;
-
-		private void SubscribeActionOnNetworkMaskChanges(Action<string, byte> action) =>
-			DeviceEvents.OnNetworkConfigurationChanged += action;
-
-		private void SubscribeActionOnShowAddIPAddressViewCommandExecution(Action action) =>
-			UIEvents.OnShowAddIPAddressViewCommandExecuted += action;
 	}
 }
