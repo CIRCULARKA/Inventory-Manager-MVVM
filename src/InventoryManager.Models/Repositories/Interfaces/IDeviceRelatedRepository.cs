@@ -6,8 +6,7 @@ namespace InventoryManager.Models
 		: IDeviceRepository, IDeviceAccountRepository,
 			IIPAddressRepository, IDeviceTypeRepository,
 			IHousingRepository, ICabinetRepository,
-			IDeviceMovementHistoryNoteRepository, ISoftwareRepository,
-			ISoftwareConfigurationRepository, ISoftwareTypeRepository
+			IDeviceMovementHistoryNoteRepository, ISoftwareRelatedRepository
 	{
 		IQueryable<DeviceAccount> GetAllDeviceAccounts(Device device);
 
