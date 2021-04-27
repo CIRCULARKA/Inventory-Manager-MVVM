@@ -147,6 +147,62 @@ namespace InventoryManager.Models
 			Include(c => c.Housing).
 			ToList();
 
+		public void AddSoftware(Software softwareToAdd) =>
+			DataContext.Software.Add(softwareToAdd);
+
+		public void RemoveSoftware(Software softwareToRemove) =>
+			DataContext.Software.Remove(softwareToRemove);
+
+		public void UpdateSoftware(Software softwareToUpdate) =>
+			DataContext.Software.Update(softwareToUpdate);
+
+		public Software FindSoftware(params object[] keys) =>
+			DataContext.Software.Find(keys);
+
+		public IEnumerable<Software> AllSoftware =>
+			DataContext.Software.Include(s => s.Type).ToList();
+
+		public void AddSoftwareType(SoftwareType newType) =>
+			DataContext.SoftwareTypes.Add(newType);
+
+		public void RemoveSoftwareType(SoftwareType typeToRemove) =>
+			DataContext.SoftwareTypes.Remove(typeToRemove);
+
+		public void UpdateSoftwareType(SoftwareType typeToUpdate) =>
+			DataContext.SoftwareTypes.Update(typeToUpdate);
+
+		public SoftwareType FindSoftwareType(params object[] keys) =>
+			DataContext.SoftwareTypes.Find(keys);
+
+		public IEnumerable<SoftwareType> AllSoftwareTypes =>
+			DataContext.SoftwareTypes.ToList();
+
+		public void AddSoftwareConfiguration(SoftwareConfiguration newConfiguration) =>
+			DataContext.SoftwareConfigurations.Add(newConfiguration);
+
+		public void RemoveSoftwareConfiguration(SoftwareConfiguration configToRemove) =>
+			DataContext.SoftwareConfigurations.Remove(configToRemove);
+
+		public void UpdateSoftwareConfiguration(SoftwareConfiguration configToUpdate) =>
+			DataContext.SoftwareConfigurations.Update(configToUpdate);
+
+		public SoftwareConfiguration FindSoftwareConfiguration(params object[] keys) =>
+			DataContext.SoftwareConfigurations.Find(keys);
+
+		public IEnumerable<SoftwareConfiguration> AllSoftwareConfiguration =>
+			DataContext.
+				SoftwareConfigurations.
+					Include(sc => sc.Software).
+						ToList();
+
+		public IQueryable<Software> GetAllDeviceSoftware(Device device) =>
+			DataContext.
+				Software.
+					Where(s => s.DeviceID == device.ID);
+
+		public IEnumerable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target) =>
+			DataContext.SoftwareConfigurations.Where(sc => sc.SoftwareID == target.ID);
+
 		public void SaveChanges() => DataContext.SaveChanges();
 	}
 }
