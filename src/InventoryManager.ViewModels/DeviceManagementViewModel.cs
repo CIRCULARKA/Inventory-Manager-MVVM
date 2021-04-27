@@ -50,6 +50,9 @@ namespace InventoryManager.ViewModels
 
 			var _deviceHistoryViewModel = ResolveDependency<IDeviceMovementHistoryViewModel>();
 			_deviceHistoryPartialView.DataContext = _deviceHistoryViewModel;
+
+			var _deviceSoftwareViewModel = ResolveDependency<ISoftwareListViewModel>();
+			_softwareListPartialView.DataContext = _deviceSoftwareViewModel;
 		}
 
 		public DevicesListView DevicesListPartialView => _devicesListPartialView;
