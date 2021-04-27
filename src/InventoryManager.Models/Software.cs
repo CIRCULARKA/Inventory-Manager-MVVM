@@ -9,7 +9,5 @@ namespace InventoryManager.Models
 		public int SoftwareTypeID { get; set; }
 
 		public SoftwareType Type { get; set; }
-
-		public int SoftwareConfigurationID { get; set; }
 	}
 }
