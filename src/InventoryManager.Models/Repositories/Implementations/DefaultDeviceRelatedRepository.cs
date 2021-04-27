@@ -150,8 +150,15 @@ namespace InventoryManager.Models
 		public void AddSoftware(Software softwareToAdd) =>
 			DataContext.Software.Add(softwareToAdd);
 
-		public void RemoveSoftware(Software softwareToRemove) =>
+		public void RemoveSoftware(Software softwareToRemove)
+		{
+			DataContext.SoftwareConfigurations.RemoveRange(
+				DataContext.
+					SoftwareConfigurations.
+						Where(sc => sc.SoftwareID == softwareToRemove.ID)
+			);
 			DataContext.Software.Remove(softwareToRemove);
+		}
 
 		public void UpdateSoftware(Software softwareToUpdate) =>
 			DataContext.Software.Update(softwareToUpdate);
