@@ -8,7 +8,7 @@ namespace InventoryManager.Models
 
 		void RemoveSoftwareType(SoftwareType typeToRemove);
 
-		void UpdateSoftwareType(Software typeToUpdate);
+		void UpdateSoftwareType(SoftwareType typeToUpdate);
 
 		SoftwareType FindSoftwareType(params object[] keys);
 
