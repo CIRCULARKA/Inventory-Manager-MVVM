@@ -23,6 +23,7 @@ namespace InventoryManager.Data
 			builder.ApplyConfiguration<Cabinet>(new CabinetModelConfiguration());
 			builder.ApplyConfiguration<DeviceAccount>(new DeviceAccountModelConfiguration());
 			builder.ApplyConfiguration<DeviceMovementHistoryNote>(new DeviceMovementHistoryNoteConfiguration());
+			builder.ApplyConfiguration(new SoftwareTypeConfiguration());
 		}
 	}
 }
