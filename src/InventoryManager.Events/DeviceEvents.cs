@@ -45,5 +45,10 @@ namespace InventoryManager.Events
 
 		public static void RaiseOnNetworkConfigurationChanged(string address, byte mask) =>
 			OnNetworkConfigurationChanged?.Invoke(address, mask);
+
+		public static event Action<Software> OnSoftwareAdded;
+
+		public static void RaiseOnSoftwareAdded(Software software) =>
+			OnSoftwareAdded?.Invoke(software);
 	}
 }
