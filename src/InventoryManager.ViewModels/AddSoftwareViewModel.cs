@@ -36,7 +36,8 @@ namespace InventoryManager.ViewModels
 
 					var newSoftware = new Software()
 					{
-						Type = SelectedSoftwareType
+						Type = SelectedSoftwareType,
+						DeviceID = SelectedDevice.ID
 					};
 					newConfiguration.Software = newSoftware;
 
@@ -59,6 +60,10 @@ namespace InventoryManager.ViewModels
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
+
+		public Device SelectedDevice =>
+			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public Command AddSoftwareCommand { get; }
 
