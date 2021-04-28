@@ -29,7 +29,12 @@ namespace InventoryManager.ViewModels
 			);
 
 			RemoveSoftwareCommand = RegisterCommandAction(
-				(obj) => Repository.RemoveSoftware(SelectedSoftware),
+				(obj) =>
+				{
+					Repository.RemoveSoftware(SelectedSoftware);
+					Repository.SaveChanges();
+					SelectedDeviceSoftware.Remove(SelectedSoftware);
+				},
 				(obj) => SelectedSoftware != null
 			);
 
