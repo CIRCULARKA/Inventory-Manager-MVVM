@@ -16,6 +16,11 @@
 		<ListBox ItemsSource="{Binding SelectedDeviceSoftware, UpdateSourceTrigger=PropertyChanged}"
 			SelectedItem="{Binding SelectedSoftware}"
 			Margin="0 0 0 3" Height="419">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Path=Type.Name}" />
+				</DataTemplate>
+			</ListBox.ItemTemplate>
 		</ListBox>
 		<StackPanel Orientation="Horizontal">
 			<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
