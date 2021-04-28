@@ -2,13 +2,16 @@ using InventoryManager.Models;
 using InventoryManager.Views;
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using System.Collections.Generic;
+using InventoryManager.Extensions;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
 	public class SoftwareListViewModel : ViewModelBase, ISoftwareListViewModel
 	{
+		private ObservableCollection<Software> _allDeviceSoftware;
+
 		public SoftwareListViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -34,11 +37,14 @@ namespace InventoryManager.ViewModels
 			{
 				if (device != null)
 				{
-					Repository.GetAllDeviceSoftware(
+					SelectedDeviceSoftware = Repository.GetAllDeviceSoftware(
 						SelectedDevice
-					).ToList();
+					).ToObservableCollection();
 				}
 			};
+
+			DeviceEvents.OnSoftwareAdded += (software) =>
+				SelectedDeviceSoftware.Add(software);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
@@ -47,7 +53,15 @@ namespace InventoryManager.ViewModels
 			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
 				SelectedDevice;
 
-		public IEnumerable<Software> SelectedDeviceSoftware { get; set; }
+		public ObservableCollection<Software> SelectedDeviceSoftware
+		{
+			get => _allDeviceSoftware;
+			set
+			{
+				_allDeviceSoftware = value;
+				OnPropertyChanged(nameof(SelectedDeviceSoftware));
+			}
+		}
 
 		public Software SelectedSoftware { get; set; }
 

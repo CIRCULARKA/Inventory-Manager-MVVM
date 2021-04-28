@@ -38,20 +38,21 @@ namespace InventoryManager.ViewModels
 					{
 						Type = SelectedSoftwareType
 					};
-
 					newConfiguration.Software = newSoftware;
 
 					try
 					{
 						Repository.AddSoftware(newSoftware);
 						Repository.SaveChanges();
+
+						DeviceEvents.RaiseOnSoftwareAdded(newSoftware);
+
+						MessageToUser = "ПО добавлено";
 					}
 					catch (Exception e)
 					{
 						MessageToUser = e.Message;
 					}
-
-					DeviceEvents.RaiseOnSoftwareAdded(newSoftware);
 				},
 				(obj) => CanAdditionBeExecuted
 			);
@@ -72,6 +73,6 @@ namespace InventoryManager.ViewModels
 
 		public string AdditionalInformation { get; set; }
 
-		public bool CanAdditionBeExecuted { get; set;  }
+		public bool CanAdditionBeExecuted { get; set; } = true;
 	}
 }
