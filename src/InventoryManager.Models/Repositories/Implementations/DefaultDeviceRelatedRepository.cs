@@ -205,7 +205,8 @@ namespace InventoryManager.Models
 		public IQueryable<Software> GetAllDeviceSoftware(Device device) =>
 			DataContext.
 				Software.
-					Where(s => s.DeviceID == device.ID);
+					Include(s => s.Type).
+						Where(s => s.DeviceID == device.ID);
 
 		public IEnumerable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target) =>
 			DataContext.SoftwareConfigurations.Where(sc => sc.SoftwareID == target.ID);
