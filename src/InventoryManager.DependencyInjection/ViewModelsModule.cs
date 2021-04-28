@@ -43,6 +43,9 @@ namespace InventoryManager.DependencyInjection
 			Bind<IAddDeviceAccountViewModel>().
 				To<AddDeviceAccountViewModel>();
 
+			Bind<IAddSoftwareViewModel>().
+				To<AddSoftwareViewModel>();
+
 			Bind<ICertificateViewModel>().
 				To<CertificateViewModel>();
 		}

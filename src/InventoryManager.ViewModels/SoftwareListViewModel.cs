@@ -1,8 +1,8 @@
 using InventoryManager.Models;
-using InventoryManager.Commands;
+using InventoryManager.Views;
 using InventoryManager.Events;
+using InventoryManager.Commands;
 using System.Collections.Generic;
-using System.Windows;
 using System.Linq;
 
 namespace InventoryManager.ViewModels
@@ -14,12 +14,14 @@ namespace InventoryManager.ViewModels
 			Repository = repo;
 
 			ShowAddSoftwareViewCommand = RegisterCommandAction(
-				(obj) => MessageBox.Show(
-					"Not yet implemented",
-					"Will be implemented soon",
-					MessageBoxButton.OK,
-					MessageBoxImage.Exclamation
-				),
+				(obj) =>
+				{
+					var _addSoftwareView = new AddSoftwareView();
+					_addSoftwareView.DataContext = ResolveDependency<IAddSoftwareViewModel>()
+						as AddSoftwareViewModel;
+					_addSoftwareView.ShowDialog();
+
+				},
 				(obj) => SelectedDevice != null
 			);
 
