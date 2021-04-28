@@ -1,0 +1,34 @@
+<src:DialogBase x:Class="InventoryManager.Views.AddSoftwareView"
+        xmlns:src="clr-namespace:InventoryManager.Views"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавьте программное обеспечение к устройству"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        Width="250">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5 0 5 10" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+		<TextBlock Text="Тип ПО" />
+        <ComboBox ItemsSource="{Binding AllSoftwareTypes}" DisplayMemberPath="Name"
+            SelectedItem="{Binding SelectedSoftwareType, UpdateSourceTrigger=PropertyChanged}" />
+		<TextBlock Text="Логин:" />
+		<TextBox Text="{Binding Login}" />
+		<TextBlock Text="Пароль:" />
+		<TextBox Text="{Binding Password}" />
+		<TextBlock Text="Дополнительная конфигурация:" />
+		<TextBox Text="{Binding AdditionalInformation}" />
+		<Button Content="Добавить" Height="30" Command="{Binding AddSoftwareCommand}" />
+        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
+    </StackPanel>
+</src:DialogBase>
