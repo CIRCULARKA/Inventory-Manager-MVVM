@@ -9,8 +9,6 @@ namespace InventoryManager.ViewModels
 {
 	public class AddSoftwareViewModel : ViewModelBase, IAddSoftwareViewModel
 	{
-		private bool _canAdditionCanBeExecuted;
-
 		public AddSoftwareViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
