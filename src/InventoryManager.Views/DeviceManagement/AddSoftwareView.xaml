@@ -6,9 +6,12 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         SizeToContent="Height"
-        Width="250">
+        Width="300">
     <Window.Resources>
         <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5 0 5 5" />
+        </Style>
+        <Style TargetType="TextBox">
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
         <Style TargetType="ComboBox">
@@ -27,8 +30,12 @@
 		<TextBlock Text="Пароль:" />
 		<TextBox Text="{Binding Password}" />
 		<TextBlock Text="Дополнительная конфигурация:" />
-		<TextBox Text="{Binding AdditionalInformation}" />
+		<TextBox Text="{Binding AdditionalInformation}" Height="100"
+            TextWrapping="Wrap" />
 		<Button Content="Добавить" Height="30" Command="{Binding AddSoftwareCommand}" />
-        <TextBlock Text="{Binding MessageToUser}" TextWrapping="Wrap" HorizontalAlignment="Center" />
+        <TextBlock Text="{Binding MessageToUser}"
+            TextWrapping="Wrap"
+            HorizontalAlignment="Center"
+            TextAlignment="Center" />
     </StackPanel>
 </src:DialogBase>
