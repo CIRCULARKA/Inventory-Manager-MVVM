@@ -20,7 +20,7 @@ namespace InventoryManager.ViewModels
 					MessageBoxButton.OK,
 					MessageBoxImage.Exclamation
 				),
-				(obj) => SelectedSoftware != null
+				(obj) => SelectedDevice != null
 			);
 
 			RemoveSoftwareCommand = RegisterCommandAction(
@@ -33,14 +33,17 @@ namespace InventoryManager.ViewModels
 				if (device != null)
 				{
 					Repository.GetAllDeviceSoftware(
-						(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
-							SelectedDevice
+						SelectedDevice
 					).ToList();
 				}
 			};
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
+
+		public Device SelectedDevice =>
+			(ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
+				SelectedDevice;
 
 		public IEnumerable<Software> SelectedDeviceSoftware { get; set; }
 
