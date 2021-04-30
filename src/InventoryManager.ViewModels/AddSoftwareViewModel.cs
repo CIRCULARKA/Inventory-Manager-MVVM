@@ -9,6 +9,10 @@ namespace InventoryManager.ViewModels
 {
 	public class AddSoftwareViewModel : ViewModelBase, IAddSoftwareViewModel
 	{
+		private string _login;
+
+		private string _password;
+
 		public AddSoftwareViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -49,6 +53,10 @@ namespace InventoryManager.ViewModels
 						DeviceEvents.RaiseOnSoftwareAdded(newSoftware);
 
 						MessageToUser = "ПО добавлено";
+
+						Login = string.Empty;
+						Password = string.Empty;
+						AdditionalInformation = string.Empty;
 					}
 					catch (Exception e)
 					{
@@ -72,9 +80,25 @@ namespace InventoryManager.ViewModels
 
 		public SoftwareType SelectedSoftwareType { get; set; }
 
-		public string Login { get; set; }
+		public string Login
+		{
+			get => _login;
+			set
+			{
+				_login = value;
+				OnPropertyChanged(nameof(Login));
+			}
+		}
 
-		public string Password { get; set; }
+		public string Password
+		{
+			get => _password;
+			set
+			{
+				_password = value;
+				OnPropertyChanged(nameof(Password));
+			}
+		}
 
 		public string AdditionalInformation { get; set; }
 
