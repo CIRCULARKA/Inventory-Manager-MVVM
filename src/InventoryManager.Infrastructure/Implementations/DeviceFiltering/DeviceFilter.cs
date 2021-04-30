@@ -24,8 +24,14 @@ namespace InventoryManager.Infrastructure.Filtering
 
 		public bool DoesMeetFilteringCriteria(Device device)
 		{
+			// Still need to figure out how to filter devices more effective way
+			// Consider this as a temporary solution (at least it works)
 			foreach (var criteria in Criteria)
-				if (criteria.State) return true;
+			{
+				if (criteria.State &&
+					device.DeviceType.Name == criteria.DeviceTypeName)
+					return true;
+			}
 
 			return false;
 		}
