@@ -19,8 +19,10 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					RefreshSelectedDeviceHistory();
-					DeviceMovementHistoryView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
-					DeviceMovementHistoryView.ShowDialog();
+					var _historyView = new DeviceMovementHistoryView();
+					_historyView.DataContext = ResolveDependency<IDeviceMovementHistoryViewModel>();
+					_historyView.Title = $"История перемещений {SelectedDevice.InventoryNumber}";
+					_historyView.ShowDialog();
 				},
 				(obj) => SelectedDevice != null
 			);
@@ -32,8 +34,6 @@ namespace InventoryManager.ViewModels
 				SelectedDevice;
 
 		public Command ShowDeviceMovementHistoryCommand { get; set; }
-
-		public DeviceMovementHistoryView DeviceMovementHistoryView { get; set; }
 
 		public IEnumerable<DeviceMovementHistoryNote> SelectedDeviceMovementHistoryNotes
 		{

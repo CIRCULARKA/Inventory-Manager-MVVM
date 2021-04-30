@@ -26,12 +26,12 @@ namespace InventoryManager.ViewModels
 			LoginCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					#if DEBUG
+#if DEBUG
 					AuthenticatedUser = Repository.FindUser("root");
 					InputtedPassword = "root";
-					#else
+#else
 					AuthenticatedUser = Repository.FindUser(InputtedLogin);
-					#endif
+#endif
 
 					if (IsInputtedPasswordCorrect())
 					{
