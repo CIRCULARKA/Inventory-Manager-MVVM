@@ -61,10 +61,16 @@ namespace InventoryManager.ViewModels
 					catch (Exception e)
 					{
 						MessageToUser = e.Message;
+						Repository.RemoveSoftware(newSoftware);
 					}
 				},
-				(obj) => CanAdditionBeExecuted
+				(obj) => SelectedSoftwareType != null && CanAdditionBeExecuted
 			);
+
+			DeviceEvents.OnSoftwareAdded += (software) =>
+			{
+
+			};
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
