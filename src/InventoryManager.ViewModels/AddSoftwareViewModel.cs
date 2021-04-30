@@ -1,9 +1,10 @@
 using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
+using InventoryManager.Extensions;
 using System;
 using System.Linq;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
@@ -13,44 +14,39 @@ namespace InventoryManager.ViewModels
 
 		private string _password;
 
+		private string _additionalInformation;
+
+		private Software _newSoftware;
+
 		public AddSoftwareViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
 
-			try
-			{
-				SelectedSoftwareType = AllSoftwareTypes.First();
-			}
+			AvailableSoftwareTypes = Repository.AllSoftwareTypes.Where(
+				st =>
+				{
+					foreach (var software in Repository.GetAllDeviceSoftware(SelectedDevice))
+						if (st.ID == software.Type.ID) return false;
+					return true;
+				}
+			).ToObservableCollection();
+
+			try { SelectedSoftwareType = AvailableSoftwareTypes.First(); }
 			catch (Exception)
 			{
-				MessageToUser = "В базе данных нет ни одного типа программного обеспечения.\n" +
-					"Попросите разработчика добавить эти типы";
+				MessageToUser = "Выбранное устройство уже имеет всё ПО, зарегестрированное в базе";
 				CanAdditionBeExecuted = false;
 			}
 
 			AddSoftwareCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var newConfiguration = new SoftwareConfiguration()
-					{
-						Login = Login,
-						Password = Password,
-						AdditionalInformation = AdditionalInformation
-					};
-
-					var newSoftware = new Software()
-					{
-						Type = SelectedSoftwareType,
-						DeviceID = SelectedDevice.ID
-					};
-					newConfiguration.Software = newSoftware;
 
 					try
 					{
-						Repository.AddSoftware(newSoftware);
-						Repository.SaveChanges();
-
-						DeviceEvents.RaiseOnSoftwareAdded(newSoftware);
+						AddSoftwareToDevice();
+						RemoveChosenSoftwareTypeFromList();
+						PickFirstSoftwareTypeInList();
 
 						MessageToUser = "ПО добавлено";
 
@@ -61,7 +57,7 @@ namespace InventoryManager.ViewModels
 					catch
 					{
 						MessageToUser = "Указанное ПО на выбранном устройстве уже установлено";
-						Repository.RemoveSoftware(newSoftware);
+						Repository.RemoveSoftware(_newSoftware);
 					}
 				},
 				(obj) => SelectedSoftwareType != null && CanAdditionBeExecuted
@@ -81,8 +77,7 @@ namespace InventoryManager.ViewModels
 
 		public Command AddSoftwareCommand { get; }
 
-		public IEnumerable<SoftwareType> AllSoftwareTypes =>
-			Repository.AllSoftwareTypes.ToList();
+		public ObservableCollection<SoftwareType> AvailableSoftwareTypes { get; }
 
 		public SoftwareType SelectedSoftwareType { get; set; }
 
@@ -106,8 +101,47 @@ namespace InventoryManager.ViewModels
 			}
 		}
 
-		public string AdditionalInformation { get; set; }
+		public string AdditionalInformation
+		{
+			get => _additionalInformation;
+			set
+			{
+				_additionalInformation = value;
+				OnPropertyChanged(nameof(AdditionalInformation));
+			}
+		}
 
 		public bool CanAdditionBeExecuted { get; set; } = true;
+
+		public void AddSoftwareToDevice()
+		{
+			var newConfiguration = new SoftwareConfiguration()
+			{
+				Login = Login,
+				Password = Password,
+				AdditionalInformation = AdditionalInformation
+			};
+
+			_newSoftware = new Software()
+			{
+				Type = SelectedSoftwareType,
+				DeviceID = SelectedDevice.ID
+			};
+			newConfiguration.Software = _newSoftware;
+
+			Repository.AddSoftware(_newSoftware);
+			Repository.SaveChanges();
+
+			DeviceEvents.RaiseOnSoftwareAdded(_newSoftware);
+		}
+
+		public void RemoveChosenSoftwareTypeFromList() =>
+			AvailableSoftwareTypes.Remove(SelectedSoftwareType);
+
+		public void PickFirstSoftwareTypeInList()
+		{
+			if (AvailableSoftwareTypes.Count > 0)
+				SelectedSoftwareType = AvailableSoftwareTypes.First();
+		}
 	}
 }

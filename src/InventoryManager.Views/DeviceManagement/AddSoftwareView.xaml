@@ -23,7 +23,7 @@
     </Window.Resources>
     <StackPanel>
 		<TextBlock Text="Тип ПО" />
-        <ComboBox ItemsSource="{Binding AllSoftwareTypes}" DisplayMemberPath="Name"
+        <ComboBox ItemsSource="{Binding AvailableSoftwareTypes}" DisplayMemberPath="Name"
             SelectedItem="{Binding SelectedSoftwareType, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Логин:" />
 		<TextBox Text="{Binding Login}" />
