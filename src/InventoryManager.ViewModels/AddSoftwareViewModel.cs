@@ -58,9 +58,9 @@ namespace InventoryManager.ViewModels
 						Password = string.Empty;
 						AdditionalInformation = string.Empty;
 					}
-					catch (Exception e)
+					catch
 					{
-						MessageToUser = e.Message;
+						MessageToUser = "Указанное ПО на выбранном устройстве уже установлено";
 						Repository.RemoveSoftware(newSoftware);
 					}
 				},
