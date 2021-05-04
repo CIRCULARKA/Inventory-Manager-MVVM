@@ -36,7 +36,7 @@ namespace InventoryManager.ViewModels
 						as EditSoftwareInfoViewModel;
 					_editSoftwareView.ShowDialog();
 				},
-				(obj) => SelectedDevice != null
+				(obj) => SelectedSoftware != null
 			);
 
 			RemoveSoftwareCommand = RegisterCommandAction(
