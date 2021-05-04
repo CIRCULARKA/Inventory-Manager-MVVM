@@ -1,16 +1,50 @@
+using InventoryManager.Models;
+
 namespace InventoryManager.ViewModels
 {
-	public class EditSoftwareInfoViewModel : IEditSoftwareInfoViewModel
+	public class EditSoftwareInfoViewModel : ViewModelBase, IEditSoftwareInfoViewModel
 	{
-		public EditSoftwareInfoViewModel()
-		{
+		private string _login;
 
+		private string _password;
+
+		private string _addInfo;
+
+		public EditSoftwareInfoViewModel(IDeviceRelatedRepository repo)
+		{
+			Repository = repo;
 		}
 
-		public string Login { get; set; }
+		private IDeviceRelatedRepository Repository { get; }
 
-		public string Password { get; set;  }
+		public string Login
+		{
+			get => _login;
+			set
+			{
+				_login = value;
+				OnPropertyChanged(nameof(Login));
+			}
+		}
 
-		public string AdditionalInformation { get; set; }
+		public string Password
+		{
+			get => _password;
+			set
+			{
+				_password = value;
+				OnPropertyChanged(nameof(Password));
+			}
+		}
+
+		public string AdditionalInformation
+		{
+			get => _addInfo;
+			set
+			{
+				_addInfo = value;
+				OnPropertyChanged(nameof(AdditionalInformation));
+			}
+		}
 	}
 }
