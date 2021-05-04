@@ -1,8 +1,8 @@
 namespace InventoryManager.Views
 {
-	public partial class EditSoftwareInformationView : DialogBase
+	public partial class EditSoftwareInfoView : DialogBase
 	{
-		public EditSoftwareInformationView() =>
+		public EditSoftwareInfoView() =>
 			InitializeComponent();
 	}
 }
