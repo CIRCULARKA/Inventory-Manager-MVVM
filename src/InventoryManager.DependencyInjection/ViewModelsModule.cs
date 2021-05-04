@@ -48,6 +48,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<ICertificateViewModel>().
 				To<CertificateViewModel>();
+
+			Bind<IEditSoftwareInfoViewModel>().
+				To<EditSoftwareInfoViewModel>();
 		}
 	}
 }
