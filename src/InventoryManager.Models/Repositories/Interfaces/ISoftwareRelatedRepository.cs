@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace InventoryManager.Models
@@ -6,6 +7,6 @@ namespace InventoryManager.Models
 		ISoftwareConfigurationRepository, ISoftwareRepository,
 		ISoftwareTypeRepository
 	{
-		IEnumerable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target);
+		IQueryable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target);
 	}
 }
