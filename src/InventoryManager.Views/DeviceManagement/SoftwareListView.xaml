@@ -30,7 +30,7 @@
 			<Button Content="Инфо" Style="{StaticResource removeAndAddButtonsStyle}"
 				Width="50"
 				FontWeight="SemiBold"
-				Command="{Binding EditSoftwareCommand}" />
+				Command="{Binding ShowEditSoftwareViewCommand}" />
 		</StackPanel>
 	</StackPanel>
 </UserControl>
