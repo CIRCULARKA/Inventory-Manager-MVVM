@@ -28,6 +28,17 @@ namespace InventoryManager.ViewModels
 				(obj) => SelectedDevice != null
 			);
 
+			ShowEditSoftwareViewCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					var _editSoftwareView = new EditSoftwareInfoView();
+					_editSoftwareView.DataContext = ResolveDependency<IEditSoftwareInfoViewModel>()
+						as EditSoftwareInfoViewModel;
+					_editSoftwareView.ShowDialog();
+				},
+				(obj) => SelectedDevice != null
+			);
+
 			RemoveSoftwareCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -71,6 +82,8 @@ namespace InventoryManager.ViewModels
 		public Software SelectedSoftware { get; set; }
 
 		public Command ShowAddSoftwareViewCommand { get; }
+
+		public Command ShowEditSoftwareViewCommand { get; }
 
 		public Command RemoveSoftwareCommand { get; }
 	}
