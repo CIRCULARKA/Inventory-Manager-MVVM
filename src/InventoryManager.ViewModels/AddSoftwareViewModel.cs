@@ -45,6 +45,7 @@ namespace InventoryManager.ViewModels
 					try
 					{
 						AddSoftwareToDevice();
+						AddSoftwareConfiguration();
 						RemoveChosenSoftwareTypeFromList();
 						PickFirstSoftwareTypeInList();
 
@@ -80,6 +81,10 @@ namespace InventoryManager.ViewModels
 		public ObservableCollection<SoftwareType> AvailableSoftwareTypes { get; }
 
 		public SoftwareType SelectedSoftwareType { get; set; }
+
+		public bool IsConfigurationEmpty =>
+			string.IsNullOrWhiteSpace(Login) && string.IsNullOrWhiteSpace(Password) &&
+			string.IsNullOrWhiteSpace(AdditionalInformation);
 
 		public string Login
 		{
@@ -150,11 +155,6 @@ namespace InventoryManager.ViewModels
 				throw new Exception($"No new software initiated. Call {nameof(AddSoftwareToDevice)} first");
 			}
 		}
-
-		public bool IsConfigurationEmpty =>
-			string.IsNullOrWhiteSpace(Login) && string.IsNullOrWhiteSpace(Password) &&
-			string.IsNullOrWhiteSpace(AdditionalInformation);
-
 
 		public void RemoveChosenSoftwareTypeFromList() =>
 			AvailableSoftwareTypes.Remove(SelectedSoftwareType);
