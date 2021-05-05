@@ -42,6 +42,8 @@ namespace InventoryManager.ViewModels
 
 						Repository.UpdateSoftwareConfiguration(configToUpdate);
 						Repository.SaveChanges();
+
+						MessageToUser = "Информация о ПО обновлена";
 					}
 					catch (Exception e) { MessageToUser = e.Message; }
 				}
