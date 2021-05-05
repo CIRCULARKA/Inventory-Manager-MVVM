@@ -25,7 +25,7 @@
 		<TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
 		<TextBlock Text="Доп. информация" />
 		<TextBox Text="{Binding AdditionalInformation, UpdateSourceTrigger=PropertyChanged}" />
-		<Button Content="Применить" Height="30" Command="{Binding ApplyChanges}" />
+		<Button Content="Применить" Height="30" Command="{Binding ApplyChangesCommand}" />
         <TextBlock Text="{Binding MessageToUser}"
             TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" />
     </StackPanel>
