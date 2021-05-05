@@ -115,26 +115,46 @@ namespace InventoryManager.ViewModels
 
 		public void AddSoftwareToDevice()
 		{
-			var newConfiguration = new SoftwareConfiguration()
-			{
-				Login = Login,
-				Password = Password,
-				AdditionalInformation = AdditionalInformation
-			};
 
 			_newSoftware = new Software()
 			{
 				Type = SelectedSoftwareType,
 				DeviceID = SelectedDevice.ID
 			};
-			newConfiguration.Software = _newSoftware;
 
 			Repository.AddSoftware(_newSoftware);
-			Repository.AddSoftwareConfiguration(newConfiguration);
 			Repository.SaveChanges();
 
 			DeviceEvents.RaiseOnSoftwareAdded(_newSoftware);
 		}
+
+		public void AddSoftwareConfiguration()
+		{
+			if (IsConfigurationEmpty) return;
+
+			try
+			{
+				var newConfiguration = new SoftwareConfiguration()
+				{
+					Software = _newSoftware,
+					Login = Login,
+					Password = Password,
+					AdditionalInformation = AdditionalInformation
+				};
+
+				Repository.AddSoftwareConfiguration(newConfiguration);
+				Repository.SaveChanges();
+			}
+			catch (NullReferenceException)
+			{
+				throw new Exception($"No new software initiated. Call {nameof(AddSoftwareToDevice)} first");
+			}
+		}
+
+		public bool IsConfigurationEmpty =>
+			string.IsNullOrWhiteSpace(Login) && string.IsNullOrWhiteSpace(Password) &&
+			string.IsNullOrWhiteSpace(AdditionalInformation);
+
 
 		public void RemoveChosenSoftwareTypeFromList() =>
 			AvailableSoftwareTypes.Remove(SelectedSoftwareType);
