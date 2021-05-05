@@ -29,7 +29,7 @@ namespace InventoryManager.DependencyInjection
 				To<DeviceHistoryViewModel>().InSingletonScope();
 
 			Bind<ISoftwareListViewModel>().
-				To<SoftwareListViewModel>();
+				To<SoftwareListViewModel>().InSingletonScope();
 
 			Bind<IAddDeviceViewModel>().
 				To<AddDeviceViewModel>();
