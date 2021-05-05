@@ -17,6 +17,13 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
+			SelectedSoftwareConfiguration = Repository.
+				GetSoftwareConfiguration(selectedSoftware);
+
+			Login = SelectedSoftwareConfiguration.Login;
+			Password = SelectedSoftwareConfiguration.Password;
+			AdditionalInformation = SelectedSoftwareConfiguration.AdditionalInformation;
+
 			ApplyChangesCommand = RegisterCommandAction(
 				(obj) =>
 				{
@@ -39,6 +46,8 @@ namespace InventoryManager.ViewModels
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
+
+		public SoftwareConfiguration SelectedSoftwareConfiguration { get; set; }
 
 		public Command ApplyChangesCommand { get; }
 
