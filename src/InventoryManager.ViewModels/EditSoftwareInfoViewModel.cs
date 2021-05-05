@@ -32,15 +32,19 @@ namespace InventoryManager.ViewModels
 				{
 					try
 					{
-						var configToUpdate = Repository.GetAllSoftwareConfiguration(
+						var newConfig = Repository.GetSoftwareConfiguration(
 							SelectedSoftware
-						).First(sc => sc.SoftwareID == SelectedSoftware.ID);
+						);
 
-						configToUpdate.Login = Login;
-						configToUpdate.Password = Password;
-						configToUpdate.AdditionalInformation = AdditionalInformation;
+						if (newConfig == null)
+							newConfig = new SoftwareConfiguration();
 
-						Repository.UpdateSoftwareConfiguration(configToUpdate);
+						newConfig.Login = Login;
+						newConfig.Password = Password;
+						newConfig.AdditionalInformation = AdditionalInformation;
+
+						try { Repository.UpdateSoftwareConfiguration(newConfig); }
+						catch { Repository.AddSoftwareConfiguration(newConfig); }
 						Repository.SaveChanges();
 
 						MessageToUser = "Информация о ПО обновлена";
