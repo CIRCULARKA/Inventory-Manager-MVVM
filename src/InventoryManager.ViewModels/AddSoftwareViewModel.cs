@@ -130,6 +130,7 @@ namespace InventoryManager.ViewModels
 			newConfiguration.Software = _newSoftware;
 
 			Repository.AddSoftware(_newSoftware);
+			Repository.AddSoftwareConfiguration(newConfiguration);
 			Repository.SaveChanges();
 
 			DeviceEvents.RaiseOnSoftwareAdded(_newSoftware);
