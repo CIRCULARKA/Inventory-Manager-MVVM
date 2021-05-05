@@ -211,6 +211,9 @@ namespace InventoryManager.Models
 		public IQueryable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target) =>
 			DataContext.SoftwareConfigurations.Where(sc => sc.SoftwareID == target.ID);
 
+		public SoftwareConfiguration GetSoftwareConfiguration(Software target) =>
+			DataContext.SoftwareConfigurations.First(sc => sc.SoftwareID == target.ID);
+
 		public void SaveChanges() => DataContext.SaveChanges();
 	}
 }

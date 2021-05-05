@@ -8,5 +8,7 @@ namespace InventoryManager.Models
 		ISoftwareTypeRepository
 	{
 		IQueryable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target);
+
+		SoftwareConfiguration GetSoftwareConfiguration(Software target);
 	}
 }
