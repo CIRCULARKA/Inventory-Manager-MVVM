@@ -20,9 +20,12 @@ namespace InventoryManager.ViewModels
 			SelectedSoftwareConfiguration = Repository.
 				GetSoftwareConfiguration(selectedSoftware);
 
-			Login = SelectedSoftwareConfiguration.Login;
-			Password = SelectedSoftwareConfiguration.Password;
-			AdditionalInformation = SelectedSoftwareConfiguration.AdditionalInformation;
+			if (SelectedSoftwareConfiguration != null)
+			{
+				Login = SelectedSoftwareConfiguration.Login;
+				Password = SelectedSoftwareConfiguration.Password;
+				AdditionalInformation = SelectedSoftwareConfiguration.AdditionalInformation;
+			}
 
 			ApplyChangesCommand = RegisterCommandAction(
 				(obj) =>
