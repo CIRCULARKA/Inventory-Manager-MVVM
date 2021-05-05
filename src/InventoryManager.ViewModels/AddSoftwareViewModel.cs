@@ -18,6 +18,8 @@ namespace InventoryManager.ViewModels
 
 		private Software _newSoftware;
 
+		private SoftwareType _selectedSoftwareType;
+
 		public AddSoftwareViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
@@ -80,7 +82,15 @@ namespace InventoryManager.ViewModels
 
 		public ObservableCollection<SoftwareType> AvailableSoftwareTypes { get; }
 
-		public SoftwareType SelectedSoftwareType { get; set; }
+		public SoftwareType SelectedSoftwareType
+		{
+			get => _selectedSoftwareType;
+			set
+			{
+				_selectedSoftwareType = value;
+				OnPropertyChanged(nameof(SelectedSoftwareType));
+			}
+		}
 
 		public bool IsConfigurationEmpty =>
 			string.IsNullOrWhiteSpace(Login) && string.IsNullOrWhiteSpace(Password) &&
