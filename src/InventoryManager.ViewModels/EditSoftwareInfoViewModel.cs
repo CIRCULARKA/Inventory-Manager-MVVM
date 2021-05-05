@@ -1,4 +1,7 @@
 using InventoryManager.Models;
+using InventoryManager.Commands;
+using System;
+using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
@@ -10,12 +13,34 @@ namespace InventoryManager.ViewModels
 
 		private string _addInfo;
 
-		public EditSoftwareInfoViewModel(IDeviceRelatedRepository repo)
+		public EditSoftwareInfoViewModel(IDeviceRelatedRepository repo, Software selectedSoftware)
 		{
 			Repository = repo;
+
+			ApplyChangesCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					try
+					{
+						var configToUpdate = Repository.GetAllSoftwareConfiguration(
+							selectedSoftware
+						).First(sc => sc.SoftwareID == selectedSoftware.ID);
+
+						configToUpdate.Login = Login;
+						configToUpdate.Password = Password;
+						configToUpdate.AdditionalInformation = AdditionalInformation;
+
+						Repository.UpdateSoftwareConfiguration(configToUpdate);
+						Repository.SaveChanges();
+					}
+					catch (Exception e) { MessageToUser = e.Message; }
+				}
+			);
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
+
+		public Command ApplyChangesCommand { get; }
 
 		public string Login
 		{
