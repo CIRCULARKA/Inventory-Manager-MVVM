@@ -208,7 +208,7 @@ namespace InventoryManager.Models
 					Include(s => s.Type).
 						Where(s => s.DeviceID == device.ID);
 
-		public IEnumerable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target) =>
+		public IQueryable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target) =>
 			DataContext.SoftwareConfigurations.Where(sc => sc.SoftwareID == target.ID);
 
 		public void SaveChanges() => DataContext.SaveChanges();
