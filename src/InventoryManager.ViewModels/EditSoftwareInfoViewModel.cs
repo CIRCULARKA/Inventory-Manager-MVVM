@@ -13,12 +13,12 @@ namespace InventoryManager.ViewModels
 
 		private string _addInfo;
 
-		public EditSoftwareInfoViewModel(IDeviceRelatedRepository repo, Software selectedSoftware)
+		public EditSoftwareInfoViewModel(IDeviceRelatedRepository repo)
 		{
 			Repository = repo;
 
 			SelectedSoftwareConfiguration = Repository.
-				GetSoftwareConfiguration(selectedSoftware);
+				GetSoftwareConfiguration(SelectedSoftware);
 
 			if (SelectedSoftwareConfiguration != null)
 			{
@@ -33,8 +33,8 @@ namespace InventoryManager.ViewModels
 					try
 					{
 						var configToUpdate = Repository.GetAllSoftwareConfiguration(
-							selectedSoftware
-						).First(sc => sc.SoftwareID == selectedSoftware.ID);
+							SelectedSoftware
+						).First(sc => sc.SoftwareID == SelectedSoftware.ID);
 
 						configToUpdate.Login = Login;
 						configToUpdate.Password = Password;
@@ -49,6 +49,10 @@ namespace InventoryManager.ViewModels
 		}
 
 		private IDeviceRelatedRepository Repository { get; }
+
+		public Software SelectedSoftware =>
+			(ResolveDependency<ISoftwareListViewModel>() as SoftwareListViewModel).
+				SelectedSoftware;
 
 		public SoftwareConfiguration SelectedSoftwareConfiguration { get; set; }
 
