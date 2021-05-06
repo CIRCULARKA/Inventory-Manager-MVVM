@@ -24,7 +24,7 @@ namespace InventoryManager.ViewModels
 			AllHousings = Repository.AllHousings.ToList();
 			AllCabinets = Repository.AllCabinets.ToList();
 
-			IsDeviceLocationChoosingAvailable = true;
+			IsDeviceLocationChoosingAvailable = false;
 
 			ApplyDeviceLocationChangesCommand = RegisterCommandAction(
 				(obj) =>

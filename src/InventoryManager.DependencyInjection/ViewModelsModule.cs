@@ -28,6 +28,9 @@ namespace InventoryManager.DependencyInjection
 			Bind<IDeviceMovementHistoryViewModel>().
 				To<DeviceHistoryViewModel>().InSingletonScope();
 
+			Bind<ISoftwareListViewModel>().
+				To<SoftwareListViewModel>().InSingletonScope();
+
 			Bind<IAddDeviceViewModel>().
 				To<AddDeviceViewModel>();
 
@@ -40,8 +43,14 @@ namespace InventoryManager.DependencyInjection
 			Bind<IAddDeviceAccountViewModel>().
 				To<AddDeviceAccountViewModel>();
 
+			Bind<IAddSoftwareViewModel>().
+				To<AddSoftwareViewModel>();
+
 			Bind<ICertificateViewModel>().
 				To<CertificateViewModel>();
+
+			Bind<IEditSoftwareInfoViewModel>().
+				To<EditSoftwareInfoViewModel>();
 		}
 	}
 }

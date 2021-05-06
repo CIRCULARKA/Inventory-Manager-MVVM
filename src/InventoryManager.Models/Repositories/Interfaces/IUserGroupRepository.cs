@@ -6,7 +6,6 @@ namespace InventoryManager.Models
 	{
 		void AddUserGroup(UserGroup newGroup);
 
-
 		void RemoveUserGroup(UserGroup groupToRemove);
 
 		void UpdateUserGroup(UserGroup groupToUpdate);
