@@ -1,7 +1,6 @@
 using InventoryManager.Models;
 using InventoryManager.Commands;
 using System;
-using System.Linq;
 
 namespace InventoryManager.ViewModels
 {
@@ -17,37 +16,44 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
-			SelectedSoftwareConfiguration = Repository.
-				GetSoftwareConfiguration(SelectedSoftware);
-
-			if (SelectedSoftwareConfiguration != null)
+			try
 			{
-				Login = SelectedSoftwareConfiguration.Login;
-				Password = SelectedSoftwareConfiguration.Password;
-				AdditionalInformation = SelectedSoftwareConfiguration.AdditionalInformation;
+				SelectedSoftwareConfiguration = Repository.
+					GetSoftwareConfiguration(SelectedSoftware);
+
+				FillFieldsWithSoftwareConfiguration(SelectedSoftwareConfiguration);
 			}
+			catch (NullReferenceException) { }
 
 			ApplyChangesCommand = RegisterCommandAction(
 				(obj) =>
 				{
+					SoftwareConfiguration newConfig;
+
 					try
 					{
-						var newConfig = Repository.GetSoftwareConfiguration(
+						newConfig = Repository.GetSoftwareConfiguration(
 							SelectedSoftware
 						);
 
-						if (newConfig == null)
-							newConfig = new SoftwareConfiguration();
+						InitializeSoftwareConfiguration(newConfig);
 
-						newConfig.Login = Login;
-						newConfig.Password = Password;
-						newConfig.AdditionalInformation = AdditionalInformation;
-
-						try { Repository.UpdateSoftwareConfiguration(newConfig); }
-						catch { Repository.AddSoftwareConfiguration(newConfig); }
+						Repository.UpdateSoftwareConfiguration(newConfig);
 						Repository.SaveChanges();
 
 						MessageToUser = "Информация о ПО обновлена";
+					}
+					catch (NullReferenceException)
+					{
+						newConfig = new SoftwareConfiguration();
+						newConfig.Software = SelectedSoftware;
+
+						InitializeSoftwareConfiguration(newConfig);
+
+						Repository.AddSoftwareConfiguration(newConfig);
+						Repository.SaveChanges();
+
+						MessageToUser = "Информация о ПО добавлена";
 					}
 					catch (Exception e) { MessageToUser = e.Message; }
 				}
@@ -92,6 +98,20 @@ namespace InventoryManager.ViewModels
 				_addInfo = value;
 				OnPropertyChanged(nameof(AdditionalInformation));
 			}
+		}
+
+		public void InitializeSoftwareConfiguration(SoftwareConfiguration config)
+		{
+			config.Login = Login;
+			config.Password = Password;
+			config.AdditionalInformation = AdditionalInformation;
+		}
+
+		public void FillFieldsWithSoftwareConfiguration(SoftwareConfiguration config)
+		{
+			Login = config.Login;
+			Password = config.Password;
+			AdditionalInformation = config.AdditionalInformation;
 		}
 	}
 }
