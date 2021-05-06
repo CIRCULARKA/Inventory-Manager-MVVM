@@ -47,7 +47,6 @@ namespace InventoryManager.ViewModels
 					try
 					{
 						AddSoftwareToDevice();
-						AddSoftwareConfiguration();
 						RemoveChosenSoftwareTypeFromList();
 						PickFirstSoftwareTypeInList();
 
@@ -130,23 +129,6 @@ namespace InventoryManager.ViewModels
 
 		public void AddSoftwareToDevice()
 		{
-
-			_newSoftware = new Software()
-			{
-				Type = SelectedSoftwareType,
-				DeviceID = SelectedDevice.ID
-			};
-
-			Repository.AddSoftware(_newSoftware);
-			Repository.SaveChanges();
-
-			DeviceEvents.RaiseOnSoftwareAdded(_newSoftware);
-		}
-
-		public void AddSoftwareConfiguration()
-		{
-			if (IsConfigurationEmpty) return;
-
 			var newConfiguration = new SoftwareConfiguration()
 			{
 				Login = Login,
@@ -156,6 +138,18 @@ namespace InventoryManager.ViewModels
 
 			Repository.AddSoftwareConfiguration(newConfiguration);
 			Repository.SaveChanges();
+
+			_newSoftware = new Software()
+			{
+				Type = SelectedSoftwareType,
+				DeviceID = SelectedDevice.ID,
+				Configuration = newConfiguration
+			};
+
+			Repository.AddSoftware(_newSoftware);
+			Repository.SaveChanges();
+
+			DeviceEvents.RaiseOnSoftwareAdded(_newSoftware);
 		}
 
 		public void RemoveChosenSoftwareTypeFromList() =>
