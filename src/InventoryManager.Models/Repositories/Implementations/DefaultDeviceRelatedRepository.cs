@@ -217,7 +217,8 @@ namespace InventoryManager.Models
 			{
 				return DataContext.SoftwareConfigurations.First(sc => sc.SoftwareID == target.ID);
 			}
-			catch (InvalidOperationException) { return null; }
+			catch (InvalidOperationException)
+			{ throw new Exception("Software has no configuration"); }
 		}
 
 		public void SaveChanges() => DataContext.SaveChanges();
