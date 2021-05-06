@@ -2,6 +2,44 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Style x:Key="windowStyle" TargetType="Window">
 		<Setter Property="Background" Value="#4090f2" />
+		<Setter Property="WindowStyle" Value="None" />
+		<Setter Property="AllowsTransparency" Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Window">
+					<Border CornerRadius="5" Background="{TemplateBinding Background}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition />
+							</Grid.RowDefinitions>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="{TemplateBinding Title}"
+									FontWeight="Regular"
+									Margin="5 3 0 0" />
+								<StackPanel HorizontalAlignment="Right" Grid.Column="1">
+									<Rectangle Fill="Red" Width="30" Height="30"
+										HorizontalAlignment="Right">
+										<Rectangle.Content>
+											<TextBlock Text="X" FontSize="18" FontWeight="Bold" />
+										</Rectangle.Content>
+									</Rectangle>
+								</StackPanel>
+							</Grid>
+							<Border Grid.Row="1">
+								<AdornerDecorator>
+									<ContentPresenter />
+								</AdornerDecorator>
+							</Border>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 	<Style x:Key="regularTextStyle" TargetType="TextBlock">
 		<Setter Property="Foreground" Value="#b8d5fa" />
