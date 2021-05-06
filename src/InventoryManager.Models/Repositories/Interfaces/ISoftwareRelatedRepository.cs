@@ -5,10 +5,5 @@ namespace InventoryManager.Models
 {
 	public interface ISoftwareRelatedRepository :
 		ISoftwareConfigurationRepository, ISoftwareRepository,
-		ISoftwareTypeRepository
-	{
-		IQueryable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target);
-
-		SoftwareConfiguration GetSoftwareConfiguration(Software target);
-	}
+		ISoftwareTypeRepository { }
 }

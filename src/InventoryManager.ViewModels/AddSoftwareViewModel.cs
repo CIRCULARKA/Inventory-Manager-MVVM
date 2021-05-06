@@ -147,23 +147,15 @@ namespace InventoryManager.ViewModels
 		{
 			if (IsConfigurationEmpty) return;
 
-			try
+			var newConfiguration = new SoftwareConfiguration()
 			{
-				var newConfiguration = new SoftwareConfiguration()
-				{
-					Software = _newSoftware,
-					Login = Login,
-					Password = Password,
-					AdditionalInformation = AdditionalInformation
-				};
+				Login = Login,
+				Password = Password,
+				AdditionalInformation = AdditionalInformation
+			};
 
-				Repository.AddSoftwareConfiguration(newConfiguration);
-				Repository.SaveChanges();
-			}
-			catch (NullReferenceException)
-			{
-				throw new Exception($"No new software initiated. Call {nameof(AddSoftwareToDevice)} first");
-			}
+			Repository.AddSoftwareConfiguration(newConfiguration);
+			Repository.SaveChanges();
 		}
 
 		public void RemoveChosenSoftwareTypeFromList() =>

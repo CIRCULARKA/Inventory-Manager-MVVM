@@ -152,11 +152,7 @@ namespace InventoryManager.Models
 
 		public void RemoveSoftware(Software softwareToRemove)
 		{
-			DataContext.SoftwareConfigurations.RemoveRange(
-				DataContext.
-					SoftwareConfigurations.
-						Where(sc => sc.SoftwareID == softwareToRemove.ID)
-			);
+			DataContext.SoftwareConfigurations.Remove(softwareToRemove.Configuration);
 			DataContext.Software.Remove(softwareToRemove);
 		}
 
@@ -199,27 +195,13 @@ namespace InventoryManager.Models
 		public IEnumerable<SoftwareConfiguration> AllSoftwareConfiguration =>
 			DataContext.
 				SoftwareConfigurations.
-					Include(sc => sc.Software).
-						ToList();
+					ToList();
 
 		public IQueryable<Software> GetAllDeviceSoftware(Device device) =>
 			DataContext.
 				Software.
 					Include(s => s.Type).
 						Where(s => s.DeviceID == device.ID);
-
-		public IQueryable<SoftwareConfiguration> GetAllSoftwareConfiguration(Software target) =>
-			DataContext.SoftwareConfigurations.Where(sc => sc.SoftwareID == target.ID);
-
-		public SoftwareConfiguration GetSoftwareConfiguration(Software target)
-		{
-			try
-			{
-				return DataContext.SoftwareConfigurations.First(sc => sc.SoftwareID == target.ID);
-			}
-			catch (InvalidOperationException)
-			{ throw new NullReferenceException("Software has no configuration"); }
-		}
 
 		public void SaveChanges() => DataContext.SaveChanges();
 	}

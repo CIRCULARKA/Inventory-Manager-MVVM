@@ -16,44 +16,21 @@ namespace InventoryManager.ViewModels
 		{
 			Repository = repo;
 
-			try
-			{
-				SelectedSoftwareConfiguration = Repository.
-					GetSoftwareConfiguration(SelectedSoftware);
-
-				FillFieldsWithSoftwareConfiguration(SelectedSoftwareConfiguration);
-			}
-			catch (NullReferenceException) { }
+			FillFieldsWithSoftwareConfiguration();
 
 			ApplyChangesCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					SoftwareConfiguration newConfig;
+					var newConfig = new SoftwareConfiguration();
 
 					try
 					{
-						newConfig = Repository.GetSoftwareConfiguration(
-							SelectedSoftware
-						);
-
 						InitializeSoftwareConfiguration(newConfig);
 
 						Repository.UpdateSoftwareConfiguration(newConfig);
 						Repository.SaveChanges();
 
 						MessageToUser = "Информация о ПО обновлена";
-					}
-					catch (NullReferenceException)
-					{
-						newConfig = new SoftwareConfiguration();
-						newConfig.Software = SelectedSoftware;
-
-						InitializeSoftwareConfiguration(newConfig);
-
-						Repository.AddSoftwareConfiguration(newConfig);
-						Repository.SaveChanges();
-
-						MessageToUser = "Информация о ПО добавлена";
 					}
 					catch (Exception e) { MessageToUser = e.Message; }
 				}
@@ -107,8 +84,9 @@ namespace InventoryManager.ViewModels
 			config.AdditionalInformation = AdditionalInformation;
 		}
 
-		public void FillFieldsWithSoftwareConfiguration(SoftwareConfiguration config)
+		public void FillFieldsWithSoftwareConfiguration()
 		{
+			var config = SelectedSoftware.Configuration;
 			Login = config.Login;
 			Password = config.Password;
 			AdditionalInformation = config.AdditionalInformation;
