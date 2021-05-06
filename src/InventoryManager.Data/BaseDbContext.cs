@@ -24,5 +24,11 @@ namespace InventoryManager.Data
 		public DbSet<DeviceAccount> DeviceAccounts { get; set; }
 
 		public DbSet<DeviceMovementHistoryNote> DeviceMovementHistoryNotes { get; set; }
+
+		public DbSet<Software> Software { get; set; }
+
+		public DbSet<SoftwareType> SoftwareTypes { get; set; }
+
+		public DbSet<SoftwareConfiguration> SoftwareConfigurations { get; set; }
 	}
 }

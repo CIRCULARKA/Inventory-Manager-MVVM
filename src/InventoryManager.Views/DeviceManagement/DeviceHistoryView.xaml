@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
 	<Button Width="Auto" Content="История"
-        Command="{Binding ShowDeviceMovementHistoryCommand}"
-        Margin="0 5 5 0" />
+		Command="{Binding ShowDeviceMovementHistoryCommand}"
+		Margin="0 5 5 0" />
 </UserControl>

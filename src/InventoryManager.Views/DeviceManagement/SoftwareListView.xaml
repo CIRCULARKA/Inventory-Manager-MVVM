@@ -1,0 +1,36 @@
+<UserControl x:Class="InventoryManager.Views.SoftwareListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:InventoryManager.Views"
+        xmlns:vms="clr-namespace:InventoryManager.ViewModels">
+    <UserControl.Resources>
+        <Style x:Key="removeAndAddButtonsStyle" TargetType="Control">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Margin" Value="0 0 3 0"/>
+        </Style>
+	</UserControl.Resources>
+	<StackPanel Margin="4 0 0 0">
+		<ListBox ItemsSource="{Binding SelectedDeviceSoftware, UpdateSourceTrigger=PropertyChanged}"
+			SelectedItem="{Binding SelectedSoftware}"
+			Margin="0 0 0 3" Height="419">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Path=Type.Name}" />
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Orientation="Horizontal">
+			<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+				Command="{Binding ShowAddSoftwareViewCommand}" />
+			<Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+				Command="{Binding RemoveSoftwareCommand}" />
+			<Button Content="Инфо" Style="{StaticResource removeAndAddButtonsStyle}"
+				Width="50"
+				FontWeight="SemiBold"
+				Command="{Binding ShowEditSoftwareViewCommand}" />
+		</StackPanel>
+	</StackPanel>
+</UserControl>
