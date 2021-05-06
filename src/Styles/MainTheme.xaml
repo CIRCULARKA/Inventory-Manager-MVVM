@@ -20,16 +20,41 @@
 	<Style x:Key="textBoxStyle" TargetType="TextBox">
 		<Setter Property="Background" Value="#2882f0" />
 		<Setter Property="Foreground" Value="#b8d5fa" />
-		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="BorderThickness" Value="5" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TextBoxBase}">
+					<Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="0"
+						Padding="{TemplateBinding Padding}">
+						<ScrollViewer x:Name="PART_ContentHost" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsFocused" Value="True">
+							<Setter Property="Background" Value="#589ef3" />
+							<Setter Property="Foreground" Value="#1171ee" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 	<Style x:Key="buttonStyle" TargetType="Button">
 		<Setter Property="Background" Value="#2882f0" />
 		<Setter Property="Foreground" Value="#b8d5fa" />
 		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border BorderThickness="0" CornerRadius="5" Background="{TemplateBinding Background}">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="#589ef3" />
+			</Trigger>
+		</Style.Triggers>
 	</Style>
-	<ControlTemplate x:Key="buttonTemplate" TargetType="Button">
-		<Border CornerRadius="5" BorderThickness="0">
-			<ContentControl Background="#2882f0" />
-		</Border>
-	</ControlTemplate>
 </ResourceDictionary>
