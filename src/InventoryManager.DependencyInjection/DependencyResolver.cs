@@ -5,7 +5,7 @@ namespace InventoryManager.DependencyInjection
 {
 	public class DependencyResolver
 	{
-		public T Resolve<T>() =>
+		public static T Resolve<T>() =>
 			StandartNinjectKernel.Get<T>();
 	}
 }

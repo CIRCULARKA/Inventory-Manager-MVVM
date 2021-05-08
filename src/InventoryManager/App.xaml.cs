@@ -2,10 +2,10 @@
 using InventoryManager.Models;
 using InventoryManager.ViewModels;
 using InventoryManager.Infrastructure;
+using InventoryManager.DependencyInjection;
 using Ninject;
 using System;
 using System.Windows;
-using static InventoryManager.DependencyInjection.NinjectKernel;
 
 namespace InventoryManager
 {
@@ -23,13 +23,14 @@ namespace InventoryManager
 			);
 
 			var authorizationViewModel = new AuthorizationViewModel(
-				StandartNinjectKernel.Get<IUserRelatedRepository>(),
-				StandartNinjectKernel.Get<IUserSession>()
+				DependencyResolver.Resolve<IUserRelatedRepository>(),
+				DependencyResolver.Resolve<IUserSession>()
 			);
 
-			var authorizationView = new AuthorizationView() {
-				DataContext = authorizationViewModel
-			};
+			var authorizationView = DependencyResolver.Resolve<IAuthorizationView>()
+				as AuthorizationView;
+
+			authorizationView.DataContext = authorizationViewModel;
 
 			authorizationViewModel.RelatedView = authorizationView;
 

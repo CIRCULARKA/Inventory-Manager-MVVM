@@ -6,6 +6,7 @@ using InventoryManager.Models;
 using InventoryManager.Commands;
 using InventoryManager.Infrastructure;
 using System;
+using System.Windows;
 
 namespace InventoryManager.ViewModels
 {
@@ -64,7 +65,7 @@ namespace InventoryManager.ViewModels
 
 				InputtedLogin = InputtedPassword = string.Empty;
 
-				RelatedView.Show();
+				(ResolveDependency<IAuthorizationView>() as Window).Show();
 			};
 		}
 		private IUserRelatedRepository Repository { get; }

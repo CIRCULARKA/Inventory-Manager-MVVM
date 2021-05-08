@@ -37,6 +37,6 @@ namespace InventoryManager.ViewModels
 		) => new Command(action, conditionOfWork);
 
 		protected T ResolveDependency<T>() =>
-			Resolver.Resolve<T>();
+			DependencyResolver.Resolve<T>();
 	}
 }

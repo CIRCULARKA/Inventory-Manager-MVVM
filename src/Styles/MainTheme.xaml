@@ -30,7 +30,8 @@
 								<TextBlock Text="{TemplateBinding Title}"
 									FontWeight="Regular"
 									Margin="5 3 0 0" />
-								<StackPanel HorizontalAlignment="Right" Grid.Column="1">
+								<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+									<ui:CollapseButton Margin="0 0 3 0" />
 									<ui:CloseButton />
 								</StackPanel>
 							</Grid>

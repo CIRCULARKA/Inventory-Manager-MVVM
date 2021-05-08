@@ -11,7 +11,8 @@ namespace InventoryManager.DependencyInjection
 			_kernel = new StandardKernel(
 				new RepositoriesModule(),
 				new ViewModelsModule(),
-				new InfrastractureModule()
+				new InfrastractureModule(),
+				new ViewsModule()
 			);
 		}
 
