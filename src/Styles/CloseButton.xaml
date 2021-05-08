@@ -1,0 +1,24 @@
+<UserControl x:Class="InventoryManager.UI.CloseButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:vm="clr-namespace:InventoryManager.UI"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Canvas Height="13" Width="13"
+		HorizontalAlignment="Right"
+		Margin="0 6 6 0">
+		<Path Style="{DynamicResource closeButtonPathStyle}" StrokeThickness="4"
+			MouseUp="CloseApplication">
+			<Path.Data>
+				<PathGeometry>
+					<PathGeometry.Figures>
+						<PathFigure StartPoint="0,0">
+							<LineSegment Point="13,13" />
+						</PathFigure>
+						<PathFigure StartPoint="0,13">
+							<LineSegment Point="13,0" />
+						</PathFigure>
+					</PathGeometry.Figures>
+				</PathGeometry>
+			</Path.Data>
+		</Path>
+	</Canvas>
+</UserControl>
