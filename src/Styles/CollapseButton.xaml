@@ -1,0 +1,20 @@
+<UserControl x:Class="InventoryManager.UI.CollapseButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Canvas Height="13" Width="13"
+		HorizontalAlignment="Right"
+		Margin="0 6 6 0">
+		<Path Style="{DynamicResource tileMenuButtonsStyle}" StrokeThickness="4"
+			MouseUp="CollapseWindow">
+			<Path.Data>
+				<PathGeometry>
+					<PathGeometry.Figures>
+						<PathFigure StartPoint="0,6">
+							<LineSegment Point="13,6" />
+						</PathFigure>
+					</PathGeometry.Figures>
+				</PathGeometry>
+			</Path.Data>
+		</Path>
+	</Canvas>
+</UserControl>

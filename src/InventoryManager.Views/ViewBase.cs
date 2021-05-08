@@ -7,9 +7,7 @@ namespace InventoryManager.Views
 	{
 		public ViewBase() { }
 
-		protected override void OnClosing(CancelEventArgs info)
-		{
+		protected override void OnClosing(CancelEventArgs info) =>
 			Application.Current.Shutdown();
-		}
 	}
 }
