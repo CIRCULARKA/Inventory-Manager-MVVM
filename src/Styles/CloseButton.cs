@@ -11,7 +11,7 @@ namespace InventoryManager.UI
 
 		public void CloseApplication(object sender, MouseButtonEventArgs info)
 		{
-			var activeWindow =
+			var activeWindow = base.ActiveWindow;
 
 			if (activeWindow is AuthorizationView ||
 				activeWindow is MainView)
