@@ -6,7 +6,7 @@ namespace InventoryManager.Views
 {
 	public class PartialViewBase : UserControl
 	{
-		public Window ActiveWindow() =>
+		public Window ActiveWindow =>
 			Application.
 				Current.
 					Windows.
