@@ -5,8 +5,7 @@
 	<Canvas Height="13" Width="13"
 		HorizontalAlignment="Right">
 		<Path Style="{DynamicResource tileMenuButtonsStyle}" StrokeThickness="4"
-			MouseUp="CloseApplication"
-			MouseLeftButtonDown="DragParentWindow">
+			MouseUp="CloseApplication">
 			<Path.Data>
 				<PathGeometry>
 					<PathGeometry.Figures>
