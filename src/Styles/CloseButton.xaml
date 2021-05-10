@@ -1,12 +1,12 @@
-<src:PartialViewBase x:Class="InventoryManager.UI.CloseButton"
+<src:TileMenuElement x:Class="InventoryManager.UI.CloseButton"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:src="clr-namepace:InventoryManager.Views">
+		xmlns:src="clr-namespace:InventoryManager.UI">
 	<Canvas Height="13" Width="13"
 		HorizontalAlignment="Right">
 		<Path Style="{DynamicResource tileMenuButtonsStyle}" StrokeThickness="4"
 			MouseUp="CloseApplication"
-			MouseLeftButtonDown="DragWindow">
+			MouseLeftButtonDown="DragParentWindow">
 			<Path.Data>
 				<PathGeometry>
 					<PathGeometry.Figures>
@@ -21,4 +21,4 @@
 			</Path.Data>
 		</Path>
 	</Canvas>
-</src:PartialViewBase>
+</src:TileMenuElement>

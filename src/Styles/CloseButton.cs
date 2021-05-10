@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace InventoryManager.UI
 {
-	public partial class CloseButton : PartialViewBase
+	public partial class CloseButton : TileMenuElement
 	{
 		public CloseButton() =>
 			InitializeComponent();
@@ -20,9 +20,5 @@ namespace InventoryManager.UI
 				activeWindow.Close();
 		}
 
-		public void DragWindow(object sender, MouseButtonEventArgs info)
-		{
-			DragMo
-		}
 	}
 }

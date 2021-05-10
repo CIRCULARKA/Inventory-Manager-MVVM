@@ -1,10 +1,11 @@
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Controls;
 
-namespace InventoryManager.Views
+namespace InventoryManager.UI
 {
-	public class PartialViewBase : UserControl
+	public class TileMenuElement : UserControl
 	{
 		public Window ActiveWindow =>
 			Application.
@@ -12,6 +13,9 @@ namespace InventoryManager.Views
 					Windows.
 						OfType<Window>().
 							First(w => w.IsActive) as Window;
+
+		protected void DragParentWindow(object sender, MouseButtonEventArgs info) =>
+			ActiveWindow.DragMove();
 
 	}
 }
