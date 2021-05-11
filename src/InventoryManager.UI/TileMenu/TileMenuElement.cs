@@ -16,7 +16,7 @@ namespace InventoryManager.UI
 
 		protected void DragParentWindow(object sender, MouseButtonEventArgs info)
 		{
-			if (info.Source is Grid)
+			if (info.Source is Grid || info.Source is TextBlock)
 				ActiveWindow.DragMove();
 		}
 	}
