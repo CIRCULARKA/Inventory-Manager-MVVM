@@ -16,6 +16,5 @@ namespace InventoryManager.UI
 
 		protected void DragParentWindow(object sender, MouseButtonEventArgs info) =>
 			ActiveWindow.DragMove();
-
 	}
 }
