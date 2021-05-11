@@ -3,20 +3,14 @@ using System.Windows.Controls;
 
 namespace InventoryManager.UI
 {
-	public partial class TileMenu : UserControl
+	public partial class TileMenu : TileMenuElement
 	{
-		public static readonly DependencyProperty _titleProperty;
-
-		static TileMenu() =>
-			_titleProperty = DependencyProperty.Register(
+		public static readonly DependencyProperty TitleProperty =
+			DependencyProperty.Register(
 				"Title",
 				typeof(string),
 				typeof(TileMenu),
-				new FrameworkPropertyMetadata(
-					"<Title>",
-					FrameworkPropertyMetadataOptions.AffectsRender |
-					FrameworkPropertyMetadataOptions.AffectsMeasure
-				)
+				new FrameworkPropertyMetadata("<Title>")
 			);
 
 		public TileMenu() =>
@@ -25,12 +19,8 @@ namespace InventoryManager.UI
 
 		public string Title
 		{
-			get => GetValue(_titleProperty) as string;
-			set
-			{
-				SetValue(_titleProperty, value);
-				tileTitle.Text = value;
-			}
+			get => GetValue(TitleProperty) as string;
+			set => SetValue(TitleProperty, value);
 		}
 	}
 }
