@@ -2,15 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
-	<UserControl.Resources>
-        <Style x:Key="removeAndAddButtonsStyle" TargetType="Control">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Width" Value="25" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Margin" Value="0 0 3 0"/>
-        </Style>
-	</UserControl.Resources>
 	<GroupBox Margin="0 10 0 2"
 		IsEnabled="{Binding IsDeviceLocationChoosingAvailable}">
 		<GroupBox.Header>
@@ -34,6 +25,7 @@
 			<Button Content="Применить"
 				Command="{Binding ApplyDeviceLocationChangesCommand}"
 				Height="25"
+				Style="{DynamicResource buttonStyle}"
 				Margin="0 5 0 0" />
 		</StackPanel>
 	</GroupBox>

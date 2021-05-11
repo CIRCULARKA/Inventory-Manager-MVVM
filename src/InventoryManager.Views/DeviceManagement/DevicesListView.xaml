@@ -12,7 +12,8 @@
 			Margin="0 0 5 0"
 			Width="245" Height="450"
 			HorizontalAlignment="Left"
-			Grid.Row="0">
+			Grid.Row="0"
+			Style="{DynamicResource listStyle}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
@@ -31,10 +32,12 @@
 			<Button Width="Auto" Content="Добавить"
 				Command="{Binding ShowAddDeviceViewCommand}"
 				Margin="0 5 5 0"
+				Style="{DynamicResource buttonStyle}"
 				Grid.Column="0" />
 			<Button Width="Auto" Content="Удалить"
 				Command="{Binding RemoveDeviceCommand}"
 				Margin="0 5 5 0"
+				Style="{DynamicResource buttonStyle}"
 				Grid.Column="1" />
 		</Grid>
 	</Grid>

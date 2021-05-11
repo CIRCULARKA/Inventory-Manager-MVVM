@@ -4,5 +4,6 @@
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
 	<Button Width="Auto" Content="История"
 		Command="{Binding ShowDeviceMovementHistoryCommand}"
+		Style="{DynamicResource buttonStyle}"
 		Margin="0 5 5 0" />
 </UserControl>

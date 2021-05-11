@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
 	<UserControl.Resources>
-        <Style x:Key="removeAndAddButtonsStyle" TargetType="Control">
+        <Style x:Key="removeAndAddButtonsStyle" TargetType="Controls.Button"
+			BasedOn="{StaticResource buttonStyle}">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Width" Value="25" />
@@ -15,7 +16,8 @@
 		<ListBox ItemsSource="{Binding SelectedDeviceIPAddresses, UpdateSourceTrigger=PropertyChanged}"
 			SelectedItem="{Binding SelectedIPAddress}"
 			Height="100"
-			Margin="0 0 0 3">
+			Margin="0 0 0 3"
+			Style="{DynamicResource listStyle}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
@@ -25,9 +27,9 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 		<StackPanel Orientation="Horizontal">
-			<Button Content="+" Style="{StaticResource removeAndAddButtonsStyle}"
+			<Button Content="+" Style="{DynamicResource removeAndAddButtonsStyle}"
 				Command="{Binding ShowAddIPViewCommand}" />
-			<Button Content="-" Style="{StaticResource removeAndAddButtonsStyle}"
+			<Button Content="-" Style="{DynamicResource removeAndAddButtonsStyle}"
 				Command="{Binding RemoveIPFromDeviceCommand}" />
 		</StackPanel>
 	</StackPanel>

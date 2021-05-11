@@ -20,7 +20,8 @@
 		</Menu>
 		<TabControl SelectedItem="{Binding SelectedTab, UpdateSourceTrigger=PropertyChanged}"
 			ItemsSource="{Binding MainViewTabs}"
-			SelectedIndex="0">
+			SelectedIndex="0"
+			Style="{DynamicResource tabControlStyle}">
 		</TabControl>
 	</StackPanel>
 </src:ViewBase>
