@@ -1,18 +1,14 @@
-using InventoryManager.Views;
-using InventoryManager.DependencyInjection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InventoryManager.UI
 {
-	public partial class CollapseButton : UserControl
+	public partial class CollapseButton : TileMenuElement
 	{
 		public CollapseButton() =>
 			InitializeComponent();
 
 		public void CollapseWindow(object sender, MouseButtonEventArgs info) =>
-			(DependencyResolver.Resolve<IAuthorizationView>() as Window).
-				WindowState = WindowState.Minimized;
+			ActiveWindow.WindowState = WindowState.Minimized;
 	}
 }
