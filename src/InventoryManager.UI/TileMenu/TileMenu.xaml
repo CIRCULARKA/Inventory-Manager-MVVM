@@ -4,17 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<ui:TileMenuElement.Template>
 		<ControlTemplate TargetType="ui:TileMenu">
-			<Grid PreviewMouseLeftButtonDown="DragParentWindow">
+			<Grid PreviewMouseLeftButtonDown="DragParentWindow"
+				Background="{TemplateBinding MenuBackground}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
-				<TextBlock FontWeight="Regular"
+				<TextBlock FontWeight="Medium"
 					Text="{TemplateBinding Title}"
-					Margin="5 3 0 0"
+					Foreground="{TemplateBinding TitleForeground}"
+					Margin="5 0 0 0"
 					x:Name="tileTitle" />
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1"
-					Margin="6">
+					Margin="0 3 7 0">
 					<ui:CollapseButton Margin="0 0 9 0" />
 					<ui:CloseButton />
 				</StackPanel>
