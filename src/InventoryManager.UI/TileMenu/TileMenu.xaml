@@ -1,0 +1,20 @@
+<UserControl x:Class="InventoryManager.UI.TileMenu"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:ui="clr-namespace:InventoryManager.UI"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Grid OnMouseLeftButtonDown="DragParentWindow">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<TextBlock Text="Test"
+			FontWeight="Regular"
+			Margin="5 3 0 0"
+			x:Name="tileTitle" />
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1"
+			Margin="6">
+			<ui:CollapseButton Margin="0 0 9 0" />
+			<ui:CloseButton />
+		</StackPanel>
+	</Grid>
+</UserControl>

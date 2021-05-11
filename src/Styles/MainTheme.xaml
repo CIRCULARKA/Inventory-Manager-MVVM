@@ -22,7 +22,7 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition />
 							</Grid.RowDefinitions>
-							<Grid>
+							<!-- <Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
 									<ColumnDefinition Width="*" />
@@ -35,7 +35,8 @@
 									<ui:CollapseButton Margin="0 0 9 0" />
 									<ui:CloseButton />
 								</StackPanel>
-							</Grid>
+							</Grid> -->
+							<ui:TileMenu Title="{TemplateBinding Title}" />
 							<Border Grid.Row="1">
 								<AdornerDecorator>
 									<ContentPresenter />
