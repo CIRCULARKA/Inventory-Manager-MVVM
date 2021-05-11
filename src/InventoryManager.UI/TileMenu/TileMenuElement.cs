@@ -14,7 +14,10 @@ namespace InventoryManager.UI
 						OfType<Window>().
 							First(w => w.IsActive) as Window;
 
-		protected void DragParentWindow(object sender, MouseButtonEventArgs info) =>
-			ActiveWindow.DragMove();
+		protected void DragParentWindow(object sender, MouseButtonEventArgs info)
+		{
+			if (info.Source is Grid)
+				ActiveWindow.DragMove();
+		}
 	}
 }
