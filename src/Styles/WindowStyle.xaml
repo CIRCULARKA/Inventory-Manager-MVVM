@@ -37,41 +37,6 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	<Style x:Key="regularTextStyle" TargetType="TextBlock">
-		<Setter Property="Foreground" Value="#b8d5fa" />
-		<Setter Property="FontWeight" Value="Medium" />
-	</Style>
-	<Style x:Key="h1TextStyle" TargetType="TextBlock">
-		<Setter Property="FontSize" Value="18" />
-		<Setter Property="Foreground" Value="#d0e3fb" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
-	<Style x:Key="h2TextStyle" TargetType="TextBlock">
-		<Setter Property="FontSize" Value="15" />
-		<Setter Property="Foreground" Value="#d0e3fb" />
-		<Setter Property="FontWeight" Value="Medium" />
-	</Style>
-	<Style x:Key="textBoxStyle" TargetType="TextBox">
-		<Setter Property="Background" Value="#2882f0" />
-		<Setter Property="Foreground" Value="#b8d5fa" />
-		<Setter Property="BorderThickness" Value="5" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type TextBoxBase}">
-					<Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="0"
-						Padding="{TemplateBinding Padding}">
-						<ScrollViewer x:Name="PART_ContentHost" />
-					</Border>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsFocused" Value="True">
-							<Setter Property="Background" Value="#589ef3" />
-							<Setter Property="Foreground" Value="#1171ee" />
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
 	<Style x:Key="buttonStyle" TargetType="Button">
 		<Setter Property="Background" Value="#2882f0" />
 		<Setter Property="Foreground" Value="#b8d5fa" />
@@ -90,23 +55,5 @@
 				<Setter Property="Background" Value="#589ef3" />
 			</Trigger>
 		</Style.Triggers>
-	</Style>
-	<Style x:Key="listStyle" TargetType="ListBox">
-		<Setter Property="Background" Value="#2882f0" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ListBox">
-					<Border CornerRadius="5" BorderThickness="0" Background="{TemplateBinding Background}">
-						<ScrollViewer>
-							<StackPanel IsItemsHost="True">
-							</StackPanel>
-						</ScrollViewer>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-	<Style x:Key="tabControlStyle" TargetType="TabControl">
-		<Setter Property="Background" Value="#4090f2" />
 	</Style>
 </ResourceDictionary>

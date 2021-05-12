@@ -13,16 +13,8 @@
 			Width="245" Height="450"
 			HorizontalAlignment="Left"
 			Grid.Row="0"
-			Style="{DynamicResource listStyle}">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<TextBlock FontSize="18" Text="{Binding Path=NetworkName}" />
-						<TextBlock Text="{Binding Path=DeviceType.Name}" />
-						<TextBlock Text="{Binding Path=InventoryNumber}" />
-					</StackPanel>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
+			Style="{DynamicResource listStyle}"
+			ItemContainerStyle="{DynamicResource deviceItemListStyle}">
 		</ListBox>
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
