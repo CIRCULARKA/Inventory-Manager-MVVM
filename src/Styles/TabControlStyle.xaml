@@ -9,13 +9,27 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TabItem">
-					<Border CornerRadius="2, 12, 0, 0" BorderThickness="0"
-						Background="{DynamicResource controlDefaultBackgroundColor}">
-						<Grid Margin="3 0 3 0">
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="SelectionStates">
+								<VisualState x:Name="Unselected" />
+								<VisualState x:Name="Selected">
+									<Storyboard>
+										<ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+											Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+											<EasingColorKeyFrame KeyTime="0"
+												Value="#4090f2"/>
+										</ColorAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Border x:Name="Border" CornerRadius="2, 12, 0, 0" BorderThickness="0"
+							Background="{DynamicResource controlDefaultBackgroundColor}">
 							<ContentPresenter x:Name="ContentSite"
 								ContentSource="Header" Margin="3" />
-						</Grid>
-					</Border>
+						</Border>
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
