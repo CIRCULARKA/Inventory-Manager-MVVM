@@ -18,12 +18,15 @@
 			SelectedItem="{Binding SelectedAccount}"
 			Height="100"
 			Style="{DynamicResource listStyle}"
-			Margin="0 0 0 3">
+			Margin="0 0 0 3"
+			ItemContainerStyle="{DynamicResource listBoxItemStyle}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
-						<TextBlock Text="{Binding Path=Password}" />
+					<StackPanel Margin="2">
+						<TextBlock Text="{Binding Path=Login}" FontWeight="Bold"
+							Style="{DynamicResource regularTextStyle}" />
+						<TextBlock Text="{Binding Path=Password}"
+							Style="{DynamicResource regularTextStyle}" />
 					</StackPanel>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

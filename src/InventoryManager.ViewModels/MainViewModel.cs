@@ -33,7 +33,12 @@ namespace InventoryManager.ViewModels
 
 			_devicesTab = new TabItem
 			{
-				Header = "Устройства",
+				Style = Application.Current.Resources["tabControlItemStyle"] as Style,
+				Header = new TextBlock
+				{
+					Text = "Устройства",
+					Style = Application.Current.Resources["h3TextStyle"] as Style
+				},
 				Content = new DevicesManagementView()
 				{
 					DataContext = new DevicesManagementViewModel()
@@ -42,7 +47,12 @@ namespace InventoryManager.ViewModels
 
 			_usersTab = new TabItem
 			{
-				Header = "Пользователи",
+				Style = Application.Current.Resources["tabControlItemStyle"] as Style,
+				Header = new TextBlock
+				{
+					Text = "Пользователи",
+					Style = Application.Current.Resources["h3TextStyle"] as Style
+				},
 				Content = new UsersManagementView()
 				{
 					DataContext = new UserViewModel(
@@ -54,7 +64,12 @@ namespace InventoryManager.ViewModels
 
 			_certificatesTab = new TabItem
 			{
-				Header = "Сертификаты",
+				Style = Application.Current.Resources["tabControlItemStyle"] as Style,
+				Header = new TextBlock
+				{
+					Text = "Сертификаты",
+					Style = Application.Current.Resources["h3TextStyle"] as Style
+				},
 				Content = new CertificatesManagementView()
 				{
 					DataContext = ResolveDependency<ICertificateViewModel>()

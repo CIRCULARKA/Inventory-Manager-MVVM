@@ -17,12 +17,13 @@
 			SelectedItem="{Binding SelectedIPAddress}"
 			Height="100"
 			Margin="0 0 0 3"
-			Style="{DynamicResource listStyle}">
+			Style="{DynamicResource listStyle}"
+			ItemContainerStyle="{DynamicResource listBoxItemStyle}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<TextBlock Text="{Binding Path=Address}" />
-					</StackPanel>
+					<TextBlock Text="{Binding Path=Address}"
+						Style="{DynamicResource regularTextStyle}"
+						Margin="1" />
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>

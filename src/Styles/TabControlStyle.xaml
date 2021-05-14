@@ -1,6 +1,23 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Style x:Key="tabControlStyle" TargetType="TabControl">
-		<Setter Property="Background" Value="#4090f2" />
+		<Setter Property="Background" Value="{DynamicResource windowBackgroundColor}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource windowBackgroundColor}" />
+	</Style>
+	<Style x:Key="tabControlItemStyle" TargetType="TabItem">
+		<Setter Property="Background" Value="{DynamicResource controlDefaultBackgroundColor}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabItem">
+					<Border CornerRadius="2, 12, 0, 0" BorderThickness="0"
+						Background="{DynamicResource controlDefaultBackgroundColor}">
+						<Grid Margin="3 0 3 0">
+							<ContentPresenter x:Name="ContentSite"
+								ContentSource="Header" Margin="3" />
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 </ResourceDictionary>

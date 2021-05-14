@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Brush x:Key="windowBackgroundColor">#4090f2</Brush>
+	<Brush x:Key="tileMenuBackgroundColor">#4090f2</Brush>
+	<Brush x:Key="defaultTextColor">#b8d5fa</Brush>
+	<Brush x:Key="h1TextColor">#d0e3fb</Brush>
+	<Brush x:Key="h2TextColor">#d0e3fb</Brush>
+	<Brush x:Key="textBoxTextFocusedColor">#1171ee</Brush>
+	<Brush x:Key="controlDefaultBackgroundColor">#2882f0</Brush>
+	<Brush x:Key="textBoxBackgroundFocusedColor">#589ef3</Brush>
+</ResourceDictionary>
