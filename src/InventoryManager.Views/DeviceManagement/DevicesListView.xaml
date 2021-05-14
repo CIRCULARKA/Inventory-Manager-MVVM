@@ -14,7 +14,7 @@
 			HorizontalAlignment="Left"
 			Grid.Row="0"
 			Style="{DynamicResource listStyle}"
-			ItemContainerStyle="{DynamicResource deviceItemListStyle}">
+			ItemContainerStyle="{DynamicResource listBoxDeviceItemStyle}">
 		</ListBox>
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
