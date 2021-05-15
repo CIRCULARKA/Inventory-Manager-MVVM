@@ -11,14 +11,6 @@
             <Setter Property="Height" Value="25" />
             <Setter Property="Margin" Value="0 0 3 0"/>
         </Style>
-        <Style x:Key="headerTextStyle">
-            <Setter Property="Control.FontSize" Value="16" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>
-        <Style x:Key="secondHeaderTextStyle">
-            <Setter Property="Control.FontSize" Value="14" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
         </Style>
@@ -34,19 +26,20 @@
             <ColumnDefinition Width="180" />
             <ColumnDefinition Width="180" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Поиск и фильтры"
-            Style="{StaticResource headerTextStyle}"
+        <TextBlock Text="Поиск"
+            Style="{StaticResource h1TextStyle}"
             Margin="0 5 0 3"
             Grid.Row="0" Grid.Column="0" />
         <UserControl Content="{Binding DeviceSearchAndFilteringPartialView}"
             Grid.Row="1" />
         <TextBlock Text="Устройства"
-            Style="{StaticResource headerTextStyle}"
+            Style="{StaticResource h1TextStyle}"
             Margin="0 5 0 3"
             Grid.Row="0" Grid.Column="1" />
         <UserControl Content="{Binding DevicesListPartialView}"
             Grid.Row="1" Grid.Column="1" />
         <TextBlock Text="Учётные записи" VerticalAlignment="Top"
+            Style="{DynamicResource h1TextStyle}"
             FontSize="14" FontWeight="Bold"
             Margin="0 7 0 0"
             Grid.Row="0" Grid.Column="2" />
@@ -60,6 +53,7 @@
                 <UserControl Content="{Binding DeviceAccountsListPartialView}" />
                 <TextBlock Text="IP-адреса"
                     FontSize="14" FontWeight="Bold"
+                    Style="{DynamicResource h2TextStyle}"
                     Margin="0 10 0 3" />
                 <UserControl Content="{Binding DeviceIPListPartialView}" />
             </StackPanel>
@@ -69,6 +63,7 @@
                 Grid.Row="2" />
         </Grid>
         <TextBlock Text="ПО"
+            Style="{DynamicResource h2TextStyle}"
             VerticalAlignment="Top"
             FontSize="14" FontWeight="Bold"
             Margin="3 8 0 0"

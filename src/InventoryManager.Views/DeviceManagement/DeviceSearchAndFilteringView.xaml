@@ -3,40 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels"
 		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
-	<UserControl.Resources>
-        <Style x:Key="secondHeaderTextStyle">
-            <Setter Property="Control.FontSize" Value="14" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>
-	</UserControl.Resources>
 	<StackPanel Margin="0 0 5 0">
 		<TextBox Text="{Binding InputtedSearchQuery, UpdateSourceTrigger=PropertyChanged}"
-			Style="{DynamicResource textBoxStyle}">
+			Style="{DynamicResource textBoxStyle}"
+			Margin="0 0 0 5">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="TextChanged">
 					<i:InvokeCommandAction Command="{Binding FilterDevicesCommand}" />
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 		</TextBox>
-		<GroupBox>
+		<GroupBox Style="{DynamicResource groupBoxStyle}">
 			<GroupBox.Header>
-				<TextBlock Text="Тип" Style="{StaticResource secondHeaderTextStyle}" />
+				<TextBlock Text="Тип" Style="{StaticResource h2TextStyle}" />
 			</GroupBox.Header>
 			<StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<CheckBox Margin="0 3 2 0" IsChecked="{Binding IsServersIncluded}"
 						Command="{Binding FilterDevicesCommand}" />
-					<TextBlock Text="Серверы" />
+					<TextBlock Text="Серверы"
+						Style="{DynamicResource regularTextStyle}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<CheckBox Margin="0 3 2 0" IsChecked="{Binding IsPCIncluded}"
 						Command="{Binding FilterDevicesCommand}" />
-					<TextBlock Text="ПК" />
+					<TextBlock Text="ПК"
+						Style="{DynamicResource regularTextStyle}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<CheckBox Margin="0 3 2 0" IsChecked="{Binding IsSwitchesIncluded}"
 						Command="{Binding FilterDevicesCommand}" />
-					<TextBlock Text="Коммутаторы" />
+					<TextBlock Text="Коммутаторы"
+						Style="{DynamicResource regularTextStyle}" />
 				</StackPanel>
 			</StackPanel>
 		</GroupBox>

@@ -48,6 +48,11 @@ namespace InventoryManager
 					as ResourceDictionary
 			);
 
+			Application.Current.Resources.MergedDictionaries.Add(
+				Application.LoadComponent(new Uri("../Styles/GroupBoxStyle.xaml", UriKind.Relative))
+					as ResourceDictionary
+			);
+
 			var authorizationViewModel = new AuthorizationViewModel(
 				DependencyResolver.Resolve<IUserRelatedRepository>(),
 				DependencyResolver.Resolve<IUserSession>()

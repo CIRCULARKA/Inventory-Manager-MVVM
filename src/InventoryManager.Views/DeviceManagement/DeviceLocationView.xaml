@@ -3,20 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
 	<GroupBox Margin="0 10 0 2"
-		IsEnabled="{Binding IsDeviceLocationChoosingAvailable}">
+		IsEnabled="{Binding IsDeviceLocationChoosingAvailable}"
+		Style="{DynamicResource groupBoxStyle}">
 		<GroupBox.Header>
-			<TextBlock Text="Расположение" FontSize="14" FontWeight="Bold" />
+			<TextBlock Text="Расположение" FontSize="14"
+				Style="{DynamicResource h2TextStyle}" />
 		</GroupBox.Header>
 		<StackPanel>
 			<TextBlock Text="Корпус"
 				FontSize="13"
-				Margin="0 0 0 3" />
+				Margin="0 0 0 3"
+				Style="{DynamicResource regularTextStyle}" />
 			<ComboBox
 				SelectedItem="{Binding SelectedHousing}"
 				ItemsSource="{Binding AllHousings}"
 				DisplayMemberPath="Name" />
 			<TextBlock Text="Кабинет"
 				FontSize="13"
+				Style="{DynamicResource regularTextStyle}"
 				Margin="0 10 0 3" />
 			<ComboBox
 				SelectedItem="{Binding SelectedCabinet}"

@@ -14,10 +14,12 @@
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding UsersToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser}"
             Height="450" Width="450"
+            Style="{DynamicResource listStyle}"
+            ItemContainerStyle="{DynamicResource listBoxItemStyle}"
             Grid.Row="1" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Margin="4">
                         <TextBlock FontSize="18" Text="{Binding Path=Login}" />
                         <TextBlock Text="{Binding Path=FullName}" />
                         <TextBlock Text="{Binding Path=UserGroup.Name}" />
