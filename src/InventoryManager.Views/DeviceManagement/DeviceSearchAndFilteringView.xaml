@@ -20,18 +20,21 @@
 			<StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<CheckBox Margin="0 3 2 0" IsChecked="{Binding IsServersIncluded}"
-						Command="{Binding FilterDevicesCommand}" />
+						Command="{Binding FilterDevicesCommand}"
+						Style="{DynamicResource checkBoxStyle}" />
 					<TextBlock Text="Серверы"
 						Style="{DynamicResource regularTextStyle}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<CheckBox Margin="0 3 2 0" IsChecked="{Binding IsPCIncluded}"
+						Style="{DynamicResource checkBoxStyle}"
 						Command="{Binding FilterDevicesCommand}" />
 					<TextBlock Text="ПК"
 						Style="{DynamicResource regularTextStyle}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<CheckBox Margin="0 3 2 0" IsChecked="{Binding IsSwitchesIncluded}"
+						Style="{DynamicResource checkBoxStyle}"
 						Command="{Binding FilterDevicesCommand}" />
 					<TextBlock Text="Коммутаторы"
 						Style="{DynamicResource regularTextStyle}" />
