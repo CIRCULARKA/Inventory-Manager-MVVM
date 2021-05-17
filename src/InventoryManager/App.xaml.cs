@@ -15,13 +15,6 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
-			Application.Current.Resources.Clear();
-
-			Application.Current.Resources.MergedDictionaries.Add(
-				Application.LoadComponent(new Uri("../Styles/MainTheme.xaml", UriKind.Relative))
-					as ResourceDictionary
-			);
-
 			var authorizationViewModel = new AuthorizationViewModel(
 				StandartNinjectKernel.Get<IUserRelatedRepository>(),
 				StandartNinjectKernel.Get<IUserSession>()
