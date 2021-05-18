@@ -3,7 +3,7 @@ using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
 using InventoryManager.Extensions;
-using InventoryManager.Infrastructure;
+using InventoryManager.UsersAccess;
 using System;
 using System.Collections.ObjectModel;
 

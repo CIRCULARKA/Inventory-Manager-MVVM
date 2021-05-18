@@ -1,10 +1,5 @@
 using InventoryManager.Views;
 using InventoryManager.Models;
-using InventoryManager.Infrastructure;
-using InventoryManager.Infrastructure.Filtering;
-using System.Collections.Generic;
-using Ninject;
-using static InventoryManager.DependencyInjection.NinjectKernel;
 
 namespace InventoryManager.ViewModels
 {

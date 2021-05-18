@@ -1,7 +1,7 @@
 using InventoryManager.Models;
 using System;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.UsersAccess
 {
 	public class UserSession : IUserSession
 	{

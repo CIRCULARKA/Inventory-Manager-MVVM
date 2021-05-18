@@ -1,7 +1,7 @@
 using InventoryManager.Models;
 using System.Collections.Generic;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Networking
 {
 	public interface INetworkConfigurator
 	{

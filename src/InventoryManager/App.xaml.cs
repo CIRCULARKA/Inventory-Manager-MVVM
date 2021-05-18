@@ -1,9 +1,8 @@
 ﻿using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.ViewModels;
-using InventoryManager.Infrastructure;
+using InventoryManager.UsersAccess;
 using Ninject;
-using System;
 using System.Windows;
 using static InventoryManager.DependencyInjection.NinjectKernel;
 

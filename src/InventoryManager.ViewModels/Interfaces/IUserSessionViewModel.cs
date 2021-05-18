@@ -1,4 +1,4 @@
-using InventoryManager.Infrastructure;
+using InventoryManager.UsersAccess;
 
 namespace InventoryManager.ViewModels
 {

@@ -1,6 +1,6 @@
 using System.Configuration;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Networking
 {
 	public class XMLNetworkConfigurationReader : INetworkConfigurationReader
 	{

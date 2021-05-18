@@ -1,9 +1,6 @@
-using System;
-using System.Reflection;
 using System.Configuration;
-using System.Xml;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Networking
 {
 	public class XMLNetworkConfigurationWriter : INetworkConfigurationWriter
 	{

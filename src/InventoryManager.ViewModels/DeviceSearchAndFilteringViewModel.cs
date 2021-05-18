@@ -1,6 +1,6 @@
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure.Filtering;
+using InventoryManager.Filtering;
 using System.Linq;
 
 namespace InventoryManager.ViewModels

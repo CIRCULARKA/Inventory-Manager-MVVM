@@ -1,7 +1,7 @@
 using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using InventoryManager.Networking;
 using System;
 
 namespace InventoryManager.ViewModels

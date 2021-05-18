@@ -1,4 +1,4 @@
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Networking
 {
 	public interface INetworkConfigurationWriter
 	{
