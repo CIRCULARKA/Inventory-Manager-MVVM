@@ -1,4 +1,4 @@
-namespace InventoryManager.Infrastructure.Filtering
+namespace InventoryManager.Filtering
 {
 	public class DeviceFilteringCriteria
 	{

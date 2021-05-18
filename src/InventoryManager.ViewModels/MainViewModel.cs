@@ -2,7 +2,7 @@ using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using InventoryManager.UsersAccess;
 using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Controls;

@@ -1,5 +1,5 @@
-using InventoryManager.Infrastructure;
-using InventoryManager.Infrastructure.Filtering;
+using InventoryManager.UsersAccess;
+using InventoryManager.Filtering;
 using System.Collections.Generic;
 using Ninject.Modules;
 

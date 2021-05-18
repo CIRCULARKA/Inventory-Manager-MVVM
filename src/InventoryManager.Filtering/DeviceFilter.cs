@@ -2,7 +2,7 @@ using InventoryManager.Models;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace InventoryManager.Infrastructure.Filtering
+namespace InventoryManager.Filtering
 {
 	public class DeviceFilter : IDeviceFilter
 	{

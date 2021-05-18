@@ -1,6 +1,4 @@
-using InventoryManager.Models;
-
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.UsersAccess
 {
 	public static class UserRightsBuilder
 	{

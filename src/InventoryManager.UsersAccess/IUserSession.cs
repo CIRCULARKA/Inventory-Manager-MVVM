@@ -1,6 +1,6 @@
 using InventoryManager.Models;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.UsersAccess
 {
 	public interface IUserSession
 	{
