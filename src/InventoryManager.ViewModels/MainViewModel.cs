@@ -94,6 +94,14 @@ namespace InventoryManager.ViewModels
 				(obj) => UserEvents.RaiseOnUserLoggedOut()
 			);
 
+			ShowReportsMasterViewCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					var reportsMasterView = new ReportsMasterView();
+					reportsMasterView.ShowDialog();
+				}
+			);
+
 			LoadViewsForAuthorizedUser();
 		}
 
@@ -124,6 +132,8 @@ namespace InventoryManager.ViewModels
 		public Command ShowSetIPMaskDialogCommand { get; }
 
 		public Command LogoutCommand { get; }
+
+		public Command ShowReportsMasterViewCommand { get; }
 
 		public void LoadViewsForAuthorizedUser()
 		{

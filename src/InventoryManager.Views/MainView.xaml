@@ -11,7 +11,7 @@
 		<Menu Margin="0 0 0 10">
 			<MenuItem Header="Главное">
 				<MenuItem Header="О программе" Command="{Binding ShowAboutProgramDialogCommand}" />
-				<MenuItem Header="Мастер отчётов..." Command="{Binding ShowAboutProgramDialogCommand}" />
+				<MenuItem Header="Мастер отчётов..." Command="{Binding ShowReportsMasterViewCommand}" />
 				<MenuItem Header="Сменить аккаунт" Command="{Binding LogoutCommand}" />
 			</MenuItem>
 			<MenuItem Header="Настройки">
