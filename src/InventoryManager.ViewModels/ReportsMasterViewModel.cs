@@ -18,20 +18,45 @@ namespace InventoryManager.ViewModels
 			MakeReportCommand = RegisterCommandAction(
 				(obj) =>
 				{
-					var allDevices = (ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
-						AllDevices;
+					if (SelectedReportType == ReportTypes[0])
+					{
+						var allDevices = (ResolveDependency<IDevicesListViewModel>() as DevicesListViewModel).
+							AllDevices;
 
-					var report = new PdfReporter<Device>(
-						allDevices,
-						new PropertyDisplayInfo[] {
-							new PropertyDisplayInfo("InventoryNumber", "Инвентарный номер"),
-							new PropertyDisplayInfo("NetworkName", "Сетевое имя"),
-							new PropertyDisplayInfo("DeviceType", "Тип")
-						},
-						"Устройства в распоряжении"
-					);
+						var report = new PdfReporter<Device>(
+							allDevices,
+							new PropertyDisplayInfo[] {
+								new PropertyDisplayInfo("InventoryNumber", "Инвентарный номер"),
+								new PropertyDisplayInfo("NetworkName", "Сетевое имя"),
+								new PropertyDisplayInfo("DeviceType", "Тип")
+							},
+							"Устройства в распоряжении"
+						);
 
-					report.GenerateReport("report.pdf");
+						report.GenerateReport("reportDevices.pdf");
+
+						MessageToUser = "Отчёт сгенерирован";
+					}
+					else if (SelectedReportType == ReportTypes[1])
+					{
+						var allUsers = (ResolveDependency<IUserViewModel>() as UserViewModel).
+							UsersToShow;
+
+						var report = new PdfReporter<User>(
+							allUsers,
+							new PropertyDisplayInfo[] {
+								new PropertyDisplayInfo("FullName", "ФИО"),
+								new PropertyDisplayInfo("Login", "Логин"),
+								new PropertyDisplayInfo("Password", "Пароль"),
+								new PropertyDisplayInfo("UserGroup", "Группа")
+							},
+							"Все пользователи"
+						);
+
+						report.GenerateReport("reportUsers.pdf");
+
+						MessageToUser = "Отчёт сгенерирован";
+					}
 				}
 			);
 		}
