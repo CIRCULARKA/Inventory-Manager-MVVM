@@ -98,6 +98,7 @@ namespace InventoryManager.ViewModels
 				(obj) =>
 				{
 					var reportsMasterView = new ReportsMasterView();
+					reportsMasterView.DataContext = ResolveDependency<IReportsMasterViewModel>();
 					reportsMasterView.ShowDialog();
 				}
 			);
