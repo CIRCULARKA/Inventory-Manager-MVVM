@@ -44,7 +44,6 @@
             TextWrapping="Wrap"
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            Foreground="#212121"
             Margin="20 20 20 15" />
     </StackPanel>
 </src:ViewBase>
