@@ -35,10 +35,12 @@
 	<StackPanel>
 		<TextBlock Text="Место сохранения отчёта"
 			Margin="25 15 2 0" />
-		<TextBox />
+		<TextBox Text="{Binding Path}" />
 		<TextBlock Text="Тип отчёта" />
-		<ComboBox />
-		<Button Content="Выполнить" />
+		<ComboBox ItemsSource="{Binding ReportTypes}"
+            SelectedIndex="0" SelectedItem="{Binding SelectedReportType}" />
+		<Button Content="Выполнить"
+            Command="{Binding MakeReportCommand}" />
 		<TextBlock Text="{Binding MessageToUser}"
 			TextAlignment="Center" HorizontalAlignment="Center" />
 	</StackPanel>
