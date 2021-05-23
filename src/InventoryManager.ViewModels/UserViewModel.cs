@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace InventoryManager.ViewModels
 {
-	public class UserViewModel : ViewModelBase, IUserSessionViewModel
+	public class UserViewModel : ViewModelBase, IUserSessionViewModel, IUserViewModel
 	{
 		private ObservableCollection<User> _allUsersToShow;
 

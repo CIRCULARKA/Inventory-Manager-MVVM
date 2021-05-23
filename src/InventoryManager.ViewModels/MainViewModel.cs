@@ -45,10 +45,8 @@ namespace InventoryManager.ViewModels
 				Header = "Пользователи",
 				Content = new UsersManagementView()
 				{
-					DataContext = new UserViewModel(
-						ResolveDependency<IUserRelatedRepository>(),
-						ResolveDependency<IUserSession>()
-					)
+					DataContext = (ResolveDependency<IUserViewModel>())
+						as UserViewModel
 				}
 			};
 

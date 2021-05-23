@@ -54,6 +54,9 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IReportsMasterViewModel>().
 				To<ReportsMasterViewModel>();
+
+			Bind<IUserViewModel>().
+				To<UserViewModel>().InSingletonScope();
 		}
 	}
 }
