@@ -7,6 +7,8 @@ namespace InventoryManager.ViewModels
 {
 	public class ReportsMasterViewModel : ViewModelBase, IReportsMasterViewModel
 	{
+		private string _selectedReportType;
+
 		public ReportsMasterViewModel()
 		{
 			ReportTypes = new List<string> {
@@ -14,6 +16,8 @@ namespace InventoryManager.ViewModels
 				"Отчёт о пользователях",
 				"Отчёт о сертификатах"
 			};
+
+			SelectedReportType = ReportTypes[0];
 
 			MakeReportCommand = RegisterCommandAction(
 				(obj) =>
@@ -63,7 +67,15 @@ namespace InventoryManager.ViewModels
 
 		public List<string> ReportTypes { get; }
 
-		public string SelectedReportType { get; set; }
+		public string SelectedReportType
+		{
+			get => _selectedReportType;
+			set
+			{
+				_selectedReportType = value;
+				OnPropertyChanged(nameof(SelectedReportType));
+			}
+		}
 
 		public string Path { get; set; }
 
