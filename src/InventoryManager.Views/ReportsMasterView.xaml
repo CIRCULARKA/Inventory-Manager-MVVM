@@ -38,7 +38,8 @@
 		<TextBox Text="{Binding Path}" />
 		<TextBlock Text="Тип отчёта" />
 		<ComboBox ItemsSource="{Binding ReportTypes}"
-            SelectedIndex="0" SelectedItem="{Binding SelectedReportType}" />
+            SelectedIndex="0" SelectedItem="{Binding SelectedReportType}"
+            Padding="5 7 0 0" />
 		<Button Content="Выполнить"
             Command="{Binding MakeReportCommand}" />
 		<TextBlock Text="{Binding MessageToUser}"
