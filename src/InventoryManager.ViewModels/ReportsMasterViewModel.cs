@@ -61,6 +61,25 @@ namespace InventoryManager.ViewModels
 
 						MessageToUser = "Отчёт сгенерирован";
 					}
+					else if (SelectedReportType == ReportTypes[2])
+					{
+						var allCertifiacates = (ResolveDependency<ICertificateViewModel>() as CertificateViewModel).
+							CertificatesToShow;
+
+						var report = new PdfReporter<Certificate>(
+							allCertifiacates,
+							new PropertyDisplayInfo[] {
+								new PropertyDisplayInfo("Name", "Наименование"),
+								new PropertyDisplayInfo("SerialNumber", "Серийный номер"),
+								new PropertyDisplayInfo("ExpirationTime", "Конец срока"),
+							},
+							"Электронные сертификаты"
+						);
+
+						report.GenerateReport("reportCertifiactes.pdf");
+
+						MessageToUser = "Отчёт сгенерирован";
+					}
 				}
 			);
 		}
