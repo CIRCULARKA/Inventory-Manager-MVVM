@@ -51,6 +51,12 @@ namespace InventoryManager.DependencyInjection
 
 			Bind<IEditSoftwareInfoViewModel>().
 				To<EditSoftwareInfoViewModel>();
+
+			Bind<IReportsMasterViewModel>().
+				To<ReportsMasterViewModel>();
+
+			Bind<IUserViewModel>().
+				To<UserViewModel>().InSingletonScope();
 		}
 	}
 }
