@@ -42,6 +42,7 @@
 		<Button Content="Выполнить"
             Command="{Binding MakeReportCommand}" />
 		<TextBlock Text="{Binding MessageToUser}"
-			TextAlignment="Center" HorizontalAlignment="Center" />
+			TextAlignment="Center" HorizontalAlignment="Center"
+            Margin="0" />
 	</StackPanel>
 </src:DialogBase>
