@@ -7,12 +7,13 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Width="300"
-        Height="400">
+        Height="400"
+        Style="{DynamicResource windowStyle}">
     <Window.Resources>
-        <Style TargetType="Controls.TextBlock">
+        <Style TargetType="Controls.TextBlock" BasedOn="{StaticResource regularTextStyle}">
             <Setter Property="Margin" Value="25 5 2 0" />
         </Style>
-        <Style TargetType="Controls.TextBox">
+        <Style TargetType="Controls.TextBox" BasedOn="{StaticResource textBoxStyle}">
             <Setter Property="Margin" Value="5 0 5 5" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Width" Value="250" />
@@ -20,7 +21,7 @@
             <Setter Property="Padding" Value="3 4 0 3" />
             <Setter Property="MaxLength" Value="30" />
         </Style>
-        <Style TargetType="Controls.Button">
+        <Style TargetType="Controls.Button" BasedOn="{StaticResource buttonStyle}">
             <Setter Property="Margin" Value="5 15 5 5" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Width" Value="250" />
@@ -29,6 +30,7 @@
     <StackPanel VerticalAlignment="Center">
         <TextBlock Text="Авторизация"
             Margin="5 0 3 5"
+            Style="{DynamicResource h1TextStyle}"
             HorizontalAlignment="Center" />
         <TextBlock Text="Логин" />
         <TextBox Text="{Binding InputtedLogin, UpdateSourceTrigger=PropertyChanged}" />
