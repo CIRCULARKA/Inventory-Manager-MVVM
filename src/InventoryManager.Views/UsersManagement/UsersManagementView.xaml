@@ -12,7 +12,8 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding UsersToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser}"
+        <ListBox ItemsSource="{Binding UsersToShow, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedUser}"
             Height="450" Width="450"
             Grid.Row="1" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
