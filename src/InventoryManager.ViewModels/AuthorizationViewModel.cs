@@ -4,7 +4,7 @@ using InventoryManager.Views;
 using InventoryManager.Events;
 using InventoryManager.Models;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using InventoryManager.UsersAccess;
 using System;
 using System.Windows;
 

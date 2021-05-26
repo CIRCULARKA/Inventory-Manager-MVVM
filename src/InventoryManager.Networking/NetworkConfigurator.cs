@@ -1,10 +1,10 @@
 using InventoryManager.Models;
-using System.Collections.Generic;
-using System.Text;
 using System;
+using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.Networking
 {
 	public class NetworkConfigurator : INetworkConfigurator
 	{

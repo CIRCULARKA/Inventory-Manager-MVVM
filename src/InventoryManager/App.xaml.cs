@@ -1,10 +1,13 @@
 ﻿using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.ViewModels;
+<<<<<<< HEAD
 using InventoryManager.Infrastructure;
 using InventoryManager.DependencyInjection;
+=======
+using InventoryManager.UsersAccess;
+>>>>>>> 26bb1aa7d3329e5b1d38a5da80c27b2553e762e1
 using Ninject;
-using System;
 using System.Windows;
 
 namespace InventoryManager
@@ -15,6 +18,7 @@ namespace InventoryManager
 		{
 			base.OnStartup(info);
 
+<<<<<<< HEAD
 			Application.Current.Resources.Clear();
 
 			// Temporary
@@ -58,6 +62,8 @@ namespace InventoryManager
 					as ResourceDictionary
 			);
 
+=======
+>>>>>>> 26bb1aa7d3329e5b1d38a5da80c27b2553e762e1
 			var authorizationViewModel = new AuthorizationViewModel(
 				DependencyResolver.Resolve<IUserRelatedRepository>(),
 				DependencyResolver.Resolve<IUserSession>()

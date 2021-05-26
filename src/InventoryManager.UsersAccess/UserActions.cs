@@ -1,4 +1,4 @@
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.UsersAccess
 {
 	public enum UserActions
 	{

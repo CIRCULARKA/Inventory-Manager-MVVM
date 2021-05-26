@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace InventoryManager.Infrastructure
+namespace InventoryManager.UsersAccess
 {
 	/// <summary>
 	/// Class for setting what user can do with he's

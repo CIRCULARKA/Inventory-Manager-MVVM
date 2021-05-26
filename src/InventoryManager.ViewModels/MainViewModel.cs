@@ -2,7 +2,7 @@ using InventoryManager.Views;
 using InventoryManager.Models;
 using InventoryManager.Events;
 using InventoryManager.Commands;
-using InventoryManager.Infrastructure;
+using InventoryManager.UsersAccess;
 using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -55,10 +55,8 @@ namespace InventoryManager.ViewModels
 				},
 				Content = new UsersManagementView()
 				{
-					DataContext = new UserViewModel(
-						ResolveDependency<IUserRelatedRepository>(),
-						ResolveDependency<IUserSession>()
-					)
+					DataContext = (ResolveDependency<IUserViewModel>())
+						as UserViewModel
 				}
 			};
 
@@ -109,6 +107,15 @@ namespace InventoryManager.ViewModels
 				(obj) => UserEvents.RaiseOnUserLoggedOut()
 			);
 
+			ShowReportsMasterViewCommand = RegisterCommandAction(
+				(obj) =>
+				{
+					var reportsMasterView = new ReportsMasterView();
+					reportsMasterView.DataContext = ResolveDependency<IReportsMasterViewModel>();
+					reportsMasterView.ShowDialog();
+				}
+			);
+
 			LoadViewsForAuthorizedUser();
 		}
 
@@ -139,6 +146,8 @@ namespace InventoryManager.ViewModels
 		public Command ShowSetIPMaskDialogCommand { get; }
 
 		public Command LogoutCommand { get; }
+
+		public Command ShowReportsMasterViewCommand { get; }
 
 		public void LoadViewsForAuthorizedUser()
 		{
