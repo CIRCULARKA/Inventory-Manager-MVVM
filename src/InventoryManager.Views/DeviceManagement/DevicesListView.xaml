@@ -17,12 +17,9 @@
 					<DataTemplate>
 						<StackPanel Margin="6">
 							<TextBlock FontSize="18" Text="{Binding Path=NetworkName}"
-								FontWeight="Medium"
-								Style="{DynamicResource regularTextStyle}" />
-							<TextBlock Text="{Binding Path=DeviceType.Name}"
-								Style="{DynamicResource regularTextStyle}" />
-							<TextBlock Text="{Binding Path=InventoryNumber}"
-								Style="{DynamicResource regularTextStyle}" />
+								FontWeight="Medium" />
+							<TextBlock Text="{Binding Path=DeviceType.Name}" />
+							<TextBlock Text="{Binding Path=InventoryNumber}" />
 						</StackPanel>
 					</DataTemplate>
 				</ListBox.ItemTemplate>

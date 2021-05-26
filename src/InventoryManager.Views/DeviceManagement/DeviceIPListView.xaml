@@ -10,7 +10,6 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding Path=Address}"
-						Style="{DynamicResource regularTextStyle}"
 						Margin="1" />
 				</DataTemplate>
 			</ListBox.ItemTemplate>

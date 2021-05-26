@@ -13,10 +13,8 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Margin="2">
-						<TextBlock Text="{Binding Path=Login}" FontWeight="Bold"
-							Style="{DynamicResource regularTextStyle}" />
-						<TextBlock Text="{Binding Path=Password}"
-							Style="{DynamicResource regularTextStyle}" />
+						<TextBlock Text="{Binding Path=Login}" FontWeight="Bold" />
+						<TextBlock Text="{Binding Path=Password}" />
 					</StackPanel>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
