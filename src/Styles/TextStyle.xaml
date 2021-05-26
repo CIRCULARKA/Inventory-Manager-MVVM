@@ -19,8 +19,8 @@
 		<Setter Property="Foreground" Value="{DynamicResource h2TextColor}" />
 		<Setter Property="FontWeight" Value="Medium" />
 	</Style>
-	<Style x:Key="textBoxStyle" TargetType="TextBox">
-		<Setter Property="Background" Value="{DynamicResource containerBackgroundColor}" />
+	<Style x:Key="{x:Type TextBox}" TargetType="TextBox">
+		<Setter Property="Background" Value="{DynamicResource controlDefaultBackgroundColor}" />
 		<Setter Property="Foreground" Value="{DynamicResource defaultTextColor}" />
 		<Setter Property="BorderThickness" Value="5" />
 		<Setter Property="Template">

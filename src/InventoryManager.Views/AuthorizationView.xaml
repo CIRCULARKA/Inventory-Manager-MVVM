@@ -13,7 +13,7 @@
         <Style TargetType="Controls.TextBlock" BasedOn="{StaticResource regularTextStyle}">
             <Setter Property="Margin" Value="25 5 2 0" />
         </Style>
-        <Style TargetType="Controls.TextBox" BasedOn="{StaticResource textBoxStyle}">
+        <Style TargetType="Controls.TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Margin" Value="5 0 5 5" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Width" Value="250" />
