@@ -3,23 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:InventoryManager.ViewModels">
 	<UserControl.Resources>
-        <Style x:Key="removeAndAddButtonsStyle" TargetType="Controls.Button"
-			BasedOn="{StaticResource buttonStyle}">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Width" Value="25" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Margin" Value="0 0 3 0"/>
-        </Style>
 	</UserControl.Resources>
 	<StackPanel>
 		<ListBox
 			ItemsSource="{Binding SelectedDeviceAccounts, UpdateSourceTrigger=PropertyChanged}"
 			SelectedItem="{Binding SelectedAccount}"
 			Height="100"
-			Style="{DynamicResource listStyle}"
-			Margin="0 0 0 3"
-			ItemContainerStyle="{DynamicResource listBoxItemStyle}">
+			Margin="0 0 0 3">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Margin="2">

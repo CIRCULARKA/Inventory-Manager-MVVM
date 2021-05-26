@@ -6,6 +6,8 @@
 	<Brush x:Key="h1TextColor">#d0e3fb</Brush>
 	<Brush x:Key="h2TextColor">#d0e3fb</Brush>
 	<Brush x:Key="textBoxTextFocusedColor">#1171ee</Brush>
-	<Brush x:Key="controlDefaultBackgroundColor">#2882f0</Brush>
+	<Brush x:Key="containerBackgroundColor">#3288f1</Brush>
+	<Color x:Key="controlMouseOverBackgroundColor">#1070e5</Color>
+	<Brush x:Key="pressedControlBackgroundColor">#5186c8</Brush>
 	<Brush x:Key="textBoxBackgroundFocusedColor">#589ef3</Brush>
 </ResourceDictionary>

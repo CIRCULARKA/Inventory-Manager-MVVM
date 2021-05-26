@@ -9,12 +9,12 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
-						<Border Background="{DynamicResource controlDefaultBackgroundColor}"
+						<Border Background="{DynamicResource containerBackgroundColor}"
 							CornerRadius="5, 5, 0, 0">
 							<ContentPresenter ContentSource="Header"
 								Margin="4" />
 						</Border>
-						<Border Grid.Row="1" Background="{DynamicResource controlDefaultBackgroundColor}"
+						<Border Grid.Row="1" Background="{DynamicResource containerBackgroundColor}"
 							CornerRadius="0, 0, 5, 5">
 							<ContentPresenter Margin="4" />
 						</Border>

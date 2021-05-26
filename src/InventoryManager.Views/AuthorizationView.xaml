@@ -21,7 +21,7 @@
             <Setter Property="Padding" Value="3 4 0 3" />
             <Setter Property="MaxLength" Value="30" />
         </Style>
-        <Style TargetType="Controls.Button" BasedOn="{StaticResource buttonStyle}">
+        <Style TargetType="Controls.Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Margin" Value="5 15 5 5" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Width" Value="250" />

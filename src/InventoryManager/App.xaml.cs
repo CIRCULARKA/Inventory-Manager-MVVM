@@ -58,6 +58,11 @@ namespace InventoryManager
 			);
 
 			Application.Current.Resources.MergedDictionaries.Add(
+				Application.LoadComponent(new Uri("../Styles/Temp.xaml", UriKind.Relative))
+					as ResourceDictionary
+			);
+
+			Application.Current.Resources.MergedDictionaries.Add(
 				Application.LoadComponent(new Uri("../Styles/ComboBoxStyle.xaml", UriKind.Relative))
 					as ResourceDictionary
 			);

@@ -14,8 +14,6 @@
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding UsersToShow, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser}"
             Height="450" Width="450"
-            Style="{DynamicResource listStyle}"
-            ItemContainerStyle="{DynamicResource listBoxItemStyle}"
             Grid.Row="1" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>

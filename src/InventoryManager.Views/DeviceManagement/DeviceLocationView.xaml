@@ -29,7 +29,6 @@
 			<Button Content="Применить"
 				Command="{Binding ApplyDeviceLocationChangesCommand}"
 				Height="25"
-				Style="{DynamicResource buttonStyle}"
 				Margin="0 5 0 0" />
 		</StackPanel>
 	</GroupBox>
