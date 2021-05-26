@@ -20,7 +20,6 @@
 				Command="{Binding RemoveSoftwareCommand}" />
 			<Button Content="Инфо" Style="{StaticResource removeAndAddButtonsStyle}"
 				Width="50"
-				FontWeight="SemiBold"
 				Command="{Binding ShowEditSoftwareViewCommand}" />
 		</StackPanel>
 	</StackPanel>
