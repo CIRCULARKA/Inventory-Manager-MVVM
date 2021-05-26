@@ -10,7 +10,7 @@
         Height="400"
         Style="{DynamicResource windowStyle}">
     <Window.Resources>
-        <Style TargetType="Controls.TextBlock" BasedOn="{StaticResource regularTextStyle}">
+        <Style TargetType="Controls.TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Margin" Value="25 5 2 0" />
         </Style>
         <Style TargetType="Controls.TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
