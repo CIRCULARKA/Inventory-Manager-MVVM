@@ -18,6 +18,16 @@ namespace InventoryManager
 
 			// Temporary
 			Application.Current.Resources.MergedDictionaries.Add(
+				Application.LoadComponent(new Uri("../Styles/LightThemeColors.xaml", UriKind.Relative))
+					as ResourceDictionary
+			);
+
+			Application.Current.Resources.MergedDictionaries.Add(
+				Application.LoadComponent(new Uri("../Styles/TextStyle.xaml", UriKind.Relative))
+					as ResourceDictionary
+			);
+
+			Application.Current.Resources.MergedDictionaries.Add(
 				Application.LoadComponent(new Uri("../Styles/WindowStyle.xaml", UriKind.Relative))
 					as ResourceDictionary
 			);
@@ -28,22 +38,12 @@ namespace InventoryManager
 			);
 
 			Application.Current.Resources.MergedDictionaries.Add(
-				Application.LoadComponent(new Uri("../Styles/TextStyle.xaml", UriKind.Relative))
-					as ResourceDictionary
-			);
-
-			Application.Current.Resources.MergedDictionaries.Add(
 				Application.LoadComponent(new Uri("../Styles/ListBoxStyle.xaml", UriKind.Relative))
 					as ResourceDictionary
 			);
 
 			Application.Current.Resources.MergedDictionaries.Add(
 				Application.LoadComponent(new Uri("../Styles/ButtonsStyle.xaml", UriKind.Relative))
-					as ResourceDictionary
-			);
-
-			Application.Current.Resources.MergedDictionaries.Add(
-				Application.LoadComponent(new Uri("../Styles/LightThemeColors.xaml", UriKind.Relative))
 					as ResourceDictionary
 			);
 
