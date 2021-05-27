@@ -1,10 +1,11 @@
 <src:DialogBase x:Class="InventoryManager.Views.DeviceMovementHistoryView"
-		xmlns:src="clr-namespace:InventoryManager.Views"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		ResizeMode="NoResize"
-		WindowStartupLocation="CenterScreen"
-		SizeToContent="WidthAndHeight">
+	xmlns:src="clr-namespace:InventoryManager.Views"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	ResizeMode="NoResize"
+	WindowStartupLocation="CenterScreen"
+	Style="{DynamicResource windowStyle}"
+	SizeToContent="WidthAndHeight">
     <StackPanel>
 		<ListView Height="300" ItemsSource="{Binding SelectedDeviceMovementHistoryNotes}"
 			SelectionMode="Single">

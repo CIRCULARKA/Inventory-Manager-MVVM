@@ -6,20 +6,21 @@
         xmlns:vms="clr-namespace:InventoryManager.ViewModels"
         Title="Заполните данные для пользователя"
         WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource windowStyle}"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Width="350">
     <Window.Resources>
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
-        <Style TargetType="TextBox">
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Margin" Value="5 0 5 10" />
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
-        <Style TargetType="ComboBox">
+        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Margin" Value="5 0 5 5" />
         </Style>
     </Window.Resources>

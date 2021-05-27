@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:src="clr-namespace:InventoryManager.Views"
 	WindowStartupLocation="CenterScreen"
+	Style="{DynamicResource windowStyle}"
 	Title="Настройка сети"
 	SizeToContent="Height"
 	Width="400"
