@@ -12,36 +12,23 @@
 					<VisualState x:Name="MouseOver">
 						<Storyboard>
 							<ColorAnimationUsingKeyFrames
-								Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush)"
+								Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
 								Storyboard.TargetName="Border">
-								<EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
+								<EasingColorKeyFrame KeyTime="0" Value="{DynamicResource controlMouseOverBackgroundColor}" />
 							</ColorAnimationUsingKeyFrames>
 						</Storyboard>
 					</VisualState>
 					<VisualState x:Name="Pressed" />
 					<VisualState x:Name="Disabled">
-						<Storyboard>
-							<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).
-						(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="Border">
-								<EasingColorKeyFrame KeyTime="0" Value="{StaticResource DisabledControlDarkColor}" />
-							</ColorAnimationUsingKeyFrames>
-							<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).
-						(SolidColorBrush.Color)" Storyboard.TargetName="Arrow">
-								<EasingColorKeyFrame KeyTime="0" Value="{StaticResource DisabledForegroundColor}" />
-							</ColorAnimationUsingKeyFrames>
-							<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).
-						(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="Border">
-								<EasingColorKeyFrame KeyTime="0" Value="{StaticResource DisabledBorderDarkColor}" />
-							</ColorAnimationUsingKeyFrames>
-						</Storyboard>
 					</VisualState>
 				</VisualStateGroup>
 				<VisualStateGroup x:Name="CheckStates">
 					<VisualState x:Name="Checked">
 						<Storyboard>
-							<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).
-						(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="Border">
-								<EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlPressedColor}" />
+							<ColorAnimationUsingKeyFrames
+								Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+								Storyboard.TargetName="Border">
+								<EasingColorKeyFrame KeyTime="0" Value="{DynamicResource pressedControlBackgroundColor}" />
 							</ColorAnimationUsingKeyFrames>
 						</Storyboard>
 					</VisualState>
@@ -49,35 +36,19 @@
 					<VisualState x:Name="Indeterminate" />
 				</VisualStateGroup>
 			</VisualStateManager.VisualStateGroups>
-			<Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="2" BorderThickness="1">
-				<Border.BorderBrush>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="{DynamicResource BorderLightColor}" Offset="0" />
-						<GradientStop Color="{DynamicResource BorderDarkColor}" Offset="1" />
-					</LinearGradientBrush>
-				</Border.BorderBrush>
-				<Border.Background>
-
-					<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-						<LinearGradientBrush.GradientStops>
-							<GradientStopCollection>
-								<GradientStop Color="{DynamicResource ControlLightColor}" />
-								<GradientStop Color="{DynamicResource ControlMediumColor}" Offset="1.0" />
-							</GradientStopCollection>
-						</LinearGradientBrush.GradientStops>
-					</LinearGradientBrush>
-
-				</Border.Background>
+			<Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="2" BorderThickness="0"
+				Background="{DynamicResource controlDefaultBackgroundColor}">
 			</Border>
-			<Border Grid.Column="0" CornerRadius="2,0,0,2" Margin="1">
-				<Border.Background>
-					<SolidColorBrush Color="{DynamicResource ControlLightColor}" />
-				</Border.Background>
+			<Border Grid.Column="0" CornerRadius="5" Margin="1"
+				Background="{DynamicResource controlDefaultBackgroundColor}">
 			</Border>
-			<Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z">
-				<Path.Fill>
-					<SolidColorBrush Color="{DynamicResource GlyphColor}" />
-				</Path.Fill>
+			<Path x:Name="Arrow"
+				Grid.Column="1"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				Data="M 0 0 L 4 4 L 8 0 Z"
+				Stroke="{DynamicResource defaultTextColor}"
+				Fill="{DynamicResource defaultTextColor}">
 			</Path>
 		</Grid>
 	</ControlTemplate>
