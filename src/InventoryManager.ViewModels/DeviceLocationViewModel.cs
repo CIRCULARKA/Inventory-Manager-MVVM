@@ -81,8 +81,8 @@ namespace InventoryManager.ViewModels
 				{
 					if (device != null)
 					{
-						SelectedHousing = device.Cabinet.Housing;
-						SelectedCabinet = device.Cabinet;
+						SelectedCabinet = device?.Cabinet;
+						SelectedHousing = device?.Cabinet?.Housing;
 					}
 				}
 			);

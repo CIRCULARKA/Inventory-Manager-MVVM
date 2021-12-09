@@ -1,7 +1,11 @@
+using System;
+
 namespace InventoryManager.Models
 {
 	public class User
 	{
+		public Guid ID { get; set; }
+
 		public string LastName { get; set; }
 
 		public string FirstName { get; set; }
@@ -12,7 +16,7 @@ namespace InventoryManager.Models
 
 		public string Password { get; set; }
 
-		public int UserGroupID { get; set; }
+		public Guid UserGroupID { get; set; }
 
 		public UserGroup UserGroup { get; set; }
 

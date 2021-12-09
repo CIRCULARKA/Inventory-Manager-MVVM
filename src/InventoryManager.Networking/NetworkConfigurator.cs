@@ -33,7 +33,7 @@ namespace InventoryManager.Networking
 					result[i] = (byte)(NetworkAddressOctets[i] & MaskOctets[i]);
 				if (result[result.Length - 1] < 255) result[result.Length - 1]++;
 
-				return new IPAddress { Address = GetAddressFromOctets(result), DeviceID = -1 };
+				return new IPAddress { Address = GetAddressFromOctets(result), DeviceID = Guid.Empty };
 			}
 		}
 

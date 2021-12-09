@@ -27,18 +27,22 @@ namespace InventoryManager.ViewModels
 						NetworkName = InputtedNetworkName,
 					};
 
+					newDevice.CabinetID = Repository.FindCabinetByName("N/A", "N/A").ID;
+
 					try
 					{
 						Repository.AddDevice(newDevice);
 						Repository.SaveChanges();
 
+
 						// Device should be counted as added to storage when added
 						var addedDeviceNote = new DeviceMovementHistoryNote
 						{
 							// N/A cabinet in N/A housing
-							TargetCabinetID = -4,
+							TargetCabinetID = Repository.
+								FindCabinetByName(cabName: "N/A", housingName: "N/A").ID,
 							DeviceID = newDevice.ID,
-							Reason = "Доставлено на склад",
+							Reason = "Добавлено",
 							Date = DateTime.Now
 						};
 						Repository.FixDeviceMovement(addedDeviceNote);

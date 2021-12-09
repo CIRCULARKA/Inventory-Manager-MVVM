@@ -1,5 +1,3 @@
-#define DEBUG
-
 using InventoryManager.Views;
 using InventoryManager.Events;
 using InventoryManager.Models;
@@ -26,12 +24,9 @@ namespace InventoryManager.ViewModels
 			LoginCommand = RegisterCommandAction(
 				(obj) =>
 				{
-#if DEBUG
-					AuthenticatedUser = Repository.FindUser("root");
-					InputtedPassword = "root";
-#else
-					AuthenticatedUser = Repository.FindUser(InputtedLogin);
-#endif
+					// AuthenticatedUser = Repository.FindUser("root", "UserGroup");
+					// InputtedPassword = "root";
+					AuthenticatedUser = Repository.FindUser(InputtedLogin, "UserGroup");
 
 					if (IsInputtedPasswordCorrect())
 					{

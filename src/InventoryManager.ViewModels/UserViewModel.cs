@@ -35,6 +35,7 @@ namespace InventoryManager.ViewModels
 				},
 				(obj) =>
 				{
+					if (SelectedUser?.Login == "root") return false;
 					if (UserSession.IsAuthorizedUserAllowedTo(UserActions.RemoveUser))
 						return SelectedUser != null;
 					else return false;

@@ -5,7 +5,7 @@ namespace InventoryManager.Models
 {
 	public class Certificate
 	{
-		public int ID { get; set; }
+		public Guid ID { get; set; }
 
 		public string Name { get; set; }
 

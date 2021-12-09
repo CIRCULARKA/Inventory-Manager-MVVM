@@ -65,9 +65,10 @@ namespace InventoryManager.ViewModels
 				{
 					device.DeviceType = Repository.AllDeviceTypes.Single(dt => dt.ID == device.DeviceTypeID);
 					device.Cabinet = Repository.FindCabinet(device.CabinetID);
-					device.Cabinet.Housing = DeviceLocationViewModel.
-						AllHousings.
-							First(h => h.ID == device.Cabinet.HousingID);
+					if (device.Cabinet != null)
+						device.Cabinet.Housing = DeviceLocationViewModel.
+							AllHousings.
+								First(h => h.ID == device.Cabinet.HousingID);
 
 					AllDevices.Add(device);
 					if (DevicesFilter.DoesMeetSearchingAndFilteringCriteria(device))

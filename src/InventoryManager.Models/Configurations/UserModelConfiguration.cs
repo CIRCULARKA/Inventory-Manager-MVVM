@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,18 +16,6 @@ namespace InventoryManager.Models.Configuration
 			builder.Property(p => p.Password).IsRequired();
 			builder.Property(p => p.UserGroupID).IsRequired();
 			builder.Ignore(p => p.FullName);
-			builder.HasData(
-				new
-				{
-					ID = -1,
-					LastName = "Иванов",
-					FirstName = "Иван",
-					MiddleName = "Иванович",
-					Login = "root",
-					Password = "root",
-					UserGroupID = 3
-				}
-			);
 		}
 	}
 }

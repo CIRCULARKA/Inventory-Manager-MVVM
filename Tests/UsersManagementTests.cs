@@ -4,13 +4,26 @@ using InventoryManager.Models;
 using InventoryManager.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace InventoryManager.Tests
 {
 	public class UsersManagementTests
 	{
-		private IEnumerable<User> BuildTestUsers() =>
-			new User[]
+		private IEnumerable<User> BuildTestUsers()
+		{
+			var userGroups = new UserGroup[] {
+				new UserGroup() {
+					ID = Guid.NewGuid(),
+					Name = "Tech"
+				},
+				new UserGroup() {
+					ID = Guid.NewGuid(),
+					Name = "Adm"
+				}
+			};
+
+			var users = new User[]
 			{
 				new User
 				{
@@ -19,7 +32,7 @@ namespace InventoryManager.Tests
 					FirstName = "TestFirstName1",
 					LastName = "TestLastName1",
 					MiddleName = "TestMiddleName1",
-					UserGroupID = -1
+					UserGroupID = userGroups[0].ID
 				},
 				new User
 				{
@@ -28,9 +41,12 @@ namespace InventoryManager.Tests
 					FirstName = "TestFirstName2",
 					LastName = "TestLastName2",
 					MiddleName = "TestMiddleName2",
-					UserGroupID = -1
+					UserGroupID = userGroups[1].ID
 				}
 			};
+
+			return users;
+		}
 
 		[Fact]
 		public void AreUsersCanBeDisplayed()
@@ -63,7 +79,7 @@ namespace InventoryManager.Tests
 			};
 
 			addUserVM.InputtedLogin = userToAdd.Login;
-			addUserVM.SelectedUserGroup = new UserGroup { ID = 1 };
+			addUserVM.SelectedUserGroup = new UserGroup { ID = Guid.Empty };
 
 			// Act
 			addUserVM.AddUserCommand.Execute(null);

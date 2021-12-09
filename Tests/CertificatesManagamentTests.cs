@@ -15,9 +15,9 @@ namespace InventoryManager.Tests
 		private IEnumerable<Certificate> BuildSeedCertificates() =>
 			new Certificate[]
 			{
-				new Certificate { Subject = "Microsoft", ID = 1, ExpirationDate = DateTime.Now },
-				new Certificate { Subject = "Apple", ID = 2, ExpirationDate = DateTime.Now },
-				new Certificate { Subject = "Oracle", ID = 3, ExpirationDate = DateTime.Now }
+				new Certificate { Subject = "Microsoft", ID = Guid.NewGuid(), ExpirationDate = DateTime.Now },
+				new Certificate { Subject = "Apple", ID = Guid.NewGuid(), ExpirationDate = DateTime.Now },
+				new Certificate { Subject = "Oracle", ID = Guid.NewGuid(), ExpirationDate = DateTime.Now }
 			};
 
 		[Fact]

@@ -1,18 +1,20 @@
+using System;
+
 namespace InventoryManager.Models
 {
 	public class Device
 	{
-		public int ID { get; set; }
+		public Guid ID { get; set; }
 
 		public string InventoryNumber { get; set; }
 
-		public int DeviceTypeID { get; set; }
+		public Guid DeviceTypeID { get; set; }
 
 		public DeviceType DeviceType { get; set; }
 
 		public string NetworkName { get; set; }
 
-		public int CabinetID { get; set; }
+		public Guid? CabinetID { get; set; }
 
 		public Cabinet Cabinet { get; set; }
 	}

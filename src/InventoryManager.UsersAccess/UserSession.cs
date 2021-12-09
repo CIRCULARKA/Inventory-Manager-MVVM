@@ -19,11 +19,11 @@ namespace InventoryManager.UsersAccess
 			_authorizedUser;
 
 		public UserAccessRights AuthorizedUserAccessLevel =>
-			(UserAccessRights)_authorizedUser.UserGroupID;
+			DetermineAccessRights(_authorizedUser);
 
 		public UserAccessRights GetAccessLevel(User user)
 		{
-			try { return (UserAccessRights)user.UserGroupID; }
+			try { return DetermineAccessRights(user); }
 			catch { throw new Exception($"User can't be null"); }
 		}
 
@@ -32,6 +32,15 @@ namespace InventoryManager.UsersAccess
 			try { return _rules.IsActionAllowed(action); }
 			catch (NullReferenceException)
 			{ return false; }
+		}
+
+		private UserAccessRights DetermineAccessRights(User user)
+		{
+			if (user.UserGroup.Name == "Техник")
+				return UserAccessRights.Technician;
+			if (user.UserGroup.Name == "Администратор")
+				return UserAccessRights.Administrator;
+			else return UserAccessRights.Superuser;
 		}
 	}
 }

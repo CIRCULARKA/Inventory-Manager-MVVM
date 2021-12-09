@@ -12,7 +12,7 @@ namespace InventoryManager.Models
 
 		void UpdateUser(User userToUpdate);
 
-		User FindUser(params object[] keys);
+		User FindUser(string login, string include = null);
 
 		IEnumerable<User> AllUsers { get; }
 	}

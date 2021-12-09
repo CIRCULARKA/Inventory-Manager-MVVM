@@ -1,12 +1,14 @@
+using System;
+
 namespace InventoryManager.Models
 {
 	public class Cabinet
 	{
-		public int ID { get; set; }
+		public Guid ID { get; set; }
 
 		public string Name { get; set; }
 
-		public int HousingID { get; set; }
+		public Guid HousingID { get; set; }
 
 		public Housing Housing { get; set; }
 	}

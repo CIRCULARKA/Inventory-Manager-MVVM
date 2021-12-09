@@ -1,8 +1,10 @@
+using System;
+
 namespace InventoryManager.Models
 {
 	public class SoftwareConfiguration
 	{
-		public int ID { get; set; }
+		public Guid ID { get; set; }
 
 		public string Login { get; set; }
 

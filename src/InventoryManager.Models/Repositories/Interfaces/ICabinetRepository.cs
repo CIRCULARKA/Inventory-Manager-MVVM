@@ -12,6 +12,8 @@ namespace InventoryManager.Models
 
 		Cabinet FindCabinet(params object[] keys);
 
+		Cabinet FindCabinetByName(string cabName, string housingName);
+
 		IEnumerable<Cabinet> AllCabinets { get; }
 	}
 }

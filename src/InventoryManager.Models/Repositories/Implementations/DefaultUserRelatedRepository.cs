@@ -2,6 +2,7 @@ using InventoryManager.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace InventoryManager.Models
 {
@@ -18,8 +19,16 @@ namespace InventoryManager.Models
 		public void UpdateUser(User userToUpdate) =>
 			DataContext.Users.Update(userToUpdate);
 
-		public User FindUser(params object[] keys) =>
-			DataContext.Users.Find(keys);
+		public User FindUser(string login, string include = null)
+		{
+			var set = DataContext.Users;
+			IQueryable<User> query = set;
+			if (include != null)
+				foreach (var property in include.Split(new char[] { ',', ' ', '.' }))
+					query = set.Include(property);
+
+			return query.FirstOrDefault(u => u.Login == login);
+		}
 
 		public IEnumerable<User> AllUsers =>
 			DataContext.

@@ -141,6 +141,9 @@ namespace InventoryManager.Models
 		public Cabinet FindCabinet(params object[] keys) =>
 			DataContext.Cabinets.Find(keys);
 
+		public Cabinet FindCabinetByName(string cabName, string housingName) =>
+			DataContext.Cabinets.Include(c => c.Housing).FirstOrDefault(c => c.Name == cabName && c.Housing.Name == housingName);
+
 		public IEnumerable<Cabinet> AllCabinets =>
 			DataContext.
 			Cabinets.
