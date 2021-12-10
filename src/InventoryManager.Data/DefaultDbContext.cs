@@ -12,7 +12,6 @@ namespace InventoryManager.Data
 	{
 		public DefaultDbContext()
 		{
-			Database.EnsureDeleted();
 			Database.EnsureCreated();
 		}
 
